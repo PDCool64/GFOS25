@@ -7,7 +7,6 @@ import jakarta.ws.rs.core.Application;
  *
  * @author philipp.doering
  */
-@ApplicationPath("api")
+@ApplicationPath("/api")
 public class App extends Application {
-
 }
