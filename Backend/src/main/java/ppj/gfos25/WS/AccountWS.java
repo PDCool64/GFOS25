@@ -99,7 +99,12 @@ public class AccountWS {
 			}
 		});
 		List <Account> accountsResult = new ArrayList<>();
+		int max = 10;
+		int i = 0;
 		for (AccountWeight accountWeight : result) {
+			if (++i > max) {
+				break;
+			}
 			if (accountWeight.weight > 0)
 			accountsResult.add(accountWeight.a);
 		}
