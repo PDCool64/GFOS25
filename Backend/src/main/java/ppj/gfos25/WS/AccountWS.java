@@ -73,19 +73,25 @@ public class AccountWS {
 		List<Account> accounts = accountFacade.getAllAccounts();
 		List<AccountWeight> result = new ArrayList<>();
 		search = search.toLowerCase();
+		String[] words = search.split(" ");
 		for (Account account : accounts) {
 			float weight = 0;
-			String name = account.getName().toLowerCase();
-			if (name.contains(search)) {
-				weight += 255 / (name.indexOf(search) + 1); 
-			}
-			String vorname = account.getVorname().toLowerCase();
-			if (vorname.contains(search)) {
-				weight += 255 / (vorname.indexOf(search) + 1); 
-			}
-			String email = account.getEmail().toLowerCase();
-			if (email.contains(search)) {
-				weight += 127 / (email.indexOf(search) + 1); 
+			for (String word : words) {
+				String name = account.getNachname().toLowerCase();
+				int index = name.indexOf(word);
+				if (index >= 0) {
+					weight += 256 / (index + 1);
+				}
+				String vorname = account.getVorname().toLowerCase();
+				index = vorname.indexOf(word);
+				if (index >= 0) {
+					weight += 256 / (index + 1);
+				}
+				String email = account.getEmail().toLowerCase();
+				index = email.indexOf(word);
+				if (index >= 0) {
+					weight += 128 / (index + 1);
+				}
 			}
 			result.add(new AccountWeight(account, weight));
 		}
@@ -98,7 +104,7 @@ public class AccountWS {
 				return 0;
 			}
 		});
-		List <Account> accountsResult = new ArrayList<>();
+		List<Account> accountsResult = new ArrayList<>();
 		int max = 10;
 		int i = 0;
 		for (AccountWeight accountWeight : result) {
@@ -106,7 +112,7 @@ public class AccountWS {
 				break;
 			}
 			if (accountWeight.weight > 0)
-			accountsResult.add(accountWeight.a);
+				accountsResult.add(accountWeight.a);
 		}
 		return responsService.ok(jsonb.toJson(accountsResult));
 	}

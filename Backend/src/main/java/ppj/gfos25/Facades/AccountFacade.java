@@ -61,9 +61,6 @@ public class AccountFacade {
 		try {
 			Account accountInDatenbank = this.getAccountById(a.getId());
 			accountInDatenbank.setEmail(a.getEmail());
-			accountInDatenbank.setGeburtsdatum(a.getGeburtsdatum());
-			accountInDatenbank.setIsadmin(a.getIsadmin());
-			accountInDatenbank.setName(a.getName());
 			accountInDatenbank.setVorname(a.getVorname());
 			if (a.getId() == accountInDatenbank.getId()) {
 				em.merge(accountInDatenbank);
