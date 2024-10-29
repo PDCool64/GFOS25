@@ -1,0 +1,7 @@
+CREATE TABLE Kalendar(
+    id INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 0, INCREMENT BY 1),
+    account INT,
+    FOREIGN KEY (account) REFERENCES Account(id),
+    termin INT,
+    FOREIGN KEY (termin) REFERENCES Termin(id)
+);
