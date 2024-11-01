@@ -53,6 +53,17 @@ public class AccountWS {
 						accountFacade.getAllAccounts()));
 	}
 
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}")
+	public Response getAccountById(
+			@PathParam("id") int id
+	) {
+		Account account = accountFacade.getAccountById(id);
+		return responsService.ok(jsonb.toJson(account));
+	}
+
 	private class AccountWeight {
 		Account a;
 		float weight;
