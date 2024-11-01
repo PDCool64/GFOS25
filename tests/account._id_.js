@@ -32,6 +32,13 @@ const data = response.then((response) => {
     return response.json();
 }).then((data) => {
     console.log(data);
+    
+    const fs = require('fs');
+    const path = require('path');
+
+    const outputPath = path.join(__dirname, 'output', 'account.' + (id ? id : '1') + '.json');
+    fs.writeFileSync(outputPath, JSON.stringify(data, null, 2));
+
 }).catch((error) => {
     console.error('There has been a problem with your fetch operation:', error);
 });
