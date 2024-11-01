@@ -41,7 +41,7 @@ public class AccountFacade {
 
 	public Account getAccountById(int id) {
 		try {
-			return em.find(Account.class, id);
+			return em.createNamedQuery("Account.findById", Account.class).setParameter("id", id).getSingleResult();
 		} catch (Exception e) {
 			return null;
 		}

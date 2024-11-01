@@ -2,7 +2,7 @@
   <q-item
     clickable
     tag="a"
-    target="_blank"
+    target="_blank" 
     :href="props.link"
   >
     <q-item-section
@@ -14,7 +14,6 @@
 
     <q-item-section>
       <q-item-label>{{ props.title }}</q-item-label>
-      <q-item-label caption>{{ props.caption }}</q-item-label>
     </q-item-section>
   </q-item>
 </template>
@@ -29,12 +28,7 @@ const props = defineProps({
     type: String,
     required: true
   },
-
-  caption: {
-    type: String,
-    default: ''
-  },
-
+  
   link: {
     type: String,
     default: '#'
@@ -46,3 +40,9 @@ const props = defineProps({
   }
 })
 </script>
+
+<style scoped>
+.q-item {
+  padding: 5px 20px;
+}
+</style>
