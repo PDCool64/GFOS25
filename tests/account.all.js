@@ -28,12 +28,9 @@ const data = response.then((response) => {
     const fs = require('fs');
     const path = require('path');
 
-    const outputDir = path.join(__dirname, 'output', path.basename(__filename, '.js'));
-    fs.mkdirSync(outputDir, { recursive: true });
-    fs.writeFileSync(path.join(outputDir, 'data.json'), JSON.stringify(data, null, 2));
+    const outputPath = path.join(__dirname, 'output', path.basename(__filename, '.js')) + '.json';
+    fs.writeFileSync(outputPath, JSON.stringify(data, null, 2));
 
 }).catch((error) => {
     console.error('There has been a problem with your fetch operation:', error);
 });
-
-// dump the data in the ./output/__name__ folder

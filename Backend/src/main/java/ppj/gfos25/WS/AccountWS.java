@@ -14,7 +14,6 @@ import jakarta.ws.rs.core.Response;
 import ppj.gfos25.Entity.Account;
 import ppj.gfos25.Facades.AccountFacade;
 import ppj.gfos25.Service.ResponseService;
-import jakarta.json.JsonObject;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.ws.rs.Produces;

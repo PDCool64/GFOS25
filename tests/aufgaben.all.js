@@ -1,6 +1,5 @@
 // fetch the document from the server
-const url = "http://localhost:8080/Backend/api/";
-
+const url = "http://localhost:8080/Backend/api/aufgaben/all";
 const hasJson = false;
 const json = {};
 const method = 'GET';
@@ -8,7 +7,7 @@ const method = 'GET';
 
 // request
 
-const response =  fetch(url, {
+const response = fetch(url, {
     method: method,
     body: hasJson ? JSON.stringify(json) : null,
     headers: hasJson ? {
@@ -31,7 +30,7 @@ const data = response.then((response) => {
 
     const outputPath = path.join(__dirname, 'output', path.basename(__filename, '.js')) + '.json';
     fs.writeFileSync(outputPath, JSON.stringify(data, null, 2));
-
+    
 }).catch((error) => {
     console.error('There has been a problem with your fetch operation:', error);
 });
