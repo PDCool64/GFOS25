@@ -1,10 +1,12 @@
+import address from "./address";
+
 export async function getAllAccounts() {
-    const response = await fetch('http://localhost:8080/Backend/api/accounts/all');
+    const response = await fetch(address + '/accounts/all');
     return await response.json();
 }
 
 export async function getAccountById(id) {
-    const response = await fetch('http://localhost:8080/Backend/api/accounts/' + id, {
+    const response = await fetch(address + '/accounts/' + id, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'

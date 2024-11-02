@@ -1,42 +1,32 @@
 <template>
-<div>
-<h1>Account</h1>
-    <ul>
-      <li> Name: &nbsp; <p>{{ account.vorname }}</p></li>
-      <li> Accountname: &nbsp; <p>{{ account.nachname }}</p> </li>
-      <li> Account: &nbsp; <p>{{ account.email }}</p> </li>
-    </ul>
-    <!-- <q-toggle
-        checked-icon="check"
-        color="green"
-        unchecked-icon="clear"
-        v-model="_2fa"
-      />  -->
-</div>
-</template>
+    <div>
+ <h1>{{ aufgabe.titel }}</h1>
+      <ul>
+          <li>{{ aufgabe.beschreibung }}</li>
+          <li>{{ aufgabe.termin }}</li>
+          <li><input type="checkbox" v-model="aufgabe.done" /> </li>
+      </ul>
 
-<script setup>
-    import { defineOptions } from 'vue'
-    import { ref } from 'vue'
+    </div>
+  </template>
 
-    const _2fa = ref(false);
+  <script>
+  export default {
+    data() {
+      return {
+        aufgabe: {
+          titel: 'Beispiel Aufgabe',
+          beschreibung: 'Dies ist eine Beispielbeschreibung für die Aufgabe.',
+          termin: '2023-10-01',
+          done: false
+        }
+      }
+    }
+  }
+  </script>
 
-    import { getAccountById } from 'src/requests/account';
-
-    const account = ref({});
-    const fetchAccount = async () => {
-        let a = await getAccountById(1);
-        console.log(a);
-        account.value = a;
-        console.log(account.value);
-    };
-
-    fetchAccount();
-</script>
-
-<style scoped>
-
-    div {
+  <style scoped>
+        div {
         margin-top: 10%;
         margin-left: 25%;
         height: 100%;
@@ -79,8 +69,5 @@
         display: flex;
     }
 
-    p {
-        opacity: 0.6;
-        margin-left: auto;
-    }
-</style>
+    </style>
+```
