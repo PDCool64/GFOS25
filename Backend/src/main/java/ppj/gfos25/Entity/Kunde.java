@@ -4,6 +4,7 @@
  */
 package ppj.gfos25.Entity;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -63,6 +64,7 @@ public class Kunde implements Serializable {
 	@Column(name = "UTC_OFFSET")
 	private Integer utcOffset;
 	@OneToMany(mappedBy = "kunde")
+	@JsonbTransient
 	private List<Aufgabe> aufgabeList;
 	@JoinColumn(name = "ANSPRECHPARTNER", referencedColumnName = "ID")
     @ManyToOne

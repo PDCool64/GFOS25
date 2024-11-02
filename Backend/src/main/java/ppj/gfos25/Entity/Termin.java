@@ -4,6 +4,7 @@
  */
 package ppj.gfos25.Entity;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -48,8 +49,10 @@ public class Termin implements Serializable {
 	@Column(name = "ENDZEIT")
 	private String endzeit;
 	@OneToMany(mappedBy = "termin")
+	@JsonbTransient
 	private List<Kalendar> kalendarList;
 	@OneToMany(mappedBy = "termin")
+	@JsonbTransient
 	private List<Aufgabenbehandlung> aufgabenbehandlungList;
 
 	public Termin() {

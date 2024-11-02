@@ -4,6 +4,7 @@
  */
 package ppj.gfos25.Entity;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -59,8 +60,10 @@ public class Aufgabe implements Serializable {
     @ManyToOne
 	private Kunde kunde;
 	@OneToMany(mappedBy = "aufgabe")
+	@JsonbTransient
 	private List<Aufgabenbearbeitung> aufgabenbearbeitungList;
 	@OneToMany(mappedBy = "aufgabe")
+	@JsonbTransient
 	private List<Aufgabenbehandlung> aufgabenbehandlungList;
 
 	public Aufgabe() {

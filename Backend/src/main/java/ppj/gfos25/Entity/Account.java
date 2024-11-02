@@ -4,6 +4,7 @@
  */
 package ppj.gfos25.Entity;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -64,10 +65,13 @@ public class Account implements Serializable {
     @ManyToOne
 	private Settings einstellungen;
 	@OneToMany(mappedBy = "account")
+	@JsonbTransient
 	private List<Kalendar> kalendarList;
 	@OneToMany(mappedBy = "bearbeiter")
+	@JsonbTransient
 	private List<Aufgabenbearbeitung> aufgabenbearbeitungList;
 	@OneToMany(mappedBy = "ansprechpartner")
+	@JsonbTransient
 	private List<Kunde> kundeList;
 
 	public Account() {
