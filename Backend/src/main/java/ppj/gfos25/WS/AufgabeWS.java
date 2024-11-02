@@ -8,6 +8,7 @@ import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -42,5 +43,17 @@ public class AufgabeWS {
 				jsonb.toJson(
 						aufgabeFacade.getAllAufgaben()));
 	}	
+
+	@GET 
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{id}")
+	public Response getAufgabeById(
+			@PathParam("id") int id
+	) {
+		return responsService.ok(
+				jsonb.toJson(
+						aufgabeFacade.getAufgabeById(id)));
+	}
+
 
 }
