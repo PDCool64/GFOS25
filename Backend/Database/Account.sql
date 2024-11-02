@@ -3,6 +3,7 @@ CREATE TABLE Settings(
     farbschema INT, 
     sprache VARCHAR(2), 
     zwei_faktor_auth BOOLEAN
+    passwort_hash VARCHAR(256)
 );
 
 CREATE TABLE Account (
@@ -17,6 +18,7 @@ CREATE TABLE Account (
     einstellungen INT,
     FOREIGN KEY (einstellungen) REFERENCES Settings(id)
 );
+
 
 
 INSERT INTO

@@ -12,10 +12,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  *
@@ -28,7 +26,8 @@ import java.util.List;
 	@NamedQuery(name = "Settings.findById", query = "SELECT s FROM Settings s WHERE s.id = :id"),
 	@NamedQuery(name = "Settings.findByFarbschema", query = "SELECT s FROM Settings s WHERE s.farbschema = :farbschema"),
 	@NamedQuery(name = "Settings.findBySprache", query = "SELECT s FROM Settings s WHERE s.sprache = :sprache"),
-	@NamedQuery(name = "Settings.findByZweiFaktorAuth", query = "SELECT s FROM Settings s WHERE s.zweiFaktorAuth = :zweiFaktorAuth")})
+	@NamedQuery(name = "Settings.findByZweiFaktorAuth", query = "SELECT s FROM Settings s WHERE s.zweiFaktorAuth = :zweiFaktorAuth"),
+	@NamedQuery(name = "Settings.findByPasswortHash", query = "SELECT s FROM Settings s WHERE s.passwortHash = :passwortHash")})
 public class Settings implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -43,8 +42,8 @@ public class Settings implements Serializable {
 	private String sprache;
 	@Column(name = "ZWEI_FAKTOR_AUTH")
 	private Boolean zweiFaktorAuth;
-	@OneToMany(mappedBy = "einstellungen")
-	private List<Account> accountList;
+	@Column(name = "PASSWORT_HASH")
+	private String passwortHash;
 
 	public Settings() {
 	}
@@ -85,12 +84,12 @@ public class Settings implements Serializable {
 		this.zweiFaktorAuth = zweiFaktorAuth;
 	}
 
-	public List<Account> getAccountList() {
-		return accountList;
+	public String getPasswortHash() {
+		return passwortHash;
 	}
 
-	public void setAccountList(List<Account> accountList) {
-		this.accountList = accountList;
+	public void setPasswortHash(String passwortHash) {
+		this.passwortHash = passwortHash;
 	}
 
 	@Override
