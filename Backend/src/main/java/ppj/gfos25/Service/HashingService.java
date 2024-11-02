@@ -15,7 +15,7 @@ import jakarta.ejb.Stateless;
 public class HashingService {
     private static final int ITERATIONS = 10000;
     private static final int KEY_LENGTH = 512;
-    private static final String SALT = "58g--fbgdf%§!bjds8b,AB.AF08?21nl"; //Zufällig
+    private static final String SALT = "58g--fbkdf%§!bjds8b,AB.AF08?21nl"; //Zufällig
 
     public String convertStringToHash(String password) {
         return Hex.encodeHexString(hashPassword(password.toCharArray()));
