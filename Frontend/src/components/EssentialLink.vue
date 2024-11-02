@@ -1,48 +1,43 @@
 <template>
-  <q-item
-    clickable
-    tag="a"
-    target="_blank" 
-    :href="props.link"
-  >
-    <q-item-section
-      v-if="props.icon"
-      avatar
-    >
-      <q-icon :name="props.icon" />
-    </q-item-section>
+    <q-item clickable tag="a" :href="props.link">
+        <q-item-section v-if="props.icon" avatar>
+            <q-icon :name="props.icon" />
+        </q-item-section>
 
-    <q-item-section>
-      <q-item-label>{{ props.title }}</q-item-label>
-    </q-item-section>
-  </q-item>
+        <q-item-section>
+            <q-item-label>{{ props.title }}</q-item-label>
+        </q-item-section>
+    </q-item>
 </template>
 
 <script setup>
 defineOptions({
-  name: 'EssentialLink'
-})
+    name: 'EssentialLink',
+});
 
 const props = defineProps({
-  title: {
-    type: String,
-    required: true
-  },
-  
-  link: {
-    type: String,
-    default: '#'
-  },
+    title: {
+        type: String,
 
-  icon: {
-    type: String,
-    default: ''
-  }
-})
+        required: true,
+    },
+
+    link: {
+        type: String,
+
+        default: '#',
+    },
+
+    icon: {
+        type: String,
+
+        default: '',
+    },
+});
 </script>
 
 <style scoped>
 .q-item {
-  padding: 5px 20px;
+    padding: 5px 20px;
 }
 </style>

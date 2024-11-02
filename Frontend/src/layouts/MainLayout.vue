@@ -28,7 +28,7 @@
         <q-item-label
           header
         >
-          Essential Links
+
         </q-item-label>
 
         <EssentialLink
@@ -57,12 +57,12 @@ const linksList = [
   {
     title: 'Übersicht',
     icon: 'space_dashboard',
-    link: 'https://quasar.dev'
+    link: '/#/dashboard'
   },
   {
     title: 'Chat',
     icon: 'chat',
-    link: 'https://github.com/quasarframework'
+    link: '/#/chat'
   },
   {
     title: 'Account',

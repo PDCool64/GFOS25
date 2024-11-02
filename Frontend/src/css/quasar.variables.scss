@@ -17,6 +17,13 @@ $primary   : #007d8f;
 $secondary : #6ab6c2;
 $accent    : #9C27B0;
 
+@media (prefers-color-scheme: dark) {
+  $primary   : #007d8f;
+  $secondary : #6ab6c2;
+  $accent    : #9C27B0;
+
+}
+
 $dark      : #1D1D1D;
 $dark-page : #121212;
 
