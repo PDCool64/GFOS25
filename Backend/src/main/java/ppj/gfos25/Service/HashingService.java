@@ -3,6 +3,7 @@ package ppj.gfos25.Service;
 import org.apache.commons.codec.binary.Hex;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
@@ -26,6 +27,8 @@ public class HashingService {
             SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
             PBEKeySpec spec = new PBEKeySpec(password, SALT.getBytes(), ITERATIONS, KEY_LENGTH);
             SecretKey key = secretKeyFactory.generateSecret(spec);
+            System.out.println("Passwort: " + String.copyValueOf(password));
+            System.out.println("Hash: " + Hex.encodeHexString(key.getEncoded()));
             return key.getEncoded();
         }
         catch(NoSuchAlgorithmException e){

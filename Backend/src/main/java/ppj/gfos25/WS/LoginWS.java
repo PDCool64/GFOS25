@@ -13,6 +13,7 @@ import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
@@ -22,6 +23,7 @@ import ppj.gfos25.Entity.Account;
 import ppj.gfos25.Facades.AccountFacade;
 import ppj.gfos25.Service.HashingService;
 import ppj.gfos25.Service.ResponseService;
+import ppj.gfos25.Service.TokenService;
 
 /**
  *
@@ -43,25 +45,37 @@ public class LoginWS {
     @EJB
     HashingService hashingService = new HashingService();
 
-    @GET
+    @EJB
+    TokenService tokenService = new TokenService();
+
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(String json) {
         JsonObject jsonObject = Json
-            .createReader(new StringReader(json))
-            .readObject();
-        String email = jsonObject.getString("email");
-        String passwort = jsonObject.getString("passwort");
+                .createReader(new StringReader(json))
+                .readObject();
+        String email, passwort;
+        try {
+            email = jsonObject.getString("email");
+            passwort = jsonObject.getString("passwort");
+        } catch (Exception e) {
+            return responsService.badRequest("Invalid JSON");
+        }
         Account account = accountFacade.getAccountByEmail(email);
         if (account == null) {
             return responsService.unauthorized("Account not found");
         }
         String passwortHash = hashingService.convertStringToHash(passwort);
         String accountPasswortHash = account
-            .getEinstellungen()
-            .getPasswortHash();
+                .getEinstellungen()
+                .getPasswortHash();
+        String token = tokenService.createNewToken(email);
+        JsonObject response = Json.createObjectBuilder()
+                .add("token", token)
+                .build();
         if (passwortHash.equals(accountPasswortHash)) {
-            return responsService.ok("Login successful");
+            return responsService.ok(jsonb.toJson(response));
         } else {
             return responsService.unauthorized("Login failed");
         }
