@@ -8,22 +8,20 @@
 import { ref } from 'vue';
 import { Pie } from 'vue-chartjs';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { defineOptions, defineProps } from 'vue';
+
+const props = defineProps({
+    data: {
+        type: Object,
+        default: () => ({}),
+    },
+    options: {
+        type: Object,
+        default: () => ({}),
+    },
+});
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-
-const data = ref({
-    labels: ['January', 'February', 'March'],
-    datasets: [
-        {
-            backgroundColor: ['#FF6633', '#FFB399', '#FF33FF'],
-            data: [30, 20, 12],
-        },
-    ],
-});
-const options = ref({
-    responsive: true,
-    maintainAspectRatio: true,
-});
 </script>
 
 <style scoped>

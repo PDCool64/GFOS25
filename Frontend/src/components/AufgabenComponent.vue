@@ -1,8 +1,15 @@
 <template>
-    <div @click="onClick" :class="taskClass">
+    <div @click="onClick" :class="taskClass" class="wrapper">
         <div class="header-wrapper">
             <h2>{{ aufgabe.titel }}</h2>
-            <q-icon class="icon" :name="icon" :color="taskClass" size="3em" />
+            <div class="icon-wrapper">
+                <q-icon
+                    class="icon"
+                    :name="icon"
+                    :color="taskClass"
+                    size="3em"
+                />
+            </div>
         </div>
         <ul>
             <li>{{ aufgabe.beschreibung }}</li>
@@ -12,9 +19,9 @@
                 {{ displayDate(new Date(aufgabe.erstellungsdatum)) }}
             </li>
             <li>
-                Fällig am {{ displayDate(new Date(aufgabe.faelligkeitsdatum)) }}
+                Fällig am
+                {{ displayDate(new Date(aufgabe.faelligkeitsdatum)) }}
             </li>
-            <li>Status: {{ aufgabe.status }}</li>
         </ul>
     </div>
 </template>
@@ -43,20 +50,19 @@ const onClick = () => {
     aufgabe.value.status = (aufgabe.value.status + 1) % 3;
     switch (aufgabe.value.status) {
         case 0:
-            icon.value = 'check';
+            icon.value = 'clear';
             break;
         case 1:
             icon.value = 'hourglass_empty';
             break;
         case 2:
-            icon.value = 'clear';
+            icon.value = 'check';
             break;
         default:
-            icon.value = 'check';
+            icon.value = 'question_mark';
             break;
     }
 };
-
 const taskClass = computed(() => {
     switch (aufgabe.value.status % 3) {
         case 0:
@@ -81,15 +87,14 @@ async function fetchAufgabe() {
     const response = await getAufgabeById(props.id);
     console.log(response);
     aufgabe.value = response;
+    onClick();
 }
 
 fetchAufgabe();
 </script>
 
 <style scoped>
-div {
-    margin: 0;
-    height: auto;
+.wrapper {
     display: flex;
     max-width: 500px;
     flex-direction: column;
@@ -97,18 +102,32 @@ div {
     background-color: var(--q-primary);
     border-radius: 10px;
     cursor: pointer;
+    margin: 1em;
+    user-select: none;
+}
+
+.open {
+    background-color: var(--q-negative);
+}
+
+.in-progress {
+    background-color: var(--q-warning);
+}
+
+.closed {
+    background-color: var(--q-positive);
 }
 
 h2 {
-    font-size: 3em;
+    font-size: 2em;
     font-family: 'Roboto', sans-serif;
     color: white;
     margin: 0;
-    margin-left: 10%;
+    line-height: 1.5em;
 }
 
 ul {
-    width: 80%;
+    width: 85%;
     margin-bottom: 10%;
     padding: 0;
     list-style-type: none;
@@ -134,11 +153,17 @@ li {
 }
 
 .icon {
-  flex-grow: 0;
-  box-shadow: #0008 3px 3px 8px;
-  border-radius: 20%;
-  margin-left: auto;
-  margin-right: 10%;
+    flex-grow: 0;
+    box-shadow: #0008 3px 3px 8px;
+    border-radius: 20%;
+    margin-left: auto;
+    margin-right: 10%;
 }
 
+.icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
 </style>
