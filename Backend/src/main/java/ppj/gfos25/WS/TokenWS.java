@@ -92,17 +92,8 @@ public class TokenWS {
         if (tokenEmail.email == null) {
             return responsService.unauthorized("Invalid token");
         }
-        try {
-            token = jsonObject.getString("token");
-        } catch (Exception e) {
-            return responsService.badRequest("Invalid JSON");
-        }
-        if (email == null) {
-            return responsService.unauthorized("Invalid token");
-        }
-        String newToken = tokenService.createNewToken(email);
         JsonObject response = Json.createObjectBuilder()
-                .add("token", newToken)
+                .add("token", tokenEmail.token)
                 .build();
         return responsService.ok(jsonb.toJson(response));
     }
