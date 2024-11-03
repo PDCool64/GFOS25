@@ -12,7 +12,7 @@ import jakarta.json.JsonObject;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
+import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -24,6 +24,7 @@ import ppj.gfos25.Facades.AccountFacade;
 import ppj.gfos25.Service.HashingService;
 import ppj.gfos25.Service.ResponseService;
 import ppj.gfos25.Service.TokenService;
+import ppj.gfos25.Service.TokenService.TokenEmail;
 
 /**
  *
@@ -31,8 +32,8 @@ import ppj.gfos25.Service.TokenService;
  */
 @Stateless
 @LocalBean
-@Path("/login")
-public class LoginWS {
+@Path("/tokens")
+public class TokenWS {
 
     private final Jsonb jsonb = JsonbBuilder.create();
 
@@ -48,6 +49,7 @@ public class LoginWS {
     @EJB
     TokenService tokenService = new TokenService();
 
+    @Path("/login")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -79,5 +81,29 @@ public class LoginWS {
         } else {
             return responsService.unauthorized("Login failed");
         }
+    }
+
+    @Path("/refresh")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response refresh(
+            @HeaderParam("Authorization") String token) {
+        TokenEmail tokenEmail = tokenService.verifyToken(token);
+        if (tokenEmail.email == null) {
+            return responsService.unauthorized("Invalid token");
+        }
+        try {
+            token = jsonObject.getString("token");
+        } catch (Exception e) {
+            return responsService.badRequest("Invalid JSON");
+        }
+        if (email == null) {
+            return responsService.unauthorized("Invalid token");
+        }
+        String newToken = tokenService.createNewToken(email);
+        JsonObject response = Json.createObjectBuilder()
+                .add("token", newToken)
+                .build();
+        return responsService.ok(jsonb.toJson(response));
     }
 }

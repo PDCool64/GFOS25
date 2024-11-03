@@ -48,7 +48,7 @@ public class TokenService {
 
     public String createNewToken(String email) {
         // try {
-        Date expirationDate = new Date(System.currentTimeMillis());
+        Date expirationDate = new Date(System.currentTimeMillis() + DT);
         Algorithm algorithm = Algorithm.HMAC256(SECRET);
         String token = JWT.create()
                 .withIssuer("GFOSProjekt")
