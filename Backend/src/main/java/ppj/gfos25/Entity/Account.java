@@ -4,7 +4,6 @@
  */
 package ppj.gfos25.Entity;
 
-import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,10 +14,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  *
@@ -35,7 +32,8 @@ import java.util.List;
 	@NamedQuery(name = "Account.findByTelefonnummer", query = "SELECT a FROM Account a WHERE a.telefonnummer = :telefonnummer"),
 	@NamedQuery(name = "Account.findByRang", query = "SELECT a FROM Account a WHERE a.rang = :rang"),
 	@NamedQuery(name = "Account.findByUtcOffset", query = "SELECT a FROM Account a WHERE a.utcOffset = :utcOffset"),
-	@NamedQuery(name = "Account.findByRegion", query = "SELECT a FROM Account a WHERE a.region = :region")})
+	@NamedQuery(name = "Account.findByRegion", query = "SELECT a FROM Account a WHERE a.region = :region"),
+	@NamedQuery(name = "Account.findByRefreshToken", query = "SELECT a FROM Account a WHERE a.refreshToken = :refreshToken")})
 public class Account implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -54,25 +52,17 @@ public class Account implements Serializable {
 	private String email;
 	@Column(name = "TELEFONNUMMER")
 	private String telefonnummer;
-	@Basic(optional = false)
-    @Column(name = "RANG")
-	private int rang;
+	@Column(name = "RANG")
+	private Integer rang;
 	@Column(name = "UTC_OFFSET")
 	private Integer utcOffset;
 	@Column(name = "REGION")
 	private String region;
+	@Column(name = "REFRESH_TOKEN")
+	private String refreshToken;
 	@JoinColumn(name = "EINSTELLUNGEN", referencedColumnName = "ID")
     @ManyToOne
 	private Settings einstellungen;
-	@OneToMany(mappedBy = "account")
-	@JsonbTransient
-	private List<Kalendar> kalendarList;
-	@OneToMany(mappedBy = "bearbeiter")
-	@JsonbTransient
-	private List<Aufgabenbearbeitung> aufgabenbearbeitungList;
-	@OneToMany(mappedBy = "ansprechpartner")
-	@JsonbTransient
-	private List<Kunde> kundeList;
 
 	public Account() {
 	}
@@ -81,11 +71,10 @@ public class Account implements Serializable {
 		this.id = id;
 	}
 
-	public Account(Integer id, String vorname, String nachname, int rang) {
+	public Account(Integer id, String vorname, String nachname) {
 		this.id = id;
 		this.vorname = vorname;
 		this.nachname = nachname;
-		this.rang = rang;
 	}
 
 	public Integer getId() {
@@ -128,11 +117,11 @@ public class Account implements Serializable {
 		this.telefonnummer = telefonnummer;
 	}
 
-	public int getRang() {
+	public Integer getRang() {
 		return rang;
 	}
 
-	public void setRang(int rang) {
+	public void setRang(Integer rang) {
 		this.rang = rang;
 	}
 
@@ -152,36 +141,20 @@ public class Account implements Serializable {
 		this.region = region;
 	}
 
+	public String getRefreshToken() {
+		return refreshToken;
+	}
+
+	public void setRefreshToken(String refreshToken) {
+		this.refreshToken = refreshToken;
+	}
+
 	public Settings getEinstellungen() {
 		return einstellungen;
 	}
 
 	public void setEinstellungen(Settings einstellungen) {
 		this.einstellungen = einstellungen;
-	}
-
-	public List<Kalendar> getKalendarList() {
-		return kalendarList;
-	}
-
-	public void setKalendarList(List<Kalendar> kalendarList) {
-		this.kalendarList = kalendarList;
-	}
-
-	public List<Aufgabenbearbeitung> getAufgabenbearbeitungList() {
-		return aufgabenbearbeitungList;
-	}
-
-	public void setAufgabenbearbeitungList(List<Aufgabenbearbeitung> aufgabenbearbeitungList) {
-		this.aufgabenbearbeitungList = aufgabenbearbeitungList;
-	}
-
-	public List<Kunde> getKundeList() {
-		return kundeList;
-	}
-
-	public void setKundeList(List<Kunde> kundeList) {
-		this.kundeList = kundeList;
 	}
 
 	@Override

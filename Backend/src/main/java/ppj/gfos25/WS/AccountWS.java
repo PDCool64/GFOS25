@@ -52,13 +52,11 @@ public class AccountWS {
 						accountFacade.getAllAccounts()));
 	}
 
-
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
 	public Response getAccountById(
-			@PathParam("id") int id
-	) {
+			@PathParam("id") int id) {
 		Account account = accountFacade.getAccountById(id);
 		return responsService.ok(jsonb.toJson(account));
 	}
@@ -74,6 +72,14 @@ public class AccountWS {
 	}
 
 	@GET
+	@Path("/test")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response test() {
+		System.out.println("Test");
+		return responsService.ok("abc");
+	}
+
+	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/search/{search}")
@@ -86,18 +92,18 @@ public class AccountWS {
 		String[] words = search.split(" ");
 		for (Account account : accounts) {
 			float weight = 0;
+			String name = account.getNachname().toLowerCase();
+			String vorname = account.getVorname().toLowerCase();
+			String email = account.getEmail().toLowerCase();
 			for (String word : words) {
-				String name = account.getNachname().toLowerCase();
 				int index = name.indexOf(word);
 				if (index >= 0) {
 					weight += 256 / (index + 1);
 				}
-				String vorname = account.getVorname().toLowerCase();
 				index = vorname.indexOf(word);
 				if (index >= 0) {
 					weight += 256 / (index + 1);
 				}
-				String email = account.getEmail().toLowerCase();
 				index = email.indexOf(word);
 				if (index >= 0) {
 					weight += 128 / (index + 1);
@@ -126,5 +132,4 @@ public class AccountWS {
 		}
 		return responsService.ok(jsonb.toJson(accountsResult));
 	}
-
 }

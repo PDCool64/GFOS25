@@ -5,7 +5,7 @@
 	<artifactId>GFOS25</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
-	<name>GFOS25-1.0</name>
+	<name>Backend</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -45,6 +45,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>Backend</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
