@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="account-wrapper">
         <h1>Account</h1>
         <ul>
       <li> Name: &nbsp; <p>{{ account.vorname }}</p></li>
@@ -23,6 +23,8 @@ const _2fa = ref(false);
 
 import { getAccountById } from 'src/requests/account';
 
+// TODO: get the logged-in user's account
+
 const account = ref({});
 const fetchAccount = async () => {
     let a = await getAccountById(1);
@@ -36,9 +38,7 @@ fetchAccount();
 
 <style scoped>
 
-
-
-div {
+.account-wrapper {
     margin-top: 10%;
     margin-left: 25%;
     height: 100%;

@@ -5,10 +5,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import { Pie } from 'vue-chartjs';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { defineOptions, defineProps } from 'vue';
+import { defineProps } from 'vue';
 
 const props = defineProps({
     data: {

@@ -100,7 +100,7 @@ fetchAufgabe();
     flex-direction: column;
     align-items: center;
     background-color: var(--q-primary);
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
     margin: 1em;
     user-select: none;
@@ -123,6 +123,8 @@ h2 {
     font-family: 'Roboto', sans-serif;
     color: white;
     margin: 0;
+    margin-right: auto;
+
     line-height: 1.5em;
 }
 
@@ -164,6 +166,7 @@ li {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: max-content;
+    margin: 0 10px;
 }
 </style>
