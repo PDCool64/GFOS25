@@ -1,4 +1,4 @@
-import address from './address';
+import address from '../address';
 export async function getAllAufgaben() {
     const response = await fetch(address + '/aufgaben/all');
     return await response.json();

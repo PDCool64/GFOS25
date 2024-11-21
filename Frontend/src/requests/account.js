@@ -1,4 +1,4 @@
-import address from "./address";
+import address from "../address";
 
 export async function getAllAccounts() {
     const response = await fetch(address + '/accounts/all');

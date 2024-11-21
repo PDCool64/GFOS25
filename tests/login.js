@@ -1,5 +1,5 @@
 // fetch the document from the server
-const url = 'http://localhost:8080/Backend/api/login';
+const url = 'http://localhost:8080/Backend/api/tokens/login';
 
 const hasJson = true;
 const json = {
