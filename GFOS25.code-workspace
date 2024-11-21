@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "Backend"
+		},
+		{
+			"path": "Frontend"
+		},
+		{
+			"path": "tests"
+		},
+		{
+			"path": "batch"
+		}
+	],
+	"settings": {}
+}
