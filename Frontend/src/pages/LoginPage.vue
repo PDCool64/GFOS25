@@ -1,12 +1,12 @@
 <template>
     <div class="login-page">
         <div class="login-form">
-            <h1>Login</h1>
+            <h1>LOGIN</h1>
             <form @submit.prevent="temp">
                 <input
                     type="text"
                     v-model="email"
-                    placeholder="Username"
+                    placeholder="Email"
                     required
                 />
                 <input
@@ -15,21 +15,24 @@
                     placeholder="Password"
                     required
                 />
-                <button>Login</button>
+                <button>LOGIN</button>
             </form>
         </div>
         <button @click="console.log(tokenStore.token)">Test</button>
     </div>
 </template>
 
+
 <script setup>
 import { ref } from 'vue';
 import { login } from 'src/requests/login';
 import { useTokenStore } from 'src/stores/token';
 import { useAccountStore } from 'src/stores/account';
+import { useAufgabenStore } from 'src/stores/aufgaben';
 
 const tokenStore = useTokenStore();
 const accountStore = useAccountStore();
+const aufgabenStore = useAufgabenStore();
 
 const email = ref('');
 const password = ref('');
@@ -38,10 +41,12 @@ const temp = async () => {
     console.log("username = " + email.value);
     console.log("password = " + password.value);
     const data = await login(email.value, password.value);
-    accountStore.email = email.value;
+    accountStore.account = JSON.parse(data.account);
     tokenStore.token = data.token;
     tokenStore.refresh_token = data.refresh_token;
     console.log(tokenStore.token);
+    console.log(aufgabenStore.aufgaben);
+    aufgabenStore.fetchAufgaben();
     setTimeout(() => {
         console.log("Refreshing token");
         tokenStore.refreshToken();
@@ -54,5 +59,12 @@ const temp = async () => {
     justify-content: center;
     align-items: center;
     height: 100vh;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 </style>

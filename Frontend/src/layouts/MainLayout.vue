@@ -12,7 +12,7 @@
                     v-if="tokenStore.token != ''"
 
                 />
-                <q-toolbar-title> GFOS Projekt </q-toolbar-title>
+                <q-toolbar-title class="title"> flow </q-toolbar-title>
             </q-toolbar>
         </q-header>
                 <q-drawer v-model="leftDrawerOpen" show-if-above bordered v-if="tokenStore.token != ''">
@@ -69,3 +69,11 @@ function toggleLeftDrawer() {
     leftDrawerOpen.value = !leftDrawerOpen.value;
 }
 </script>
+
+<style scoped>
+    .title {
+        font-size: 3em;
+        font: Noto Sans;
+        font-weight: bold;
+    }
+</style>

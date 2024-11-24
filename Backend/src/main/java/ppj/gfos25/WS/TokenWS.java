@@ -83,6 +83,7 @@ public class TokenWS {
         JsonObject response = Json.createObjectBuilder()
                 .add("token", token)
                 .add("refresh_token", refresh_token)
+                .add("account", jsonb.toJson(account))
                 .build();
         return responseService.ok(jsonb.toJson(response));
 
@@ -99,6 +100,8 @@ public class TokenWS {
             email = jsonObject.getString("email");
             old_refresh_token = jsonObject.getString("refresh_token");
         } catch (Exception e) {
+            System.out.println(e);
+            System.out.println(json);
             return responseService.badRequest("Could not parse JSON");
         }
         Account account = accountFacade.getAccountByEmail(email);
@@ -120,6 +123,3 @@ public class TokenWS {
         return responseService.ok(jsonb.toJson(response));
     }
 }
-
-// 43dc9bc80dad42a608b1b107b2e44de105045f57ed9bcc726077c008850a193d
-// 43dc9bc80dad42a608b1b107b2e44de105045f57ed9bcc726077c008850a193d
