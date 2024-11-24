@@ -4,7 +4,10 @@
  */
 package ppj.gfos25.Service;
 
+import java.security.SecureRandom;
 import java.util.Date;
+
+import org.apache.commons.codec.binary.Hex;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -60,6 +63,14 @@ public class TokenService {
         // return "JWT-Creation failed.";
         // } -> Die Exception sollte nie geworfen werden - wenn doch, sollte das geloggt
         // werden.
+    }
+
+    public String createNewRefreshToken() {
+        SecureRandom sr = new SecureRandom();        
+        byte[] bytes = new byte[32];
+        sr.nextBytes(bytes); 
+        String token = Hex.encodeHexString(bytes);
+        return token;
     }
 
     public TokenEmail verifyToken(String token) {

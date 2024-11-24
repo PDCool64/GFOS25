@@ -18,6 +18,7 @@ CREATE TABLE Account (
     region VARCHAR(255),
     einstellungen INT,
     FOREIGN KEY (einstellungen) REFERENCES Settings(id)
+    refresh_token VARCHAR(255),
 );
 
 INSERT INTO

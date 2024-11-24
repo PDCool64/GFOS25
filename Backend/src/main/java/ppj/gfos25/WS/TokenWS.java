@@ -9,9 +9,12 @@ import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
+import jakarta.json.JsonObjectBuilder;
+import jakarta.json.JsonReader;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -38,7 +41,7 @@ public class TokenWS {
     private final Jsonb jsonb = JsonbBuilder.create();
 
     @EJB
-    ResponseService responsService = new ResponseService();
+    ResponseService responseService = new ResponseService();
 
     @EJB
     AccountFacade accountFacade = new AccountFacade();
@@ -62,39 +65,61 @@ public class TokenWS {
             email = jsonObject.getString("email");
             passwort = jsonObject.getString("passwort");
         } catch (Exception e) {
-            return responsService.badRequest("Invalid JSON");
+            return responseService.badRequest("Invalid JSON");
         }
         Account account = accountFacade.getAccountByEmail(email);
         if (account == null) {
-            return responsService.unauthorized("Account not found");
+            System.out.println("Something went wrong");
+            return responseService.unauthorized("Account not found");
         }
         String passwortHash = hashingService.convertStringToHash(passwort);
         String accountPasswortHash = account
                 .getEinstellungen()
                 .getPasswortHash();
+        if (!passwortHash.equals(accountPasswortHash)) {
+            System.out.println(email);
+            System.out.println(passwortHash);
+            return responseService.unauthorized("Login failed");
+        }
         String token = tokenService.createNewToken(email);
+        String refresh_token = tokenService.createNewRefreshToken();
+        account.setRefreshToken(refresh_token);
+        accountFacade.updateAccount(account);
         JsonObject response = Json.createObjectBuilder()
                 .add("token", token)
+                .add("refresh_token", refresh_token)
                 .build();
-        if (passwortHash.equals(accountPasswortHash)) {
-            return responsService.ok(jsonb.toJson(response));
-        } else {
-            return responsService.unauthorized("Login failed");
-        }
+        return responseService.ok(jsonb.toJson(response));
+
     }
 
     @Path("/refresh")
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response refresh(
-            @HeaderParam("Authorization") String token) {
-        TokenEmail tokenEmail = tokenService.verifyToken(token);
-        if (tokenEmail.email == null) {
-            return responsService.unauthorized("Invalid token");
+    public Response refresh(String json) {
+        JsonObject jsonObject = Json.createReader(new StringReader(json)).readObject();
+        String email = jsonObject.getString("email");
+        String old_refresh_token = jsonObject.getString("refresh_token");
+        Account account = accountFacade.getAccountByEmail(email);
+        if (account == null) {
+            System.out.println("Account not found");
+            return responseService.unauthorized("Account not found");
         }
+        if (!account.getRefreshToken().equals(old_refresh_token)) {
+            return responseService.unauthorized("Refresh Token is invalid");
+        }
+        String new_refresh_token = tokenService.createNewRefreshToken();
+        account.setRefreshToken(new_refresh_token);
+        accountFacade.updateAccount(account);
+        String token = tokenService.createNewToken(email);
         JsonObject response = Json.createObjectBuilder()
-                .add("token", tokenEmail.token)
+                .add("refresh_token", new_refresh_token)
+                .add("token", token)
                 .build();
-        return responsService.ok(jsonb.toJson(response));
+        return responseService.ok(jsonb.toJson(response));
     }
 }
+
+// 43dc9bc80dad42a608b1b107b2e44de105045f57ed9bcc726077c008850a193d
+// 43dc9bc80dad42a608b1b107b2e44de105045f57ed9bcc726077c008850a193d
