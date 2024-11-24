@@ -2,8 +2,12 @@ import { defineStore, acceptHMRUpdate } from 'pinia'
 
 export const useAccountStore = defineStore('account', {
    state: () => ({
-      email: '',
-
+      account: {
+          id: -1,
+          email: '',
+          vorname: '',
+          nachname: ''
+      },
     }),
     getters: {},
     actions: {},

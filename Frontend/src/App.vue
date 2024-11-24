@@ -6,6 +6,7 @@
 defineOptions({
   name: 'App'
 });
+document.title = 'flow';
 </script>
 
 <style scoped>

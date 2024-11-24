@@ -15,12 +15,10 @@ export const useTokenStore = defineStore('token', {
             this.token = '';
         },
         async refreshToken() {
-            console.log(accountStore.email);
-            console.log(this.refresh_token);
             const response = await fetch(address + '/tokens/refresh', {
                 method: 'POST',
                 body: JSON.stringify({
-                    email: accountStore.email,
+                    email: accountStore.account.email,
                     refresh_token: this.refresh_token,
                 }),
                 headers: {
