@@ -1,6 +1,6 @@
 <template>
-    <q-layout view="lHh Lpr lFf">
-        <q-header elevated>
+    <q-layout view="lHh Lpr lFf" >
+        <q-header elevated >
             <q-toolbar>
                 <q-btn
                     flat
@@ -9,13 +9,13 @@
                     icon="menu"
                     aria-label="Menu"
                     @click="toggleLeftDrawer"
+                    v-if="tokenStore.token != ''"
+
                 />
-
                 <q-toolbar-title> GFOS Projekt </q-toolbar-title>
-
             </q-toolbar>
         </q-header>
-                <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
+                <q-drawer v-model="leftDrawerOpen" show-if-above bordered v-if="tokenStore.token != ''">
                     <q-list>
                         <q-item-label header> </q-item-label>
 
@@ -36,6 +36,10 @@
 <script setup>
 import { ref } from 'vue';
 import EssentialLink from 'components/EssentialLink.vue';
+import { useTokenStore } from 'src/stores/token';
+
+const tokenStore = useTokenStore();
+
 
 defineOptions({
     name: 'MainLayout',
