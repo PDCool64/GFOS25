@@ -62,6 +62,13 @@ public class AccountFacade {
 			Account accountInDatenbank = this.getAccountById(a.getId());
 			accountInDatenbank.setEmail(a.getEmail());
 			accountInDatenbank.setVorname(a.getVorname());
+			accountInDatenbank.setNachname(a.getNachname());
+			accountInDatenbank.setRang(a.getRang());
+			accountInDatenbank.setRegion(a.getRegion());
+			accountInDatenbank.setUtcOffset(a.getUtcOffset());
+			accountInDatenbank.setTelefonnummer(a.getTelefonnummer());
+			accountInDatenbank.setRefreshToken(a.getRefreshToken());
+			accountInDatenbank.setEinstellungen(a.getEinstellungen());
 			if (a.getId() == accountInDatenbank.getId()) {
 				em.merge(accountInDatenbank);
 				em.flush();

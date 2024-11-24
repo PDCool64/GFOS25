@@ -1,5 +1,8 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import address from 'src/address';
+import { useAccountStore } from './account';
+
+const accountStore = useAccountStore();
 
 export const useTokenStore = defineStore('token', {
     state: () => ({
@@ -12,11 +15,13 @@ export const useTokenStore = defineStore('token', {
             this.token = '';
         },
         async refreshToken() {
+            console.log(accountStore.email);
+            console.log(this.refresh_token);
             const response = await fetch(address + '/tokens/refresh', {
                 method: 'POST',
                 body: JSON.stringify({
-                    email: '',
-                    refresh_token: this.refreshToken,
+                    email: accountStore.email,
+                    refresh_token: this.refresh_token,
                 }),
                 headers: {
                     'Content-Type': 'application/json',

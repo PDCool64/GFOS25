@@ -9,13 +9,9 @@ import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
-import jakarta.json.JsonObjectBuilder;
-import jakarta.json.JsonReader;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -27,7 +23,6 @@ import ppj.gfos25.Facades.AccountFacade;
 import ppj.gfos25.Service.HashingService;
 import ppj.gfos25.Service.ResponseService;
 import ppj.gfos25.Service.TokenService;
-import ppj.gfos25.Service.TokenService.TokenEmail;
 
 /**
  *
@@ -99,8 +94,13 @@ public class TokenWS {
     @Produces(MediaType.APPLICATION_JSON)
     public Response refresh(String json) {
         JsonObject jsonObject = Json.createReader(new StringReader(json)).readObject();
-        String email = jsonObject.getString("email");
-        String old_refresh_token = jsonObject.getString("refresh_token");
+        String email, old_refresh_token;
+        try {
+            email = jsonObject.getString("email");
+            old_refresh_token = jsonObject.getString("refresh_token");
+        } catch (Exception e) {
+            return responseService.badRequest("Could not parse JSON");
+        }
         Account account = accountFacade.getAccountByEmail(email);
         if (account == null) {
             System.out.println("Account not found");

@@ -5,7 +5,7 @@
             <form @submit.prevent="temp">
                 <input
                     type="text"
-                    v-model="username"
+                    v-model="email"
                     placeholder="Username"
                     required
                 />
@@ -26,22 +26,28 @@
 import { ref } from 'vue';
 import { login } from 'src/requests/login';
 import { useTokenStore } from 'src/stores/token';
+import { useAccountStore } from 'src/stores/account';
 
 const tokenStore = useTokenStore();
+const accountStore = useAccountStore();
 
-const username = ref('');
+const email = ref('');
 const password = ref('');
 
 const temp = async () => {
-  console.log("username = " + username.value);
-  console.log("password = " + password.value);
-  const data = await login(username.value, password.value);
-  const token = data.token;
-  tokenStore.setToken(token);
-  console.log(tokenStore.token);
+    console.log("username = " + email.value);
+    console.log("password = " + password.value);
+    const data = await login(email.value, password.value);
+    accountStore.email = email.value;
+    tokenStore.token = data.token;
+    tokenStore.refresh_token = data.refresh_token;
+    console.log(tokenStore.token);
+    setTimeout(() => {
+        console.log("Refreshing token");
+        tokenStore.refreshToken();
+    }, 1000 * 1);
 };
 </script>
-
 <style scoped>
 .login-page {
     display: flex;
