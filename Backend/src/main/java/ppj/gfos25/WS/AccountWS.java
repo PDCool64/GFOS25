@@ -1,6 +1,7 @@
 package ppj.gfos25.WS;
 
 import java.util.List;
+import java.io.StringReader;
 import java.util.ArrayList;
 
 import jakarta.ejb.EJB;
@@ -8,12 +9,17 @@ import jakarta.ejb.Stateless;
 import jakarta.ejb.LocalBean;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
 import ppj.gfos25.Entity.Account;
+import ppj.gfos25.Entity.Aufgabenbearbeitung;
 import ppj.gfos25.Facades.AccountFacade;
 import ppj.gfos25.Service.ResponseService;
+import ppj.gfos25.Service.TokenService;
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.ws.rs.Produces;
@@ -25,13 +31,16 @@ import jakarta.ws.rs.core.MediaType;
  */
 @Stateless
 @LocalBean
-@Path("/accounts")
+@Path("/accounts") // <ip>/Backend/api/accounts
 public class AccountWS {
 
 	private final Jsonb jsonb = JsonbBuilder.create();
 
 	@EJB
 	ResponseService responsService = new ResponseService();
+
+	@EJB
+	TokenService tokenService = new TokenService();
 
 	@EJB
 	AccountFacade accountFacade = new AccountFacade();
@@ -131,5 +140,21 @@ public class AccountWS {
 				accountsResult.add(accountWeight.a);
 		}
 		return responsService.ok(jsonb.toJson(accountsResult));
+	}
+
+	// GET, POST, PUT, DELETE
+	// R C U D
+	// CRUD -> CREATE, READ, UPDATE, DELETE
+	@GET
+	@Path("/aufgaben/{id}") // <ip>/Backend/api/accounts/aufgaben/43 -> Die Aufgaben von User mit id = 43
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAufgabenByAccount(
+			@HeaderParam("Authorization") String token, // body, header
+			@PathParam("id") int id) {
+		// if (tokenService.verifyToken(token) == null) {
+		// 	responsService.unauthorized("Token invalid");
+		// }
+		List<Aufgabenbearbeitung> aufgabenbearbeitungsListe = accountFacade.getAllAufgabenbearbeitungByAccountId(id);
+		return responsService.ok(jsonb.toJson(aufgabenbearbeitungsListe));
 	}
 }

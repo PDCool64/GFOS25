@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.util.List;
 import ppj.gfos25.Entity.Account;
+import ppj.gfos25.Entity.Aufgabenbearbeitung;
 
 /**
  *
@@ -31,9 +32,9 @@ public class AccountFacade {
 	public Account getAccountByEmail(String email) {
 		try {
 			return em
-				.createNamedQuery("Account.findByEmail", Account.class)
-				.setParameter("email", email)
-				.getSingleResult();
+					.createNamedQuery("Account.findByEmail", Account.class)
+					.setParameter("email", email)
+					.getSingleResult();
 		} catch (Exception e) {
 			return null;
 		}
@@ -50,8 +51,8 @@ public class AccountFacade {
 	public List<Account> getAllAccounts() {
 		try {
 			return em
-				.createNamedQuery("Account.findAll", Account.class)
-				.getResultList();
+					.createNamedQuery("Account.findAll", Account.class)
+					.getResultList();
 		} catch (Exception e) {
 			return null;
 		}
@@ -86,6 +87,13 @@ public class AccountFacade {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	public List<Aufgabenbearbeitung> getAllAufgabenbearbeitungByAccountId(int id) {
+		return em
+				.createNamedQuery("Aufgabenbearbeitung.findByAccountId", Aufgabenbearbeitung.class)
+				.setParameter("bearbeiterId", id)
+				.getResultList();
 	}
 
 }

@@ -25,7 +25,9 @@ import java.io.Serializable;
 @Table(name = "AUFGABENBEARBEITUNG")
 @NamedQueries({
 	@NamedQuery(name = "Aufgabenbearbeitung.findAll", query = "SELECT a FROM Aufgabenbearbeitung a"),
-	@NamedQuery(name = "Aufgabenbearbeitung.findById", query = "SELECT a FROM Aufgabenbearbeitung a WHERE a.id = :id")})
+	@NamedQuery(name = "Aufgabenbearbeitung.findById", query = "SELECT a FROM Aufgabenbearbeitung a WHERE a.id = :id"), 
+	@NamedQuery(name = "Aufgabenbearbeitung.findByAccountId", query = "SELECT a FROM Aufgabenbearbeitung a WHERE a.bearbeiter.id = :bearbeiterId")
+})
 public class Aufgabenbearbeitung implements Serializable {
 
 	private static final long serialVersionUID = 1L;
