@@ -2,15 +2,15 @@
 	<q-layout view="lHh Lpr lFf">
 		<q-header elevated>
 			<q-toolbar>
-				<q-btn
+				<!--<q-btn
 					flat
 					dense
 					round
 					icon="menu"
 					aria-label="Menu"
 					@click="toggleLeftDrawer"
-					v-if="tokenStore.token != ''" />
-				<q-toolbar-title class="title"> flow </q-toolbar-title>
+					v-if="tokenStore.token != ''" /> -->
+				<q-toolbar-title class="logo"> flow </q-toolbar-title>
 
 				<q-btn
 					flat
@@ -26,10 +26,9 @@
 			v-model="leftDrawerOpen"
 			show-if-above
 			bordered
-			v-if="tokenStore.token != ''">
+			v-if="tokenStore.token != ''"
+			class="drawer">
 			<q-list>
-				<q-item-label header> </q-item-label>
-
 				<EssentialLink
 					v-for="link in linksList"
 					:key="link.title"
@@ -107,7 +106,7 @@ const linksList = [
 	},
 ];
 
-const leftDrawerOpen = ref(false);
+const leftDrawerOpen = ref(true);
 
 const alert = ref(false);
 
@@ -127,9 +126,13 @@ function logout() {
 </script>
 
 <style scoped>
-.title {
+.logo {
 	font-size: 3em;
 	font: Noto Sans;
 	font-weight: bold;
+}
+
+.drawer {
+	background-color: red !important;
 }
 </style>
