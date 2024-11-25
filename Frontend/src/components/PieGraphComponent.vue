@@ -7,7 +7,6 @@
 <script setup>
 import { Pie } from 'vue-chartjs';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { defineProps } from 'vue';
 
 const props = defineProps({
     data: {

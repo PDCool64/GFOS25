@@ -1,16 +1,16 @@
 <template>
-  <router-view class="main-view" />
+	<router-view class="main-view" />
 </template>
 
 <script setup>
 defineOptions({
-  name: 'App'
+	name: "App",
 });
-document.title = 'flow';
+document.title = "flow";
 </script>
 
 <style scoped>
 .main-view {
-  height: 10vh;
+	height: 10vh;
 }
 </style>

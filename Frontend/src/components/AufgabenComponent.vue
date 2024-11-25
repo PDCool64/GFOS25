@@ -29,7 +29,6 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { getAufgabeById } from 'src/requests/aufgabe';
-import { defineOptions, defineProps } from 'vue';
 
 defineOptions({
     name: 'AufgabenComponent',
