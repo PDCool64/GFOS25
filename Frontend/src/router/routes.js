@@ -33,6 +33,11 @@ const routes = [
 				component: () => import("pages/DashboardPage.vue"),
 				meta: { requiresAuth: true },
 			},
+			{
+				path: "/chat",
+				component: () => import("pages/ChatPage.vue"),
+				meta: { requiresAuth: true },
+			},
 		],
 	},
 	// Always leave this as last one,
