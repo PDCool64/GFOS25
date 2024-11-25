@@ -1,7 +1,7 @@
 <template>
 	<div class="login-page">
 		<div class="login-form">
-			<h1>LOGIN</h1>
+			<h1 class="logo">flow</h1>
 			<form @submit.prevent="onSubmit">
 				<input
 					type="text"
@@ -13,9 +13,11 @@
 					v-model="password"
 					placeholder="Password"
 					required />
-				<button>LOGIN</button>
+				<button>login</button>
 			</form>
-			<button @click="onForgotPassword">Forgot Password?</button>
+			<button class="password" @click="onForgotPassword">
+				Forgot Password?
+			</button>
 		</div>
 
 		<q-dialog v-model="showPopup">
@@ -88,11 +90,21 @@ const closePopup = () => {
 };
 </script>
 <style scoped>
+.logo {
+	font-size: 10em;
+	font: Noto Sans;
+	font-weight: bold;
+	color: var(--q-accent);
+}
+
 .login-page {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
+	padding: 20px 40px;
+	height: 100%;
+	overflow: hidden;
 }
 
 .login-form {
@@ -100,5 +112,49 @@ const closePopup = () => {
 	flex-direction: column;
 	align-items: center;
 	gap: 1rem;
+	/* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;  <-- wär geil aber sieht leider hässlich aus*/
+}
+
+input {
+	width: 100%;
+	border: 0;
+	border-bottom: 2px solid black;
+	padding: 15px 0;
+	font-size: 20px;
+	margin: 10px 0 40px;
+}
+
+input:valid,
+input:focus {
+	outline: 0;
+	color: var(--q-secondary);
+	border-bottom: 2px solid var(--q-secondary);
+}
+
+button {
+	width: 100%;
+	border: 0;
+	background-color: var(--q-secondary);
+	color: black;
+	padding: 0.5rem;
+	cursor: pointer;
+	font-size: 20px;
+	border-radius: 5px;
+	padding: 20px;
+}
+button:hover {
+	opacity: 0.8;
+	outline: none;
+	color: white;
+}
+.password {
+	color: var(--q-secondary);
+	cursor: pointer;
+	background-color: transparent;
+	width: auto;
+}
+.password:hover {
+	opacity: 0.8;
+	color: var(--q-primary);
 }
 </style>
