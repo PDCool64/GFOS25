@@ -4,6 +4,7 @@
  */
 package ppj.gfos25.Entity;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,8 +15,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -24,29 +27,29 @@ import java.io.Serializable;
 @Entity
 @Table(name = "ACCOUNT")
 @NamedQueries({
-	@NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a"),
-	@NamedQuery(name = "Account.findById", query = "SELECT a FROM Account a WHERE a.id = :id"),
-	@NamedQuery(name = "Account.findByVorname", query = "SELECT a FROM Account a WHERE a.vorname = :vorname"),
-	@NamedQuery(name = "Account.findByNachname", query = "SELECT a FROM Account a WHERE a.nachname = :nachname"),
-	@NamedQuery(name = "Account.findByEmail", query = "SELECT a FROM Account a WHERE a.email = :email"),
-	@NamedQuery(name = "Account.findByTelefonnummer", query = "SELECT a FROM Account a WHERE a.telefonnummer = :telefonnummer"),
-	@NamedQuery(name = "Account.findByRang", query = "SELECT a FROM Account a WHERE a.rang = :rang"),
-	@NamedQuery(name = "Account.findByUtcOffset", query = "SELECT a FROM Account a WHERE a.utcOffset = :utcOffset"),
-	@NamedQuery(name = "Account.findByRegion", query = "SELECT a FROM Account a WHERE a.region = :region"),
-	@NamedQuery(name = "Account.findByRefreshToken", query = "SELECT a FROM Account a WHERE a.refreshToken = :refreshToken")})
+		@NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a"),
+		@NamedQuery(name = "Account.findById", query = "SELECT a FROM Account a WHERE a.id = :id"),
+		@NamedQuery(name = "Account.findByVorname", query = "SELECT a FROM Account a WHERE a.vorname = :vorname"),
+		@NamedQuery(name = "Account.findByNachname", query = "SELECT a FROM Account a WHERE a.nachname = :nachname"),
+		@NamedQuery(name = "Account.findByEmail", query = "SELECT a FROM Account a WHERE a.email = :email"),
+		@NamedQuery(name = "Account.findByTelefonnummer", query = "SELECT a FROM Account a WHERE a.telefonnummer = :telefonnummer"),
+		@NamedQuery(name = "Account.findByRang", query = "SELECT a FROM Account a WHERE a.rang = :rang"),
+		@NamedQuery(name = "Account.findByUtcOffset", query = "SELECT a FROM Account a WHERE a.utcOffset = :utcOffset"),
+		@NamedQuery(name = "Account.findByRegion", query = "SELECT a FROM Account a WHERE a.region = :region"),
+		@NamedQuery(name = "Account.findByRefreshToken", query = "SELECT a FROM Account a WHERE a.refreshToken = :refreshToken") })
 public class Account implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name = "ID")
 	private Integer id;
 	@Basic(optional = false)
-    @Column(name = "VORNAME")
+	@Column(name = "VORNAME")
 	private String vorname;
 	@Basic(optional = false)
-    @Column(name = "NACHNAME")
+	@Column(name = "NACHNAME")
 	private String nachname;
 	@Column(name = "EMAIL")
 	private String email;
@@ -60,8 +63,14 @@ public class Account implements Serializable {
 	private String region;
 	@Column(name = "REFRESH_TOKEN")
 	private String refreshToken;
+	@JsonbTransient
+	@OneToMany(mappedBy = "receiver")
+	private List<Message> messageList;
+	@JsonbTransient
+	@OneToMany(mappedBy = "sender")
+	private List<Message> messageList1;
 	@JoinColumn(name = "EINSTELLUNGEN", referencedColumnName = "ID")
-    @ManyToOne
+	@ManyToOne
 	private Settings einstellungen;
 
 	public Account() {
@@ -149,6 +158,22 @@ public class Account implements Serializable {
 		this.refreshToken = refreshToken;
 	}
 
+	public List<Message> getMessageList() {
+		return messageList;
+	}
+
+	public void setMessageList(List<Message> messageList) {
+		this.messageList = messageList;
+	}
+
+	public List<Message> getMessageList1() {
+		return messageList1;
+	}
+
+	public void setMessageList1(List<Message> messageList1) {
+		this.messageList1 = messageList1;
+	}
+
 	public Settings getEinstellungen() {
 		return einstellungen;
 	}
@@ -181,5 +206,5 @@ public class Account implements Serializable {
 	public String toString() {
 		return "ppj.gfos25.Entity.Account[ id=" + id + " ]";
 	}
-	
+
 }

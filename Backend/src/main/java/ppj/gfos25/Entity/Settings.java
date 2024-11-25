@@ -4,6 +4,7 @@
  */
 package ppj.gfos25.Entity;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,8 +13,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -44,6 +47,9 @@ public class Settings implements Serializable {
 	private Boolean zweiFaktorAuth;
 	@Column(name = "PASSWORT_HASH")
 	private String passwortHash;
+	@JsonbTransient
+	@OneToMany(mappedBy = "einstellungen")
+	private List<Account> accountList;
 
 	public Settings() {
 	}
@@ -90,6 +96,14 @@ public class Settings implements Serializable {
 
 	public void setPasswortHash(String passwortHash) {
 		this.passwortHash = passwortHash;
+	}
+
+	public List<Account> getAccountList() {
+		return accountList;
+	}
+
+	public void setAccountList(List<Account> accountList) {
+		this.accountList = accountList;
 	}
 
 	@Override
