@@ -23,6 +23,7 @@ import ppj.gfos25.Facades.AccountFacade;
 import ppj.gfos25.Service.HashingService;
 import ppj.gfos25.Service.ResponseService;
 import ppj.gfos25.Service.TokenService;
+import ppj.gfos25.Service.TokenService.TokenEmail;
 
 /**
  *
@@ -121,5 +122,18 @@ public class TokenWS {
                 .add("token", token)
                 .build();
         return responseService.ok(jsonb.toJson(response));
+    }
+
+    @Path("/logout")
+    @POST
+    public Response logout(String json) {
+        TokenEmail tokenEmail = tokenService.verifyToken(json);
+        if (tokenEmail == null || tokenEmail.email == null) {
+            return responseService.unauthorized("Token is invalid");
+        }
+        Account account = accountFacade.getAccountByEmail(tokenEmail.email);
+        account.setRefreshToken(null);
+        accountFacade.updateAccount(account);
+        return responseService.ok("Logout successful");
     }
 }

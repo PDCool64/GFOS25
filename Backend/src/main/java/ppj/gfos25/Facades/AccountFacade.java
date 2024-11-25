@@ -36,6 +36,7 @@ public class AccountFacade {
 					.setParameter("email", email)
 					.getSingleResult();
 		} catch (Exception e) {
+			System.out.println(e);
 			return null;
 		}
 	}
