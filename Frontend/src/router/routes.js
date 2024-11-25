@@ -1,22 +1,46 @@
 const routes = [
-  {
-    path: '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/IndexPage.vue') },
-      { path: '/test', component: () => import('pages/TestPage.vue') },
-      { path: '/login', component: () => import('src/pages/LoginPage.vue') },
-      { path: '/account', component: () => import('components/AccountComponent.vue') },
-      { path: '/aufgaben', component: () => import('components/AufgabenComponent.vue') },
-      { path: '/dashboard', component: () => import('pages/DashboardPage.vue') },
-    ]
-  },
-  // Always leave this as last one,
-  // but you can also remove it
-  {
-    path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue')
-  }
-]
+	{
+		path: "/",
+		component: () => import("layouts/MainLayout.vue"),
+		children: [
+			{
+				path: "",
+				component: () => import("pages/IndexPage.vue"),
+				meta: { requiresAuth: false },
+			},
+			{
+				path: "/test",
+				component: () => import("pages/TestPage.vue"),
+				meta: { requiresAuth: true },
+			},
+			{
+				path: "/login",
+				component: () => import("src/pages/LoginPage.vue"),
+				meta: { requiresAuth: false },
+			},
+			{
+				path: "/account",
+				component: () => import("components/AccountComponent.vue"),
+				meta: { requiresAuth: true },
+			},
+			{
+				path: "/aufgaben",
+				component: () => import("components/AufgabenComponent.vue"),
+				meta: { requiresAuth: true },
+			},
+			{
+				path: "/dashboard",
+				component: () => import("pages/DashboardPage.vue"),
+				meta: { requiresAuth: true },
+			},
+		],
+	},
+	// Always leave this as last one,
+	// but you can also remove it
+	{
+		path: "/:catchAll(.*)*",
+		component: () => import("pages/ErrorNotFound.vue"),
+	},
+];
 
-export default routes
+export default routes;
