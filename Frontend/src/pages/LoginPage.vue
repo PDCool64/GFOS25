@@ -18,7 +18,6 @@
                 <button>LOGIN</button>
             </form>
         </div>
-        <button @click="console.log(tokenStore.token)">Test</button>
     </div>
 </template>
 
