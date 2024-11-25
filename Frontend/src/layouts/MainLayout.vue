@@ -11,6 +11,15 @@
 					@click="toggleLeftDrawer"
 					v-if="tokenStore.token != ''" />
 				<q-toolbar-title class="title"> flow </q-toolbar-title>
+
+				<q-btn
+					flat
+					dense
+					round
+					icon="logout"
+					aria-label="Logout"
+					@click="logout"
+					v-if="tokenStore.token != ''" />
 			</q-toolbar>
 		</q-header>
 		<q-drawer
@@ -24,13 +33,32 @@
 				<EssentialLink
 					v-for="link in linksList"
 					:key="link.title"
+					@click="link.onClick ? link.onClick : null"
 					v-bind="link" />
+				<!-- @click funktioniert nicht, bleibt drin falls irgendwer mal auf die Idee kommen sollte das zu implementieren -->
 			</q-list>
 		</q-drawer>
 
 		<q-page-container>
 			<router-view />
 		</q-page-container>
+
+		<q-dialog v-model="alert">
+			<!-- Funktioniert so noch nicht, ist aber auch nicht so wichtig :) -->
+			<q-card>
+				<q-card-section>
+					<q-card-title> Not implemented! </q-card-title>
+				</q-card-section>
+				<q-card-section>
+					<q-card-text>
+						This function is currently being worked on!
+					</q-card-text>
+				</q-card-section>
+				<q-card-actions align="right">
+					<q-btn label="OK" color="primary" @click="alert = false" />
+				</q-card-actions>
+			</q-card>
+		</q-dialog>
 	</q-layout>
 </template>
 
@@ -64,6 +92,13 @@ const linksList = [
 		title: "Chat",
 		icon: "chat",
 		link: "/#/chat",
+		onClick: "setAlert",
+	},
+	{
+		title: "Kalender",
+		icon: "event",
+		link: "/#/calendar",
+		onClick: "setAlert",
 	},
 	{
 		title: "Account",
@@ -74,8 +109,20 @@ const linksList = [
 
 const leftDrawerOpen = ref(false);
 
+const alert = ref(false);
+
 function toggleLeftDrawer() {
 	leftDrawerOpen.value = !leftDrawerOpen.value;
+}
+
+function setAlert() {
+	console.log("setAlert");
+	alert.value = ref(true);
+}
+
+function logout() {
+	tokenStore.token = "";
+	router.push("/login");
 }
 </script>
 
