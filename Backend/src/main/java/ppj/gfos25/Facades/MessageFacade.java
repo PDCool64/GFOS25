@@ -14,6 +14,7 @@ import ppj.gfos25.Entity.Message;
 @Stateless
 @LocalBean
 public class MessageFacade {
+
 	@PersistenceContext
 	EntityManager em;
 
@@ -57,6 +58,7 @@ public class MessageFacade {
 					.setParameter("id", id)
 					.getResultList();
 		} catch (Exception e) {
+			System.out.println(e);
 			return null;
 		}
 	}

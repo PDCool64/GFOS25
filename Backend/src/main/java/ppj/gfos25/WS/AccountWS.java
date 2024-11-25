@@ -18,8 +18,6 @@ import ppj.gfos25.Entity.Aufgabenbearbeitung;
 import ppj.gfos25.Facades.AccountFacade;
 import ppj.gfos25.Service.ResponseService;
 import ppj.gfos25.Service.TokenService;
-import jakarta.json.Json;
-import jakarta.json.JsonObject;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.ws.rs.Produces;

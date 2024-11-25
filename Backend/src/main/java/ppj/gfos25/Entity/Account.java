@@ -62,6 +62,7 @@ public class Account implements Serializable {
 	@Column(name = "REGION")
 	private String region;
 	@Column(name = "REFRESH_TOKEN")
+	@JsonbTransient
 	private String refreshToken;
 	@JsonbTransient
 	@OneToMany(mappedBy = "receiver")

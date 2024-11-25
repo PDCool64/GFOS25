@@ -37,7 +37,6 @@ public class AufgabeFacade {
     }
 
     public Aufgabe getAufgabeById(int id) {
-        em.find(Aufgabe.class, id);
         return em.find(Aufgabe.class, id);
     }
 
