@@ -7,15 +7,58 @@ servers:
 paths:
     /accounts/all:
         get:
+            tags:
+                - accounts
+            summary: Retrieve all accounts
+            description: Returns a list of all registered user accounts in the system
             responses:
                 "200":
-                    description: OK
-                
+                    description: List of accounts retrieved successfully
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Account"
+                            example:
+                                - id: 1
+                                  username: "john.doe"
+                                  email: "john@example.com"
+                                  role: "USER"
+                                  created_at: "2024-03-20T10:30:00Z"
+                                  einstellungen:
+                                      id: 1
+                                      sprache: "EN"
+                                      zweiFaktorAuth: false
+                                      farbschema: 1
+                                - id: 2
+                                  username: "admin.user"
+                                  email: "admin@example.com"
+                                  role: "ADMIN"
+                                  created_at: "2024-03-19T08:15:00Z"
+                                  einstellungen:
+                                      id: 2
+                                      sprache: "DE"
+                                      zweiFaktorAuth: true
+                                      farbschema: 2
+                "401":
+                    description: Unauthorized - Authentication required
+                    content:
+                        application/json:
+                            example:
+                                error: "Authentication required"
+                "403":
+                    description: Forbidden - Insufficient permissions
+                    content:
+                        application/json:
+                            example:
+                                error: "Insufficient permissions to access this resource"
     /accounts/{id}:
         get:
-            responses:
-                "200":
-                    description: OK
+            tags:
+                - accounts
+            summary: Get account by ID
+            description: Retrieve the account of the specified User
             parameters:
                 - name: id
                   in: path
@@ -23,15 +66,55 @@ paths:
                   schema:
                       type: integer
                   description: Account ID
-                
+                  example: 1
+            responses:
+                "200":
+                    description: Account details retrieved successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Account"
+                            example:
+                                id: 1
+                                username: "john.doe"
+                                email: "john@example.com"
+                                role: "USER"
+                                created_at: "2024-03-20T10:30:00Z"
+                                einstellungen:
+                                    id: 1
+                                    sprache: "EN"
+                                    zweiFaktorAuth: false
+                                    farbschema: 1
+                "401":
+                    description: Unauthorized - Authentication required
+                    content:
+                        application/json:
+                            example:
+                                error: "Authentication required"
+                "403":
+                    description: Forbidden - Insufficient permissions
+                    content:
+                        application/json:
+                            example:
+                                error: "Insufficient permissions to access this resource"
+                "404":
+                    description: Account not found
+                    content:
+                        application/json:
+                            example:
+                                error: "Account with ID 1 not found"
     /accounts/test:
         get:
+            tags:
+                - accounts
             responses:
                 "200":
                     description: OK
-                
+
     /accounts/search/{search}:
         get:
+            tags:
+                - accounts
             responses:
                 "200":
                     description: OK
@@ -42,37 +125,81 @@ paths:
                   schema:
                       type: string
                   description: Search string
-                
+
+    # Aufgaben
     /aufgaben/all:
         get:
+            tags:
+                - aufgaben
+            summary: Retrieve all tasks
+            description: Returns a list of all tasks in the system including their status, assignees, and deadlines
             responses:
                 "200":
-                    description: OK
-                
+                    description: List of tasks retrieved successfully
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Aufgabe"
+                "401":
+                    description: Unauthorized - Authentication required
+                "403":
+                    description: Forbidden - Insufficient permissions
+
     /aufgaben/{id}:
         get:
-            responses:
-                "200":
-                    description: OK
+            tags:
+                - aufgaben
+            summary: Get task by ID
+            description: Retrieves the specified Aufgabe by its ID
             parameters:
                 - name: id
                   in: path
                   required: true
                   schema:
                       type: integer
-                  description: Aufgaben ID
-                
+                  description: Unique identifier of the task
+            responses:
+                "200":
+                    description: Task details retrieved successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Aufgabe"
+                "401":
+                    description: Unauthorized - Authentication required
+                "403":
+                    description: Forbidden - Insufficient permissions
+                "404":
+                    description: Aufgabe not found
+    # Messages
     /messages/all:
         get:
+            tags:
+                - messages
+            summary: Retrieve all messages
+            description: Returns a list of all messages in the system
             responses:
                 "200":
-                    description: OK
-                
+                    description: List of messages retrieved successfully
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Message"
+                "401":
+                    description: Unauthorized - Authentication required
+                "403":
+                    description: Forbidden - Insufficient permissions
+
     /messages/{id}:
         get:
-            responses:
-                "200":
-                    description: OK
+            tags:
+                - messages
+            summary: Get message by ID
+            description: Retrieves a specific message from the system
             parameters:
                 - name: id
                   in: path
@@ -80,24 +207,54 @@ paths:
                   schema:
                       type: integer
                   description: Message ID
-                
+            responses:
+                "200":
+                    description: Message retrieved successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Message"
+                "401":
+                    description: Unauthorized - Authentication required
+                "403":
+                    description: Forbidden - Insufficient permissions
+                "404":
+                    description: Message not found
 
     /messages/received/{id}:
         get:
-            responses:
-                "200":
-                    description: OK
+            tags:
+                - messages
+            summary: Get messages received by user
+            description: Retrieves all messages where the specified user is the recipient
             parameters:
                 - name: id
                   in: path
                   required: true
                   schema:
                       type: integer
-                  description: User ID
-                
+                  description: User ID of the recipient
+            responses:
+                "200":
+                    description: Messages retrieved successfully
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/Message"
+                "401":
+                    description: Unauthorized - Authentication required
+                "403":
+                    description: Forbidden - Insufficient permissions
+                "404":
+                    description: No messages found or invalid user ID
 
+    # Tokens
     /tokens/login:
         post:
+            tags:
+                - tokens
             security: []
             summary: Login
             description: Logs the user in and returns an access token and a refresh token
@@ -117,6 +274,8 @@ paths:
 
     /tokens/refresh:
         post:
+            tags:
+                - tokens
             security: []
             summary: Refresh Token
             description: Refreshes the access token
@@ -136,7 +295,6 @@ paths:
                                         description: The new refresh token as part of the refresh token rotation
                 "401":
                     description: Unauthorized
-
             requestBody:
                 content:
                     application/json:
@@ -150,6 +308,8 @@ paths:
 
     /tokens/logout:
         post:
+            tags:
+                - tokens
             responses:
                 "200":
                     description: OK
@@ -161,8 +321,132 @@ paths:
                             properties:
                                 refresh_token:
                                     type: string
-                
+
+tags:
+    - name: accounts
+      description: Account operations
+      x-displayName: Accounts
+    - name: aufgaben
+      description: Aufgaben operations
+      x-displayName: Aufgaben
+    - name: messages
+      description: Message operations
+      x-displayName: Messages
+    - name: tokens
+      description: Token operations
+      x-displayName: Tokens
+
 components:
+    parameters:
+        id:
+            name: id
+            in: path
+            description: Account ID
+            required: true
+            schema:
+                type: integer
+    schemas:
+        Account:
+            type: object
+            properties:
+                einstellungen:
+                    $ref: "#/components/schemas/Einstellungen"
+                email:
+                    type: string
+                id:
+                    type: integer
+                vorname:
+                    type: string
+                nachname:
+                    type: string
+                rang:
+                    type: integer
+                region:
+                    type: string
+                telefonnummer:
+                    type: string
+                utcOffset:
+                    type: integer
+                    description: The UTC offset in minutes
+
+            required:
+                - id
+                - email
+
+        Aufgabe:
+            type: object
+            properties:
+                id:
+                    type: integer
+                titel:
+                    type: string
+                beschreibung:
+                    type: string
+                erstellungsdatum:
+                    type: string
+                faelligkeitsdatum:
+                    type: string
+                status:
+                    type: integer
+                kunde:
+                    $ref: "#/components/schemas/Kunde"
+                prioritaet:
+                    type: integer
+
+        Einstellungen:
+            type: object
+            properties:
+                id:
+                    type: integer
+                sprache:
+                    type: string
+                zweiFaktorAuth:
+                    type: boolean
+                farbschema:
+                    type: integer
+
+        Kunde:
+            type: object
+            properties:
+                ansprechpartner:
+                    $ref: "#/components/schemas/Account"
+                id:
+                    type: integer
+                email:
+                    type: string
+                vorname:
+                    type: string
+                nachname:
+                    type: string
+                firma:
+                    type: string
+                telefonnummer:
+                    type: string
+                kontaktstatus:
+                    type: integer
+                kundenstatus:
+                    type: integer
+                utcOffset:
+                    type: integer
+                    description: The UTC offset in minutes
+
+        Message:
+            type: object
+            properties:
+                content:
+                    type: string
+                id:
+                    type: integer
+                isRead:
+                    type: boolean
+                isReceived:
+                    type: boolean
+                sender:
+                    $ref: "#/components/schemas/Account"
+                receiver:
+                    $ref: "#/components/schemas/Account"
+                time_sent:
+                    type: string
     securitySchemes:
         BearerAuth:
             type: http
@@ -170,4 +454,4 @@ components:
             bearerFormat: JWT
 
 security:
-  - BearerAuth: []
+    - BearerAuth: []

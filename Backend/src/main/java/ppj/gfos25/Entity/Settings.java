@@ -45,6 +45,7 @@ public class Settings implements Serializable {
 	private String sprache;
 	@Column(name = "ZWEI_FAKTOR_AUTH")
 	private Boolean zweiFaktorAuth;
+	@JsonbTransient
 	@Column(name = "PASSWORT_HASH")
 	private String passwortHash;
 	@JsonbTransient
