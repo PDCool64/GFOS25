@@ -1,0 +1,173 @@
+openapi: "3.0.3"
+info:
+    title: flow API
+    version: "1.0"
+servers:
+    - url: http://localhost:8080/Backend/api
+paths:
+    /accounts/all:
+        get:
+            responses:
+                "200":
+                    description: OK
+                
+    /accounts/{id}:
+        get:
+            responses:
+                "200":
+                    description: OK
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: integer
+                  description: Account ID
+                
+    /accounts/test:
+        get:
+            responses:
+                "200":
+                    description: OK
+                
+    /accounts/search/{search}:
+        get:
+            responses:
+                "200":
+                    description: OK
+            parameters:
+                - name: search
+                  in: path
+                  required: true
+                  schema:
+                      type: string
+                  description: Search string
+                
+    /aufgaben/all:
+        get:
+            responses:
+                "200":
+                    description: OK
+                
+    /aufgaben/{id}:
+        get:
+            responses:
+                "200":
+                    description: OK
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: integer
+                  description: Aufgaben ID
+                
+    /messages/all:
+        get:
+            responses:
+                "200":
+                    description: OK
+                
+    /messages/{id}:
+        get:
+            responses:
+                "200":
+                    description: OK
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: integer
+                  description: Message ID
+                
+
+    /messages/received/{id}:
+        get:
+            responses:
+                "200":
+                    description: OK
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: integer
+                  description: User ID
+                
+
+    /tokens/login:
+        post:
+            security: []
+            summary: Login
+            description: Logs the user in and returns an access token and a refresh token
+            responses:
+                "200":
+                    description: OK
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                username:
+                                    type: string
+                                password:
+                                    type: string
+
+    /tokens/refresh:
+        post:
+            security: []
+            summary: Refresh Token
+            description: Refreshes the access token
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    token:
+                                        type: string
+                                        description: The new access token
+                                    refresh_token:
+                                        type: string
+                                        description: The new refresh token as part of the refresh token rotation
+                "401":
+                    description: Unauthorized
+
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                email:
+                                    type: string
+                                refresh_token:
+                                    type: string
+
+    /tokens/logout:
+        post:
+            responses:
+                "200":
+                    description: OK
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                refresh_token:
+                                    type: string
+                
+components:
+    securitySchemes:
+        BearerAuth:
+            type: http
+            scheme: bearer
+            bearerFormat: JWT
+
+security:
+  - BearerAuth: []
