@@ -34,7 +34,6 @@
 
 <script>
 import { computed, ref } from "vue";
-import { getMessageBy } from "src/requests/aufgabe";
 </script>
 
 <style scoped>
