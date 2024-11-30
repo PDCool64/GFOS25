@@ -14,7 +14,7 @@
 				</div>
 			</div>
 			<div class="chart-section">
-				<PieGraphComponent :options="options" :data="data" />
+				<PieGraphComponent />
 			</div>
 		</div>
 		<!-- Space for future components -->
@@ -32,43 +32,13 @@ import { useAufgabenStore } from "src/stores/aufgaben";
 
 const aufgabenStore = useAufgabenStore();
 
-watch(
-	data,
-	() => {
-		console.log("Data changed");
-	},
-	{
-		immediate: true,
-	}
-);
-
 const aufgabenIds = ref([]);
 aufgabenStore.fetchAufgaben().finally(() => {
-	console.log(aufgabenStore.aufgaben);
 	for (const aufgabeId in aufgabenStore.aufgaben) {
 		aufgabenIds.value.push(aufgabeId);
 	}
-	console.log(data.value.datasets);
 });
-
-setTimeout(() => {
-	console.log(data.value.datasets);
-	data.value.datasets.data = [
-		aufgabenStore.stats?.done,
-		aufgabenStore.stats?.in_progress,
-		aufgabenStore.stats?.undone,
-	];
-}, 1000);
-
 console.log(aufgabenStore.stats);
-
-aufgabenStore.$subscribe((aufgaben) => {
-	data.value.datasets.data = [
-		aufgabenStore.stats?.done,
-		aufgabenStore.stats?.in_progress,
-		aufgabenStore.stats?.undone,
-	];
-});
 </script>
 
 <style scoped>
