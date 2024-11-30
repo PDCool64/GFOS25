@@ -72,14 +72,6 @@ defineOptions({
 });
 
 const router = useRouter();
-const tokenStore = useTokenStore();
-console.log(tokenStore);
-
-router.beforeEach((to) => {
-	console.log(to);
-	console.log(to.meta.requiresAuth);
-	if (to.meta.requiresAuth && tokenStore.token == "") return "/login";
-});
 
 const linksList = [
 	{
