@@ -67,6 +67,8 @@ import EssentialLink from "components/EssentialLink.vue";
 import { useTokenStore } from "src/stores/token";
 import { useRouter } from "vue-router";
 
+const tokenStore = useTokenStore();
+
 defineOptions({
 	name: "MainLayout",
 });
