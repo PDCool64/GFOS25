@@ -1,16 +1,16 @@
 <template>
-    <div></div>
+	<div></div>
 </template>
 
 <script setup>
-import PieGraphComponent from 'src/components/PieGraphComponent.vue';
+import PieGraphComponent from "src/components/AufgabenPieGraphComponent.vue";
 defineOptions({
-    name: 'IndexPage',
+	name: "IndexPage",
 });
 
 // TODO: Check Token and possible redirect to LoginPage
 
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router";
 const router = useRouter();
-router.push('/dashboard');
+router.push("/dashboard");
 </script>

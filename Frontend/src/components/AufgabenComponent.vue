@@ -28,6 +28,7 @@
 <script setup>
 import { computed, ref } from "vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
+import { watch } from "vue";
 
 const aufgabenStore = useAufgabenStore();
 

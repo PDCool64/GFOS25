@@ -27,18 +27,11 @@
 <script setup>
 import { ref, watch } from "vue";
 import AufgabenComponent from "src/components/AufgabenComponent.vue";
-import PieGraphComponent from "src/components/PieGraphComponent.vue";
+import PieGraphComponent from "src/components/AufgabenPieGraphComponent.vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
 
-const data = ref({
-	labels: ["Open", "In-Progress", "Done"],
-	datasets: [
-		{
-			backgroundColor: ["#C10015", "#F2C037", "#21BA45"],
-			data: [0, 1, 0],
-		},
-	],
-});
+const aufgabenStore = useAufgabenStore();
+
 watch(
 	data,
 	() => {
@@ -49,24 +42,12 @@ watch(
 	}
 );
 
-const aufgabenStore = useAufgabenStore();
 const aufgabenIds = ref([]);
 aufgabenStore.fetchAufgaben().finally(() => {
 	console.log(aufgabenStore.aufgaben);
 	for (const aufgabeId in aufgabenStore.aufgaben) {
 		aufgabenIds.value.push(aufgabeId);
 	}
-	console.log(aufgabenStore.stats);
-	data.value.datasets.data = [
-		aufgabenStore.stats?.done,
-		aufgabenStore.stats?.in_progress,
-		aufgabenStore.stats?.undone,
-	];
-	console.log([
-		aufgabenStore.stats?.done,
-		aufgabenStore.stats?.in_progress,
-		aufgabenStore.stats?.undone,
-	]);
 	console.log(data.value.datasets);
 });
 
@@ -81,8 +62,12 @@ setTimeout(() => {
 
 console.log(aufgabenStore.stats);
 
-const options = ref({
-	responsive: true,
+aufgabenStore.$subscribe((aufgaben) => {
+	data.value.datasets.data = [
+		aufgabenStore.stats?.done,
+		aufgabenStore.stats?.in_progress,
+		aufgabenStore.stats?.undone,
+	];
 });
 </script>
 

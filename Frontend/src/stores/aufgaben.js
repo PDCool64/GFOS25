@@ -22,11 +22,11 @@ export const useAufgabenStore = defineStore("aufgaben", {
 				const aufgabe = this.aufgaben[id].aufgabe;
 				stats.total++;
 				if (aufgabe.status % 3 == 0) {
-					stats.done++;
+					stats.undone++;
 				} else if (aufgabe.status % 3 == 1) {
 					stats.in_progress++;
 				} else {
-					stats.undone++;
+					stats.done++;
 				}
 			}
 			return stats;
