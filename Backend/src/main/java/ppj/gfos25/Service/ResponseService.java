@@ -36,6 +36,13 @@ public class ResponseService {
 			.build();
 	}
 
+	public Response created(String data) {
+		return Response
+			.status(201)
+			.entity(data)
+			.build();
+	}
+
 	public Response status(int status, String data) {
 		return Response
 			.status(status)

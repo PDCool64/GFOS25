@@ -127,6 +127,44 @@ paths:
                   description: Search string
 
     # Aufgaben
+    /aufgaben:
+        post: 
+            tags:
+                - aufgaben
+            summary: Create a new Aufgabe
+            description: Persists an Aufgabe that is given in the request body
+            responses:
+                "201":
+                    description: Aufgabe created successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Aufgabe"
+                "400":
+                    description: Bad request - Invalid input
+                    content:
+                        application/json:
+                            example:
+                                error: "Invalid input"
+                "401":
+                    description: Unauthorized - Authentication required
+                    content:
+                        application/json:
+                            example:
+                                error: "Authentication required"
+                "403":
+                    description: Forbidden - Insufficient permissions
+                    content:
+                        application/json:
+                            example:
+                                error: "Insufficient permissions to access this resource"
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Aufgabe"
+
     /aufgaben/all:
         get:
             tags:
