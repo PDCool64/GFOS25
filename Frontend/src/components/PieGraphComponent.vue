@@ -7,6 +7,7 @@
 <script setup>
 import { Pie } from "vue-chartjs";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { computed, onMounted, watch } from "vue";
 
 const props = defineProps({
 	data: {
@@ -19,7 +20,24 @@ const props = defineProps({
 	},
 });
 
+watch(props, () => {
+	console.log("Props changed");
+});
+
+const sum = computed(() => {
+	let sum = 0;
+	console.log(props.data.datasets[0].data);
+	for (const i in props.data) {
+		sum += props.data[i];
+	}
+	return sum;
+});
+
 ChartJS.register(ArcElement, Tooltip, Legend);
+
+onMounted(() => {
+	console.log(props.data);
+});
 </script>
 
 <style scoped>

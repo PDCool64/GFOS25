@@ -18,15 +18,17 @@ export const useAufgabenStore = defineStore("aufgaben", {
 				in_progress: 0,
 				undone: 0,
 			};
-			for (const aufgabe of Object.values(this.aufgaben)) {
+			for (const id in this.aufgaben) {
+				const aufgabe = this.aufgaben[id].aufgabe;
 				stats.total++;
-				if (aufgabe.done) {
+				if (aufgabe.status % 3 == 0) {
 					stats.done++;
+				} else if (aufgabe.status % 3 == 1) {
+					stats.in_progress++;
 				} else {
 					stats.undone++;
 				}
 			}
-			console.log(stats);
 			return stats;
 		},
 	},
