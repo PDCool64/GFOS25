@@ -14,7 +14,7 @@
 				</div>
 			</div>
 			<div class="chart-section">
-				<PieGraphComponent :options="options" :data="data" />
+				<PieGraphComponent />
 			</div>
 		</div>
 		<!-- Space for future components -->
@@ -25,40 +25,20 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import { ref, watch } from "vue";
 import AufgabenComponent from "src/components/AufgabenComponent.vue";
-import PieGraphComponent from "src/components/PieGraphComponent.vue";
+import PieGraphComponent from "src/components/AufgabenPieGraphComponent.vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
 
 const aufgabenStore = useAufgabenStore();
+
 const aufgabenIds = ref([]);
 aufgabenStore.fetchAufgaben().finally(() => {
-	console.log(aufgabenStore.aufgaben);
 	for (const aufgabeId in aufgabenStore.aufgaben) {
-		console.log(aufgabeId);
 		aufgabenIds.value.push(aufgabeId);
 	}
 });
-
-for (const aufgabe in aufgabenStore.aufgaben) {
-	console.log(aufgabe);
-}
-
-console.log(aufgabenStore.stats.done);
-
-const data = ref({
-	labels: ["Open", "In-Progress", "Done"],
-	datasets: [
-		{
-			backgroundColor: ["#C10015", "#F2C037", "#21BA45"],
-			data: [aufgabenStore.stats.undone, aufgabenStore.stats.done, 1],
-		},
-	],
-});
-
-const options = ref({
-	responsive: true,
-});
+console.log(aufgabenStore.stats);
 </script>
 
 <style scoped>

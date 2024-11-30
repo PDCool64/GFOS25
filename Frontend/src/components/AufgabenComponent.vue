@@ -27,8 +27,8 @@
 
 <script setup>
 import { computed, ref } from "vue";
-import { getAufgabeById } from "src/requests/aufgabe";
 import { useAufgabenStore } from "src/stores/aufgaben";
+import { watch } from "vue";
 
 const aufgabenStore = useAufgabenStore();
 
@@ -42,7 +42,6 @@ const props = defineProps({
 	},
 });
 
-console.log(props.id);
 const icon = ref("check");
 const displayDate = (date) => {
 	return new Date(date).toLocaleDateString();
@@ -77,19 +76,10 @@ const taskClass = computed(() => {
 			return "bg-primary";
 	}
 });
-
-const aufgabe = ref(aufgabenStore.aufgaben[props.id]);
+const aufgabe = ref(aufgabenStore.aufgaben[props.id].aufgabe);
 console.log(aufgabe.value);
 
 onClick();
-
-async function fetchAufgabe() {
-	const response = await getAufgabeById(props.id);
-	console.log(response);
-	aufgabe.value = response;
-}
-
-fetchAufgabe();
 </script>
 
 <style scoped>
