@@ -20,6 +20,10 @@ export const useMessageStore = defineStore("message", () => ({
 			}
 		},
 	},
+	perist: {
+		enabled: true,
+		strategy: "local",
+	},
 }));
 
 if (import.meta.hot) {

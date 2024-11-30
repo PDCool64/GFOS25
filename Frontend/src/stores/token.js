@@ -37,6 +37,10 @@ export const useTokenStore = defineStore("token", {
 			}, 1000 * 60 * 5);
 		},
 	},
+	persist: {
+		enabled: true,
+		strategy: "local",
+	},
 });
 
 if (import.meta.hot) {

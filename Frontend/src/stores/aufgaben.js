@@ -57,6 +57,10 @@ export const useAufgabenStore = defineStore("aufgaben", {
 			console.log(this.aufgaben);
 		},
 	},
+	persist: {
+		enabled: true,
+		strategy: "local",
+	},
 });
 
 if (import.meta.hot) {
