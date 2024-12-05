@@ -14,6 +14,10 @@ export const useTokenStore = defineStore("token", {
 		clearToken() {
 			this.token = "";
 		},
+		logout() {
+			this.token = "";
+			this.refresh_token = "";
+		},
 		async refreshToken() {
 			const response = await fetch(address + "/tokens/refresh", {
 				method: "POST",

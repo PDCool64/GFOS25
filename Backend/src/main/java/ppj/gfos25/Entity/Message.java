@@ -4,6 +4,7 @@
  */
 package ppj.gfos25.Entity;
 
+import jakarta.inject.Named;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,9 +29,11 @@ import java.io.Serializable;
 	@NamedQuery(name = "Message.findById", query = "SELECT m FROM Message m WHERE m.id = :id"),
 	@NamedQuery(name = "Message.findBySenderId", query = "SELECT m FROM Message m WHERE m.sender.id = :id"),
 	@NamedQuery(name = "Message.findByReceiverId", query = "SELECT m FROM Message m WHERE m.receiver.id = :id"),
+	@NamedQuery(name = "Message.findUnreadByReceiverID", query = "SELECT m FROM Message m WHERE m.receiver.id = :id AND m.isRead = false"),
 	@NamedQuery(name = "Message.findByContent", query = "SELECT m FROM Message m WHERE m.content = :content"),
 	@NamedQuery(name = "Message.findByTimeSent", query = "SELECT m FROM Message m WHERE m.timeSent = :timeSent"),
 	@NamedQuery(name = "Message.findByIsReceived", query = "SELECT m FROM Message m WHERE m.isReceived = :isReceived"),
+	@NamedQuery(name = "Message.findByChat", query = "SELECT m FROM Message m WHERE m.sender.id = :senderID AND m.receiver.id = :receiverID"),
 	@NamedQuery(name = "Message.findByIsRead", query = "SELECT m FROM Message m WHERE m.isRead = :isRead")})
 public class Message implements Serializable {
 

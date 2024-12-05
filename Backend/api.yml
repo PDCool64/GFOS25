@@ -1,4 +1,4 @@
-openapi: "3.0.3"
+openapi: 3.0.3
 info:
     title: flow API
     version: "1.0"
@@ -21,38 +21,76 @@ paths:
                                 items:
                                     $ref: "#/components/schemas/Account"
                             example:
-                                - id: 1
-                                  username: "john.doe"
-                                  email: "john@example.com"
-                                  role: "USER"
-                                  created_at: "2024-03-20T10:30:00Z"
-                                  einstellungen:
-                                      id: 1
-                                      sprache: "EN"
+                                - einstellungen:
+                                      farbschema: 0
+                                      id: 0
+                                      sprache: de
                                       zweiFaktorAuth: false
-                                      farbschema: 1
-                                - id: 2
-                                  username: "admin.user"
-                                  email: "admin@example.com"
-                                  role: "ADMIN"
-                                  created_at: "2024-03-19T08:15:00Z"
-                                  einstellungen:
-                                      id: 2
-                                      sprache: "DE"
-                                      zweiFaktorAuth: true
-                                      farbschema: 2
+                                  email: test@test.de
+                                  id: 0
+                                  nachname: König
+                                  vorname: Corina
+                                - einstellungen:
+                                      farbschema: 0
+                                      id: 0
+                                      sprache: de
+                                      zweiFaktorAuth: false
+                                  email: oluki81@gmx.de
+                                  id: 1
+                                  nachname: Tätuwade
+                                  rang: 0
+                                  region: Niederbayern
+                                  telefonnummer: "0172653334"
+                                  utcOffset: 60
+                                  vorname: Janette
+                                - email: gerda.wosavoreweiner60@outloock.de
+                                  id: 2
+                                  nachname: Wosavoreweiner
+                                  vorname: Gerda
+                                - email: arolo64@surfnet.de
+                                  id: 3
+                                  nachname: Botobi
+                                  vorname: Karolina
+                                - email: ortrud.hoetugau59@email.com
+                                  id: 4
+                                  nachname: Hötugau
+                                  vorname: Ortrud
+                                - email: aziz.foteschattmeiner78@gmail.de
+                                  id: 5
+                                  nachname: Foteschattmeiner
+                                  vorname: Aziz
+                                - email: orilo92@gmail.de
+                                  id: 6
+                                  nachname: Jotudison
+                                  vorname: Margarethe
+                                - email: evari86@outloock.de
+                                  id: 7
+                                  nachname: Vivedistein
+                                  vorname: Zofia
+                                - email: etiza89@t-online.de
+                                  id: 8
+                                  nachname: Schneider
+                                  vorname: Adelbert
+                                - email: heino.fasevore82@test.de
+                                  id: 9
+                                  nachname: Fasevore
+                                  vorname: Heino
+                                - email: aseta85@gmail.de
+                                  id: 10
+                                  nachname: Tetoba
+                                  vorname: Benno
                 "401":
                     description: Unauthorized - Authentication required
                     content:
                         application/json:
                             example:
-                                error: "Authentication required"
+                                error: Authentication required
                 "403":
                     description: Forbidden - Insufficient permissions
                     content:
                         application/json:
                             example:
-                                error: "Insufficient permissions to access this resource"
+                                error: Insufficient permissions to access this resource
     /accounts/{id}:
         get:
             tags:
@@ -75,34 +113,33 @@ paths:
                             schema:
                                 $ref: "#/components/schemas/Account"
                             example:
-                                id: 1
-                                username: "john.doe"
-                                email: "john@example.com"
-                                role: "USER"
-                                created_at: "2024-03-20T10:30:00Z"
                                 einstellungen:
-                                    id: 1
-                                    sprache: "EN"
+                                    farbschema: 0
+                                    id: 0
+                                    sprache: de
                                     zweiFaktorAuth: false
-                                    farbschema: 1
+                                email: test@test.de
+                                id: 0
+                                nachname: König
+                                vorname: Corina
                 "401":
                     description: Unauthorized - Authentication required
                     content:
                         application/json:
                             example:
-                                error: "Authentication required"
+                                error: Authentication required
                 "403":
                     description: Forbidden - Insufficient permissions
                     content:
                         application/json:
                             example:
-                                error: "Insufficient permissions to access this resource"
+                                error: Insufficient permissions to access this resource
                 "404":
                     description: Account not found
                     content:
                         application/json:
                             example:
-                                error: "Account with ID 1 not found"
+                                error: Account with ID 1 not found
     /accounts/test:
         get:
             tags:
@@ -110,7 +147,6 @@ paths:
             responses:
                 "200":
                     description: OK
-
     /accounts/search/{search}:
         get:
             tags:
@@ -125,10 +161,8 @@ paths:
                   schema:
                       type: string
                   description: Search string
-
-    # Aufgaben
     /aufgaben:
-        post: 
+        post:
             tags:
                 - aufgaben
             summary: Create a new Aufgabe
@@ -145,32 +179,33 @@ paths:
                     content:
                         application/json:
                             example:
-                                error: "Invalid input"
+                                error: Invalid input
                 "401":
                     description: Unauthorized - Authentication required
                     content:
                         application/json:
                             example:
-                                error: "Authentication required"
+                                error: Authentication required
                 "403":
                     description: Forbidden - Insufficient permissions
                     content:
                         application/json:
                             example:
-                                error: "Insufficient permissions to access this resource"
+                                error: Insufficient permissions to access this resource
             requestBody:
                 required: true
                 content:
                     application/json:
                         schema:
                             $ref: "#/components/schemas/Aufgabe"
-
     /aufgaben/all:
         get:
             tags:
                 - aufgaben
             summary: Retrieve all tasks
-            description: Returns a list of all tasks in the system including their status, assignees, and deadlines
+            description: >-
+                Returns a list of all tasks in the system including their status,
+                assignees, and deadlines
             responses:
                 "200":
                     description: List of tasks retrieved successfully
@@ -180,11 +215,104 @@ paths:
                                 type: array
                                 items:
                                     $ref: "#/components/schemas/Aufgabe"
+                            example:
+                                - beschreibung: Lorem Ipsum Dolor Sit Amet
+                                  erstellungsdatum: "2024-11-02"
+                                  faelligkeitsdatum: "2024-11-05"
+                                  id: 1
+                                  kunde:
+                                      ansprechpartner:
+                                          einstellungen:
+                                              farbschema: 0
+                                              id: 0
+                                              sprache: de
+                                              zweiFaktorAuth: false
+                                          email: oluki81@gmx.de
+                                          id: 1
+                                          nachname: Tätuwade
+                                          rang: 0
+                                          region: Niederbayern
+                                          telefonnummer: "0172653334"
+                                          utcOffset: 60
+                                          vorname: Janette
+                                      email: maxine.musterfrau@web.de
+                                      firma: Mustermann Gmbh
+                                      id: 1
+                                      kontaktstatus: 0
+                                      kundenststatus: 1
+                                      nachname: Musterfrau
+                                      telefonnummer: "00491832910332"
+                                      utcOffset: 60
+                                      vorname: Maxine
+                                  prioritaet: 1
+                                  status: 0
+                                  titel: Lorem Ipsum
+                                - beschreibung: Einige Bücher kochen
+                                  erstellungsdatum: "2024-11-02"
+                                  faelligkeitsdatum: "2024-11-05"
+                                  id: 2
+                                  kunde:
+                                      ansprechpartner:
+                                          einstellungen:
+                                              farbschema: 0
+                                              id: 0
+                                              sprache: de
+                                              zweiFaktorAuth: false
+                                          email: oluki81@gmx.de
+                                          id: 1
+                                          nachname: Tätuwade
+                                          rang: 0
+                                          region: Niederbayern
+                                          telefonnummer: "0172653334"
+                                          utcOffset: 60
+                                          vorname: Janette
+                                      email: maxine.musterfrau@web.de
+                                      firma: Mustermann Gmbh
+                                      id: 1
+                                      kontaktstatus: 0
+                                      kundenststatus: 1
+                                      nachname: Musterfrau
+                                      telefonnummer: "00491832910332"
+                                      utcOffset: 60
+                                      vorname: Maxine
+                                  prioritaet: 2
+                                  status: 0
+                                  titel: Bücher kochen
+                                - beschreibung: Test Aufgaben in der Datenbank erstellen
+                                  erstellungsdatum: "2024-11-02"
+                                  faelligkeitsdatum: "2024-11-05"
+                                  id: 3
+                                  kunde:
+                                      ansprechpartner:
+                                          einstellungen:
+                                              farbschema: 0
+                                              id: 0
+                                              sprache: de
+                                              zweiFaktorAuth: false
+                                          email: oluki81@gmx.de
+                                          id: 1
+                                          nachname: Tätuwade
+                                          rang: 0
+                                          region: Niederbayern
+                                          telefonnummer: "0172653334"
+                                          utcOffset: 60
+                                          vorname: Janette
+                                      email: maxine.musterfrau@web.de
+                                      firma: Mustermann Gmbh
+                                      id: 1
+                                      kontaktstatus: 0
+                                      kundenststatus: 1
+                                      nachname: Musterfrau
+                                      telefonnummer: "00491832910332"
+                                      utcOffset: 60
+                                      vorname: Maxine
+                                  prioritaet: 0
+                                  status: 1
+                                  titel: Test Aufgaben erstellen
                 "401":
                     description: Unauthorized - Authentication required
                 "403":
                     description: Forbidden - Insufficient permissions
-
     /aufgaben/{id}:
         get:
             tags:
@@ -205,13 +333,80 @@ paths:
                         application/json:
                             schema:
                                 $ref: "#/components/schemas/Aufgabe"
+                            example:
+                                beschreibung: Lorem Ipsum Dolor Sit Amet
+                                erstellungsdatum: "2024-11-02"
+                                faelligkeitsdatum: "2024-11-05"
+                                id: 1
+                                kunde:
+                                    ansprechpartner:
+                                        einstellungen:
+                                            farbschema: 0
+                                            id: 0
+                                            sprache: de
+                                            zweiFaktorAuth: false
+                                        email: oluki81@gmx.de
+                                        id: 1
+                                        nachname: Tätuwade
+                                        rang: 0
+                                        region: Niederbayern
+                                        telefonnummer: "0172653334"
+                                        utcOffset: 60
+                                        vorname: Janette
+                                    email: maxine.musterfrau@web.de
+                                    firma: Mustermann Gmbh
+                                    id: 1
+                                    kontaktstatus: 0
+                                    kundenststatus: 1
+                                    nachname: Musterfrau
+                                    telefonnummer: "00491832910332"
+                                    utcOffset: 60
+                                    vorname: Maxine
+                                prioritaet: 1
+                                status: 0
+                                titel: Lorem Ipsum
                 "401":
                     description: Unauthorized - Authentication required
                 "403":
                     description: Forbidden - Insufficient permissions
                 "404":
                     description: Aufgabe not found
-    # Messages
+    /messages:
+        post:
+            description: Send a message
+            tags:
+                - messages
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Message"
+            responses:
+                "201":
+                    description: Message sent successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Message"
+                "400":
+                    description: Bad request - Invalid input
+                    content:
+                        application/json:
+                            example:
+                                error: Invalid input
+                "401":
+                    description: Unauthorized - Authentication required
+                    content:
+                        application/json:
+                            example:
+                                error: Authentication required
+                "403":
+                    description: Forbidden - Insufficient permissions
+                    content:
+                        application/json:
+                            example:
+                                error: Insufficient permissions to access this resource
     /messages/all:
         get:
             tags:
@@ -227,11 +422,156 @@ paths:
                                 type: array
                                 items:
                                     $ref: "#/components/schemas/Message"
+                            example:
+                                - content: Hello World
+                                  id: 0
+                                  isRead: true
+                                  isReceived: true
+                                  receiver:
+                                      einstellungen:
+                                          farbschema: 0
+                                          id: 0
+                                          sprache: de
+                                          zweiFaktorAuth: false
+                                      email: oluki81@gmx.de
+                                      id: 1
+                                      nachname: Tätuwade
+                                      rang: 0
+                                      region: Niederbayern
+                                      telefonnummer: "0172653334"
+                                      utcOffset: 60
+                                      vorname: Janette
+                                  sender:
+                                      einstellungen:
+                                          farbschema: 0
+                                          id: 0
+                                          sprache: de
+                                          zweiFaktorAuth: false
+                                      email: test@test.de
+                                      id: 0
+                                      nachname: König
+                                      vorname: Corina
+                                  timeSent: "2021-01-01 00:00:00"
+                                - content: Hello World
+                                  id: 1
+                                  isRead: true
+                                  isReceived: true
+                                  receiver:
+                                      einstellungen:
+                                          farbschema: 0
+                                          id: 0
+                                          sprache: de
+                                          zweiFaktorAuth: false
+                                      email: test@test.de
+                                      id: 0
+                                      nachname: König
+                                      vorname: Corina
+                                  sender:
+                                      einstellungen:
+                                          farbschema: 0
+                                          id: 0
+                                          sprache: de
+                                          zweiFaktorAuth: false
+                                      email: oluki81@gmx.de
+                                      id: 1
+                                      nachname: Tätuwade
+                                      rang: 0
+                                      region: Niederbayern
+                                      telefonnummer: "0172653334"
+                                      utcOffset: 60
+                                      vorname: Janette
+                                  timeSent: "2021-01-01 00:00:01"
+                                - content: How is life
+                                  id: 2
+                                  isRead: false
+                                  isReceived: true
+                                  receiver:
+                                      einstellungen:
+                                          farbschema: 0
+                                          id: 0
+                                          sprache: de
+                                          zweiFaktorAuth: false
+                                      email: oluki81@gmx.de
+                                      id: 1
+                                      nachname: Tätuwade
+                                      rang: 0
+                                      region: Niederbayern
+                                      telefonnummer: "0172653334"
+                                      utcOffset: 60
+                                      vorname: Janette
+                                  sender:
+                                      einstellungen:
+                                          farbschema: 0
+                                          id: 0
+                                          sprache: de
+                                          zweiFaktorAuth: false
+                                      email: test@test.de
+                                      id: 0
+                                      nachname: König
+                                      vorname: Corina
+                                  timeSent: "2021-01-01 00:00:02"
+                                - content: Good. With you?
+                                  id: 3
+                                  isRead: false
+                                  isReceived: true
+                                  receiver:
+                                      einstellungen:
+                                          farbschema: 0
+                                          id: 0
+                                          sprache: de
+                                          zweiFaktorAuth: false
+                                      email: test@test.de
+                                      id: 0
+                                      nachname: König
+                                      vorname: Corina
+                                  sender:
+                                      einstellungen:
+                                          farbschema: 0
+                                          id: 0
+                                          sprache: de
+                                          zweiFaktorAuth: false
+                                      email: oluki81@gmx.de
+                                      id: 1
+                                      nachname: Tätuwade
+                                      rang: 0
+                                      region: Niederbayern
+                                      telefonnummer: "0172653334"
+                                      utcOffset: 60
+                                      vorname: Janette
+                                  timeSent: "2021-01-01 00:00:03"
+                                - content: Great!
+                                  id: 4
+                                  isRead: false
+                                  isReceived: true
+                                  receiver:
+                                      einstellungen:
+                                          farbschema: 0
+                                          id: 0
+                                          sprache: de
+                                          zweiFaktorAuth: false
+                                      email: oluki81@gmx.de
+                                      id: 1
+                                      nachname: Tätuwade
+                                      rang: 0
+                                      region: Niederbayern
+                                      telefonnummer: "0172653334"
+                                      utcOffset: 60
+                                      vorname: Janette
+                                  sender:
+                                      einstellungen:
+                                          farbschema: 0
+                                          id: 0
+                                          sprache: de
+                                          zweiFaktorAuth: false
+                                      email: test@test.de
+                                      id: 0
+                                      nachname: König
+                                      vorname: Corina
+                                  timeSent: "2021-01-01 00:00:04"
                 "401":
                     description: Unauthorized - Authentication required
                 "403":
                     description: Forbidden - Insufficient permissions
-
     /messages/{id}:
         get:
             tags:
@@ -252,19 +592,234 @@ paths:
                         application/json:
                             schema:
                                 $ref: "#/components/schemas/Message"
+                            example:
+                                content: Hello World
+                                id: 0
+                                isRead: true
+                                isReceived: true
+                                receiver:
+                                    einstellungen:
+                                        farbschema: 0
+                                        id: 0
+                                        sprache: de
+                                        zweiFaktorAuth: false
+                                    email: oluki81@gmx.de
+                                    id: 1
+                                    nachname: Tätuwade
+                                    rang: 0
+                                    region: Niederbayern
+                                    telefonnummer: "0172653334"
+                                    utcOffset: 60
+                                    vorname: Janette
+                                sender:
+                                    einstellungen:
+                                        farbschema: 0
+                                        id: 0
+                                        sprache: de
+                                        zweiFaktorAuth: false
+                                    email: test@test.de
+                                    id: 0
+                                    nachname: König
+                                    vorname: Corina
+                                timeSent: "2021-01-01 00:00:00"
                 "401":
                     description: Unauthorized - Authentication required
                 "403":
                     description: Forbidden - Insufficient permissions
                 "404":
                     description: Message not found
-
+    /messages/chat/{senderID}/{receiverID}:
+        get:
+            description: Get messages between two users
+            tags:
+                - messages
+            parameters:
+                - name: senderID
+                  in: path
+                  required: true
+                  schema:
+                      type: integer
+                  description: User ID of the sender
+                - name: receiverID
+                  in: path
+                  required: true
+                  schema:
+                      type: integer
+                  description: User ID of the receiver
+            responses:
+                "200":
+                    description: Messages retrieved successfully
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    sent:
+                                        type: array
+                                        items:
+                                            $ref: "#/components/schemas/Message"
+                                    received:
+                                        type: array
+                                        items:
+                                            $ref: "#/components/schemas/Message"
+                            example:
+                                received:
+                                    - content: Hello World
+                                      id: 1
+                                      isRead: true
+                                      isReceived: true
+                                      receiver:
+                                          einstellungen:
+                                              farbschema: 0
+                                              id: 0
+                                              sprache: de
+                                              zweiFaktorAuth: false
+                                          email: test@test.de
+                                          id: 0
+                                          nachname: König
+                                          vorname: Corina
+                                      sender:
+                                          einstellungen:
+                                              farbschema: 0
+                                              id: 0
+                                              sprache: de
+                                              zweiFaktorAuth: false
+                                          email: oluki81@gmx.de
+                                          id: 1
+                                          nachname: Tätuwade
+                                          rang: 0
+                                          region: Niederbayern
+                                          telefonnummer: "0172653334"
+                                          utcOffset: 60
+                                          vorname: Janette
+                                      timeSent: "2021-01-01 00:00:01"
+                                    - content: Good. With you?
+                                      id: 3
+                                      isRead: false
+                                      isReceived: true
+                                      receiver:
+                                          einstellungen:
+                                              farbschema: 0
+                                              id: 0
+                                              sprache: de
+                                              zweiFaktorAuth: false
+                                          email: test@test.de
+                                          id: 0
+                                          nachname: König
+                                          vorname: Corina
+                                      sender:
+                                          einstellungen:
+                                              farbschema: 0
+                                              id: 0
+                                              sprache: de
+                                              zweiFaktorAuth: false
+                                          email: oluki81@gmx.de
+                                          id: 1
+                                          nachname: Tätuwade
+                                          rang: 0
+                                          region: Niederbayern
+                                          telefonnummer: "0172653334"
+                                          utcOffset: 60
+                                          vorname: Janette
+                                      timeSent: "2021-01-01 00:00:03"
+                                sent:
+                                    - content: Hello World
+                                      id: 0
+                                      isRead: true
+                                      isReceived: true
+                                      receiver:
+                                          einstellungen:
+                                              farbschema: 0
+                                              id: 0
+                                              sprache: de
+                                              zweiFaktorAuth: false
+                                          email: oluki81@gmx.de
+                                          id: 1
+                                          nachname: Tätuwade
+                                          rang: 0
+                                          region: Niederbayern
+                                          telefonnummer: "0172653334"
+                                          utcOffset: 60
+                                          vorname: Janette
+                                      sender:
+                                          einstellungen:
+                                              farbschema: 0
+                                              id: 0
+                                              sprache: de
+                                              zweiFaktorAuth: false
+                                          email: test@test.de
+                                          id: 0
+                                          nachname: König
+                                          vorname: Corina
+                                      timeSent: "2021-01-01 00:00:00"
+                                    - content: How is life
+                                      id: 2
+                                      isRead: false
+                                      isReceived: true
+                                      receiver:
+                                          einstellungen:
+                                              farbschema: 0
+                                              id: 0
+                                              sprache: de
+                                              zweiFaktorAuth: false
+                                          email: oluki81@gmx.de
+                                          id: 1
+                                          nachname: Tätuwade
+                                          rang: 0
+                                          region: Niederbayern
+                                          telefonnummer: "0172653334"
+                                          utcOffset: 60
+                                          vorname: Janette
+                                      sender:
+                                          einstellungen:
+                                              farbschema: 0
+                                              id: 0
+                                              sprache: de
+                                              zweiFaktorAuth: false
+                                          email: test@test.de
+                                          id: 0
+                                          nachname: König
+                                          vorname: Corina
+                                      timeSent: "2021-01-01 00:00:02"
+                                    - content: Great!
+                                      id: 4
+                                      isRead: false
+                                      isReceived: true
+                                      receiver:
+                                          einstellungen:
+                                              farbschema: 0
+                                              id: 0
+                                              sprache: de
+                                              zweiFaktorAuth: false
+                                          email: oluki81@gmx.de
+                                          id: 1
+                                          nachname: Tätuwade
+                                          rang: 0
+                                          region: Niederbayern
+                                          telefonnummer: "0172653334"
+                                          utcOffset: 60
+                                          vorname: Janette
+                                      sender:
+                                          einstellungen:
+                                              farbschema: 0
+                                              id: 0
+                                              sprache: de
+                                              zweiFaktorAuth: false
+                                          email: test@test.de
+                                          id: 0
+                                          nachname: König
+                                          vorname: Corina
+                                      timeSent: "2021-01-01 00:00:04"
+                "401":
+                    description: Unauthorized - Authentication required
+                "403":
+                    description: Forbidden - Insufficient permissions
     /messages/received/{id}:
         get:
             tags:
                 - messages
-            summary: Get messages received by user
-            description: Retrieves all messages where the specified user is the recipient
+            summary: Get unread messages received by user
+            description: Retrieves all unread messages where the specified user is the recipient
             parameters:
                 - name: id
                   in: path
@@ -281,14 +836,62 @@ paths:
                                 type: array
                                 items:
                                     $ref: "#/components/schemas/Message"
+                            example:
+                                - content: Good. With you?
+                                  id: 3
+                                  isRead: false
+                                  isReceived: true
+                                  receiver:
+                                      einstellungen:
+                                          farbschema: 0
+                                          id: 0
+                                          sprache: de
+                                          zweiFaktorAuth: false
+                                      email: test@test.de
+                                      id: 0
+                                      nachname: König
+                                      vorname: Corina
+                                  sender:
+                                      einstellungen:
+                                          farbschema: 0
+                                          id: 0
+                                          sprache: de
+                                          zweiFaktorAuth: false
+                                      email: oluki81@gmx.de
+                                      id: 1
+                                      nachname: Tätuwade
+                                      rang: 0
+                                      region: Niederbayern
+                                      telefonnummer: "0172653334"
+                                      utcOffset: 60
+                                      vorname: Janette
+                                  timeSent: "2021-01-01 00:00:03"
+                                - content: Hey, how is it going?
+                                  id: 5
+                                  isRead: false
+                                  isReceived: true
+                                  receiver:
+                                      einstellungen:
+                                          farbschema: 0
+                                          id: 0
+                                          sprache: de
+                                          zweiFaktorAuth: false
+                                      email: test@test.de
+                                      id: 0
+                                      nachname: König
+                                      vorname: Corina
+                                  sender:
+                                      email: gerda.wosavoreweiner60@outloock.de
+                                      id: 2
+                                      nachname: Wosavoreweiner
+                                      vorname: Gerda
+                                  timeSent: "2021-01-01 00:00:05"
                 "401":
                     description: Unauthorized - Authentication required
                 "403":
                     description: Forbidden - Insufficient permissions
                 "404":
                     description: No messages found or invalid user ID
-
-    # Tokens
     /tokens/login:
         post:
             tags:
@@ -309,7 +912,12 @@ paths:
                                     type: string
                                 password:
                                     type: string
-
+                        example:
+                            token: >-
+                                eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJHRk9TUHJvamVrdCIsInN1YiI6InRlc3RAdGVzdC5kZSIsImV4cCI6MTczMzA2NTE0NX0.LPUn5iRALtgj5xqCq5Vii5rGpp9ObcqVjsE3SS7R5go
+                            refresh_token: c51a7f203c1b71d3d60c4a3654b7e5d2f2b25e45103f315d2926a4278b8d5a24
+                            account: >-
+                                {"einstellungen":{"farbschema":0,"id":0,"sprache":"de","zweiFaktorAuth":false},"email":"test@test.de","id":0,"nachname":"König","vorname":"Corina"}
     /tokens/refresh:
         post:
             tags:
@@ -330,7 +938,14 @@ paths:
                                         description: The new access token
                                     refresh_token:
                                         type: string
-                                        description: The new refresh token as part of the refresh token rotation
+                                        description: >-
+                                            The new refresh token as part of the refresh token
+                                            rotation
+                            example:
+                                refresh_token: >-
+                                    05422f6cbb4b61b4373936cd8a0f40fdde0065d302f75c280ac6e57aa3e8e885
+                                token: >-
+                                    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJHRk9TUHJvamVrdCIsInN1YiI6InRlc3RAdGVzdC5kZSIsImV4cCI6MTczMzA2NTE0Nn0.gl_dNz6aSQEtsufKYGbAuRg9BWx3vwzdCCwfWXB13LU
                 "401":
                     description: Unauthorized
             requestBody:
@@ -343,7 +958,6 @@ paths:
                                     type: string
                                 refresh_token:
                                     type: string
-
     /tokens/logout:
         post:
             tags:
@@ -359,7 +973,6 @@ paths:
                             properties:
                                 refresh_token:
                                     type: string
-
 tags:
     - name: accounts
       description: Account operations
@@ -373,7 +986,6 @@ tags:
     - name: tokens
       description: Token operations
       x-displayName: Tokens
-
 components:
     parameters:
         id:
@@ -406,11 +1018,9 @@ components:
                 utcOffset:
                     type: integer
                     description: The UTC offset in minutes
-
             required:
                 - id
                 - email
-
         Aufgabe:
             type: object
             properties:
@@ -430,7 +1040,6 @@ components:
                     $ref: "#/components/schemas/Kunde"
                 prioritaet:
                     type: integer
-
         Einstellungen:
             type: object
             properties:
@@ -442,7 +1051,6 @@ components:
                     type: boolean
                 farbschema:
                     type: integer
-
         Kunde:
             type: object
             properties:
@@ -467,7 +1075,6 @@ components:
                 utcOffset:
                     type: integer
                     description: The UTC offset in minutes
-
         Message:
             type: object
             properties:
@@ -490,6 +1097,5 @@ components:
             type: http
             scheme: bearer
             bearerFormat: JWT
-
 security:
     - BearerAuth: []

@@ -51,11 +51,24 @@ public class MessageFacade {
 		}
 	}
 
-	public List<Message> getMessagesForAccountId(int id) {
+	public List<Message> getUnreadMessagesForAccountId(int id) {
 		try {
 			return em
-					.createNamedQuery("Message.findBySenderId", Message.class)
+					.createNamedQuery("Message.findUnreadByReceiverID", Message.class)
 					.setParameter("id", id)
+					.getResultList();
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+	}
+
+	public List<Message> getMessagesForChat(int senderID, int receiverID) {
+		try {
+			return em
+					.createNamedQuery("Message.findByChat", Message.class)
+					.setParameter("senderID", senderID)
+					.setParameter("receiverID", receiverID)
 					.getResultList();
 		} catch (Exception e) {
 			System.out.println(e);
