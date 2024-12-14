@@ -81,6 +81,11 @@ public class AccountFacade {
 		}
 	}
 
+	public boolean deleteAccount(int id) {
+		Account a = getAccountById(id);
+		return deleteAccount(a);
+	}
+
 	public boolean deleteAccount(Account a) {
 		try {
 			em.remove(a);

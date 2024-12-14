@@ -48,6 +48,7 @@ public class AufgabeFacade {
         return em.createQuery("SELECT a FROM Aufgabe a WHERE a.status = :status", Aufgabe.class).getResultList();
 
     }
+
     // TODO: richtig machen
     public List<Aufgabe> getAufgabenByMitarbeiter(Account mitarbeiter) {
         List<Aufgabenbearbeitung> bearbeitung = em
@@ -59,5 +60,26 @@ public class AufgabeFacade {
             aufgaben.add(a.getAufgabe());
         }
         return aufgaben;
+    }
+
+    public Aufgabe updateAufgabe(Aufgabe a) {
+        try {
+            return em.merge(a);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public boolean deleteAufgabe(int id) {
+        try {
+            Aufgabe aufgabe = getAufgabeById(id);
+            if (aufgabe != null) {
+                em.remove(aufgabe);
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

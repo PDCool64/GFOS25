@@ -140,27 +140,58 @@ paths:
                         application/json:
                             example:
                                 error: Account with ID 1 not found
-    /accounts/test:
-        get:
+        delete:
             tags:
                 - accounts
-            responses:
-                "200":
-                    description: OK
-    /accounts/search/{search}:
-        get:
-            tags:
-                - accounts
-            responses:
-                "200":
-                    description: OK
+            summary: Delete account by ID
+            description: Delete a specific account by its ID
             parameters:
-                - name: search
+                - name: id
                   in: path
                   required: true
                   schema:
-                      type: string
-                  description: Search string
+                      type: integer
+                  description: Account ID
+            responses:
+                "204":
+                    description: Account deleted successfully
+                "404":
+                    description: Account not found
+                    content:
+                        application/json:
+                            example:
+                                error: Account not found
+        put:
+            tags:
+                - accounts
+            summary: Update account by ID
+            description: Update a specific account by its ID
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    description: Account ID
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Account'
+            responses:
+                "200":
+                    description: Account updated successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Account'
+                "400":
+                    description: Error updating account
+                    content:
+                        application/json:
+                            example:
+                                error: Error updating account
     /aufgaben:
         post:
             tags:
@@ -371,6 +402,58 @@ paths:
                     description: Forbidden - Insufficient permissions
                 "404":
                     description: Aufgabe not found
+        put:
+            tags:
+                - aufgaben
+            summary: Update Aufgabe by ID
+            description: Update a specific Aufgabe by its ID
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                        type: integer
+                  description: Aufgabe ID
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Aufgabe'
+            responses:
+                "200":
+                    description: Aufgabe updated successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Aufgabe'
+                "400":
+                    description: Error updating Aufgabe
+                    content:
+                        application/json:
+                            example:
+                                error: Error updating Aufgabe
+        delete:
+            tags:
+                - aufgaben
+            summary: Delete Aufgabe by ID
+            description: Delete a specific Aufgabe by its ID
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    description: Aufgabe ID
+            responses:
+                "204":
+                    description: Aufgabe deleted successfully
+                "404":
+                    description: Aufgabe not found
+                    content:
+                        application/json:
+                            example:
+                                error: Aufgabe not found
     /messages:
         post:
             description: Send a message
@@ -973,6 +1056,123 @@ paths:
                             properties:
                                 refresh_token:
                                     type: string
+    /termine:
+        get:
+            tags:
+                - termine
+            summary: Retrieve all Termine
+            description: Returns a list of all Termine
+            responses:
+                "200":
+                    description: List of Termine retrieved successfully
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Termin'
+        post:
+            tags:
+                - termine
+            summary: Create a new Termin
+            description: Persists a new Termin
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Termin'
+            responses:
+                "201":
+                    description: Termin created successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Termin'
+                "400":
+                    description: Error creating Termin
+                    content:
+                        application/json:
+                            example:
+                                error: Error creating Termin
+    /termine/{id}:
+        get:
+            tags:
+                - termine
+            summary: Get Termin by ID
+            description: Retrieve a specific Termin by its ID
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: integer
+                  description: Termin ID
+            responses:
+                "200":
+                    description: Termin retrieved successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Termin'
+                "404":
+                    description: Termin not found
+                    content:
+                        application/json:
+                            example:
+                                error: Termin not found
+        put:
+            tags:
+                - termine
+            summary: Update Termin by ID
+            description: Update a specific Termin by its ID
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: integer
+                  description: Termin ID
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Termin'
+            responses:
+                "200":
+                    description: Termin updated successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Termin'
+                "400":
+                    description: Error updating Termin
+                    content:
+                        application/json:
+                            example:
+                                error: Error updating Termin
+        delete:
+            tags:
+                - termine
+            summary: Delete Termin by ID
+            description: Delete a specific Termin by its ID
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: integer
+                  description: Termin ID
+            responses:
+                "204":
+                    description: Termin deleted successfully
+                "404":
+                    description: Termin not found
+                    content:
+                        application/json:
+                            example:
+                                error: Termin not found
 tags:
     - name: accounts
       description: Account operations
@@ -986,6 +1186,9 @@ tags:
     - name: tokens
       description: Token operations
       x-displayName: Tokens
+    - name: termine
+      description: Termin operations
+      x-displayName: Termine
 components:
     parameters:
         id:
@@ -1092,6 +1295,21 @@ components:
                     $ref: "#/components/schemas/Account"
                 time_sent:
                     type: string
+        Termin:
+            type: object
+            properties:
+                id:
+                    type: integer
+                title:
+                    type: string
+                description:
+                    type: string
+                date:
+                    type: string
+                    format: date-time
+            required:
+                - title
+                - date
     securitySchemes:
         BearerAuth:
             type: http

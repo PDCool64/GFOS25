@@ -77,4 +77,17 @@ public class ResponseService {
 			.entity("{\"error\": \"" + string + "\"}")
 			.build();
 	}
+
+	public Response notFound(String string) {
+		return Response
+			.status(404)
+			.entity("{\"error\": \"" + string + "\"}")
+			.build();
+	}
+	
+	public Response notFound() {
+		return Response
+			.status(404)
+			.build();
+	}
 }

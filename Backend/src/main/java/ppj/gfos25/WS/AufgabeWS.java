@@ -7,9 +7,11 @@ import jakarta.ejb.LocalBean;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -85,4 +87,33 @@ public class AufgabeWS {
 								jsonb.fromJson(aufgabe, Aufgabe.class))));
 	}
 
+	@PUT
+	@Path("/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response updateAufgabe(@PathParam("id") int id, String aufgabeJson) {
+		Aufgabe aufgabe;
+		try {
+			aufgabe = jsonb.fromJson(aufgabeJson, Aufgabe.class);
+		} catch (Exception e) {
+			return responseService.unprocessable("Invalid JSON");
+		}
+		aufgabe.setId(id);
+		Aufgabe updatedAufgabe = aufgabeFacade.updateAufgabe(aufgabe);
+		if (updatedAufgabe == null) {
+			return responseService.badRequest("Error updating Aufgabe");
+		}
+		return responseService.ok(jsonb.toJson(updatedAufgabe));
+	}
+
+	@DELETE
+	@Path("/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deleteAufgabe(@PathParam("id") int id) {
+		boolean deleted = aufgabeFacade.deleteAufgabe(id);
+		if (!deleted) {
+			return responseService.notFound("Aufgabe not found");
+		}
+		return responseService.notFound();
+	}
 }

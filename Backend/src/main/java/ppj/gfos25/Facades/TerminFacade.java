@@ -7,6 +7,7 @@ package ppj.gfos25.Facades;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import java.util.List;
 import ppj.gfos25.Entity.Termin;
 import jakarta.ejb.LocalBean;
 
@@ -20,27 +21,63 @@ public class TerminFacade {
     @PersistenceContext
     private EntityManager em;
 
-    public Termin createTermin(Termin t){
+    public Termin createTermin(Termin t) {
         try {
-			em.persist(t);
-			em.flush();
-			Termin terminMitId = this.getTerminById(t.getId());
-			return terminMitId;
-		} catch (Exception e) {
-			return null;
-		}
-        
+            em.persist(t);
+            em.flush();
+            return this.getTerminById(t.getId());
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public Termin getTerminById(int id){
+    public Termin getTerminById(int id) {
         try {
-			return em.find(Termin.class, id);
-		} catch (Exception e) {
-			return null;
-		}
-
+            return em.createNamedQuery("Termin.findById", Termin.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    public List<Termin> getAllTermine() {
+        try {
+            return em.createNamedQuery("Termin.findAll", Termin.class)
+                    .getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<Termin> getTermineForAccountId(int accountId) {
+        try {
+            return em.createNamedQuery("Termin.findByAccountId", Termin.class)
+                    .setParameter("accountId", accountId)
+                    .getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public Termin updateTermin(Termin t) {
+        try {
+            return em.merge(t);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public boolean deleteTermin(int id) {
+        try {
+            Termin t = getTerminById(id);
+            if (t != null) {
+                em.remove(t);
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
