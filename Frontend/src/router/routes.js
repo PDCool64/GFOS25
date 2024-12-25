@@ -38,6 +38,10 @@ const routes = [
 				component: () => import("pages/ChatPage.vue"),
 				meta: { requiresAuth: true },
 			},
+			{
+				path: "/calendar",
+				component: () => import("pages/KalendarPage.vue"),
+			},
 		],
 	},
 	// Always leave this as last one,
