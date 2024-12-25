@@ -1,2 +1,4 @@
-cd C:\Users\phili\GlassFish_Server\bin\	
+CALL config.bat
+
+cd %glassfish_bin%
 stopserv
