@@ -4,7 +4,6 @@
  */
 package ppj.gfos25.Entity;
 
-import jakarta.inject.Named;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

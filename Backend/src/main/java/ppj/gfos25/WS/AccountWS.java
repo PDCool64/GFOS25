@@ -1,7 +1,6 @@
 package ppj.gfos25.WS;
 
 import java.util.List;
-import java.util.ArrayList;
 
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;

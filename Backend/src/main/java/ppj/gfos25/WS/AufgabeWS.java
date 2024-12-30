@@ -83,8 +83,7 @@ public class AufgabeWS {
 		}
 		return responseService.created(
 				jsonb.toJson(
-						aufgabeFacade.createAufgabe(
-								jsonb.fromJson(aufgabe, Aufgabe.class))));
+					aufgabeFacade.createAufgabe(a)));
 	}
 
 	@PUT
