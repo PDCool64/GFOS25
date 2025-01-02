@@ -1,5 +1,5 @@
 <template>
-	<div @click="onClick" :class="taskClass" class="wrapper">
+	<div v-if="aufgabe" @click="onClick" :class="taskClass" class="wrapper">
 		<div class="header-wrapper">
 			<h2>{{ aufgabe?.titel }}</h2>
 			<div class="icon-wrapper">
@@ -46,10 +46,10 @@ const icon = ref("check");
 const displayDate = (date) => {
 	return new Date(date).toLocaleDateString();
 };
-
 const onClick = () => {
-	aufgabe.value.status = (aufgabe.value.status + 1) % 3;
-	switch (aufgabe.value.status) {
+	console.log(aufgabe);
+	aufgabe.value.status = (aufgabe.value?.status + 1) % 3;
+	switch (aufgabe.value?.status) {
 		case 0:
 			icon.value = "clear";
 			break;
@@ -77,6 +77,7 @@ const taskClass = computed(() => {
 	}
 });
 const aufgabe = ref(aufgabenStore.aufgaben[props.id].aufgabe);
+
 console.log(aufgabe.value);
 
 onClick();

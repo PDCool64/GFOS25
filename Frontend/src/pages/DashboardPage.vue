@@ -16,6 +16,9 @@
 			<div class="chart-section">
 				<PieGraphComponent />
 			</div>
+			<div>
+				<BarComponement />
+			</div>
 		</div>
 		<!-- Space for future components -->
 		<div class="bottom-row">
@@ -28,14 +31,16 @@
 import { ref, watch } from "vue";
 import AufgabenComponent from "src/components/AufgabenComponent.vue";
 import PieGraphComponent from "src/components/AufgabenPieGraphComponent.vue";
+import BarComponement from "src/components/AufgabenBarComponement.vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
 
 const aufgabenStore = useAufgabenStore();
 
 const aufgabenIds = ref([]);
 aufgabenStore.fetchAufgaben().finally(() => {
-	for (const aufgabeId in aufgabenStore.aufgaben) {
-		aufgabenIds.value.push(aufgabeId);
+	console.log(aufgabenStore.active);
+	for (const aufgabe of aufgabenStore.active) {
+		aufgabenIds.value.push(aufgabe.aufgabe.id);
 	}
 });
 console.log(aufgabenStore.stats);

@@ -74,6 +74,9 @@ public class TokenWS {
                 .getPasswortHash();
         if (!passwortHash.equals(accountPasswortHash)) {
             System.out.println(email);
+            System.out.println(passwort.equals(accountPasswortHash));
+            System.out.println(passwort.compareTo(accountPasswortHash));
+            System.out.println(accountPasswortHash);
             System.out.println(passwortHash);
             return responseService.unauthorized("Login failed");
         }

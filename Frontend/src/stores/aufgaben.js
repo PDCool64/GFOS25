@@ -11,6 +11,12 @@ export const useAufgabenStore = defineStore("aufgaben", {
 		aufgaben: {},
 	}),
 	getters: {
+		active() {
+			return Object.values(this.aufgaben).filter(
+				(aufgabe) =>
+					new Date(aufgabe.aufgabe.faelligkeitsdatum) > new Date()
+			);
+		},
 		stats() {
 			let stats = {
 				total: 0,
@@ -30,6 +36,35 @@ export const useAufgabenStore = defineStore("aufgaben", {
 				}
 			}
 			return stats;
+		},
+		activeStats() {
+			let stats = {
+				total: 0,
+				done: 0,
+				in_progress: 0,
+				undone: 0,
+			};
+			for (const aufgabe of this.active) {
+				stats.total++;
+				if (aufgabe.status % 3 == 0) {
+					stats.undone++;
+				} else if (aufgabe.status % 3 == 1) {
+					stats.in_progress++;
+				} else {
+					stats.done++;
+				}
+			}
+			return stats;
+		},
+		perMonth(month, status) {
+			counter = 0;
+			for (const aufgabe in this.aufgaben) {
+				console.log(aufgabe);
+				if (aufgabe.month == month && aufgabe.status == status) {
+					counter++;
+				}
+			}
+			return counter;
 		},
 	},
 	actions: {

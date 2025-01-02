@@ -21,9 +21,9 @@ const data = ref({
 		{
 			backgroundColor: ["#21BA45", "#F2C037", "#C10015"],
 			data: [
-				aufgabenStore.stats.done,
-				aufgabenStore.stats.in_progress,
-				aufgabenStore.stats.undone,
+				aufgabenStore.activeStats.done,
+				aufgabenStore.activeStats.in_progress,
+				aufgabenStore.activeStats.undone,
 			],
 		},
 	],
@@ -48,9 +48,9 @@ aufgabenStore.$subscribe(() => {
 				{
 					backgroundColor: ["#21BA45", "#F2C037", "#C10015"],
 					data: [
-						aufgabenStore.stats.done,
-						aufgabenStore.stats.in_progress,
-						aufgabenStore.stats.undone,
+						aufgabenStore.activeStats.done,
+						aufgabenStore.activeStats.in_progress,
+						aufgabenStore.activeStats.undone,
 					],
 				},
 			],
