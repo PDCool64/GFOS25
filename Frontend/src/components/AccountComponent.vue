@@ -1,32 +1,31 @@
 <template>
-	<div class="account-wrapper">
-		<h1>Account</h1>
-		<ul>
-			<li>
-				Name: &nbsp;
-				<p>{{ account.vorname }}</p>
-			</li>
-			<li>
-				Accountname: &nbsp;
-				<p>{{ account.nachname }}</p>
-			</li>
-			<li>
-				E-Mail: &nbsp;
-				<p>{{ account.email }}</p>
-			</li>
-		</ul>
-		<!-- <q-toggle
-        checked-icon="check"
-        color="green"
-        unchecked-icon="clear"
-        v-model="_2fa"
-      />  -->
+	<div class="account-container">
+			<ul>
+				<li>
+					Name: &nbsp;
+					<p>{{ account.vorname }}</p>
+				</li>
+				<li>
+					Accountname: &nbsp;
+					<p>{{ account.nachname }}</p>
+				</li>
+				<li>
+					E-Mail: &nbsp;
+					<p>{{ account.email }}</p>
+				</li>
+				<li>
+					Telefonnummer: &nbsp;
+					<p>{{ account.telefonnummer }}</p>
+				</li>
+			</ul>
 	</div>
 </template>
 
 <script setup>
 import { defineOptions } from "vue";
 import { ref } from "vue";
+import BarComponement from "src/components/AufgabenBarComponement.vue";
+import PieGraphComponent from "src/components/AufgabenPieGraphComponent.vue";
 
 const _2fa = ref(false);
 
@@ -46,49 +45,30 @@ fetchAccount();
 </script>
 
 <style scoped>
-.account-wrapper {
-	margin-top: 10%;
-	margin-left: 25%;
-	height: 100%;
-	width: 60%;
-	display: flex;
-	flex-direction: column;
-	text-align: center;
-	align-items: center;
-	justify-content: center;
-	border-radius: 10px;
-}
 
-h1 {
-	font-size: 8em;
-	font: Noto Sans;
-	font-weight: bold;
-	color: var(--q-primary);
-}
 
 ul {
+	margin: 0;
 	height: 100%;
-	width: 80%;
-	margin-bottom: 10%;
+	width: 100%;
 	padding: 0;
 	list-style-type: none;
 	display: flex;
-	flex-direction: column;
-	border-radius: 10px;
-	box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.3);
-	overflow-x: hidden;
-	background-color: var(--q-secondary);
+	flex-direction: column; /* Listenelemente vertikal anordnen */
+
 }
 
 li {
 	padding: 4%;
 	font-size: 1.5em;
 	color: black;
-	display: flex;
+	display: flex; /* Inhalt innerhalb eines Listenelements horizontal anordnen */
+	flex-direction: row; /* Inhalt innerhalb eines Listenelements horizontal anordnen */
+	align-items: center; /* Vertikale Ausrichtung der Inhalte innerhalb eines Listenelements */
 }
 
 p {
 	opacity: 0.6;
-	margin-left: auto;
+	margin-left: auto; /* Verschiebt das <p>-Element an das Ende des Listenelements */
 }
 </style>

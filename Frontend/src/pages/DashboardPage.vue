@@ -16,9 +16,6 @@
 			<div class="chart-section">
 				<PieGraphComponent />
 			</div>
-			<div>
-				<BarComponement />
-			</div>
 		</div>
 		<!-- Space for future components -->
 		<div class="bottom-row">
@@ -31,7 +28,6 @@
 import { ref, watch } from "vue";
 import AufgabenComponent from "src/components/AufgabenComponent.vue";
 import PieGraphComponent from "src/components/AufgabenPieGraphComponent.vue";
-import BarComponement from "src/components/AufgabenBarComponement.vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
 
 const aufgabenStore = useAufgabenStore();

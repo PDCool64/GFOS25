@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="bar-container">
 		<canvas id="myChart"></canvas>
 	</div>
 </template>
@@ -51,8 +51,28 @@ onMounted(() => {
 				label: "In Progress",
 				data: months.map((month, index) => StatusImMonat(index, 1)),
 				borderColor: "#F2C037",
-				borderWidth: 3,
+				borderWidth: 5,
 				fill: false,
+				pointBackgroundColor: "#F2C037", // Punktfarbe
+				radius: 5,// Punktgröße
+			},
+			{
+				label: "done",
+				data: months.map((month, index) => StatusImMonat(index, 2)),
+				borderColor: "#21BA45" ,
+				borderWidth: 5,
+				fill: false,
+				pointBackgroundColor: "#21BA45", // Punktfarbe
+				radius: 5,// Punktgröße
+			},
+			{
+				label: "undone",
+				data: months.map((month, index) => StatusImMonat(index, 0)),
+				borderColor:"#C10015",
+				borderWidth: 5,
+				fill: false,
+				pointBackgroundColor: "#C10015",
+				radius: 5,		
 			},
 		],
 	};
@@ -61,17 +81,53 @@ onMounted(() => {
 		type: "line",
 		data: data,
 		options: {
-			scales: {
-				y: {
-					beginAtZero: true,
-				},
-			},
-		},
+    scales: {
+        x: {
+            grid: {
+                display: false // Raster entfernen
+            },
+            ticks: {
+                font: {
+                    size: 20 // Schriftgröße der x-Achse
+                }
+            }
+        },
+        y: {
+            beginAtZero: true,
+            grid: {
+                display: false // Raster entfernen
+            },
+            ticks: {
+                stepSize: 1, // Nur ganze Zahlen anzeigen
+                font: {
+                    size: 20 // Schriftgröße der y-Achse
+                }
+            }
+        }
+    },
+    elements: {
+        line: {
+            borderWidth: 5, // Linienbreite
+        },
+        point: {
+            radius: 12,// Punktgröße
+        }
+    }
+},
 	});
 });
+
+
 aufgabenStore.$subscribe(() => {
 	if (chartRef.value && chartRef.value.chart) {
 		console.log("Irgendwas funktioniert");
 	}
 });
 </script>
+
+<style scoped>
+.bar-container {
+	width: 100%;
+	height: 100%;
+}
+</style>

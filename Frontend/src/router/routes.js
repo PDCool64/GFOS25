@@ -20,7 +20,7 @@ const routes = [
 			},
 			{
 				path: "/account",
-				component: () => import("components/AccountComponent.vue"),
+				component: () => import("pages/AccountPage.vue"),
 				meta: { requiresAuth: true },
 			},
 			{
