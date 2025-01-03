@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import PieGraphComponent from "src/components/AufgabenPieGraphComponent.vue";
+import PieGraphComponent from "src/components/stats/aufgaben/AufgabenPieGraphComponent.vue";
 defineOptions({
 	name: "IndexPage",
 });

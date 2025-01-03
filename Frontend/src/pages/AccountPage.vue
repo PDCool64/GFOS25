@@ -8,7 +8,7 @@
 		</div>
 	  	<div class="box" id="zwei">
 			<h2>Aktuelle Statistik</h2>
-			<PieGraphComponent />
+			<AccountPieGraphComponent />
 	  	</div>
 	  	<div class="box" id="drei">
 			<div class="bar">
@@ -25,8 +25,8 @@
 <script setup>
 import { defineOptions } from 'vue'
 import { ref } from 'vue'
-import BarComponement from 'src/components/AufgabenBarComponement.vue'
-import PieGraphComponent from 'src/components/AufgabenPieGraphComponent.vue'
+import BarComponement from 'src/components/stats/aufgaben/AufgabenBarComponement.vue'
+import AccountPieGraphComponent from 'src/components/stats/aufgaben/AufgabenPieGraphComponent.vue'
 import AccountComponent from 'src/components/AccountComponent.vue'
 
 
@@ -49,8 +49,8 @@ h2{
 
 .account {
 	margin-top: 0;
-	margin-left: 30%;
-	margin-right: 30%;
+	margin-left: 10%;
+	margin-right: 10%;
 	align-items: center;
 	justify-content: center;
 	text-align: center;
@@ -78,7 +78,7 @@ h2{
 		gap: 1rem;
 		width: 100%;
 	}
-	
+
 	#eins {
 		grid-column: 1 / span 2;
 		grid-row: 1 / span 1;

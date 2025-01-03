@@ -27,7 +27,7 @@
 <script setup>
 import { ref, watch } from "vue";
 import AufgabenComponent from "src/components/AufgabenComponent.vue";
-import PieGraphComponent from "src/components/AufgabenPieGraphComponent.vue";
+import PieGraphComponent from "src/components/stats/aufgaben/AufgabenPieGraphComponent.vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
 
 const aufgabenStore = useAufgabenStore();

@@ -24,8 +24,8 @@
 <script setup>
 import { defineOptions } from "vue";
 import { ref } from "vue";
-import BarComponement from "src/components/AufgabenBarComponement.vue";
-import PieGraphComponent from "src/components/AufgabenPieGraphComponent.vue";
+import BarComponement from "src/components/stats/aufgaben/AufgabenBarComponement.vue";
+import PieGraphComponent from "src/components/stats/aufgaben/AufgabenPieGraphComponent.vue";
 
 const _2fa = ref(false);
 
