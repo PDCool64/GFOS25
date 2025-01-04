@@ -54,25 +54,25 @@ onMounted(() => {
 				borderWidth: 5,
 				fill: false,
 				pointBackgroundColor: "#F2C037", // Punktfarbe
-				radius: 5,// Punktgröße
+				radius: 5, // Punktgröße
 			},
 			{
 				label: "done",
 				data: months.map((month, index) => StatusImMonat(index, 2)),
-				borderColor: "#21BA45" ,
+				borderColor: "#21BA45",
 				borderWidth: 5,
 				fill: false,
 				pointBackgroundColor: "#21BA45", // Punktfarbe
-				radius: 5,// Punktgröße
+				radius: 5, // Punktgröße
 			},
 			{
 				label: "undone",
 				data: months.map((month, index) => StatusImMonat(index, 0)),
-				borderColor:"#C10015",
+				borderColor: "#C10015",
 				borderWidth: 5,
 				fill: false,
 				pointBackgroundColor: "#C10015",
-				radius: 5,		
+				radius: 5,
 			},
 		],
 	};
@@ -81,42 +81,41 @@ onMounted(() => {
 		type: "line",
 		data: data,
 		options: {
-    scales: {
-        x: {
-            grid: {
-                display: false // Raster entfernen
-            },
-            ticks: {
-                font: {
-                    size: 20 // Schriftgröße der x-Achse
-                }
-            }
-        },
-        y: {
-            beginAtZero: true,
-            grid: {
-                display: false // Raster entfernen
-            },
-            ticks: {
-                stepSize: 1, // Nur ganze Zahlen anzeigen
-                font: {
-                    size: 20 // Schriftgröße der y-Achse
-                }
-            }
-        }
-    },
-    elements: {
-        line: {
-            borderWidth: 5, // Linienbreite
-        },
-        point: {
-            radius: 12,// Punktgröße
-        }
-    }
-},
+			scales: {
+				x: {
+					grid: {
+						display: false, // Raster entfernen
+					},
+					ticks: {
+						font: {
+							size: 20, // Schriftgröße der x-Achse
+						},
+					},
+				},
+				y: {
+					beginAtZero: true,
+					grid: {
+						display: false, // Raster entfernen
+					},
+					ticks: {
+						stepSize: 1, // Nur ganze Zahlen anzeigen
+						font: {
+							size: 20, // Schriftgröße der y-Achse
+						},
+					},
+				},
+			},
+			elements: {
+				line: {
+					borderWidth: 5, // Linienbreite
+				},
+				point: {
+					radius: 12, // Punktgröße
+				},
+			},
+		},
 	});
 });
-
 
 aufgabenStore.$subscribe(() => {
 	if (chartRef.value && chartRef.value.chart) {

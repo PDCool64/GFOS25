@@ -1,35 +1,31 @@
 <template>
-<div class="account">
-	<h1>Account</h1>
-	<div class="account-wrapper">
-		<div class="box" id="eins">
-			<h2>Accountdetails</h2>
-            <AccountComponent />
-		</div>
-	  	<div class="box" id="zwei">
-			<h2>Aktuelle Statistik</h2>
-			<AccountPieGraphComponent />
-	  	</div>
-	  	<div class="box" id="drei">
-			<div class="bar">
-				<h2>Aktivitäten letztes Jahr</h2>
-				<BarComponement />
+	<div class="account">
+		<h1>Account</h1>
+		<div class="account-wrapper">
+			<div class="box" id="eins">
+				<h2>Accountdetails</h2>
+				<AccountComponent />
+			</div>
+			<div class="box" id="zwei">
+				<h2>Aktuelle Statistik</h2>
+				<AccountPieGraphComponent />
+			</div>
+			<div class="box" id="drei">
+				<div class="bar">
+					<h2>Aktivitäten letztes Jahr</h2>
+					<BarComponement />
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </template>
 
-
-
 <script setup>
-import { defineOptions } from 'vue'
-import { ref } from 'vue'
-import BarComponement from 'src/components/stats/aufgaben/AufgabenBarComponement.vue'
-import AccountPieGraphComponent from 'src/components/stats/aufgaben/AufgabenPieGraphComponent.vue'
-import AccountComponent from 'src/components/AccountComponent.vue'
-
-
+import { defineOptions } from "vue";
+import { ref } from "vue";
+import BarComponement from "src/components/stats/aufgaben/AufgabenBarComponement.vue";
+import AccountPieGraphComponent from "src/components/stats/aufgaben/AufgabenPieGraphComponent.vue";
+import AccountComponent from "src/components/AccountComponent.vue";
 </script>
 
 <style scoped>
@@ -40,7 +36,7 @@ h1 {
 	color: var(--q-primary);
 }
 
-h2{
+h2 {
 	font-size: 2em;
 	font: Noto Sans;
 	font-weight: bold;
@@ -55,9 +51,8 @@ h2{
 	justify-content: center;
 	text-align: center;
 	display: flex; /* Flexbox hinzufügen */
-    flex-direction: column; /* Elemente vertikal anordnen */
+	flex-direction: column; /* Elemente vertikal anordnen */
 	padding: 0;
-
 }
 
 #eins {
@@ -67,7 +62,8 @@ h2{
 }
 .box {
 	border-radius: 10px;
-	box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+	box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+		rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
 }
 
 @media screen and (min-width: 600px) {
@@ -90,9 +86,8 @@ h2{
 	}
 
 	#drei {
-		grid-column: 1/ span 3;
+		grid-column: 1 / span 3;
 		grid-row: 2 / span 1;
 	}
-
 }
 </style>

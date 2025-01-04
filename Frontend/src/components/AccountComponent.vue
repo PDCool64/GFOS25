@@ -1,23 +1,23 @@
 <template>
 	<div class="account-container">
-			<ul>
-				<li>
-					Name: &nbsp;
-					<p>{{ account.vorname }}</p>
-				</li>
-				<li>
-					Accountname: &nbsp;
-					<p>{{ account.nachname }}</p>
-				</li>
-				<li>
-					E-Mail: &nbsp;
-					<p>{{ account.email }}</p>
-				</li>
-				<li>
-					Telefonnummer: &nbsp;
-					<p>{{ account.telefonnummer }}</p>
-				</li>
-			</ul>
+		<ul>
+			<li>
+				Name: &nbsp;
+				<p>{{ account.vorname }}</p>
+			</li>
+			<li>
+				Accountname: &nbsp;
+				<p>{{ account.nachname }}</p>
+			</li>
+			<li>
+				E-Mail: &nbsp;
+				<p>{{ account.email }}</p>
+			</li>
+			<li>
+				Telefonnummer: &nbsp;
+				<p>{{ account.telefonnummer }}</p>
+			</li>
+		</ul>
 	</div>
 </template>
 
@@ -45,8 +45,6 @@ fetchAccount();
 </script>
 
 <style scoped>
-
-
 ul {
 	margin: 0;
 	height: 100%;
@@ -55,7 +53,6 @@ ul {
 	list-style-type: none;
 	display: flex;
 	flex-direction: column; /* Listenelemente vertikal anordnen */
-
 }
 
 li {
