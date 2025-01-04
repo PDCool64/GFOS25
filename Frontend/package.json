@@ -1,42 +1,42 @@
 {
-  "name": "frontend",
-  "version": "0.0.1",
-  "description": "GFOS Innovationsaward 2025 Projekt",
-  "productName": "GFOS-25",
-  "author": "PDCool64 <p.d.cool@web.de>",
-  "private": true,
-  "scripts": {
-    "lint": "eslint --ext .js,.vue ./",
-    "format": "prettier --write \"**/*.{js,vue,scss,html,md,json}\" --ignore-path .gitignore",
-    "test": "echo \"No test specified\" && exit 0",
-    "dev": "quasar dev",
-    "build": "quasar build"
-  },
-  "dependencies": {
-    "@quasar/extras": "^1.16.15",
-    "chartjs": "^0.3.24",
-    "frontend": "file:",
-    "pinia": "^2.3.0",
-    "pinia-plugin-persistedstate": "^4.2.0",
-    "quasar": "^2.17.6",
-    "vue": "^3.4.18",
-    "vue-chartjs": "^5.3.2",
-    "vue-router": "^4.5.0"
-  },
-  "devDependencies": {
-    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
-    "@quasar/app-vite": "^1.11.0",
-    "autoprefixer": "^10.4.20",
-    "eslint": "^8.57.1",
-    "eslint-config-prettier": "^8.10.0",
-    "eslint-plugin-vue": "^9.32.0",
-    "postcss": "^8.4.49",
-    "prettier": "^2.8.8",
-    "vite-plugin-checker": "^0.6.4"
-  },
-  "engines": {
-    "node": "^20 || ^18 || ^16",
-    "npm": ">= 6.13.4",
-    "yarn": ">= 1.21.1"
-  }
+	"name": "frontend",
+	"version": "0.0.1",
+	"description": "GFOS Innovationsaward 2025 Projekt",
+	"productName": "GFOS-25",
+	"author": "PDCool64 <p.d.cool@web.de>",
+	"private": true,
+	"scripts": {
+		"lint": "eslint --ext .js,.vue ./",
+		"format": "prettier --write \"**/*.{js,vue,scss,html,md,json}\" --ignore-path .gitignore",
+		"test": "echo \"No test specified\" && exit 0",
+		"dev": "quasar dev",
+		"build": "quasar build"
+	},
+	"dependencies": {
+		"@quasar/extras": "^1.16.15",
+		"chartjs": "^0.3.24",
+		"frontend": "file:",
+		"pinia": "^2.3.0",
+		"pinia-plugin-persistedstate": "^4.2.0",
+		"quasar": "^2.17.6",
+		"vue": "^3.4.18",
+		"vue-chartjs": "^5.3.2",
+		"vue-router": "^4.5.0"
+	},
+	"devDependencies": {
+		"@babel/plugin-proposal-optional-chaining": "^7.21.0",
+		"@quasar/app-vite": "^2.0.5",
+		"autoprefixer": "^10.4.20",
+		"eslint": "^8.57.1",
+		"eslint-config-prettier": "^8.10.0",
+		"eslint-plugin-vue": "^9.32.0",
+		"postcss": "^8.4.49",
+		"prettier": "^2.8.8",
+		"vite-plugin-checker": "^0.6.4"
+	},
+	"engines": {
+		"node": "^20 || ^18 || ^16",
+		"npm": ">= 6.13.4",
+		"yarn": ">= 1.21.1"
+	}
 }
