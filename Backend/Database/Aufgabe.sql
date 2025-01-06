@@ -28,6 +28,16 @@ CREATE TABLE Aufgabenbehandlung(
     FOREIGN KEY (termin) REFERENCES Termin(id)
 );
 
+CREATE TABLE Aufgabenpunkt(
+    id INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 0, INCREMENT BY 1),
+    aufgabe INT,
+    FOREIGN KEY (aufgabe) REFERENCES Aufgabe(id),
+    titel VARCHAR(255),
+    beschreibung VARCHAR(1023),
+    erledigt BOOLEAN
+); 
+
+
 INSERT INTO
     Aufgabe (
         titel,
