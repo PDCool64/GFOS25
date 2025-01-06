@@ -68,6 +68,13 @@ public class TokenService {
     }
 
     public TokenEmail verifyToken(String token) {
+        if (token == null) {
+            return null;
+        }
+        if (token.substring(0, 7).equals("Bearer ")) {
+            token = token.substring(7);
+        }
+        System.out.println("Token: " + token);
         Algorithm algorithm = Algorithm.HMAC256(SECRET);
         Date now = new Date();
         try {

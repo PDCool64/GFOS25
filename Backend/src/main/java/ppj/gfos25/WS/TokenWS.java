@@ -37,16 +37,16 @@ public class TokenWS {
     private final Jsonb jsonb = JsonbBuilder.create();
 
     @EJB
-    ResponseService responseService = new ResponseService();
+    ResponseService responseService;
 
     @EJB
-    AccountFacade accountFacade = new AccountFacade();
+    AccountFacade accountFacade;
 
     @EJB
-    HashingService hashingService = new HashingService();
+    HashingService hashingService;
 
     @EJB
-    TokenService tokenService = new TokenService();
+    TokenService tokenService;
 
     @Path("/login")
     @POST
@@ -57,6 +57,7 @@ public class TokenWS {
                 .createReader(new StringReader(json))
                 .readObject();
         String email, passwort;
+        System.out.println("Test");
         try {
             email = jsonObject.getString("email");
             passwort = jsonObject.getString("passwort");
