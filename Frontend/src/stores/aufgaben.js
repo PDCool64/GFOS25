@@ -2,6 +2,7 @@ import { defineStore, acceptHMRUpdate } from "pinia";
 import address from "src/address";
 import { useAccountStore } from "./account";
 import { useTokenStore } from "./token";
+import { get_no_data, post } from "src/request";
 
 const accountStore = useAccountStore();
 const tokenStore = useTokenStore();
@@ -14,7 +15,7 @@ export const useAufgabenStore = defineStore("aufgaben", {
 		active() {
 			return Object.values(this.aufgaben).filter(
 				(aufgabe) =>
-					new Date(aufgabe.aufgabe.faelligkeitsdatum) > new Date()
+					new Date(aufgabe.aufgabe?.faelligkeitsdatum) > new Date()
 			);
 		},
 		stats() {
@@ -46,14 +47,17 @@ export const useAufgabenStore = defineStore("aufgaben", {
 			};
 			for (const aufgabe of this.active) {
 				stats.total++;
-				if (aufgabe.status % 3 == 0) {
+				if (aufgabe.aufgabe.status % 3 == 0) {
 					stats.undone++;
-				} else if (aufgabe.status % 3 == 1) {
+				} else if (aufgabe.aufgabe.status % 3 == 1) {
 					stats.in_progress++;
 				} else {
+					console.log(aufgabe.aufgabe.status);
 					stats.done++;
 				}
 			}
+			console.log(stats);
+
 			return stats;
 		},
 		perMonth(month, status) {
@@ -74,13 +78,8 @@ export const useAufgabenStore = defineStore("aufgaben", {
 				console.log("Account not defined");
 				return;
 			}
-			const response = await fetch(
-				address + "/accounts/aufgaben/" + accountStore.account.id,
-				{
-					headers: {
-						Authorization: tokenStore.token,
-					},
-				}
+			const response = await get_no_data(
+				"/accounts/aufgaben/" + accountStore.account.id
 			);
 			if (!response.ok) {
 				console.log(response);
@@ -93,12 +92,29 @@ export const useAufgabenStore = defineStore("aufgaben", {
 			}
 			console.log(this.aufgaben);
 		},
-	},
-	persist: {
-		enabled: true,
-		strategy: "local",
+		async createAufgabe(aufgabe) {
+			this.aufgaben[aufgabe.id] = aufgabe;
+			const response = await post("/aufgaben", {
+				body: JSON.stringify(aufgabe),
+			});
+		},
 	},
 });
+
+/*
+fetch("http://localhost:8080/Backend/api//aufgaben", {
+  "headers": {
+    "content-type": "application/json",
+    "sec-ch-ua": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "Referer": "http://localhost:9001/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "body": "{\"titel\":\"Test\",\"beschreibung\":\"Test\",\"erstellungsdatum\":\"\",\"faelligkeitsdatum\":\"2025/01/14\",\"prioritaet\":{\"label\":\"Low\",\"value\":0},\"status\":null}",
+  "method": "POST"
+});
+ */
 
 if (import.meta.hot) {
 	import.meta.hot.accept(acceptHMRUpdate(useAufgabenStore, import.meta.hot));

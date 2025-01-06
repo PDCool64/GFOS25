@@ -3,11 +3,7 @@
 		<div class="header-wrapper">
 			<h2>{{ aufgabe?.titel }}</h2>
 			<div class="icon-wrapper">
-				<q-icon
-					class="icon"
-					:name="icon"
-					:color="taskClass"
-					size="3em" />
+				<q-icon class="icon" :name="icon" :color="taskClass" size="3em" />
 			</div>
 		</div>
 		<ul>

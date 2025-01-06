@@ -9,11 +9,6 @@ const routes = [
 				meta: { requiresAuth: false },
 			},
 			{
-				path: "/test",
-				component: () => import("pages/TestPage.vue"),
-				meta: { requiresAuth: true },
-			},
-			{
 				path: "/login",
 				component: () => import("src/pages/LoginPage.vue"),
 				meta: { requiresAuth: false },
@@ -41,6 +36,11 @@ const routes = [
 			{
 				path: "/calendar",
 				component: () => import("pages/KalendarPage.vue"),
+			},
+			{
+				path: "/test",
+				component: () =>
+					import("components/create/AufgabenCreateComponent.vue"),
 			},
 		],
 	},

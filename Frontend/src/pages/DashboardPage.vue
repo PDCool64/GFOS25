@@ -2,19 +2,21 @@
 	<div class="dashboard-container">
 		<div class="top-row">
 			<div class="tasks-section">
-				<div class="aufgaben">
-					<div class="tasks-wrapper">
-						<div
-							v-for="id in aufgabenIds"
-							:key="id"
-							class="task-item">
-							<AufgabenComponent :id="id" />
-						</div>
+				<div class="tasks-wrapper">
+					<div v-for="id in aufgabenIds" :key="id" class="task-item">
+						<AufgabenComponent :id="id" />
+					</div>
+					<div class="task-item add-task-item" @click="createAufgabeOpen = true">
+						<q-icon name="add" size="220px">
+							<q-popup-proxy cover v-if="createAufgabeOpen">
+								<AufgabenCreateComponent @creationDone="onCreationDone" />
+							</q-popup-proxy>
+						</q-icon>
 					</div>
 				</div>
 			</div>
 			<div class="chart-section">
-				<PieGraphComponent />
+				<AccountPieGraphComponent />
 			</div>
 		</div>
 		<!-- Space for future components -->
@@ -27,10 +29,18 @@
 <script setup>
 import { ref, watch } from "vue";
 import AufgabenComponent from "src/components/AufgabenComponent.vue";
-import PieGraphComponent from "src/components/stats/aufgaben/AufgabenPieGraphComponent.vue";
+import AccountPieGraphComponent from "src/components/stats/aufgaben/AufgabenPieGraphComponent.vue";
+import AufgabenCreateComponent from "src/components/create/AufgabenCreateComponent.vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
 
+const createAufgabeOpen = ref(false);
+
 const aufgabenStore = useAufgabenStore();
+
+const onCreationDone = () => {
+	console.log("Something worked");
+	createAufgabeOpen.value = false;
+}
 
 const aufgabenIds = ref([]);
 aufgabenStore.fetchAufgaben().finally(() => {
@@ -45,7 +55,8 @@ console.log(aufgabenStore.stats);
 <style scoped>
 .dashboard-container {
 	display: grid;
-	grid-template-rows: auto 1fr; /* First row for content, second for future components */
+	grid-template-rows: auto 1fr;
+	/* First row for content, second for future components */
 	gap: 1rem;
 	padding: 1rem;
 	height: calc(100vh - 100px);
@@ -53,7 +64,8 @@ console.log(aufgabenStore.stats);
 
 .top-row {
 	display: grid;
-	grid-template-columns: 3fr 1fr; /* Tasks take 3/4, chart takes 1/4 */
+	grid-template-columns: 3fr 1fr;
+	/* Tasks take 3/4, chart takes 1/4 */
 	gap: 1rem;
 }
 
@@ -65,8 +77,10 @@ console.log(aufgabenStore.stats);
 }
 
 .task-item {
-	flex: 0 1 calc(33.333% - 1rem); /* Three items per row with gap */
-	min-width: 250px; /* Minimum width before wrapping */
+	flex: 0 1 calc(33.333% - 1rem);
+	/* Three items per row with gap */
+	min-width: 250px;
+	/* Minimum width before wrapping */
 }
 
 .chart-section {
@@ -83,7 +97,18 @@ console.log(aufgabenStore.stats);
 }
 
 .bottom-row {
-	min-height: 200px; /* Minimum height for future components */
+	min-height: 200px;
+	/* Minimum height for future components */
+}
+
+.add-task-item {
+	cursor: pointer;
+	border: 2px dashed #ccc;
+	background-color: #f9f9f9;
+	transition: background-color 0.3s;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 /* Responsive design */
@@ -93,7 +118,8 @@ console.log(aufgabenStore.stats);
 	}
 
 	.task-item {
-		flex: 0 1 calc(50% - 1rem); /* Two items per row on smaller screens */
+		flex: 0 1 calc(50% - 1rem);
+		/* Two items per row on smaller screens */
 	}
 }
 </style>
