@@ -27,24 +27,24 @@ import java.util.List;
 @Entity
 @Table(name = "AUFGABE")
 @NamedQueries({
-	@NamedQuery(name = "Aufgabe.findAll", query = "SELECT a FROM Aufgabe a"),
-	@NamedQuery(name = "Aufgabe.findById", query = "SELECT a FROM Aufgabe a WHERE a.id = :id"),
-	@NamedQuery(name = "Aufgabe.findByTitel", query = "SELECT a FROM Aufgabe a WHERE a.titel = :titel"),
-	@NamedQuery(name = "Aufgabe.findByBeschreibung", query = "SELECT a FROM Aufgabe a WHERE a.beschreibung = :beschreibung"),
-	@NamedQuery(name = "Aufgabe.findByErstellungsdatum", query = "SELECT a FROM Aufgabe a WHERE a.erstellungsdatum = :erstellungsdatum"),
-	@NamedQuery(name = "Aufgabe.findByFaelligkeitsdatum", query = "SELECT a FROM Aufgabe a WHERE a.faelligkeitsdatum = :faelligkeitsdatum"),
-	@NamedQuery(name = "Aufgabe.findByPrioritaet", query = "SELECT a FROM Aufgabe a WHERE a.prioritaet = :prioritaet"),
-	@NamedQuery(name = "Aufgabe.findByStatus", query = "SELECT a FROM Aufgabe a WHERE a.status = :status")})
+		@NamedQuery(name = "Aufgabe.findAll", query = "SELECT a FROM Aufgabe a"),
+		@NamedQuery(name = "Aufgabe.findById", query = "SELECT a FROM Aufgabe a WHERE a.id = :id"),
+		@NamedQuery(name = "Aufgabe.findByTitel", query = "SELECT a FROM Aufgabe a WHERE a.titel = :titel"),
+		@NamedQuery(name = "Aufgabe.findByBeschreibung", query = "SELECT a FROM Aufgabe a WHERE a.beschreibung = :beschreibung"),
+		@NamedQuery(name = "Aufgabe.findByErstellungsdatum", query = "SELECT a FROM Aufgabe a WHERE a.erstellungsdatum = :erstellungsdatum"),
+		@NamedQuery(name = "Aufgabe.findByFaelligkeitsdatum", query = "SELECT a FROM Aufgabe a WHERE a.faelligkeitsdatum = :faelligkeitsdatum"),
+		@NamedQuery(name = "Aufgabe.findByPrioritaet", query = "SELECT a FROM Aufgabe a WHERE a.prioritaet = :prioritaet"),
+		@NamedQuery(name = "Aufgabe.findByStatus", query = "SELECT a FROM Aufgabe a WHERE a.status = :status") })
 public class Aufgabe implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name = "ID")
 	private Integer id;
 	@Basic(optional = false)
-    @Column(name = "TITEL")
+	@Column(name = "TITEL")
 	private String titel;
 	@Column(name = "BESCHREIBUNG")
 	private String beschreibung;
@@ -57,7 +57,7 @@ public class Aufgabe implements Serializable {
 	@Column(name = "STATUS")
 	private Integer status;
 	@JoinColumn(name = "KUNDE", referencedColumnName = "ID")
-    @ManyToOne
+	@ManyToOne
 	private Kunde kunde;
 	@OneToMany(mappedBy = "aufgabe")
 	@JsonbTransient
@@ -65,6 +65,9 @@ public class Aufgabe implements Serializable {
 	@OneToMany(mappedBy = "aufgabe")
 	@JsonbTransient
 	private List<Aufgabenbehandlung> aufgabenbehandlungList;
+	@OneToMany(mappedBy = "aufgabe")
+	@JsonbTransient
+	private List<Aufgabenpunkt> aufgabenpunktList;
 
 	public Aufgabe() {
 	}
@@ -158,6 +161,14 @@ public class Aufgabe implements Serializable {
 		this.aufgabenbehandlungList = aufgabenbehandlungList;
 	}
 
+	public List<Aufgabenpunkt> getAufgabenpunktList() {
+		return aufgabenpunktList;
+	}
+
+	public void setAufgabenpunktList(List<Aufgabenpunkt> aufgabenpunktList) {
+		this.aufgabenpunktList = aufgabenpunktList;
+	}
+
 	@Override
 	public int hashCode() {
 		int hash = 0;
@@ -182,5 +193,5 @@ public class Aufgabe implements Serializable {
 	public String toString() {
 		return "ppj.gfos25.Entity.Aufgabe[ id=" + id + " ]";
 	}
-	
+
 }

@@ -13,6 +13,7 @@ import jakarta.persistence.PersistenceContext;
 import ppj.gfos25.Entity.Account;
 import ppj.gfos25.Entity.Aufgabe;
 import ppj.gfos25.Entity.Aufgabenbearbeitung;
+import ppj.gfos25.Entity.Aufgabenpunkt;
 import jakarta.ejb.LocalBean;
 
 /**
@@ -81,5 +82,55 @@ public class AufgabeFacade {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public List<Aufgabe> getAufgabenByKunde(Account kunde) {
+        return em.createQuery("SELECT a FROM Aufgabe a WHERE a.kunde = :kunde", Aufgabe.class)
+                .setParameter("kunde", kunde).getResultList();
+    }
+
+    public Aufgabenpunkt createAufgabenpunkt(Aufgabenpunkt ap) {
+        try {
+            em.persist(ap);
+            em.flush();
+            Aufgabenpunkt aufgabenpunktMitId = this.getAufgabenpunktById(ap.getId());
+            return aufgabenpunktMitId;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public Aufgabenpunkt getAufgabenpunktById(int id) {
+        return em.find(Aufgabenpunkt.class, id); 
+    }
+
+    public List<Aufgabenpunkt> getAufgabenpunkteByAufgabe(Aufgabe aufgabe) {
+        return em.createQuery("SELECT ap FROM Aufgabenpunkt ap WHERE ap.aufgabe = :aufgabe", Aufgabenpunkt.class)
+                .setParameter("aufgabe", aufgabe).getResultList();
+    }
+
+    public Aufgabenpunkt updateAufgabenpunkt(Aufgabenpunkt ap) {
+        try {
+            return em.merge(ap);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public boolean deleteAufgabenpunkt(int id) {
+        try {
+            Aufgabenpunkt aufgabenpunkt = getAufgabenpunktById(id);
+            if (aufgabenpunkt != null) {
+                em.remove(aufgabenpunkt);
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public List<Aufgabenpunkt> getAllAufgabenpunkte() {
+        return em.createNamedQuery("Aufgabenpunkt.findAll", Aufgabenpunkt.class).getResultList();
     }
 }

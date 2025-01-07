@@ -83,7 +83,7 @@ public class AufgabeWS {
 		}
 		return responseService.created(
 				jsonb.toJson(
-					aufgabeFacade.createAufgabe(a)));
+						aufgabeFacade.createAufgabe(a)));
 	}
 
 	@PUT
@@ -115,4 +115,5 @@ public class AufgabeWS {
 		}
 		return responseService.notFound();
 	}
+
 }

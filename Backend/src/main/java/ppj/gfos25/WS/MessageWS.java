@@ -5,8 +5,6 @@
 package ppj.gfos25.WS;
 
 import jakarta.ejb.Stateless;
-import jakarta.json.Json;
-import jakarta.json.JsonObject;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.ws.rs.Consumes;

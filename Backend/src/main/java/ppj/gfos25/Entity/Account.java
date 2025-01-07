@@ -27,29 +27,29 @@ import java.util.List;
 @Entity
 @Table(name = "ACCOUNT")
 @NamedQueries({
-		@NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a"),
-		@NamedQuery(name = "Account.findById", query = "SELECT a FROM Account a WHERE a.id = :id"),
-		@NamedQuery(name = "Account.findByVorname", query = "SELECT a FROM Account a WHERE a.vorname = :vorname"),
-		@NamedQuery(name = "Account.findByNachname", query = "SELECT a FROM Account a WHERE a.nachname = :nachname"),
-		@NamedQuery(name = "Account.findByEmail", query = "SELECT a FROM Account a WHERE a.email = :email"),
-		@NamedQuery(name = "Account.findByTelefonnummer", query = "SELECT a FROM Account a WHERE a.telefonnummer = :telefonnummer"),
-		@NamedQuery(name = "Account.findByRang", query = "SELECT a FROM Account a WHERE a.rang = :rang"),
-		@NamedQuery(name = "Account.findByUtcOffset", query = "SELECT a FROM Account a WHERE a.utcOffset = :utcOffset"),
-		@NamedQuery(name = "Account.findByRegion", query = "SELECT a FROM Account a WHERE a.region = :region"),
+	@NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a"),
+	@NamedQuery(name = "Account.findById", query = "SELECT a FROM Account a WHERE a.id = :id"),
+	@NamedQuery(name = "Account.findByVorname", query = "SELECT a FROM Account a WHERE a.vorname = :vorname"),
+	@NamedQuery(name = "Account.findByNachname", query = "SELECT a FROM Account a WHERE a.nachname = :nachname"),
+	@NamedQuery(name = "Account.findByEmail", query = "SELECT a FROM Account a WHERE a.email = :email"),
+	@NamedQuery(name = "Account.findByTelefonnummer", query = "SELECT a FROM Account a WHERE a.telefonnummer = :telefonnummer"),
+	@NamedQuery(name = "Account.findByRang", query = "SELECT a FROM Account a WHERE a.rang = :rang"),
+	@NamedQuery(name = "Account.findByUtcOffset", query = "SELECT a FROM Account a WHERE a.utcOffset = :utcOffset"),
+	@NamedQuery(name = "Account.findByRegion", query = "SELECT a FROM Account a WHERE a.region = :region"),
 		@NamedQuery(name = "Account.findByRefreshToken", query = "SELECT a FROM Account a WHERE a.refreshToken = :refreshToken") })
 public class Account implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Basic(optional = false)
-	@Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
 	private Integer id;
 	@Basic(optional = false)
-	@Column(name = "VORNAME")
+    @Column(name = "VORNAME")
 	private String vorname;
 	@Basic(optional = false)
-	@Column(name = "NACHNAME")
+    @Column(name = "NACHNAME")
 	private String nachname;
 	@Column(name = "EMAIL")
 	private String email;
@@ -71,8 +71,11 @@ public class Account implements Serializable {
 	@OneToMany(mappedBy = "sender")
 	private List<Message> messageList1;
 	@JoinColumn(name = "EINSTELLUNGEN", referencedColumnName = "ID")
-	@ManyToOne
+    @ManyToOne
 	private Settings einstellungen;
+	@JsonbTransient
+	@OneToMany(mappedBy = "ansprechpartner")
+	private List<Kunde> kundeList;
 
 	public Account() {
 	}
@@ -183,6 +186,14 @@ public class Account implements Serializable {
 		this.einstellungen = einstellungen;
 	}
 
+	public List<Kunde> getKundeList() {
+		return kundeList;
+	}
+
+	public void setKundeList(List<Kunde> kundeList) {
+		this.kundeList = kundeList;
+	}
+
 	@Override
 	public int hashCode() {
 		int hash = 0;
@@ -207,5 +218,5 @@ public class Account implements Serializable {
 	public String toString() {
 		return "ppj.gfos25.Entity.Account[ id=" + id + " ]";
 	}
-
+	
 }
