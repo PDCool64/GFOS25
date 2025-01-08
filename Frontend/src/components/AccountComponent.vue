@@ -18,20 +18,33 @@
 				<p>{{ account.telefonnummer }}</p>
 			</li>
 		</ul>
+		<q-file filled type="file" v-model="file" />
+		<div v-if="fileContent">
+			<h3>File Content:</h3>
+			<img :src="fileContent" alt="Uploaded Image" />
+		</div>
 	</div>
 </template>
 
 <script setup>
-import { defineOptions } from "vue";
-import { ref } from "vue";
-import BarComponement from "src/components/stats/aufgaben/AufgabenBarComponement.vue";
-import PieGraphComponent from "src/components/stats/aufgaben/AufgabenPieGraphComponent.vue";
-
-const _2fa = ref(false);
-
+import { ref, watch } from "vue";
 import { getAccountById } from "src/requests/account";
 
-// TODO: get the logged-in user's account
+const _2fa = ref(false);
+const file = ref(null);
+const fileContent = ref("");
+
+watch(file, (newFile) => {
+	if (newFile) {
+		const reader = new FileReader();
+		reader.onload = (e) => {
+			console.log(e);
+			fileContent.value = e.target.result;
+			console.log(fileContent);
+		};
+		reader.readAsDataURL(newFile);
+	}
+});
 
 const account = ref({});
 const fetchAccount = async () => {
@@ -41,7 +54,21 @@ const fetchAccount = async () => {
 	console.log(account.value);
 };
 
-fetchAccount();
+const handleFileUpload = (event) => {
+	console.log(event);
+	const selectedFile = event.target.files[0];
+	console.log(selectedFile);
+	if (selectedFile) {
+		file.value = selectedFile;
+		const reader = new FileReader();
+		reader.onload = (e) => {
+			fileContent.value = e.target.result;
+		};
+		reader.readAsText(file.value);
+	}
+};
+
+// fetchAccount();
 </script>
 
 <style scoped>
@@ -52,20 +79,25 @@ ul {
 	padding: 0;
 	list-style-type: none;
 	display: flex;
-	flex-direction: column; /* Listenelemente vertikal anordnen */
+	flex-direction: column;
+	/* Listenelemente vertikal anordnen */
 }
 
 li {
 	padding: 4%;
 	font-size: 1.5em;
 	color: black;
-	display: flex; /* Inhalt innerhalb eines Listenelements horizontal anordnen */
-	flex-direction: row; /* Inhalt innerhalb eines Listenelements horizontal anordnen */
-	align-items: center; /* Vertikale Ausrichtung der Inhalte innerhalb eines Listenelements */
+	display: flex;
+	/* Inhalt innerhalb eines Listenelements horizontal anordnen */
+	flex-direction: row;
+	/* Inhalt innerhalb eines Listenelements horizontal anordnen */
+	align-items: center;
+	/* Vertikale Ausrichtung der Inhalte innerhalb eines Listenelements */
 }
 
 p {
 	opacity: 0.6;
-	margin-left: auto; /* Verschiebt das <p>-Element an das Ende des Listenelements */
+	margin-left: auto;
+	/* Verschiebt das <p>-Element an das Ende des Listenelements */
 }
 </style>
