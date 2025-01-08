@@ -1,59 +1,43 @@
 <template>
-	<div class="kalendar-container">
-		<h1>Kalendar</h1>
-		<div v-if="termine.length === 0">No Termine available</div>
-		<ul v-else>
-			<li v-for="termin in termine" :key="termin.id">
-				<h2>{{ termin.titel }}</h2>
-				<p>{{ termin.beschreibung }}</p>
-				<p>Start: {{ formatDate(termin.startzeit) }}</p>
-				<p>End: {{ formatDate(termin.endzeit) }}</p>
-			</li>
-		</ul>
+	<div>
+		<ScheduleXCalendar :calendar-app="calendarApp" />
 	</div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { useKalendarStore } from "src/stores/kalendar";
+import { ScheduleXCalendar } from "@schedule-x/vue";
+import {
+	createCalendar,
+	createViewDay,
+	createViewMonthAgenda,
+	createViewMonthGrid,
+	createViewWeek,
+} from "@schedule-x/calendar";
+import "@schedule-x/theme-default/dist/index.css";
 
-const kalendarStore = useKalendarStore();
-const termine = ref([]);
-
-onMounted(async () => {
-	await kalendarStore.fetchTermine();
-	termine.value = kalendarStore.termine;
+// Do not use a ref here, as the calendar instance is not reactive, and doing so might cause issues
+// For updating events, use the events service plugin
+const calendarApp = createCalendar({
+	selectedDate: "2023-12-19",
+	views: [
+		createViewDay(),
+		createViewWeek(),
+		createViewMonthGrid(),
+		createViewMonthAgenda(),
+	],
+	events: [
+		{
+			id: 1,
+			title: "Event 1",
+			start: "2023-12-19",
+			end: "2023-12-19",
+		},
+		{
+			id: 2,
+			title: "Event 2",
+			start: "2023-12-20 12:00",
+			end: "2023-12-20 13:00",
+		},
+	],
 });
-
-const formatDate = (date) => {
-	return new Date(date).toLocaleString();
-};
 </script>
-
-<style scoped>
-.kalendar-container {
-	padding: 1rem;
-}
-
-ul {
-	list-style-type: none;
-	padding: 0;
-}
-
-li {
-	background-color: #f9f9f9;
-	margin: 0.5rem 0;
-	padding: 1rem;
-	border-radius: 5px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-	margin: 0;
-	font-size: 1.5rem;
-}
-
-p {
-	margin: 0.5rem 0;
-}
-</style>

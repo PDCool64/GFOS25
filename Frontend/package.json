@@ -14,6 +14,8 @@
 	},
 	"dependencies": {
 		"@quasar/extras": "^1.16.15",
+		"@schedule-x/theme-default": "^2.13.0",
+		"@schedule-x/vue": "^2.12.0",
 		"chartjs": "^0.3.24",
 		"frontend": "file:",
 		"pinia": "^2.3.0",
