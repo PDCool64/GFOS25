@@ -116,4 +116,11 @@ public class AufgabeWS {
 		return responseService.notFound();
 	}
 
+	@GET
+	@Path("{id}/punkte")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAufgabenPunkte(@PathParam("id") int id) {
+		Aufgabe a = aufgabeFacade.getAufgabeById(id);
+		return responseService.ok(jsonb.toJson(a.getAufgabenpunktList()));
+	}
 }

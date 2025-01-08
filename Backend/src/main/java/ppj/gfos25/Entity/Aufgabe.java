@@ -66,7 +66,6 @@ public class Aufgabe implements Serializable {
 	@JsonbTransient
 	private List<Aufgabenbehandlung> aufgabenbehandlungList;
 	@OneToMany(mappedBy = "aufgabe")
-	@JsonbTransient
 	private List<Aufgabenpunkt> aufgabenpunktList;
 
 	public Aufgabe() {
