@@ -6,6 +6,6 @@
 	"editor.codeActionsOnSave": ["source.fixAll.eslint"],
 	"eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
 	"[vue]": {
-		"editor.defaultFormatter": "ms-vsliveshare.vsliveshare"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	}
 }

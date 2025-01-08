@@ -39,8 +39,7 @@ const routes = [
 			},
 			{
 				path: "/test",
-				component: () =>
-					import("components/create/AufgabenCreateComponent.vue"),
+				component: () => import("components/KundeComponent.vue"),
 			},
 		],
 	},

@@ -1,82 +1,90 @@
 <template>
 	<div v-if="aufgabe" @click="onClick" :class="taskClass" class="wrapper">
-		<div class="header-wrapper">
-			<h2>{{ aufgabe?.titel }}</h2>
-			<div class="icon-wrapper">
-				<q-icon class="icon" :name="icon" :color="taskClass" size="3em" />
+		<div class="header-wrapper text-center">
+			<h3 class="q-pa-xs">{{ aufgabe?.titel }}</h3>
+		</div>
+		<div class="outer">
+			<div class="row">
+				<div class="inner">
+					<q-icon name="edit" class="icon" />
+					{{ displayDate(new Date(aufgabe?.erstellungsdatum)) }}
+				</div>
+				<div class="inner">
+					<q-icon name="schedule" class="icon" />
+					{{ displayDate(new Date(aufgabe?.faelligkeitsdatum)) }}
+				</div>
+				<div class="inner" @mouseenter="openKunde = true">
+					<q-icon name="person" class="icon relative" />
+					<div>
+						{{ aufgabe?.kunde?.vorname }}
+						{{ aufgabe?.kunde?.nachname }}
+					</div>
+					<q-popup-proxy v-model="openKunde">
+						<KundeComponent />
+					</q-popup-proxy>
+				</div>
+			</div>
+			<div class="inner">
+				<q-icon class="icon" name="description" />
+				<div>
+					{{ aufgabe?.beschreibung }}
+				</div>
+			</div>
+			<div class="inner">
+				<q-icon class="icon" name="task_alt" />
+				<div>{{ done }}/{{ aufgabe.aufgabenpunktList.length }}</div>
 			</div>
 		</div>
-		<ul>
-			<li>{{ aufgabe?.beschreibung }}</li>
-			<!-- <li>{{ aufgabe }}</li> -->
-			<li>
-				Erstellt am
-				{{ displayDate(new Date(aufgabe?.erstellungsdatum)) }}
-			</li>
-			<li>
-				Fällig am
-				{{ displayDate(new Date(aufgabe?.faelligkeitsdatum)) }}
-			</li>
-		</ul>
 	</div>
 </template>
 
 <script setup>
 import { computed, ref } from "vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
-import { watch } from "vue";
+import KundeComponent from "./KundeComponent.vue";
 
 const aufgabenStore = useAufgabenStore();
 
-defineOptions({
-	name: "AufgabenComponent",
-});
+const openKunde = ref(false);
+
 const props = defineProps({
-	id: {
-		type: String,
-		required: true,
-	},
+	id: Number,
 });
 
-const icon = ref("check");
-const displayDate = (date) => {
-	return new Date(date).toLocaleDateString();
-};
-const onClick = () => {
-	console.log(aufgabe);
-	aufgabe.value.status = (aufgabe.value?.status + 1) % 3;
-	switch (aufgabe.value?.status) {
-		case 0:
-			icon.value = "clear";
-			break;
-		case 1:
-			icon.value = "hourglass_empty";
-			break;
-		case 2:
-			icon.value = "check";
-			break;
-		default:
-			icon.value = "question_mark";
-			break;
+const aufgabe = computed(() => aufgabenStore.aufgaben[props.id].aufgabe);
+
+const done = computed(() => {
+	let summe = 0;
+	for (const punkt of aufgabe.value.aufgabenpunktList) {
+		summe += punkt.erledigt;
 	}
-};
+	return summe;
+});
+
+console.log(done.value);
+
 const taskClass = computed(() => {
-	switch (aufgabe.value.status % 3) {
-		case 0:
-			return "open";
-		case 1:
-			return "in-progress";
-		case 2:
-			return "closed";
-		default:
-			return "bg-primary";
-	}
+	// Define your task class logic here
+	return "task-class";
 });
-const aufgabe = ref(aufgabenStore.aufgaben[props.id].aufgabe);
 
-console.log(aufgabe.value);
+const displayDate = (date) => {
+	// Define your date display logic here
+	return date.toLocaleDateString();
+};
 
-onClick();
+const onClick = () => {
+	// Define your click handler logic here
+	console.log("Task clicked");
+};
+
+const isLastPunkt = (punkt) => {
+	if (aufgabe.value.aufgabenpunktList === undefined) return false;
+	return (
+		aufgabe.value.aufgabenpunktList.indexOf(punkt) ===
+		aufgabe.value.aufgabenpunktList.length - 1
+	);
+};
 </script>
 
 <style scoped>
@@ -88,33 +96,19 @@ onClick();
 	background-color: var(--q-primary);
 	border-radius: 5px;
 	cursor: pointer;
-	margin: 1em;
 	user-select: none;
 }
 
-.open {
-	background-color: var(--q-negative);
-}
-
-.in-progress {
-	background-color: var(--q-warning);
-}
-
-.closed {
-	background-color: var(--q-positive);
-}
-
-h2 {
-	font-size: 2em;
+h3 {
+	font-size: 1.5em;
 	font-family: "Roboto", sans-serif;
 	color: white;
 	margin: 0;
-	margin-right: auto;
-
 	line-height: 1.5em;
+	border-radius: 15px;
 }
 
-ul {
+.outer {
 	width: 85%;
 	margin-bottom: 10%;
 	padding: 0;
@@ -125,8 +119,7 @@ ul {
 	overflow-x: hidden;
 }
 
-li {
-	font-size: 1.5em;
+.inner {
 	padding: 10px 20px;
 	color: white;
 	display: flex;
@@ -141,18 +134,10 @@ li {
 }
 
 .icon {
-	flex-grow: 0;
-	box-shadow: #0008 3px 3px 8px;
-	border-radius: 20%;
-	margin-left: auto;
-	margin-right: 10%;
-}
-
-.icon-wrapper {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: max-content;
-	margin: 0 10px;
+	margin: auto 0;
+	margin-right: 5px;
+	position: relative;
+	top: 0;
+	left: 0;
 }
 </style>
