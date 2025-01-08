@@ -19,8 +19,10 @@
 						{{ aufgabe?.kunde?.vorname }}
 						{{ aufgabe?.kunde?.nachname }}
 					</div>
-					<q-popup-proxy v-model="openKunde">
-						<KundeComponent />
+					<q-popup-proxy
+						v-model="openKunde"
+						@mouseleave="openKunde = false">
+						<KundeComponent></KundeComponent>
 					</q-popup-proxy>
 				</div>
 			</div>
