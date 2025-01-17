@@ -21,8 +21,6 @@
 </template>
 
 <script setup>
-import { defineOptions } from "vue";
-import { ref } from "vue";
 import BarComponement from "src/components/stats/aufgaben/AufgabenBarComponement.vue";
 import AccountPieGraphComponent from "src/components/stats/aufgaben/AufgabenPieGraphComponent.vue";
 import AccountComponent from "src/components/AccountComponent.vue";

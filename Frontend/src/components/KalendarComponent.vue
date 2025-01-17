@@ -24,7 +24,7 @@ const aufgabenStore = useAufgabenStore();
 const aufgaben = aufgabenStore.aufgaben;
 
 const calendarApp = createCalendar({
-	selectedDate: "2023-12-19",
+	selectedDate: new Date().toISOString(),
 	views: [
 		createViewDay(),
 		createViewWeek(),

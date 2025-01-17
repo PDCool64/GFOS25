@@ -45,13 +45,9 @@
 		<q-dialog v-model="alert">
 			<!-- Funktioniert so noch nicht, ist aber auch nicht so wichtig :) -->
 			<q-card>
+				<q-card-section> Not implemented! </q-card-section>
 				<q-card-section>
-					<q-card-title> Not implemented! </q-card-title>
-				</q-card-section>
-				<q-card-section>
-					<q-card-text>
-						This function is currently being worked on!
-					</q-card-text>
+					This function is currently being worked on!
 				</q-card-section>
 				<q-card-actions align="right">
 					<q-btn label="OK" color="primary" @click="alert = false" />
@@ -62,7 +58,7 @@
 </template>
 
 <script setup>
-import { onActivated, onMounted, onRenderTriggered, onUpdated, ref } from "vue";
+import { ref } from "vue";
 import EssentialLink from "components/EssentialLink.vue";
 import { useTokenStore } from "src/stores/token";
 import { useRouter } from "vue-router";

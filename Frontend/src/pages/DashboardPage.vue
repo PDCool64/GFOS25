@@ -6,10 +6,13 @@
 					<div v-for="id in aufgabenIds" :key="id" class="task-item">
 						<AufgabenComponent :id="id" />
 					</div>
-					<div class="task-item add-task-item" @click="createAufgabeOpen = true">
+					<div
+						class="task-item add-task-item"
+						@click="createAufgabeOpen = true">
 						<q-icon name="add" size="220px">
 							<q-popup-proxy cover v-if="createAufgabeOpen">
-								<AufgabenCreateComponent @creationDone="onCreationDone" />
+								<AufgabenCreateComponent
+									@creationDone="onCreationDone" />
 							</q-popup-proxy>
 						</q-icon>
 					</div>
@@ -40,7 +43,7 @@ const aufgabenStore = useAufgabenStore();
 const onCreationDone = () => {
 	console.log("Something worked");
 	createAufgabeOpen.value = false;
-}
+};
 
 const aufgabenIds = ref([]);
 aufgabenStore.fetchAufgaben().finally(() => {
