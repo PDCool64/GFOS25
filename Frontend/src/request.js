@@ -20,16 +20,20 @@ export async function get(url, data) {
 	return response;
 }
 
-export async function post(url, data) {
+export async function post(url, json) {
+	let data = {};
 	data.method = "POST";
 	data.headers = {
 		"Content-Type": "application/json",
 		Authorization: "Bearer " + tokenStore.token,
 	};
+	data.body = JSON.stringify(json);
+
 	const response = await fetch(`${address}${url}`, data);
 	if (response.status === 401) {
 		tokenStore.logout();
 	}
+	return response;
 }
 
 export async function put(url, data) {

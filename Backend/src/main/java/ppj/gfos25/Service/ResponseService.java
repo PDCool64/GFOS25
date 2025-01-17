@@ -11,6 +11,9 @@ import jakarta.ws.rs.core.Response;
 /**
  *
  * @author philipp.doering
+ *
+ * @description
+ * Some information about the ResponseService
  */
 @Stateless
 @LocalBean
@@ -29,6 +32,11 @@ public class ResponseService {
 			)
 	 */
 
+  /**
+   * Method to create a response with status 200
+   * @param data
+   * @return Response
+   */
 	public Response ok(String data) {
 		return Response
 			.status(200)
