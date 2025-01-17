@@ -18,7 +18,7 @@ import "@schedule-x/theme-default/dist/index.css";
 // Do not use a ref here, as the calendar instance is not reactive, and doing so might cause issues
 // For updating events, use the events service plugin
 const calendarApp = createCalendar({
-	selectedDate: "2023-12-19",
+	selectedDate: new Date().toISOString(),
 	views: [
 		createViewDay(),
 		createViewWeek(),

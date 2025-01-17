@@ -58,7 +58,7 @@
 </template>
 
 <script setup>
-import { onActivated, onMounted, onRenderTriggered, onUpdated, ref } from "vue";
+import { ref } from "vue";
 import EssentialLink from "components/EssentialLink.vue";
 import { useTokenStore } from "src/stores/token";
 import { useRouter } from "vue-router";

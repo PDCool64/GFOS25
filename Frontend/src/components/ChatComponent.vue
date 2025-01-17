@@ -1,17 +1,22 @@
 <template>
 	<div class="q-pa-md column justify-center">
-		<div style="margin-bottom: 20%; height: 80vh;">
 		<div
-			style="width: 70%; "
-			v-for="(message, index) in messages"
-			:key="index">
-			<q-chat-message
-				:text="message.content"
-				:sent="message.sent"
-				:name="message.sender.vorname + ' ' + message.sender.nachname"
-				:stamp="get_display_time(message.timeSent)" />
-		</div></div>
-		<div class="input" style="background: white; padding-bottom: 5px;">
+			style="margin-bottom: 20%; height: 80vh; overflow: scroll"
+			id="chat">
+			<div
+				style="width: 70%"
+				v-for="(message, index) in messages"
+				:key="index">
+				<q-chat-message
+					:text="message.content"
+					:sent="message.sent"
+					:name="
+						message.sender.vorname + ' ' + message.sender.nachname
+					"
+					:stamp="get_display_time(message.timeSent)" />
+			</div>
+		</div>
+		<div class="input" style="background: white; padding-bottom: 5px">
 			<q-input
 				v-model="message"
 				@keyup.enter="send_message"
@@ -34,6 +39,11 @@ const get_display_time = (time) => {
 	return hours + ":" + minutes;
 };
 
+const scroll_to_bottom = () => {
+	const chat = document.getElementById("chat");
+	chat.scrollTop = chat.scrollHeight;
+};
+
 const message = ref("");
 
 const send_message = async () => {
@@ -47,10 +57,10 @@ const send_message = async () => {
 	console.log(response);
 	if (response.ok) {
 		message.value = "";
-		get_messages();
-		// scroll to bottom
-		const chat = document.querySelector(".q-chat__scroll-area");
-		chat.scrollTop = chat.scrollHeight;
+		get_messages().finally(() => {
+			scroll_to_bottom();
+		});
+		scroll_to_bottom();
 	}
 
 	// get_messages();
@@ -72,6 +82,7 @@ const get_messages = async () => {
 		"/messages/chat/" + accountStore.account.id + "/" + props.receiver
 	);
 	const data = await response.json();
+	console.log(data);
 	const sent = data.sent;
 	const received = data.received;
 	for (let i = 0; i < sent.length; i++) {
@@ -82,7 +93,7 @@ const get_messages = async () => {
 	}
 	for (let i = 0; i < received.length; i++) {
 		received[i].sent = false;
-		const temp = sent[i].content;
+		const temp = received[i].content;
 		received[i].content = [];
 		received[i].content.push(temp);
 	}
@@ -102,7 +113,6 @@ const get_messages = async () => {
 		console.log(diff);
 		if (
 			messages.value[i].sent === messages.value[i + 1].sent &&
-			messages.value[i].sent &&
 			diff < 300000
 		) {
 			messages.value[i].content = messages.value[i].content.concat(
@@ -117,7 +127,9 @@ const get_messages = async () => {
 	console.log(messages.value);
 };
 
-get_messages();
+get_messages().finally(() => {
+	scroll_to_bottom();
+});
 </script>
 
 <style lang="scss" scoped>
@@ -125,7 +137,7 @@ get_messages();
 	/* make input fixed to the bottom with 10% margin */
 	position: fixed;
 	width: 100%;
-	bottom: 0;
+	bottom: 30px;
 	text-align: center;
 }
 </style>
