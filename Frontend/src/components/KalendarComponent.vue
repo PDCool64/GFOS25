@@ -14,9 +14,15 @@ import {
 	createViewWeek,
 } from "@schedule-x/calendar";
 import "@schedule-x/theme-default/dist/index.css";
+import { useAufgabenStore } from "src/stores/aufgaben";
 
 // Do not use a ref here, as the calendar instance is not reactive, and doing so might cause issues
 // For updating events, use the events service plugin
+
+const aufgabenStore = useAufgabenStore();
+
+const aufgaben = aufgabenStore.aufgaben;
+
 const calendarApp = createCalendar({
 	selectedDate: "2023-12-19",
 	views: [

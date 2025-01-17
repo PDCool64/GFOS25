@@ -25,7 +25,9 @@ import java.io.Serializable;
 @Table(name = "KALENDAR")
 @NamedQueries({
 	@NamedQuery(name = "Kalendar.findAll", query = "SELECT k FROM Kalendar k"),
-	@NamedQuery(name = "Kalendar.findById", query = "SELECT k FROM Kalendar k WHERE k.id = :id")})
+	@NamedQuery(name = "Kalendar.findById", query = "SELECT k FROM Kalendar k WHERE k.id = :id"),
+	@NamedQuery(name = "Kalendar.findByAccountId", query = "SELECT k FROM Kalendar k WHERE k.account.id = :accountId"),
+})
 public class Kalendar implements Serializable {
 
 	private static final long serialVersionUID = 1L;

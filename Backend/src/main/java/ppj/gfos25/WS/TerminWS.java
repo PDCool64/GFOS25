@@ -83,4 +83,12 @@ public class TerminWS {
         }
         return responseService.notFound();
     }
+
+    @GET
+    @Path("/account/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getTermineForAccount(@PathParam("id") int id) {
+        List<Termin> termine = terminFacade.getTermineForAccountId(id);
+        return responseService.ok(jsonb.toJson(termine));
+    }
 }

@@ -8,6 +8,9 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.util.List;
+
+import ppj.gfos25.Entity.Account;
+import ppj.gfos25.Entity.Kalendar;
 import ppj.gfos25.Entity.Termin;
 import jakarta.ejb.LocalBean;
 
@@ -52,9 +55,14 @@ public class TerminFacade {
 
     public List<Termin> getTermineForAccountId(int accountId) {
         try {
-            return em.createNamedQuery("Termin.findByAccountId", Termin.class)
+            List<Kalendar> kalender = em.createNamedQuery("Kalendar.findByAccountId", Kalendar.class)
                     .setParameter("accountId", accountId)
                     .getResultList();
+            List<Termin> termine = new java.util.ArrayList<>();
+            for (Kalendar k : kalender) {
+                termine.add(k.getTermin());
+            }
+            return termine;
         } catch (Exception e) {
             return null;
         }
