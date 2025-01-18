@@ -38,7 +38,7 @@
 				label="Priorität" />
 			<q-btn
 				@click="createAufgabe"
-				label="Create Aufgabe"
+				label="Aufgabe erstellen"
 				color="primary" />
 		</q-card-section>
 	</q-card>

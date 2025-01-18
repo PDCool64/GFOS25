@@ -17,6 +17,7 @@ export const useTokenStore = defineStore("token", {
 		logout() {
 			this.token = "";
 			this.refresh_token = "";
+			accountStore.$reset();
 		},
 		async refreshToken() {
 			const response = await fetch(address + "/tokens/refresh", {

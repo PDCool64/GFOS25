@@ -28,7 +28,7 @@ export async function post(url, json) {
 		Authorization: "Bearer " + tokenStore.token,
 	};
 	data.body = JSON.stringify(json);
-
+	console.log("post", url, data);
 	const response = await fetch(`${address}${url}`, data);
 	if (response.status === 401) {
 		tokenStore.logout();

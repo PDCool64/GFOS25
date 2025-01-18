@@ -48,6 +48,7 @@ const message = ref("");
 
 const send_message = async () => {
 	const response = await post("/messages", {
+		sender: accountStore.account.id.toString(),
 		receiver: props.receiver,
 		content: message.value,
 		timeSent: new Date().toISOString(),

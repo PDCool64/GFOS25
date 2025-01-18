@@ -50,7 +50,7 @@
 
 		<q-dialog v-model="settingsOpen" persistent>
 			<q-card>
-				<q-card-section>AHHHHHHHHHHHhhhhhhhhhhhhHH </q-card-section>
+				<q-card-section>Settings </q-card-section>
 				<q-card-section> </q-card-section>
 				<q-card-actions align="right">
 					<q-btn label="OK" color="primary" @click="settingsOpen = false" />
@@ -118,7 +118,4 @@ function logout() {
 	font-weight: bold;
 }
 
-.drawer {
-	background-color: red !important;
-}
 </style>
