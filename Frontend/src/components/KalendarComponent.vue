@@ -23,8 +23,11 @@ const aufgabenStore = useAufgabenStore();
 
 const aufgaben = aufgabenStore.aufgaben;
 
+console.log(new Date("YYYY:MM:DD").toString());
+
 const calendarApp = createCalendar({
-	selectedDate: new Date().toISOString(),
+	selectedDate: "2025-01-18",
+
 	views: [
 		createViewDay(),
 		createViewWeek(),
@@ -35,14 +38,14 @@ const calendarApp = createCalendar({
 		{
 			id: 1,
 			title: "Event 1",
-			start: "2023-12-19",
-			end: "2023-12-19",
+			start: "2025-01-18",
+			end: "2025-01-18",
 		},
 		{
 			id: 2,
 			title: "Event 2",
-			start: "2023-12-20 12:00",
-			end: "2023-12-20 13:00",
+			start: "2025-01-18 12:00",
+			end: "2025-01-18 13:00",
 		},
 	],
 });

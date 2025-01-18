@@ -1,5 +1,5 @@
 <template>
-		<ChatComponent receiver="1" />
+	<ChatComponent receiver="1" />
 </template>
 
 <script setup>
