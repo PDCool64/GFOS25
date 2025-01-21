@@ -27,7 +27,10 @@ console.log(new Date("YYYY:MM:DD").toString());
 
 const calendarApp = createCalendar({
 	selectedDate: "2025-01-18",
-
+	dayBoundaries: {
+		start: "08:00",
+		end: "18:00",
+	},
 	views: [
 		createViewDay(),
 		createViewWeek(),

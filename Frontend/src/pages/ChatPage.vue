@@ -1,5 +1,7 @@
 <template>
-	<ChatComponent :receiver="accountStore.account.id == 0 ? 1 : 0" />
+	<div class="everything">
+		<ChatComponent :receiver="accountStore.account.id == 0 ? 1 : 0" />
+	</div>
 </template>
 
 <script setup>
@@ -9,4 +11,8 @@ import { useAccountStore } from "src/stores/account";
 const accountStore = useAccountStore();
 </script>
 
-<style scoped></style>
+<style scoped>
+.everything {
+	overflow-y: hidden;
+}
+</style>
