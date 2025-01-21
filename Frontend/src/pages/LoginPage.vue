@@ -23,10 +23,8 @@
 		<q-dialog v-model="showPopup">
 			<q-card>
 				<q-card-section>
-					<q-card-title>
-						<h4>Leider Pech gehabt du Huremsom</h4>
-						<h5>Aber wird vielleicht später mal implementiert</h5>
-					</q-card-title>
+					<h4>Leider Pech gehabt du Huremsom</h4>
+					<h5>Aber wird vielleicht später mal implementiert</h5>
 				</q-card-section>
 				<q-card-actions align="right">
 					<q-btn

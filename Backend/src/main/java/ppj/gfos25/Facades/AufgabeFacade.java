@@ -133,4 +133,19 @@ public class AufgabeFacade {
     public List<Aufgabenpunkt> getAllAufgabenpunkte() {
         return em.createNamedQuery("Aufgabenpunkt.findAll", Aufgabenpunkt.class).getResultList();
     }
+
+    public Aufgabenbearbeitung createAufgabenbearbeitung(Aufgabenbearbeitung ab) {
+        try {
+            em.persist(ab);
+            em.flush();
+            Aufgabenbearbeitung aufgabenbearbeitungMitId = this.getAufgabenbearbeitungById(ab.getId());
+            return aufgabenbearbeitungMitId;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public Aufgabenbearbeitung getAufgabenbearbeitungById(int id) {
+        return em.find(Aufgabenbearbeitung.class, id);
+    }
 }

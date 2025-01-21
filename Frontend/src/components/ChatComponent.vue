@@ -1,7 +1,7 @@
 <template>
 	<div class="q-pa-md column justify-center">
 		<div
-			style="margin-bottom: 20%; height: 80vh; overflow: scroll"
+			style="margin-bottom: 20%; height: 80vh; overflow-y: scroll"
 			id="chat">
 			<div
 				style="width: 70%"
@@ -16,12 +16,14 @@
 					:stamp="get_display_time(message.timeSent)" />
 			</div>
 		</div>
-		<div class="input" style="background: white; padding-bottom: 5px">
+		<div class="input row" style="background: white; padding-bottom: 5px">
 			<q-input
 				v-model="message"
 				@keyup.enter="send_message"
 				placeholder="Nachricht eingeben"
-				dense />
+				dense
+				class="col-11" />
+			<q-btn icon="send" round flat @click="send_message" />
 		</div>
 	</div>
 </template>
@@ -137,7 +139,7 @@ get_messages().finally(() => {
 .input {
 	/* make input fixed to the bottom with 10% margin */
 	position: fixed;
-	width: 100%;
+	width: 80%;
 	bottom: 30px;
 	text-align: center;
 }

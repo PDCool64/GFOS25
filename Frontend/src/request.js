@@ -20,6 +20,10 @@ export async function get(url, data) {
 	return response;
 }
 
+export async function post_no_data(url) {
+	return post(url, {});
+}
+
 export async function post(url, json) {
 	let data = {};
 	data.method = "POST";

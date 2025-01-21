@@ -17,7 +17,10 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import ppj.gfos25.Entity.Account;
 import ppj.gfos25.Entity.Aufgabe;
+import ppj.gfos25.Entity.Aufgabenbearbeitung;
+import ppj.gfos25.Facades.AccountFacade;
 import ppj.gfos25.Facades.AufgabeFacade;
 import ppj.gfos25.Service.ResponseService;
 import ppj.gfos25.Service.TokenService;
@@ -41,6 +44,9 @@ public class AufgabeWS {
 
 	@EJB
 	TokenService tokenService;
+
+	@EJB
+	AccountFacade accountFacade;
 
 	/**
 	 *
@@ -75,15 +81,40 @@ public class AufgabeWS {
 		if (tokenEmail == null || tokenEmail.email == null) {
 			return responseService.unauthorized();
 		}
+		System.out.println(aufgabe);
 		Aufgabe a;
 		try {
 			a = jsonb.fromJson(aufgabe, Aufgabe.class);
 		} catch (Exception e) {
+			System.out.println(e);
 			return responseService.unprocessable("Invalid JSON");
 		}
 		return responseService.created(
 				jsonb.toJson(
 						aufgabeFacade.createAufgabe(a)));
+	}
+
+	@POST
+	@Path("/{aufgabeId}/add-account/{AccountId}")
+	public Response addAccount(
+			@PathParam("aufgabeId") int aufgabeId,
+			@PathParam("AccountId") int AccountId,
+			@HeaderParam("Authorization") String token) {
+		TokenEmail tokenEmail = tokenService.verifyToken(token);
+		if (tokenEmail == null || tokenEmail.email == null) {
+			return responseService.unauthorized();
+		}
+		Aufgabe aufgabe = aufgabeFacade.getAufgabeById(aufgabeId);
+		Account account = accountFacade.getAccountById(AccountId);
+
+		Aufgabenbearbeitung ab = new Aufgabenbearbeitung();
+
+		ab.setAufgabe(aufgabe);
+		ab.setBearbeiter(account);
+		
+		Aufgabenbearbeitung abDB = aufgabeFacade.createAufgabenbearbeitung(ab);
+
+		return responseService.ok(jsonb.toJson(abDB));
 	}
 
 	@PUT
