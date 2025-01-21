@@ -95,29 +95,28 @@ const isLastPunkt = (punkt) => {
 	max-width: 500px;
 	flex-direction: column;
 	align-items: center;
-	background-color: var(--q-primary);
+	background-color: var(--q-secondary);
 	border-radius: 5px;
 	cursor: pointer;
 	user-select: none;
+	box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+		rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
 }
 
 h3 {
-	font-size: 1.5em;
-	font-family: "Roboto", sans-serif;
-	color: white;
-	margin: 0;
-	line-height: 1.5em;
-	border-radius: 15px;
+	font-size: 2em;
+	font: Noto Sans;
+	font-weight: bold;
+	color: var(--q-primary);
 }
 
 .outer {
-	width: 85%;
+	width: 100%;
 	margin-bottom: 10%;
 	padding: 0;
 	list-style-type: none;
 	background-color: var(--q-secondary);
 	border-radius: 10px;
-	box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.3);
 	overflow-x: hidden;
 }
 
@@ -125,14 +124,6 @@ h3 {
 	padding: 10px 20px;
 	color: white;
 	display: flex;
-}
-
-.header-wrapper {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	width: 100%;
-	padding: 10px 20px;
 }
 
 .icon {

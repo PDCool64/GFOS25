@@ -41,6 +41,11 @@ const routes = [
 				path: "/test",
 				component: () => import("components/KundeComponent.vue"),
 			},
+			{
+				path: "/aufgabe/:id",
+				name: "AufgabeDetail",
+				component: () => import("pages/AufgabePage.vue"),
+			},
 		],
 	},
 	// Always leave this as last one,
