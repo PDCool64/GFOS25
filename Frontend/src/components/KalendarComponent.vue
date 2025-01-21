@@ -14,11 +14,23 @@ import {
 	createViewWeek,
 } from "@schedule-x/calendar";
 import "@schedule-x/theme-default/dist/index.css";
+import { useAufgabenStore } from "src/stores/aufgaben";
 
 // Do not use a ref here, as the calendar instance is not reactive, and doing so might cause issues
 // For updating events, use the events service plugin
+
+const aufgabenStore = useAufgabenStore();
+
+const aufgaben = aufgabenStore.aufgaben;
+
+console.log(new Date("YYYY:MM:DD").toString());
+
 const calendarApp = createCalendar({
-	selectedDate: "2023-12-19",
+	selectedDate: "2025-01-18",
+	dayBoundaries: {
+		start: "08:00",
+		end: "18:00",
+	},
 	views: [
 		createViewDay(),
 		createViewWeek(),
@@ -29,14 +41,14 @@ const calendarApp = createCalendar({
 		{
 			id: 1,
 			title: "Event 1",
-			start: "2023-12-19",
-			end: "2023-12-19",
+			start: "2025-01-18",
+			end: "2025-01-18",
 		},
 		{
 			id: 2,
 			title: "Event 2",
-			start: "2023-12-20 12:00",
-			end: "2023-12-20 13:00",
+			start: "2025-01-18 12:00",
+			end: "2025-01-18 13:00",
 		},
 	],
 });

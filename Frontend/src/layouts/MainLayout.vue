@@ -1,5 +1,5 @@
 <template>
-	<q-layout view="lHh Lpr lFf">
+	<q-layout view="hHh Lpr lFf">
 		<q-header elevated>
 			<q-toolbar>
 				<!--<q-btn
@@ -15,7 +15,14 @@
 				<q-btn
 					flat
 					dense
-					round
+					icon="settings"
+					aria-label="Logout"
+					@click="settingsOpen = true"
+					v-if="tokenStore.token != ''" />
+
+				<q-btn
+					flat
+					dense
 					icon="logout"
 					aria-label="Logout"
 					@click="logout"
@@ -34,7 +41,6 @@
 					:key="link.title"
 					@click="link.onClick ? link.onClick : null"
 					v-bind="link" />
-				<!-- @click funktioniert nicht, bleibt drin falls irgendwer mal auf die Idee kommen sollte das zu implementieren -->
 			</q-list>
 		</q-drawer>
 
@@ -42,19 +48,12 @@
 			<router-view />
 		</q-page-container>
 
-		<q-dialog v-model="alert">
-			<!-- Funktioniert so noch nicht, ist aber auch nicht so wichtig :) -->
+		<q-dialog v-model="settingsOpen" persistent>
 			<q-card>
-				<q-card-section>
-					<q-card-title> Not implemented! </q-card-title>
-				</q-card-section>
-				<q-card-section>
-					<q-card-text>
-						This function is currently being worked on!
-					</q-card-text>
-				</q-card-section>
+				<q-card-section>Settings </q-card-section>
+				<q-card-section> </q-card-section>
 				<q-card-actions align="right">
-					<q-btn label="OK" color="primary" @click="alert = false" />
+					<q-btn label="OK" color="primary" @click="settingsOpen = false" />
 				</q-card-actions>
 			</q-card>
 		</q-dialog>
@@ -62,7 +61,7 @@
 </template>
 
 <script setup>
-import { onActivated, onMounted, onRenderTriggered, onUpdated, ref } from "vue";
+import { ref } from "vue";
 import EssentialLink from "components/EssentialLink.vue";
 import { useTokenStore } from "src/stores/token";
 import { useRouter } from "vue-router";
@@ -85,13 +84,11 @@ const linksList = [
 		title: "Chat",
 		icon: "chat",
 		link: "/#/chat",
-		onClick: "setAlert",
 	},
 	{
 		title: "Kalender",
 		icon: "event",
 		link: "/#/calendar",
-		onClick: "setAlert",
 	},
 	{
 		title: "Account",
@@ -102,15 +99,10 @@ const linksList = [
 
 const leftDrawerOpen = ref(true);
 
-const alert = ref(false);
+const settingsOpen = ref(false);
 
 function toggleLeftDrawer() {
 	leftDrawerOpen.value = !leftDrawerOpen.value;
-}
-
-function setAlert() {
-	console.log("setAlert");
-	alert.value = ref(true);
 }
 
 function logout() {
@@ -126,7 +118,4 @@ function logout() {
 	font-weight: bold;
 }
 
-.drawer {
-	background-color: red !important;
-}
 </style>

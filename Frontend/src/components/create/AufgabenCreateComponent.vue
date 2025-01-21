@@ -2,52 +2,73 @@
 	<q-card class="aufgaben-card">
 		<q-card-section>
 			<q-input v-model="titel" label="Titel" />
-			<q-input v-model="beschreibung" label="Beschreibung" type="textarea" />
+			<q-input
+				v-model="beschreibung"
+				label="Beschreibung"
+				type="textarea" />
 			<!-- Input with Date-Picker as a popup -->
-			<q-input filled v-model="faelligkeitsdatum" mask="date" :rules="['date']" label="Fälligkeitsdatum">
+			<q-input
+				filled
+				v-model="faelligkeitsdatum"
+				mask="date"
+				:rules="['date']"
+				label="Fälligkeitsdatum">
 				<template v-slot:append>
 					<q-icon name="event" class="cursor-pointer">
-						<q-popup-proxy cover transition-show="scale" transition-hide="scale">
+						<q-popup-proxy
+							cover
+							transition-show="scale"
+							transition-hide="scale">
 							<q-date v-model="faelligkeitsdatum">
 								<div class="row items-center justify-end">
-									<q-btn v-close-popup label="Close" color="primary" flat />
+									<q-btn
+										v-close-popup
+										label="Close"
+										color="primary"
+										flat />
 								</div>
 							</q-date>
 						</q-popup-proxy>
 					</q-icon>
 				</template>
 			</q-input>
-			<q-select v-model="prioritaet" :options="prioritaetOptions" label="Priorität" />
-			<q-btn @click="createAufgabe" label="Create Aufgabe" color="primary" />
+			<q-select
+				v-model="prioritaet"
+				:options="prioritaetOptions"
+				label="Priorität" />
+			<q-btn
+				@click="createAufgabe"
+				label="Aufgabe erstellen"
+				color="primary" />
 		</q-card-section>
 	</q-card>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useAufgabenStore } from 'src/stores/aufgaben';
-import { defineEmits } from 'vue';
-const emit = defineEmits(["creationDone"])
+import { ref } from "vue";
+import { useAufgabenStore } from "src/stores/aufgaben";
+import { defineEmits } from "vue";
+const emit = defineEmits(["creationDone"]);
 
 const aufgabenStore = useAufgabenStore();
 
-const titel = ref('');
-const beschreibung = ref('');
-const erstellungsdatum = ref('');
-const faelligkeitsdatum = ref('');
+const titel = ref("");
+const beschreibung = ref("");
+const erstellungsdatum = ref("");
+const faelligkeitsdatum = ref("");
 const prioritaet = ref(null);
 const status = ref(null);
 
 const prioritaetOptions = [
-	{ label: 'Low', value: 0 },
-	{ label: 'Medium', value: 1 },
-	{ label: 'High', value: 2 },
+	{ label: "Low", value: 0 },
+	{ label: "Medium", value: 1 },
+	{ label: "High", value: 2 },
 ];
 
 const statusOptions = [
-	{ label: 'Open', value: 0 },
-	{ label: 'In Progress', value: 1 },
-	{ label: 'Completed', value: 2 },
+	{ label: "Open", value: 0 },
+	{ label: "In Progress", value: 1 },
+	{ label: "Completed", value: 2 },
 ];
 
 async function createAufgabe() {
@@ -62,7 +83,7 @@ async function createAufgabe() {
 	await aufgabenStore.createAufgabe(newAufgabe);
 
 	emit("creationDone");
-};
+}
 </script>
 
 <style scoped>
