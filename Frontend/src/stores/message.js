@@ -1,4 +1,5 @@
 import { defineStore, acceptHMRUpdate } from "pinia";
+import { useAccountStore } from "./account";
 import address from "src/address";
 
 const accountStore = useAccountStore();
@@ -6,6 +7,7 @@ const accountStore = useAccountStore();
 export const useMessageStore = defineStore("message", () => ({
 	state: () => ({
 		messages: {},
+		chats: [],
 	}),
 	getter: {},
 	actions: {
