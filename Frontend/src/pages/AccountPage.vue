@@ -1,6 +1,5 @@
 <template>
 	<div class="account">
-		<h1>Account</h1>
 		<div class="account-wrapper">
 			<div class="box" id="eins">
 				<h2>Accountdetails</h2>
@@ -50,7 +49,8 @@ h2 {
 	text-align: center;
 	display: flex; /* Flexbox hinzufügen */
 	flex-direction: column; /* Elemente vertikal anordnen */
-	padding: 0;
+	padding: 10px;
+	height: 100vh;
 }
 
 #eins {
@@ -71,6 +71,7 @@ h2 {
 		grid-template-rows: 1fr 1fr 1fr;
 		gap: 1rem;
 		width: 100%;
+		height: 100%;
 	}
 
 	#eins {
@@ -86,6 +87,12 @@ h2 {
 	#drei {
 		grid-column: 1 / span 3;
 		grid-row: 2 / span 1;
+		display: flex;
+		align-items: center;
+	}
+	div {
+		text-align: center;
+		justify-content: center;
 	}
 }
 </style>
