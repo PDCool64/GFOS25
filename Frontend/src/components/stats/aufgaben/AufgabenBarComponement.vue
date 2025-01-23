@@ -126,7 +126,9 @@ aufgabenStore.$subscribe(() => {
 
 <style scoped>
 .bar-container {
-	width: 100%;
-	height: 100%;
+	width: 60vw;
+	height: 35vh;
+	display: flex;
+	align-items: center;
 }
 </style>

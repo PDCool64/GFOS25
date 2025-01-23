@@ -50,7 +50,9 @@ ul {
 }
 
 li {
-	padding: 4%;
+	padding: auto;
+	padding-left: 3em;
+	padding-right: 3em;
 	font-size: 1.5em;
 	color: black;
 	display: flex; /* Inhalt innerhalb eines Listenelements horizontal anordnen */
