@@ -31,8 +31,17 @@
 <script setup>
 import { get_no_data, post } from "src/request";
 import { useAccountStore } from "src/stores/account";
+import { useMessageStore } from "src/stores/message";
 import { ref } from "vue";
+
+const props = defineProps({
+	receiver: String,
+});
+
 const accountStore = useAccountStore();
+const messageStore = useMessageStore();
+
+const messages = ref([]);
 
 const get_display_time = (time) => {
 	const date = new Date(time);
@@ -71,12 +80,6 @@ const send_message = async () => {
 	const data = await response.json();
 };
 
-const messages = ref([]);
-
-const props = defineProps({
-	receiver: String,
-});
-
 console.log(props.receiver);
 console.log(accountStore.account.id);
 
@@ -88,17 +91,17 @@ const get_messages = async () => {
 	console.log(data);
 	const sent = data.sent;
 	const received = data.received;
+	process_messages(sent, received);
+};
+
+const process_messages = (sent, received) => {
 	for (let i = 0; i < sent.length; i++) {
 		sent[i].sent = true;
-		const temp = sent[i].content;
-		sent[i].content = [];
-		sent[i].content.push(temp);
+		sent[i].content = [sent[i].content];
 	}
 	for (let i = 0; i < received.length; i++) {
 		received[i].sent = false;
-		const temp = received[i].content;
-		received[i].content = [];
-		received[i].content.push(temp);
+		received[i].content = [received[i].content];
 	}
 	// merge sent and received messages
 	messages.value = sent.concat(received);
@@ -108,12 +111,9 @@ const get_messages = async () => {
 	);
 	// merge messages that are sent within 5 minutes of each other
 	for (let i = 0; i < messages.value.length - 1; i++) {
-		console.log(messages.value[i].sent === messages.value[i + 1].sent);
 		const time1 = new Date(messages.value[i].timeSent);
 		const time2 = new Date(messages.value[i + 1].timeSent);
 		const diff = time2 - time1;
-		console.log(messages.value[i].content);
-		console.log(diff);
 		if (
 			messages.value[i].sent === messages.value[i + 1].sent &&
 			diff < 300000
@@ -126,8 +126,6 @@ const get_messages = async () => {
 			i--;
 		}
 	}
-
-	console.log(messages.value);
 };
 
 get_messages().finally(() => {

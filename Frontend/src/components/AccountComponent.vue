@@ -22,16 +22,10 @@
 </template>
 
 <script setup>
-import { defineOptions } from "vue";
 import { ref } from "vue";
-import BarComponement from "src/components/stats/aufgaben/AufgabenBarComponement.vue";
-import PieGraphComponent from "src/components/stats/aufgaben/AufgabenPieGraphComponent.vue";
-
 const _2fa = ref(false);
 
 import { getAccountById } from "src/requests/account";
-
-// TODO: get the logged-in user's account
 
 const account = ref({});
 const fetchAccount = async () => {

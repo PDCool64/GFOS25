@@ -47,7 +47,7 @@
 <script setup>
 import { ref } from "vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
-import { defineEmits } from "vue";
+
 const emit = defineEmits(["creationDone"]);
 
 const aufgabenStore = useAufgabenStore();
