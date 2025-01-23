@@ -1,4 +1,5 @@
 <template>
+	<ChatComponent receiver="0" />
 	<div class="everything">
 		<ChatComponent :receiver="accountStore.account.id == 0 ? 1 : 0" />
 	</div>

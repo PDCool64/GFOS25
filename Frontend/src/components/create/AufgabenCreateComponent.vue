@@ -54,7 +54,6 @@ const aufgabenStore = useAufgabenStore();
 
 const titel = ref("");
 const beschreibung = ref("");
-const erstellungsdatum = ref("");
 const faelligkeitsdatum = ref("");
 const prioritaet = ref(null);
 const status = ref(null);
@@ -71,11 +70,18 @@ const statusOptions = [
 	{ label: "Completed", value: 2 },
 ];
 
+const formatDate = (date) => {
+	const year = date.getFullYear();
+	const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+	const day = String(date.getDate()).padStart(2, "0");
+	return `${year}-${month}-${day}`;
+};
+
 async function createAufgabe() {
 	const newAufgabe = {
 		titel: titel.value,
 		beschreibung: beschreibung.value,
-		erstellungsdatum: erstellungsdatum.value,
+		erstellungsdatum: formatDate(new Date()),
 		faelligkeitsdatum: faelligkeitsdatum.value,
 		prioritaet: prioritaet.value.value,
 		status: 0,
