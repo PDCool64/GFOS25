@@ -84,7 +84,7 @@ console.log(aufgabe.value);
 
 .wrapper {
 	display: flex;
-	width: 70vw;
+	width: auto;
 	flex-direction: column;
 	align-items: center;
 	background-color: var(--q-secondary);

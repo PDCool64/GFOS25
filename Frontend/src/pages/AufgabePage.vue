@@ -1,10 +1,8 @@
 <template>
 	<div id="aufgabe">
 		<h1 class="q-pa-xs">{{ aufgabe?.titel }}</h1>
-		<div id="box1">
+		<div class="wrapper">
 			<BeschreibungComponent />
-		</div>
-		<div>
 			<Unterpunkte />
 		</div>
 	</div>
@@ -49,20 +47,25 @@ console.log(aufgabe.value);
 
 <style scoped>
 #aufgabe {
-	margin-top: 0;
-	margin-left: 10%;
-	margin-right: 10%;
 	align-items: center;
 	justify-content: center;
 	text-align: center;
 	display: flex; /* Flexbox hinzufügen */
-	flex-direction: column; /* Elemente vertikal anordnen */
 	padding: 0;
+	flex-direction: column;
 }
 h1 {
 	font-size: 8em;
 	font: Noto Sans;
 	font-weight: bold;
 	color: var(--q-primary);
+}
+.wrapper {
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	display: flex; /* Flexbox hinzufügen */
+	padding: 20px;
+	margin: 20px;
 }
 </style>
