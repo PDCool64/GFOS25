@@ -15,7 +15,9 @@
 				{{ punkt.beschreibung }}
 			</div>
 		</div>
-		<div :class="['titel', { active: null === activePunktId }]">
+		<div
+			:class="['plus', 'titel', { active: null === activePunktId }]"
+			@click="setActivePunkt(null)">
 			<q-icon name="add" size="auto"> </q-icon>
 		</div>
 	</div>
@@ -84,17 +86,23 @@ const setActivePunkt = (id) => {
 
 .titel {
 	border-radius: 5px;
-	background-color: var(--q-secondary);
 	flex: 0.5;
 	margin: 5px;
 	cursor: pointer;
 	width: 100%;
+	height: 500%;
 	background-color: var(--q-secondary);
 	font-size: 2em;
 	font: Noto Sans;
 	font-weight: bold;
 	color: var(--q-primary);
 	transition: flex 0.7s ease-in;
+}
+
+.plus {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .done {
