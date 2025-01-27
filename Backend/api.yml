@@ -193,42 +193,36 @@ paths:
                             example:
                                 error: Error updating account
     /aufgaben:
+        get:
+            tags:
+                - aufgaben
+            summary: Get all Aufgaben
+            responses:
+                '200':
+                    description: A list of all Aufgaben
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Aufgabe'
         post:
             tags:
                 - aufgaben
             summary: Create a new Aufgabe
-            description: Persists an Aufgabe that is given in the request body
-            responses:
-                "201":
-                    description: Aufgabe created successfully
-                    content:
-                        application/json:
-                            schema:
-                                $ref: "#/components/schemas/Aufgabe"
-                "400":
-                    description: Bad request - Invalid input
-                    content:
-                        application/json:
-                            example:
-                                error: Invalid input
-                "401":
-                    description: Unauthorized - Authentication required
-                    content:
-                        application/json:
-                            example:
-                                error: Authentication required
-                "403":
-                    description: Forbidden - Insufficient permissions
-                    content:
-                        application/json:
-                            example:
-                                error: Insufficient permissions to access this resource
             requestBody:
                 required: true
                 content:
                     application/json:
                         schema:
-                            $ref: "#/components/schemas/Aufgabe"
+                            $ref: '#/components/schemas/Aufgabe'
+            responses:
+                '201':
+                    description: The created Aufgabe
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Aufgabe'
     /aufgaben/all:
         get:
             tags:
@@ -348,7 +342,7 @@ paths:
         get:
             tags:
                 - aufgaben
-            summary: Get task by ID
+            summary: Get Aufgabe by ID
             description: Retrieves the specified Aufgabe by its ID
             parameters:
                 - name: id
@@ -454,7 +448,76 @@ paths:
                         application/json:
                             example:
                                 error: Aufgabe not found
+    /aufgaben/{id}/punkte:
+        get:
+            tags:
+                - aufgaben
+            summary: Get Punkte for Aufgabe by ID
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: integer
+            responses:
+                '200':
+                    description: A list of Punkte for the Aufgabe
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Aufgabenpunkt'
+    /aufgaben/punkte:
+        post:
+            tags:
+                - aufgaben
+            summary: Create a new Aufgabenpunkt
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Aufgabenpunkt'
+            responses:
+                '201':
+                    description: The created Aufgabenpunkt
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Aufgabenpunkt'
+    /aufgaben/punkte/{id}:
+        get:
+            tags:
+                - aufgaben
+            summary: Get Aufgabenpunkt by ID
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                      type: integer
+            responses:
+                '200':
+                    description: The requested Aufgabenpunkt
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Aufgabenpunkt'
     /messages:
+        get:
+            tags:
+                - messages
+            summary: Get all Messages
+            responses:
+                '200':
+                    description: A list of all Messages
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Message'
         post:
             description: Send a message
             tags:
@@ -1043,6 +1106,7 @@ paths:
                                     type: string
     /tokens/logout:
         post:
+            description: Logs the user out
             tags:
                 - tokens
             responses:
@@ -1060,11 +1124,10 @@ paths:
         get:
             tags:
                 - termine
-            summary: Retrieve all Termine
-            description: Returns a list of all Termine
+            summary: Get all Termine
             responses:
-                "200":
-                    description: List of Termine retrieved successfully
+                '200':
+                    description: A list of all Termine
                     content:
                         application/json:
                             schema:
@@ -1075,7 +1138,6 @@ paths:
             tags:
                 - termine
             summary: Create a new Termin
-            description: Persists a new Termin
             requestBody:
                 required: true
                 content:
@@ -1083,56 +1145,40 @@ paths:
                         schema:
                             $ref: '#/components/schemas/Termin'
             responses:
-                "201":
-                    description: Termin created successfully
+                '201':
+                    description: The created Termin
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Termin'
-                "400":
-                    description: Error creating Termin
-                    content:
-                        application/json:
-                            example:
-                                error: Error creating Termin
     /termine/{id}:
         get:
             tags:
                 - termine
             summary: Get Termin by ID
-            description: Retrieve a specific Termin by its ID
             parameters:
                 - name: id
                   in: path
                   required: true
                   schema:
                       type: integer
-                  description: Termin ID
             responses:
-                "200":
-                    description: Termin retrieved successfully
+                '200':
+                    description: The requested Termin
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Termin'
-                "404":
-                    description: Termin not found
-                    content:
-                        application/json:
-                            example:
-                                error: Termin not found
         put:
             tags:
                 - termine
             summary: Update Termin by ID
-            description: Update a specific Termin by its ID
             parameters:
                 - name: id
                   in: path
                   required: true
                   schema:
                       type: integer
-                  description: Termin ID
             requestBody:
                 required: true
                 content:
@@ -1140,39 +1186,25 @@ paths:
                         schema:
                             $ref: '#/components/schemas/Termin'
             responses:
-                "200":
-                    description: Termin updated successfully
+                '200':
+                    description: The updated Termin
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Termin'
-                "400":
-                    description: Error updating Termin
-                    content:
-                        application/json:
-                            example:
-                                error: Error updating Termin
         delete:
             tags:
                 - termine
             summary: Delete Termin by ID
-            description: Delete a specific Termin by its ID
             parameters:
                 - name: id
                   in: path
                   required: true
                   schema:
                       type: integer
-                  description: Termin ID
             responses:
-                "204":
-                    description: Termin deleted successfully
-                "404":
-                    description: Termin not found
-                    content:
-                        application/json:
-                            example:
-                                error: Termin not found
+                '200':
+                    description: Termin deleted
 tags:
     - name: accounts
       description: Account operations
@@ -1242,6 +1274,15 @@ components:
                 kunde:
                     $ref: "#/components/schemas/Kunde"
                 prioritaet:
+                    type: integer
+        Aufgabenpunkt:
+            type: object
+            properties:
+                id:
+                    type: integer
+                name:
+                    type: string
+                points:
                     type: integer
         Einstellungen:
             type: object

@@ -18,7 +18,6 @@
 						<q-item-label>Chat 2</q-item-label>
 					</q-item-section>
 				</q-item>
-				<!-- Add more chat items as needed -->
 			</q-list>
 		</q-drawer>
 
