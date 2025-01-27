@@ -68,7 +68,14 @@ onMounted(() => {
 const activePunktId = ref(null);
 
 const setActivePunkt = (id) => {
-	activePunktId.value = id;
+	if (activePunktId.value === id) {
+		const punkt = aufgabenpunktList.value.find((p) => p.id === id);
+		if (punkt) {
+			punkt.erledigt = !punkt.erledigt;
+		}
+	} else {
+		activePunktId.value = id;
+	}
 };
 </script>
 
