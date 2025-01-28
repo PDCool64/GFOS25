@@ -1,7 +1,24 @@
 <template>
-	<div>
-		<div v-for="punkt in aufgabenpunktList" :key="punkt.id">
-			{{ punkt.titel }}test
+	<div class="wrapper">
+		<div
+			v-for="punkt in aufgabenpunktList"
+			:key="punkt.id"
+			:class="[
+				'titel',
+				{ active: punkt.id === activePunktId },
+				{ done: punkt.erledigt },
+				{ undone: !punkt.erledigt },
+			]"
+			@click="setActivePunkt(punkt.id)">
+			{{ punkt.titel }}
+			<div class="Beschreibung" v-if="punkt.id === activePunktId">
+				{{ punkt.beschreibung }}
+			</div>
+		</div>
+		<div
+			:class="['plus', 'titel', { active: null === activePunktId }]"
+			@click="setActivePunkt(null)">
+			<q-icon name="add" size="auto"> </q-icon>
 		</div>
 	</div>
 </template>
@@ -48,5 +65,70 @@ onMounted(() => {
 	}
 });
 
-console.log(aufgabe.value);
+const activePunktId = ref(null);
+
+const setActivePunkt = (id) => {
+	activePunktId.value = id;
+};
 </script>
+
+<style scoped>
+.wrapper {
+	box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+		rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	width: 85%;
+	height: 50vh;
+	padding: 10px;
+}
+
+.titel {
+	border-radius: 5px;
+	flex: 0.5;
+	margin: 5px;
+	cursor: pointer;
+	width: 100%;
+	height: 500%;
+	background-color: var(--q-secondary);
+	font-size: 2em;
+	font: Noto Sans;
+	font-weight: bold;
+	color: var(--q-primary);
+	transition: flex 0.7s ease-in;
+}
+
+.plus {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.done {
+	background-color: #a5efc2;
+}
+
+.undone {
+	background-color: #f7b7b7;
+}
+
+.active.done {
+	flex: 5;
+}
+
+.active .q-icon {
+	font-size: 150px;
+}
+
+.active.undone {
+	flex: 5;
+}
+
+.Beschreibung {
+	font-size: 0.5em;
+	font: Noto Sans;
+	color: black;
+}
+</style>
+ease-in;

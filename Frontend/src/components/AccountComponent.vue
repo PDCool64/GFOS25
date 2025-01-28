@@ -41,8 +41,8 @@ fetchAccount();
 <style scoped>
 ul {
 	margin: 0;
-	height: 100%;
-	width: 100%;
+	height: 30vh;
+	width: auto;
 	padding: 0;
 	list-style-type: none;
 	display: flex;

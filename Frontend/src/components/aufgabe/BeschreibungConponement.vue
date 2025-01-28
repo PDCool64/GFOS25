@@ -84,7 +84,8 @@ console.log(aufgabe.value);
 
 .wrapper {
 	display: flex;
-	width: 70vw;
+	height: 50vh;
+	width: auto;
 	flex-direction: column;
 	align-items: center;
 	background-color: var(--q-secondary);
@@ -96,7 +97,7 @@ console.log(aufgabe.value);
 }
 
 h3 {
-	font-size: 4em;
+	font-size: auto;
 	font: Noto Sans;
 	font-weight: bold;
 	color: var(--q-primary);
@@ -114,7 +115,7 @@ h3 {
 }
 
 .inner {
-	font-size: 2em;
+	font-size: auto;
 	padding: 10px 20px;
 	color: white;
 	display: flex;
