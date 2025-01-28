@@ -9,7 +9,7 @@
 				{ done: punkt.erledigt },
 				{ undone: !punkt.erledigt },
 			]"
-			@click="setActivePunkt(punkt.id)">
+			@click="onClick(punkt.id)">
 			{{ punkt.titel }}
 			<div class="Beschreibung" v-if="punkt.id === activePunktId">
 				{{ punkt.beschreibung }}
@@ -67,12 +67,14 @@ onMounted(() => {
 
 const activePunktId = ref(null);
 
-const setActivePunkt = (id) => {
+const onClick = (id) => {
 	if (activePunktId.value === id) {
 		const punkt = aufgabenpunktList.value.find((p) => p.id === id);
 		if (punkt) {
 			punkt.erledigt = !punkt.erledigt;
 		}
+		// database update
+		aufgabenStore.togglePunkt(id);
 	} else {
 		activePunktId.value = id;
 	}

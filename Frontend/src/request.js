@@ -40,6 +40,10 @@ export async function post(url, json) {
 	return response;
 }
 
+export async function put_no_data(url) {
+	return put(url, {});
+}
+
 export async function put(url, data) {
 	data.method = "PUT";
 	data.headers = {
@@ -47,10 +51,11 @@ export async function put(url, data) {
 		Authorization: "Bearer " + tokenStore.token,
 	};
 	data.Authorization = "Bearer " + tokenStore.token;
-	const response = await fetch(`${address}/${url}`, data);
+	const response = await fetch(`${address}${url}`, data);
 	if (response.status === 401) {
 		tokenStore.logout();
 	}
+	return response;
 }
 
 export async function del(url) {

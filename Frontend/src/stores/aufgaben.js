@@ -2,7 +2,7 @@ import { defineStore, acceptHMRUpdate } from "pinia";
 import address from "src/address";
 import { useAccountStore } from "./account";
 import { useTokenStore } from "./token";
-import { get_no_data, post, post_no_data } from "src/request";
+import { get_no_data, post, post_no_data, put_no_data } from "src/request";
 
 const accountStore = useAccountStore();
 const tokenStore = useTokenStore();
@@ -114,6 +114,18 @@ export const useAufgabenStore = defineStore("aufgaben", {
 			const response_to_account_add = await post_no_data(
 				`/aufgaben/${aufgabenId}/add-account/` + accountStore.account.id
 			);
+		},
+		async togglePunkt(id) {
+			const response = await put_no_data(
+				"/aufgaben/punkte/" + id + "/toggle"
+			);
+			console.log(response);
+
+			if (!response.ok) {
+				throw new Error("HTTP error, status = " + response.status);
+			}
+			const data = await response.json();
+			this.aufgaben[id] = data;
 		},
 	},
 });

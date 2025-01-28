@@ -9,6 +9,7 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -60,6 +61,25 @@ public class AufgabenpunkteWS {
         return responseService.ok(jsonb.toJson(
                 aufgabeFacade.getAufgabenpunktById(id)));
     }
+
+    @PUT
+    @Path("/{id}/toggle")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response toggleAufgabenpunktStatus(
+            @HeaderParam("Authorization") String token,
+            @PathParam("id") int id) {
+                Aufgabenpunkt ap = aufgabeFacade.getAufgabenpunktById(id);
+                System.out.println(ap);
+                System.out.println(id);
+                if (ap == null) {
+                    return responseService.notFound("Aufgabenpunkt not found");
+                }
+                ap.setErledigt(!ap.getErledigt());
+                return responseService.ok(
+                        jsonb.toJson(
+                                aufgabeFacade.updateAufgabenpunkt(ap)));
+            }
+    
 
 
     @POST
