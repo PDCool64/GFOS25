@@ -1,15 +1,16 @@
 import { defineStore, acceptHMRUpdate } from "pinia";
 import { useAccountStore } from "./account";
 import address from "src/address";
+import { get_no_data } from "src/request";
 
 const accountStore = useAccountStore();
 
-export const useMessageStore = defineStore("message", () => ({
+export const useMessageStore = defineStore("message", {
 	state: () => ({
 		messages: {},
-		chats: [],
+		chats: {},
 	}),
-	getter: {},
+	getters: {},
 	actions: {
 		async fetchMessages() {
 			const response = await fetch(address + "/messages");
@@ -21,12 +22,23 @@ export const useMessageStore = defineStore("message", () => ({
 				this.messages[message.id] = message;
 			}
 		},
+		async fetchChat(receiver) {
+			const response = await get_no_data(
+				"/messages/chat/" + accountStore.account.id + "/" + receiver
+			);
+			console.log(response);
+			if (!response.ok) {
+				throw new Error("HTTP error, status = " + response.status);
+			}
+			const data = await response.json();
+			this.chats[receiver] = data;
+		},
 	},
-	perist: {
+	persist: {
 		enabled: true,
 		strategy: "local",
 	},
-}));
+});
 
 if (import.meta.hot) {
 	import.meta.hot.accept(acceptHMRUpdate(useMessageStore, import.meta.hot));

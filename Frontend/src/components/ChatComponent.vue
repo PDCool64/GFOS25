@@ -84,14 +84,10 @@ console.log(props.receiver);
 console.log(accountStore.account.id);
 
 const get_messages = async () => {
-	const response = await get_no_data(
-		"/messages/chat/" + accountStore.account.id + "/" + props.receiver
-	);
-	const data = await response.json();
-	console.log(data);
-	const sent = data.sent;
-	const received = data.received;
-	process_messages(sent, received);
+	messageStore.fetchChat(props.receiver).finally(() => {
+		const data = messageStore.chats[props.receiver];
+		process_messages(data.sent, data.received);
+	});
 };
 
 const process_messages = (sent, received) => {
@@ -127,7 +123,10 @@ const process_messages = (sent, received) => {
 		}
 	}
 };
-
+process_messages(
+	messageStore.chats[props.receiver].sent,
+	messageStore.chats[props.receiver].received
+);
 get_messages().finally(() => {
 	scroll_to_bottom();
 });
