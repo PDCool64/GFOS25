@@ -60,13 +60,11 @@ const calendarApp = createCalendar({
 kalenderStore.fetchTermine().then(() => {
 	console.log(kalenderStore.termine);
 	for (let temp of kalenderStore.termine) {
-		let termin = { ...temp };
-		termin.start = termin.startzeit;
-		termin.end = termin.endzeit;
-		termin.title = termin.titel;
-		delete termin.startzeit;
-		delete termin.endzeit;
-		delete termin.titel;
+		let termin = {};
+		termin.start = temp.startzeit;
+		termin.end = temp.endzeit;
+		termin.title = temp.titel;
+		termin.description = temp.beschreibung;
 		console.log(termin);
 		events.value.push(termin);
 	}
