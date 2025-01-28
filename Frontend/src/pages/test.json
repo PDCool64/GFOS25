@@ -1,0 +1,524 @@
+{
+	"received": [
+		{
+			"content": ["Hello World"],
+			"id": 1,
+			"isRead": true,
+			"isReceived": true,
+			"receiver": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "test@test.de",
+				"id": 0,
+				"nachname": "König",
+				"telefonnummer": "01001099213",
+				"vorname": "Maurice"
+			},
+			"sender": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "oluki81@gmx.de",
+				"id": 1,
+				"nachname": "Tätuwade",
+				"rang": 0,
+				"region": "Niederbayern",
+				"telefonnummer": "0172653334",
+				"utcOffset": 60,
+				"vorname": "Janette"
+			},
+			"timeSent": "2021-01-01 00:00:01",
+			"sent": false
+		},
+		{
+			"content": ["Good. With you?"],
+			"id": 3,
+			"isRead": false,
+			"isReceived": true,
+			"receiver": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "test@test.de",
+				"id": 0,
+				"nachname": "König",
+				"telefonnummer": "01001099213",
+				"vorname": "Maurice"
+			},
+			"sender": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "oluki81@gmx.de",
+				"id": 1,
+				"nachname": "Tätuwade",
+				"rang": 0,
+				"region": "Niederbayern",
+				"telefonnummer": "0172653334",
+				"utcOffset": 60,
+				"vorname": "Janette"
+			},
+			"timeSent": "2021-01-01 00:00:03",
+			"sent": false
+		},
+		{
+			"content": ["Fick dich", "Ich kann auch schreiben!"],
+			"id": 204,
+			"isRead": false,
+			"isReceived": false,
+			"receiver": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "test@test.de",
+				"id": 0,
+				"nachname": "König",
+				"telefonnummer": "01001099213",
+				"vorname": "Maurice"
+			},
+			"sender": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "oluki81@gmx.de",
+				"id": 1,
+				"nachname": "Tätuwade",
+				"rang": 0,
+				"region": "Niederbayern",
+				"telefonnummer": "0172653334",
+				"utcOffset": 60,
+				"vorname": "Janette"
+			},
+			"timeSent": "2025-01-22T19:00:21.177Z",
+			"sent": false
+		},
+		{
+			"content": ["Ich kann auch schreiben!"],
+			"id": 205,
+			"isRead": false,
+			"isReceived": false,
+			"receiver": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "test@test.de",
+				"id": 0,
+				"nachname": "König",
+				"telefonnummer": "01001099213",
+				"vorname": "Maurice"
+			},
+			"sender": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "oluki81@gmx.de",
+				"id": 1,
+				"nachname": "Tätuwade",
+				"rang": 0,
+				"region": "Niederbayern",
+				"telefonnummer": "0172653334",
+				"utcOffset": 60,
+				"vorname": "Janette"
+			},
+			"timeSent": "2025-01-22T19:00:24.027Z",
+			"sent": false
+		}
+	],
+	"sent": [
+		{
+			"content": ["Hello World"],
+			"id": 0,
+			"isRead": true,
+			"isReceived": true,
+			"receiver": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "oluki81@gmx.de",
+				"id": 1,
+				"nachname": "Tätuwade",
+				"rang": 0,
+				"region": "Niederbayern",
+				"telefonnummer": "0172653334",
+				"utcOffset": 60,
+				"vorname": "Janette"
+			},
+			"sender": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "test@test.de",
+				"id": 0,
+				"nachname": "König",
+				"telefonnummer": "01001099213",
+				"vorname": "Maurice"
+			},
+			"timeSent": "2021-01-01 00:00:00",
+			"sent": true
+		},
+		{
+			"content": ["How is life"],
+			"id": 2,
+			"isRead": false,
+			"isReceived": true,
+			"receiver": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "oluki81@gmx.de",
+				"id": 1,
+				"nachname": "Tätuwade",
+				"rang": 0,
+				"region": "Niederbayern",
+				"telefonnummer": "0172653334",
+				"utcOffset": 60,
+				"vorname": "Janette"
+			},
+			"sender": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "test@test.de",
+				"id": 0,
+				"nachname": "König",
+				"telefonnummer": "01001099213",
+				"vorname": "Maurice"
+			},
+			"timeSent": "2021-01-01 00:00:02",
+			"sent": true
+		},
+		{
+			"content": ["Great!"],
+			"id": 4,
+			"isRead": false,
+			"isReceived": true,
+			"receiver": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "oluki81@gmx.de",
+				"id": 1,
+				"nachname": "Tätuwade",
+				"rang": 0,
+				"region": "Niederbayern",
+				"telefonnummer": "0172653334",
+				"utcOffset": 60,
+				"vorname": "Janette"
+			},
+			"sender": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "test@test.de",
+				"id": 0,
+				"nachname": "König",
+				"telefonnummer": "01001099213",
+				"vorname": "Maurice"
+			},
+			"timeSent": "2021-01-01 00:00:04",
+			"sent": true
+		},
+		{
+			"content": ["Test", "Ich schreibe eine weitere Nachricht"],
+			"id": 102,
+			"isRead": false,
+			"isReceived": false,
+			"receiver": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "oluki81@gmx.de",
+				"id": 1,
+				"nachname": "Tätuwade",
+				"rang": 0,
+				"region": "Niederbayern",
+				"telefonnummer": "0172653334",
+				"utcOffset": 60,
+				"vorname": "Janette"
+			},
+			"sender": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "test@test.de",
+				"id": 0,
+				"nachname": "König",
+				"telefonnummer": "01001099213",
+				"vorname": "Maurice"
+			},
+			"timeSent": "2025-01-17T21:09:27.385Z",
+			"sent": true
+		},
+		{
+			"content": ["Ich schreibe eine weitere Nachricht"],
+			"id": 103,
+			"isRead": false,
+			"isReceived": false,
+			"receiver": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "oluki81@gmx.de",
+				"id": 1,
+				"nachname": "Tätuwade",
+				"rang": 0,
+				"region": "Niederbayern",
+				"telefonnummer": "0172653334",
+				"utcOffset": 60,
+				"vorname": "Janette"
+			},
+			"sender": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "test@test.de",
+				"id": 0,
+				"nachname": "König",
+				"telefonnummer": "01001099213",
+				"vorname": "Maurice"
+			},
+			"timeSent": "2025-01-17T21:09:38.047Z",
+			"sent": true
+		},
+		{
+			"content": ["Ich tippe eine Nachricht", "Eine für Flip"],
+			"id": 104,
+			"isRead": false,
+			"isReceived": false,
+			"receiver": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "oluki81@gmx.de",
+				"id": 1,
+				"nachname": "Tätuwade",
+				"rang": 0,
+				"region": "Niederbayern",
+				"telefonnummer": "0172653334",
+				"utcOffset": 60,
+				"vorname": "Janette"
+			},
+			"sender": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "test@test.de",
+				"id": 0,
+				"nachname": "König",
+				"telefonnummer": "01001099213",
+				"vorname": "Maurice"
+			},
+			"timeSent": "2025-01-17T21:32:09.065Z",
+			"sent": true
+		},
+		{
+			"content": ["Eine für Flip"],
+			"id": 105,
+			"isRead": false,
+			"isReceived": false,
+			"receiver": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "oluki81@gmx.de",
+				"id": 1,
+				"nachname": "Tätuwade",
+				"rang": 0,
+				"region": "Niederbayern",
+				"telefonnummer": "0172653334",
+				"utcOffset": 60,
+				"vorname": "Janette"
+			},
+			"sender": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "test@test.de",
+				"id": 0,
+				"nachname": "König",
+				"telefonnummer": "01001099213",
+				"vorname": "Maurice"
+			},
+			"timeSent": "2025-01-17T21:32:19.602Z",
+			"sent": true
+		},
+		{
+			"content": ["Eine Nachricht für Nils", "Eine weitere"],
+			"id": 202,
+			"isRead": false,
+			"isReceived": false,
+			"receiver": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "oluki81@gmx.de",
+				"id": 1,
+				"nachname": "Tätuwade",
+				"rang": 0,
+				"region": "Niederbayern",
+				"telefonnummer": "0172653334",
+				"utcOffset": 60,
+				"vorname": "Janette"
+			},
+			"sender": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "test@test.de",
+				"id": 0,
+				"nachname": "König",
+				"telefonnummer": "01001099213",
+				"vorname": "Maurice"
+			},
+			"timeSent": "2025-01-22T19:00:07.764Z",
+			"sent": true
+		},
+		{
+			"content": ["Eine weitere"],
+			"id": 203,
+			"isRead": false,
+			"isReceived": false,
+			"receiver": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "oluki81@gmx.de",
+				"id": 1,
+				"nachname": "Tätuwade",
+				"rang": 0,
+				"region": "Niederbayern",
+				"telefonnummer": "0172653334",
+				"utcOffset": 60,
+				"vorname": "Janette"
+			},
+			"sender": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "test@test.de",
+				"id": 0,
+				"nachname": "König",
+				"telefonnummer": "01001099213",
+				"vorname": "Maurice"
+			},
+			"timeSent": "2025-01-22T19:00:11.898Z",
+			"sent": true
+		},
+		{
+			"content": ["Nachricht"],
+			"id": 302,
+			"isRead": false,
+			"isReceived": false,
+			"receiver": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "oluki81@gmx.de",
+				"id": 1,
+				"nachname": "Tätuwade",
+				"rang": 0,
+				"region": "Niederbayern",
+				"telefonnummer": "0172653334",
+				"utcOffset": 60,
+				"vorname": "Janette"
+			},
+			"sender": {
+				"einstellungen": {
+					"farbschema": 0,
+					"id": 0,
+					"sprache": "de",
+					"zweiFaktorAuth": false
+				},
+				"email": "test@test.de",
+				"id": 0,
+				"nachname": "König",
+				"telefonnummer": "01001099213",
+				"vorname": "Maurice"
+			},
+			"timeSent": "2025-01-23T14:40:11.572Z",
+			"sent": true
+		}
+	]
+}

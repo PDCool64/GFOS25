@@ -32,11 +32,18 @@
 import { get_no_data, post } from "src/request";
 import { useAccountStore } from "src/stores/account";
 import { useMessageStore } from "src/stores/message";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 const props = defineProps({
 	receiver: String,
 });
+
+watch(
+	() => props.receiver,
+	() => {
+		get_messages();
+	}
+);
 
 const accountStore = useAccountStore();
 const messageStore = useMessageStore();
@@ -117,16 +124,17 @@ const process_messages = (sent, received) => {
 			messages.value[i].content = messages.value[i].content.concat(
 				messages.value[i + 1].content
 			);
-			console.log(messages.value[i].content);
 			messages.value.splice(i + 1, 1);
 			i--;
 		}
 	}
 };
-process_messages(
-	messageStore.chats[props.receiver].sent,
-	messageStore.chats[props.receiver].received
-);
+if (messageStore.chats[props.receiver]) {
+	process_messages(
+		messageStore.chats[props.receiver].sent,
+		messageStore.chats[props.receiver].received
+	);
+}
 get_messages().finally(() => {
 	scroll_to_bottom();
 });
