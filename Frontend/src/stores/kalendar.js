@@ -9,7 +9,7 @@ export const useKalendarStore = defineStore("kalendar", {
 	actions: {
 		async fetchTermine() {
 			try {
-				const response = await get_no_data("termine/all");
+				const response = await get_no_data("/termine/all");
 				if (!response.ok) {
 					throw new Error("Failed to fetch termine");
 				}
@@ -21,7 +21,7 @@ export const useKalendarStore = defineStore("kalendar", {
 		},
 		async addTermin(termin) {
 			try {
-				const response = await post("termine", {
+				const response = await post("/termine", {
 					body: JSON.stringify(termin),
 				});
 				if (!response.ok) {
@@ -35,7 +35,7 @@ export const useKalendarStore = defineStore("kalendar", {
 		},
 		async updateTermin(id, termin) {
 			try {
-				const response = await post(`termine/${id}`, {
+				const response = await post(`/termine/${id}`, {
 					method: "PUT",
 					body: JSON.stringify(termin),
 				});

@@ -8,6 +8,7 @@ export const useAccountStore = defineStore("account", {
 			vorname: "",
 			nachname: "",
 		},
+		accounts: {},
 	}),
 	getters: {},
 	actions: {},

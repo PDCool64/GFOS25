@@ -3,7 +3,7 @@
 		<h1 class="q-pa-xs">{{ aufgabe?.titel }}</h1>
 		<div class="wrapper">
 			<BeschreibungComponent />
-			<Unterpunkte />
+			<Unterpunkte :id="route.params.id" />
 		</div>
 	</div>
 </template>

@@ -20,6 +20,8 @@ export const useTokenStore = defineStore("token", {
 			accountStore.$reset();
 		},
 		async refreshToken() {
+			console.log("refreshing token");
+
 			const response = await fetch(address + "/tokens/refresh", {
 				method: "POST",
 				body: JSON.stringify({

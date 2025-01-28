@@ -9,7 +9,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.util.List;
 
-import ppj.gfos25.Entity.Account;
 import ppj.gfos25.Entity.Kalendar;
 import ppj.gfos25.Entity.Termin;
 import jakarta.ejb.LocalBean;

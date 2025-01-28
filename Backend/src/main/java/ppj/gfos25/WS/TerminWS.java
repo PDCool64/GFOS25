@@ -1,6 +1,5 @@
 package ppj.gfos25.WS;
 
-import ppj.gfos25.Entity.Account;
 import ppj.gfos25.Entity.Termin;
 import ppj.gfos25.Facades.AccountFacade;
 import ppj.gfos25.Facades.TerminFacade;

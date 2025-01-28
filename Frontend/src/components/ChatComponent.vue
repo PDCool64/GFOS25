@@ -32,11 +32,18 @@
 import { get_no_data, post } from "src/request";
 import { useAccountStore } from "src/stores/account";
 import { useMessageStore } from "src/stores/message";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 const props = defineProps({
 	receiver: String,
 });
+
+watch(
+	() => props.receiver,
+	() => {
+		get_messages();
+	}
+);
 
 const accountStore = useAccountStore();
 const messageStore = useMessageStore();
@@ -84,14 +91,10 @@ console.log(props.receiver);
 console.log(accountStore.account.id);
 
 const get_messages = async () => {
-	const response = await get_no_data(
-		"/messages/chat/" + accountStore.account.id + "/" + props.receiver
-	);
-	const data = await response.json();
-	console.log(data);
-	const sent = data.sent;
-	const received = data.received;
-	process_messages(sent, received);
+	messageStore.fetchChat(props.receiver).finally(() => {
+		const data = messageStore.chats[props.receiver];
+		process_messages(data.sent, data.received);
+	});
 };
 
 const process_messages = (sent, received) => {
@@ -121,13 +124,17 @@ const process_messages = (sent, received) => {
 			messages.value[i].content = messages.value[i].content.concat(
 				messages.value[i + 1].content
 			);
-			console.log(messages.value[i].content);
 			messages.value.splice(i + 1, 1);
 			i--;
 		}
 	}
 };
-
+if (messageStore.chats[props.receiver]) {
+	process_messages(
+		messageStore.chats[props.receiver].sent,
+		messageStore.chats[props.receiver].received
+	);
+}
 get_messages().finally(() => {
 	scroll_to_bottom();
 });

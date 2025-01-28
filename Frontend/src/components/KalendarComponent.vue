@@ -13,8 +13,12 @@ import {
 	createViewMonthGrid,
 	createViewWeek,
 } from "@schedule-x/calendar";
+import { createEventModalPlugin } from "@schedule-x/event-modal";
+import { createEventsServicePlugin } from "@schedule-x/events-service";
 import "@schedule-x/theme-default/dist/index.css";
 import { useAufgabenStore } from "src/stores/aufgaben";
+import { useKalendarStore } from "src/stores/kalendar";
+import { ref } from "vue";
 
 // Do not use a ref here, as the calendar instance is not reactive, and doing so might cause issues
 // For updating events, use the events service plugin
@@ -29,8 +33,13 @@ const get_formatted_date = (date) => {
 };
 
 const aufgaben = aufgabenStore.aufgaben;
+const kalenderStore = useKalendarStore();
 
-console.log(new Date("YYYY:MM:DD").toString());
+const events = ref([]);
+
+console.log(events.value);
+
+const eventsService = createEventsServicePlugin();
 
 const calendarApp = createCalendar({
 	selectedDate: get_formatted_date(new Date()),
@@ -44,19 +53,24 @@ const calendarApp = createCalendar({
 		createViewMonthGrid(),
 		createViewMonthAgenda(),
 	],
-	events: [
-		{
-			id: 1,
-			title: "Event 1",
-			start: "2025-01-18",
-			end: "2025-01-18",
-		},
-		{
-			id: 2,
-			title: "Event 2",
-			start: "2025-01-18 12:00",
-			end: "2025-01-18 13:00",
-		},
-	],
+	plugins: [createEventModalPlugin(), eventsService],
+	events: events.value,
+});
+
+kalenderStore.fetchTermine().then(() => {
+	console.log(kalenderStore.termine);
+	for (let temp of kalenderStore.termine) {
+		let termin = { ...temp };
+		termin.start = termin.startzeit;
+		termin.end = termin.endzeit;
+		termin.title = termin.titel;
+		delete termin.startzeit;
+		delete termin.endzeit;
+		delete termin.titel;
+		console.log(termin);
+		events.value.push(termin);
+	}
+	console.log(kalenderStore.termine);
+	eventsService.set(events.value);
 });
 </script>

@@ -22,7 +22,7 @@
 					<q-popup-proxy
 						v-model="openKunde"
 						@mouseleave="openKunde = false">
-						<KundeComponent></KundeComponent>
+						<KundeComponent />
 					</q-popup-proxy>
 				</div>
 			</div>

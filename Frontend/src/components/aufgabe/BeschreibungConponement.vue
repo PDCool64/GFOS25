@@ -1,6 +1,6 @@
 <template>
 	<div id="aufgabe">
-		<div v-if="aufgabe" @click="onClick" :class="taskClass" class="wrapper">
+		<div v-if="aufgabe" @click="onClick" class="wrapper">
 			<div class="header-wrapper text-center"></div>
 			<div class="outer">
 				<div class="row">
@@ -44,6 +44,10 @@
 import { computed, ref, watch, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useAufgabenStore } from "src/stores/aufgaben";
+import KundeComponent from "../KundeComponent.vue";
+
+const openKunde = ref(false);
+const done = ref(false);
 
 const route = useRoute();
 const aufgabenStore = useAufgabenStore();
