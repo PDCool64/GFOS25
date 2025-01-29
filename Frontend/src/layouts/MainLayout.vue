@@ -50,10 +50,13 @@
 
 		<q-dialog v-model="settingsOpen" persistent>
 			<q-card>
-				<q-card-section>Settings </q-card-section>
-				<q-card-section> </q-card-section>
+				<q-card-section>Settings</q-card-section>
+				<q-toggle label="Dark Mode" v-model="darkMode" />
 				<q-card-actions align="right">
-					<q-btn label="OK" color="primary" @click="settingsOpen = false" />
+					<q-btn
+						label="OK"
+						color="primary"
+						@click="settingsOpen = false" />
 				</q-card-actions>
 			</q-card>
 		</q-dialog>
@@ -61,18 +64,30 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import EssentialLink from "components/EssentialLink.vue";
 import { useTokenStore } from "src/stores/token";
 import { useRouter } from "vue-router";
+import { useQuasar } from "quasar";
 
 const tokenStore = useTokenStore();
+
+const $q = useQuasar();
 
 defineOptions({
 	name: "MainLayout",
 });
 
 const router = useRouter();
+
+const darkMode = ref(true);
+watch(
+	() => darkMode.value,
+	() => {
+		console.log("Switching");
+		$q.dark.set(darkMode.value);
+	}
+);
 
 const linksList = [
 	{
@@ -117,5 +132,4 @@ function logout() {
 	font: Noto Sans;
 	font-weight: bold;
 }
-
 </style>
