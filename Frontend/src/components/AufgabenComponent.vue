@@ -84,6 +84,7 @@ const displayDate = (date) => {
 
 const onClick = async () => {
 	console.log("Task clicked");
+	await router.push("/aufgabe/" + props.id);
 };
 
 const isLastPunkt = (punkt) => {

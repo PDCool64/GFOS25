@@ -27,6 +27,10 @@ export const useAufgabenStore = defineStore("aufgaben", {
 			};
 			for (const id in this.aufgaben) {
 				const aufgabe = this.aufgaben[id].aufgabe;
+				if (aufgabe === undefined) {
+					console.log(id);
+					continue;
+				}
 				stats.total++;
 				if (aufgabe.status % 3 == 0) {
 					stats.undone++;
