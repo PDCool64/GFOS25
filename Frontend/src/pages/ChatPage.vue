@@ -44,10 +44,6 @@ import { useAccountsStore } from "src/stores/accounts";
 
 const receiver = ref(1);
 
-setTimeout(() => {
-	receiver.value = "2";
-}, 1000);
-
 const messagesStore = useMessageStore();
 const accountsStore = useAccountsStore();
 accountsStore.fetchAllAccounts().then(async () => {

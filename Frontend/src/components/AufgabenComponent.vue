@@ -13,15 +13,19 @@
 					<q-icon name="schedule" class="icon" />
 					{{ displayDate(new Date(aufgabe?.faelligkeitsdatum)) }}
 				</div>
-				<div class="inner" @mouseenter="openKunde = true">
+				<div
+					class="inner"
+					@contextmenu.prevent="
+						(openKunde = true),
+							console.log('Something happened'),
+							console.log(openKunde)
+					">
 					<q-icon name="person" class="icon relative" />
 					<div>
 						{{ aufgabe?.kunde?.vorname }}
 						{{ aufgabe?.kunde?.nachname }}
 					</div>
-					<q-popup-proxy
-						v-model="openKunde"
-						@mouseleave="openKunde = false">
+					<q-popup-proxy v-model="openKunde">
 						<KundeComponent />
 					</q-popup-proxy>
 				</div>
@@ -44,6 +48,9 @@
 import { computed, ref } from "vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
 import KundeComponent from "./KundeComponent.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const aufgabenStore = useAufgabenStore();
 
@@ -75,8 +82,7 @@ const displayDate = (date) => {
 	return date.toLocaleDateString();
 };
 
-const onClick = () => {
-	// Define your click handler logic here
+const onClick = async () => {
 	console.log("Task clicked");
 };
 

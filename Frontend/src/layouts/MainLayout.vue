@@ -80,7 +80,8 @@ defineOptions({
 
 const router = useRouter();
 
-const darkMode = ref(true);
+const darkMode = ref(false);
+
 watch(
 	() => darkMode.value,
 	() => {
