@@ -2,7 +2,7 @@
 	<q-layout view="hHh Lpr lFf">
 		<q-header elevated>
 			<q-toolbar>
-				<!--<q-btn
+				<!-- <q-btn
 					flat
 					dense
 					round
@@ -44,8 +44,8 @@
 			</q-list>
 		</q-drawer>
 
-		<q-page-container>
-			<router-view />
+		<q-page-container class="flex-container">
+			<router-view class="flex-item" />
 		</q-page-container>
 
 		<q-dialog v-model="settingsOpen" persistent>
@@ -113,7 +113,7 @@ const linksList = [
 	},
 ];
 
-const leftDrawerOpen = ref(true);
+const leftDrawerOpen = ref(false);
 
 const settingsOpen = ref(false);
 
@@ -132,5 +132,16 @@ function logout() {
 	font-size: 3em;
 	font: Noto Sans;
 	font-weight: bold;
+}
+
+.flex-container {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.flex-item {
+	flex: 1;
+	overflow: hidden;
 }
 </style>

@@ -62,7 +62,7 @@ const accountStore = useAccountStore();
 
 <style scoped>
 .everything {
-	overflow-y: hidden;
 	height: 100%;
+	overflow-y: hidden;
 }
 </style>
