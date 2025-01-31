@@ -5,7 +5,6 @@
 				<div class="tasks-wrapper">
 					<div v-for="id in aufgabenIds" :key="id" class="task-item">
 						<AufgabenComponent :id="'' + id" />
-						{{ id }}
 					</div>
 					<div
 						class="task-item add-task-item"
