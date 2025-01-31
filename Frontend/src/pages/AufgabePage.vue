@@ -2,7 +2,7 @@
 	<div id="aufgabe">
 		<h1 class="q-pa-xs">{{ aufgabe?.titel }}</h1>
 		<div class="wrapper">
-			<BeschreibungComponent />
+			<BeschreibungComponent :id="route.params.id" />
 			<Unterpunkte :id="route.params.id" />
 		</div>
 	</div>

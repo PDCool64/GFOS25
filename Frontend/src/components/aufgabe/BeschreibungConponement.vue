@@ -1,40 +1,42 @@
 <template>
 	<div id="aufgabe">
-		<div v-if="aufgabe" @click="onClick" class="wrapper">
-			<div class="header-wrapper text-center"></div>
-			<div class="outer">
-				<div class="row">
-					<div class="inner">
-						<q-icon name="edit" class="icon" />
-						{{ displayDate(new Date(aufgabe?.erstellungsdatum)) }}
-					</div>
-					<div class="inner">
-						<q-icon name="schedule" class="icon" />
-						{{ displayDate(new Date(aufgabe?.faelligkeitsdatum)) }}
-					</div>
-					<div class="inner" @mouseenter="openKunde = true">
-						<q-icon name="person" class="icon relative" />
-						<div>
-							{{ aufgabe?.kunde?.vorname }}
-							{{ aufgabe?.kunde?.nachname }}
-						</div>
-						<q-popup-proxy
-							v-model="openKunde"
-							@mouseleave="openKunde = false">
-							<KundeComponent></KundeComponent>
-						</q-popup-proxy>
-					</div>
+		<div v-if="aufgabe" @click="onClick" class="wrapper"></div>
+		<div class="outer">
+			<div class="row">
+				<div class="inner">
+					<q-icon name="edit" class="icon" />
+					{{ displayDate(new Date(aufgabe?.erstellungsdatum)) }}
 				</div>
 				<div class="inner">
-					<q-icon class="icon" name="description" />
+					<q-icon name="schedule" class="icon" />
+					{{ displayDate(new Date(aufgabe?.faelligkeitsdatum)) }}
+				</div>
+				<div
+					class="inner"
+					@contextmenu.prevent="
+						(openKunde = true),
+							console.log('Something happened'),
+							console.log(openKunde)
+					">
+					<q-icon name="person" class="icon relative" />
 					<div>
-						{{ aufgabe?.beschreibung }}
+						{{ aufgabe?.kunde?.vorname }}
+						{{ aufgabe?.kunde?.nachname }}
 					</div>
+					<q-popup-proxy v-model="openKunde">
+						<KundeComponent />
+					</q-popup-proxy>
 				</div>
-				<div class="inner">
-					<q-icon class="icon" name="task_alt" />
-					<div>{{ done }}/{{ aufgabe.aufgabenpunktList.length }}</div>
+			</div>
+			<div class="inner">
+				<q-icon class="icon" name="description" />
+				<div>
+					{{ aufgabe?.beschreibung }}
 				</div>
+			</div>
+			<div class="inner">
+				<q-icon class="icon" name="task_alt" />
+				<div>{{ done }}/{{ aufgabe?.aufgabenpunktList.length }}</div>
 			</div>
 		</div>
 	</div>
@@ -45,6 +47,12 @@ import { computed, ref, watch, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useAufgabenStore } from "src/stores/aufgaben";
 import KundeComponent from "../KundeComponent.vue";
+
+const props = defineProps({
+	id: String,
+});
+
+console.log(props.id);
 
 const openKunde = ref(false);
 const done = ref(false);
@@ -69,7 +77,7 @@ const loadAufgabe = (id) => {
 };
 
 onMounted(() => {
-	const id = route.params.id;
+	const id = props.id;
 	console.log(id);
 	if (id) {
 		aufgabenStore.fetchAufgabe(id).finally(() => loadAufgabe(id));
@@ -88,7 +96,6 @@ console.log(aufgabe.value);
 
 .wrapper {
 	display: flex;
-	height: 50vh;
 	width: auto;
 	flex-direction: column;
 	align-items: center;

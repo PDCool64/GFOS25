@@ -17,8 +17,18 @@
 		</div>
 		<div
 			:class="['plus', 'titel', { active: null === activePunktId }]"
-			@click="setActivePunkt(null)">
-			<q-icon name="add" size="auto"> </q-icon>
+			@click="openCreate = true">
+			<q-icon name="add" size="auto">
+				<q-popup-proxy cover>
+					<AufgabenpunktCreateComponent
+						:id="props.id"
+						@creation-done="
+							aufgabenStore
+								.fetchAufgabe(id)
+								.finally(() => loadAufgabe(id))
+						" />
+				</q-popup-proxy>
+			</q-icon>
 		</div>
 	</div>
 </template>
@@ -27,6 +37,7 @@
 import { computed, ref, watch, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useAufgabenStore } from "src/stores/aufgaben";
+import AufgabenpunktCreateComponent from "../create/AufgabenpunktCreateComponent.vue";
 
 const route = useRoute();
 const aufgabenStore = useAufgabenStore();
@@ -37,6 +48,8 @@ const props = defineProps({
 		required: true,
 	},
 });
+
+const openCreate = ref(false);
 
 const aufgabe = ref(null);
 

@@ -3,6 +3,7 @@ package ppj.gfos25.WS;
 import jakarta.ejb.EJB;
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
+import jakarta.json.JsonObject;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.ws.rs.Consumes;
@@ -15,6 +16,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import ppj.gfos25.Entity.Aufgabe;
 import ppj.gfos25.Entity.Aufgabenpunkt;
 import ppj.gfos25.Facades.AufgabeFacade;
 import ppj.gfos25.Service.ResponseService;
@@ -92,12 +94,20 @@ public class AufgabenpunkteWS {
         if (tokenEmail == null || tokenEmail.email == null) {
             return responseService.unauthorized();
         }
+        Aufgabenpunkt temp  = jsonb.fromJson(aufgabenpunkt, Aufgabenpunkt.class);
+        Aufgabe aufgabe = aufgabeFacade.getAufgabeById(temp.getAufgabeId());
+        if (aufgabe == null) {
+            System.out.println("Aufgabe not found");
+            System.out.println(temp.getAufgabeId());
+            return responseService.notFound("Aufgabe not found");
+        }
         Aufgabenpunkt ap;
         try {
             ap = jsonb.fromJson(aufgabenpunkt, Aufgabenpunkt.class);
         } catch (Exception e) {
             return responseService.unprocessable("Invalid JSON");
         }
+        ap.setAufgabe(aufgabe);
         return responseService.created(
                 jsonb.toJson(
                         aufgabeFacade.createAufgabenpunkt(ap)));

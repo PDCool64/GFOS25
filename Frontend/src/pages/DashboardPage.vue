@@ -4,7 +4,8 @@
 			<div class="tasks-section">
 				<div class="tasks-wrapper">
 					<div v-for="id in aufgabenIds" :key="id" class="task-item">
-						<AufgabenComponent :id="id" />
+						<AufgabenComponent :id="'' + id" />
+						{{ id }}
 					</div>
 					<div
 						class="task-item add-task-item"
@@ -49,7 +50,7 @@ const aufgabenIds = ref([]);
 aufgabenStore.fetchAufgaben().finally(() => {
 	console.log(aufgabenStore.active);
 	for (const aufgabe of aufgabenStore.active) {
-		aufgabenIds.value.push(aufgabe.aufgabe.id);
+		aufgabenIds.value.push(aufgabe.id);
 	}
 });
 console.log(aufgabenStore.stats);

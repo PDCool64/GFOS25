@@ -14,8 +14,7 @@ export const useAufgabenStore = defineStore("aufgaben", {
 	getters: {
 		active() {
 			return Object.values(this.aufgaben).filter(
-				(aufgabe) =>
-					new Date(aufgabe.aufgabe?.faelligkeitsdatum) > new Date()
+				(aufgabe) => new Date(aufgabe.faelligkeitsdatum) > new Date()
 			);
 		},
 		stats() {
@@ -26,7 +25,7 @@ export const useAufgabenStore = defineStore("aufgaben", {
 				undone: 0,
 			};
 			for (const id in this.aufgaben) {
-				const aufgabe = this.aufgaben[id].aufgabe;
+				const aufgabe = this.aufgaben[id];
 				if (aufgabe === undefined) {
 					console.log(id);
 					continue;
@@ -51,12 +50,12 @@ export const useAufgabenStore = defineStore("aufgaben", {
 			};
 			for (const aufgabe of this.active) {
 				stats.total++;
-				if (aufgabe.aufgabe.status % 3 == 0) {
+				if (aufgabe.status % 3 == 0) {
 					stats.undone++;
-				} else if (aufgabe.aufgabe.status % 3 == 1) {
+				} else if (aufgabe.status % 3 == 1) {
 					stats.in_progress++;
 				} else {
-					console.log(aufgabe.aufgabe.status);
+					console.log(aufgabe.status);
 					stats.done++;
 				}
 			}
@@ -92,7 +91,7 @@ export const useAufgabenStore = defineStore("aufgaben", {
 			const data = await response.json();
 			for (const aufgabe of data) {
 				console.log(aufgabe.id);
-				this.aufgaben[aufgabe.aufgabe.id] = aufgabe;
+				this.aufgaben[aufgabe.aufgabe.id] = aufgabe.aufgabe;
 			}
 			console.log(this.aufgaben);
 		},
@@ -103,7 +102,7 @@ export const useAufgabenStore = defineStore("aufgaben", {
 				throw new Error("HTTP error, status = " + response.status);
 			}
 			const aufgabe = await response.json();
-			this.aufgaben[aufgabe.id] = aufgabe;
+			this.aufgaben[aufgabe.id.toString()] = aufgabe;
 		},
 		async createAufgabe(aufgabe) {
 			this.aufgaben[aufgabe.id] = aufgabe;
@@ -118,6 +117,14 @@ export const useAufgabenStore = defineStore("aufgaben", {
 			const response_to_account_add = await post_no_data(
 				`/aufgaben/${aufgabenId}/add-account/` + accountStore.account.id
 			);
+		},
+		async createAufgabenpunkt(punkt) {
+			const response = await post("/aufgaben/punkte", punkt);
+			if (!response.ok) {
+				console.log(response);
+				throw new Error("HTTP error, status = " + response.status);
+			}
+			const data = await response.json();
 		},
 		async togglePunkt(id) {
 			const response = await put_no_data(
