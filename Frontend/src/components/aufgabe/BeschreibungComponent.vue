@@ -42,13 +42,7 @@
 				</div>
 			</div>
 		</div>
-		<div
-			id="bar"
-			:class="[
-				{ done: aufgabe?.status === 1 },
-				{ undone: aufgabe?.status === 2 },
-				{ inprogress: aufgabe?.status === 0 },
-			]"></div>
+
 	</div>
 </template>
 
@@ -158,21 +152,5 @@ h3 {
 	top: 0;
 }
 
-#bar {
-	width: 100%;
-	height: 10px;
-	background-color: var(--q-primary);
-}
 
-.done {
-	background-color: #a5efc2;
-}
-
-.undone {
-	background-color: #f7b7b7;
-}
-
-.inprogress {
-	background-color: #f7f7b7;
-}
 </style>
