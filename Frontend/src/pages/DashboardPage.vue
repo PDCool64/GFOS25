@@ -1,5 +1,12 @@
 <template>
 	<div class="dashboard-container">
+		<h3 style="font-weight: 900">
+			Hallo "{{
+				accountStore.account.vorname +
+				" " +
+				accountStore.account.nachname
+			}}"
+		</h3>
 		<div class="top-row">
 			<div class="tasks-section">
 				<div class="tasks-wrapper">
@@ -35,10 +42,12 @@ import AufgabenComponent from "src/components/AufgabenComponent.vue";
 import AccountPieGraphComponent from "src/components/stats/aufgaben/AufgabenPieGraphComponent.vue";
 import AufgabenCreateComponent from "src/components/create/AufgabenCreateComponent.vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
+import { useAccountStore } from "src/stores/account";
 
 const createAufgabeOpen = ref(false);
 
 const aufgabenStore = useAufgabenStore();
+const accountStore = useAccountStore();
 
 const onCreationDone = () => {
 	console.log("Something worked");
