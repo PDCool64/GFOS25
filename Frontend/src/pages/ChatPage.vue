@@ -29,7 +29,7 @@
 					<q-item-section>
 						<q-item-label>
 							<q-icon name="add" />
-							Chat hinzufügen
+							Chat beginnen
 						</q-item-label></q-item-section
 					>
 				</q-item>
