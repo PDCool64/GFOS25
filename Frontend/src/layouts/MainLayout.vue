@@ -142,6 +142,5 @@ function logout() {
 
 .flex-item {
 	flex: 1;
-	overflow: hidden;
 }
 </style>

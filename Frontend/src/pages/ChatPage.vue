@@ -1,5 +1,5 @@
 <template>
-	<q-layout view="hHh lpR fFf">
+	<q-layout view="hhh lpR fFf">
 		<q-drawer
 			show-if-above
 			v-model="drawer"
@@ -15,21 +15,33 @@
 					v-for="chat in messagesStore.chats"
 					:key="chat">
 					<q-item-section>
-						<q-item-label>{{
-							accountsStore.accounts[chat.id]?.vorname +
-							" " +
-							accountsStore.accounts[chat.id]?.nachname
-						}}</q-item-label>
+						<q-item-label>
+							<q-icon name="person" />
+							{{
+								accountsStore.accounts[chat.id]?.vorname +
+								" " +
+								accountsStore.accounts[chat.id]?.nachname
+							}}</q-item-label
+						>
 					</q-item-section>
+				</q-item>
+				<q-item clickable v-ripple>
+					<q-item-section>
+						<q-item-label>
+							<q-icon name="add" />
+							Chat hinzufügen
+						</q-item-label></q-item-section
+					>
 				</q-item>
 			</q-list>
 		</q-drawer>
 
 		<q-page-container>
 			<q-page class="q-pa-md">
-				<div class="everything">
+				<div class="everything" v-if="receiver !== -1">
 					<ChatComponent :receiver="receiver" />
 				</div>
+				<div v-else>Öffnen Sie einen Chat</div>
 			</q-page>
 		</q-page-container>
 	</q-layout>
@@ -42,7 +54,7 @@ import { useAccountStore } from "src/stores/account";
 import { useMessageStore } from "src/stores/message";
 import { useAccountsStore } from "src/stores/accounts";
 
-const receiver = ref(1);
+const receiver = ref(-1);
 
 const messagesStore = useMessageStore();
 const accountsStore = useAccountsStore();
