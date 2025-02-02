@@ -44,6 +44,9 @@
 import { computed, ref } from "vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
 import KundeComponent from "./KundeComponent.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const aufgabenStore = useAufgabenStore();
 
@@ -76,7 +79,7 @@ const displayDate = (date) => {
 };
 
 const onClick = () => {
-	// Define your click handler logic here
+	router.push({ path: `/aufgabe/${props.id}` });
 	console.log("Task clicked");
 };
 

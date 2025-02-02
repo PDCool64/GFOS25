@@ -37,6 +37,13 @@
 				</div>
 			</div>
 		</div>
+		<div
+			id="bar"
+			:class="[
+				{ done: aufgabe?.status === 1 },
+				{ undone: aufgabe?.status === 2 },
+				{ inprogress: aufgabe?.status === 0 },
+			]"></div>
 	</div>
 </template>
 
@@ -75,6 +82,10 @@ onMounted(() => {
 		aufgabenStore.fetchAufgabe(id).finally(() => loadAufgabe(id));
 	}
 });
+
+const onClick = () => {
+	console.log(aufgabe.value);
+};
 
 console.log(aufgabe.value);
 </script>
@@ -130,5 +141,23 @@ h3 {
 	margin-right: 5px;
 	position: relative;
 	top: 0;
+}
+
+#bar {
+	width: 100%;
+	height: 10px;
+	background-color: var(--q-primary);
+}
+
+.done {
+	background-color: #a5efc2;
+}
+
+.undone {
+	background-color: #f7b7b7;
+}
+
+.inprogress {
+	background-color: #f7f7b7;
 }
 </style>
