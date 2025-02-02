@@ -12,7 +12,7 @@ import { computed, ref } from "vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
 import KundeComponent from "./KundeComponent.vue";
 import { useRouter } from "vue-router";
-import BeschreibungConponement from "./aufgabe/BeschreibungConponement.vue";
+import BeschreibungConponement from "./aufgabe/BeschreibungComponent.vue";
 
 const router = useRouter();
 

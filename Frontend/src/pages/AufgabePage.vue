@@ -12,8 +12,8 @@
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useAufgabenStore } from "src/stores/aufgaben";
-import BeschreibungComponent from "src/components/aufgabe/BeschreibungConponement.vue";
-import Unterpunkte from "src/components/aufgabe/AufgabenUnterpunkte.vue";
+import BeschreibungComponent from "src/components/aufgabe/BeschreibungComponent.vue";
+import Unterpunkte from "src/components/aufgabe/AufgabenUnterpunkteComponent.vue";
 
 const route = useRoute();
 const aufgabenStore = useAufgabenStore();
