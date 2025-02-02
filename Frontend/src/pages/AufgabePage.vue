@@ -2,8 +2,22 @@
 	<div id="aufgabe">
 		<h1 class="q-pa-xs">{{ aufgabe?.titel }}</h1>
 		<div class="wrapper">
-			<BeschreibungComponent :id="route.params.id" style="height: 50vh" />
-			<Unterpunkte :id="route.params.id" />
+			<div>
+				<BeschreibungComponent
+					:id="route.params.id"
+					style="height: 50vh" />
+				<div
+					:class="[
+						{ done: aufgabe?.status === 1 },
+						{ undone: aufgabe?.status === 2 },
+						{ inprogress: aufgabe?.status === 0 },
+						'bar',
+					]">
+				</div>
+			</div>
+			<div>
+				<Unterpunkte :id="route.params.id" />
+			</div>
 		</div>
 	</div>
 </template>
@@ -41,8 +55,6 @@ onMounted(() => {
 		aufgabenStore.fetchAufgabe(id).finally(() => loadAufgabe(id));
 	}
 });
-
-console.log(aufgabe.value);
 </script>
 
 <style scoped>
@@ -67,5 +79,23 @@ h1 {
 	display: flex; /* Flexbox hinzufügen */
 	padding: 20px;
 	margin: 20px;
+}
+
+.bar {
+	width: 100%;
+	height: 10px;
+	background-color: var(--q-primary);
+}
+
+.done {
+	background-color: #a5efc2;
+}
+
+.undone {
+	background-color: #f7b7b7;
+}
+
+.inprogress {
+	background-color: #f7f7b7;
 }
 </style>
