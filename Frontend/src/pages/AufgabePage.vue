@@ -2,14 +2,14 @@
 	<div id="aufgabe">
 		<h1 class="q-pa-xs">{{ aufgabe?.titel }}</h1>
 		<div class="wrapper">
-			<BeschreibungComponent />
+			<BeschreibungComponent :id="route.params.id" style="height: 50vh" />
 			<Unterpunkte :id="route.params.id" />
 		</div>
 	</div>
 </template>
 
 <script setup>
-import { computed, ref, watch, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useAufgabenStore } from "src/stores/aufgaben";
 import BeschreibungComponent from "src/components/aufgabe/BeschreibungConponement.vue";

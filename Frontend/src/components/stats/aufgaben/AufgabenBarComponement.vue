@@ -15,10 +15,10 @@ Chart.register(...registerables);
 const StatusImMonat = (monat, status) => {
 	let count = 0;
 	for (const aufgabe of Object.values(aufgabenStore.aufgaben)) {
-		const date = new Date(aufgabe.aufgabe.faelligkeitsdatum);
+		const date = new Date(aufgabe.faelligkeitsdatum);
 		console.log(aufgabe.faelligkeitsdatum);
 		if (date.getMonth() === monat) {
-			if (aufgabe.aufgabe.status == status) {
+			if (aufgabe.status == status) {
 				count++;
 			}
 		}

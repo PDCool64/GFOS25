@@ -3,40 +3,7 @@
 		<div class="header-wrapper text-center">
 			<h3 class="q-pa-xs">{{ aufgabe?.titel }}</h3>
 		</div>
-		<div class="outer">
-			<div class="row">
-				<div class="inner">
-					<q-icon name="edit" class="icon" />
-					{{ displayDate(new Date(aufgabe?.erstellungsdatum)) }}
-				</div>
-				<div class="inner">
-					<q-icon name="schedule" class="icon" />
-					{{ displayDate(new Date(aufgabe?.faelligkeitsdatum)) }}
-				</div>
-				<div class="inner" @mouseenter="openKunde = true">
-					<q-icon name="person" class="icon relative" />
-					<div>
-						{{ aufgabe?.kunde?.vorname }}
-						{{ aufgabe?.kunde?.nachname }}
-					</div>
-					<q-popup-proxy
-						v-model="openKunde"
-						@mouseleave="openKunde = false">
-						<KundeComponent />
-					</q-popup-proxy>
-				</div>
-			</div>
-			<div class="inner">
-				<q-icon class="icon" name="description" />
-				<div>
-					{{ aufgabe?.beschreibung }}
-				</div>
-			</div>
-			<div class="inner">
-				<q-icon class="icon" name="task_alt" />
-				<div>{{ done }}/{{ aufgabe.aufgabenpunktList.length }}</div>
-			</div>
-		</div>
+		<BeschreibungConponement :id="props.id" />
 	</div>
 </template>
 
@@ -45,6 +12,7 @@ import { computed, ref } from "vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
 import KundeComponent from "./KundeComponent.vue";
 import { useRouter } from "vue-router";
+import BeschreibungConponement from "./aufgabe/BeschreibungConponement.vue";
 
 const router = useRouter();
 
@@ -53,10 +21,13 @@ const aufgabenStore = useAufgabenStore();
 const openKunde = ref(false);
 
 const props = defineProps({
-	id: Number,
+	id: String,
 });
 
-const aufgabe = computed(() => aufgabenStore.aufgaben[props.id].aufgabe);
+const aufgabe = computed(() => {
+	console.log(aufgabenStore.aufgaben);
+	return aufgabenStore.aufgaben[props.id];
+});
 
 const done = computed(() => {
 	let summe = 0;
@@ -78,9 +49,9 @@ const displayDate = (date) => {
 	return date.toLocaleDateString();
 };
 
-const onClick = () => {
-	router.push({ path: `/aufgabe/${props.id}` });
+const onClick = async () => {
 	console.log("Task clicked");
+	await router.push("/aufgabe/" + props.id);
 };
 
 const isLastPunkt = (punkt) => {

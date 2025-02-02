@@ -1,8 +1,11 @@
 import { defineStore, acceptHMRUpdate } from "pinia";
 import address from "src/address";
 import { useAccountStore } from "./account";
+import { useRouter } from "vue-router";
 
 const accountStore = useAccountStore();
+
+const router = useRouter();
 
 export const useTokenStore = defineStore("token", {
 	state: () => ({
@@ -14,10 +17,11 @@ export const useTokenStore = defineStore("token", {
 		clearToken() {
 			this.token = "";
 		},
-		logout() {
+		async logout() {
 			this.token = "";
 			this.refresh_token = "";
 			accountStore.$reset();
+			await router.push("/login");
 		},
 		async refreshToken() {
 			console.log("refreshing token");
