@@ -1,6 +1,6 @@
 <template>
 	<q-layout view="hHh Lpr lFf">
-		<q-header elevated>
+		<q-header :elevated="!$q.dark.isActive">
 			<q-toolbar>
 				<!-- <q-btn
 					flat
