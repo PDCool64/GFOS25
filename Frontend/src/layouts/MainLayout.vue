@@ -13,6 +13,14 @@
 				<q-toolbar-title class="logo"> flow </q-toolbar-title>
 
 				<q-btn
+					v-if="warning"
+					flat
+					dense
+					icon="error"
+					aria-label="Messages"
+					color="yellow" />
+
+				<q-btn
 					flat
 					dense
 					icon="settings"
@@ -81,6 +89,8 @@ defineOptions({
 const router = useRouter();
 
 const darkMode = ref(false);
+
+const warning = ref(true);
 
 watch(
 	() => darkMode.value,

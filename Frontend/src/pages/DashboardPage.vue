@@ -1,14 +1,11 @@
 <template>
 	<div class="dashboard-container">
-		<h3 style="font-weight: 900">
-			Hallo "{{
-				accountStore.account.vorname +
-				" " +
-				accountStore.account.nachname
-			}}"
+		<h3 style="font-weight: 700">
+			Willkommen zurück, {{ accountStore.account.vorname }}!
 		</h3>
 		<div class="top-row">
 			<div class="tasks-section">
+				<h4>Offene Aufgaben</h4>
 				<div class="tasks-wrapper">
 					<div v-for="id in aufgabenIds" :key="id" class="task-item">
 						<AufgabenComponent :id="'' + id" />
@@ -26,11 +23,14 @@
 				</div>
 			</div>
 			<div class="chart-section">
+				<h4>Charts</h4>
 				<AccountPieGraphComponent />
 			</div>
 		</div>
 		<!-- Space for future components -->
 		<div class="bottom-row">
+			<h4>Anstehende Termine</h4>
+
 			<!-- Future components will go here -->
 		</div>
 	</div>

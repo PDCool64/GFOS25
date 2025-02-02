@@ -28,7 +28,7 @@
 				<q-item clickable v-ripple>
 					<q-item-section>
 						<q-item-label>
-							<q-icon name="edit_square" />
+							<q-icon name="edit" />
 							Chat beginnen
 						</q-item-label></q-item-section
 					>
