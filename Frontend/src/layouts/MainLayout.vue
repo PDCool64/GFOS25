@@ -49,10 +49,10 @@
 		</q-page-container>
 
 		<q-dialog v-model="settingsOpen" persistent>
-			<q-card>
+			<q-card style="width: 25vh; height: 25vh">
 				<q-card-section>Settings</q-card-section>
 				<q-toggle label="Dark Mode" v-model="darkMode" />
-				<q-card-actions align="right">
+				<q-card-actions align="center">
 					<q-btn
 						label="OK"
 						color="primary"
