@@ -27,7 +27,6 @@ export const useAufgabenStore = defineStore("aufgaben", {
 			for (const id in this.aufgaben) {
 				const aufgabe = this.aufgaben[id];
 				if (aufgabe === undefined) {
-					console.log(id);
 					continue;
 				}
 				stats.total++;
@@ -55,18 +54,15 @@ export const useAufgabenStore = defineStore("aufgaben", {
 				} else if (aufgabe.status % 3 == 1) {
 					stats.in_progress++;
 				} else {
-					console.log(aufgabe.status);
 					stats.done++;
 				}
 			}
-			console.log(stats);
 
 			return stats;
 		},
 		perMonth(month, status) {
 			counter = 0;
 			for (const aufgabe in this.aufgaben) {
-				console.log(aufgabe);
 				if (aufgabe.month == month && aufgabe.status == status) {
 					counter++;
 				}
@@ -76,29 +72,23 @@ export const useAufgabenStore = defineStore("aufgaben", {
 	},
 	actions: {
 		async fetchAufgaben() {
-			console.log("Fetching Aufgaben");
 			if (accountStore.account?.id == undefined) {
-				console.log("Account not defined");
 				return;
 			}
 			const response = await get_no_data(
 				"/accounts/aufgaben/" + accountStore.account.id
 			);
 			if (!response.ok) {
-				console.log(response);
 				throw new Error("HTTP error, status = " + response.status);
 			}
 			const data = await response.json();
 			for (const aufgabe of data) {
-				console.log(aufgabe.id);
 				this.aufgaben[aufgabe.aufgabe.id] = aufgabe.aufgabe;
 			}
-			console.log(this.aufgaben);
 		},
 		async fetchAufgabe(id) {
 			const response = await get_no_data("/aufgaben/" + id);
 			if (!response.ok) {
-				console.log(response);
 				throw new Error("HTTP error, status = " + response.status);
 			}
 			const aufgabe = await response.json();
@@ -108,12 +98,11 @@ export const useAufgabenStore = defineStore("aufgaben", {
 			this.aufgaben[aufgabe.id] = aufgabe;
 			const response = await post("/aufgaben", aufgabe);
 			if (!response.ok) {
-				console.log(response);
 				throw new Error("HTTP error, status = " + response.status);
 			}
 			const data = await response.json();
 			const aufgabenId = data.id;
-			console.log(aufgabenId);
+
 			const response_to_account_add = await post_no_data(
 				`/aufgaben/${aufgabenId}/add-account/` + accountStore.account.id
 			);
@@ -121,7 +110,6 @@ export const useAufgabenStore = defineStore("aufgaben", {
 		async createAufgabenpunkt(punkt) {
 			const response = await post("/aufgaben/punkte", punkt);
 			if (!response.ok) {
-				console.log(response);
 				throw new Error("HTTP error, status = " + response.status);
 			}
 			const data = await response.json();
@@ -130,7 +118,6 @@ export const useAufgabenStore = defineStore("aufgaben", {
 			const response = await put_no_data(
 				"/aufgaben/punkte/" + id + "/toggle"
 			);
-			console.log(response);
 
 			if (!response.ok) {
 				throw new Error("HTTP error, status = " + response.status);

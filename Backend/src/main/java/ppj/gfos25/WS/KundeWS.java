@@ -5,6 +5,7 @@ import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -44,7 +45,7 @@ public class KundeWS {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getKundeById(int id) {
+    public Response getKundeById(@PathParam("id") int id) {
         return responseService.ok(jsonb.toJson(kundeFacade.getKundeById(id)));
     }
 
