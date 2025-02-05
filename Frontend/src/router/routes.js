@@ -9,50 +9,50 @@ const routes = [
 				meta: { requiresAuth: false },
 			},
 			{
-				path: "/login",
-				component: () => import("src/pages/LoginPage.vue"),
-				meta: { requiresAuth: false },
-			},
-			{
-				path: "/account",
+				path: "account",
 				component: () => import("pages/AccountPage.vue"),
 				meta: { requiresAuth: true },
 			},
 			{
-				path: "/aufgaben",
+				path: "aufgaben",
 				component: () => import("components/AufgabenComponent.vue"),
 				meta: { requiresAuth: true },
+				children: [
+					{
+						path: ":id",
+						name: "AufgabeDetail",
+						component: () => import("pages/AufgabePage.vue"),
+						meta: { requiresAuth: true },
+					},
+				],
 			},
 			{
-				path: "/dashboard",
+				path: "dashboard",
 				component: () => import("pages/DashboardPage.vue"),
 				meta: { requiresAuth: true },
 			},
 			{
-				path: "/chat",
+				path: "chat",
 				component: () => import("pages/ChatPage.vue"),
 				meta: { requiresAuth: true },
 			},
 			{
-				path: "/calendar",
+				path: "calendar",
 				component: () => import("pages/KalendarPage.vue"),
 				meta: { requiresAuth: true },
 			},
 			{
-				path: "/test",
+				path: "test",
 				component: () => import("components/KundeComponent.vue"),
 				meta: { requiresAuth: true },
 			},
 			{
-				path: "/aufgabe/:id",
-				name: "AufgabeDetail",
-				component: () => import("pages/AufgabePage.vue"),
+				path: "clients",
+				component: () => import("pages/KundePage.vue"),
 				meta: { requiresAuth: true },
 			},
 		],
 	},
-	// Always leave this as last one,
-	// but you can also remove it
 	{
 		path: "/:catchAll(.*)*",
 		component: () => import("pages/ErrorNotFound.vue"),

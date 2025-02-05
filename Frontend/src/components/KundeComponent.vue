@@ -1,21 +1,36 @@
 <template>
-	<q-card :class="['kunde-card']">
+	<q-card :class="['kunde-card']" v-if="kunde !== null">
 		<q-card-section>
-			<q-input v-model="name" label="Name" readonly />
-			<q-input v-model="vorname" label="Vorname" readonly />
-			<q-input v-model="email" label="Email" readonly />
-			<q-input v-model="telefon" label="Telefon" readonly />
+			<q-input v-model="kunde.nachname" label="Name" readonly />
+			<q-input v-model="kunde.vorname" label="Vorname" readonly />
+			<q-input v-model="kunde.email" label="Email" readonly />
+			<q-input v-model="kunde.telefonnummer" label="Telefon" readonly />
 		</q-card-section>
 	</q-card>
 </template>
 
 <script setup>
+import { useKundeStore } from "src/stores/kunde";
 import { ref } from "vue";
 
-const name = ref("Mustermann");
-const vorname = ref("Max");
-const email = ref("max.mustermann@example.com");
-const telefon = ref("0123456789");
+const props = defineProps({
+	id: String,
+});
+
+const kundeStore = useKundeStore();
+
+const kunde = ref(null);
+if (kundeStore.kunden[props.id]) {
+	kunde.value = kundeStore.kunden[props.id];
+}
+
+kundeStore.fetchKunde(props.id).then(() => {
+	kunde.value = kundeStore.kunden[parseInt(props.id)];
+	console.log(kunde.value);
+	console.log(kundeStore.kunden);
+	console.log(props.id);
+	console.log("Interesting");
+});
 </script>
 
 <style lang="scss" scoped>

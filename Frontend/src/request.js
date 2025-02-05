@@ -8,7 +8,6 @@ export async function get_no_data(url) {
 }
 
 export async function get(url, data) {
-	console.log("get", url, data);
 	data.method = "GET";
 	data.headers = {
 		Authorization: "Bearer " + tokenStore.token,
@@ -32,7 +31,7 @@ export async function post(url, json) {
 		Authorization: "Bearer " + tokenStore.token,
 	};
 	data.body = JSON.stringify(json);
-	console.log("post", url, data);
+
 	const response = await fetch(`${address}${url}`, data);
 	if (response.status === 401) {
 		tokenStore.logout();

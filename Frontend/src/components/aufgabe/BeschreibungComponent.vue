@@ -24,7 +24,7 @@
 							{{ aufgabe.kunde?.nachname }}
 						</div>
 						<q-popup-proxy v-model="openKunde">
-							<KundeComponent />
+							<KundeComponent :id="'' + aufgabe.kunde?.id" />
 						</q-popup-proxy>
 					</div>
 				</div>
@@ -42,7 +42,6 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 </template>
 
@@ -54,8 +53,6 @@ import KundeComponent from "../KundeComponent.vue";
 const props = defineProps({
 	id: String,
 });
-
-console.log(props.id);
 
 const aufgabe = ref(null);
 
@@ -76,7 +73,7 @@ const displayDate = (date) => {
 };
 
 const loadAufgabe = (id) => {
-	console.log(aufgabenStore.aufgaben); // Ausgabe des Objekts in der Konsole
+	// Ausgabe des Objekts in der Konsole
 	const task = aufgabenStore.aufgaben[id];
 	if (task) {
 		aufgabe.value = task;
@@ -87,17 +84,13 @@ const loadAufgabe = (id) => {
 
 onMounted(() => {
 	const id = props.id;
-	console.log(id);
+
 	if (id) {
 		aufgabenStore.fetchAufgabe(id).finally(() => loadAufgabe(id));
 	}
 });
 
-const onClick = () => {
-	console.log(aufgabe.value);
-};
-
-console.log(aufgabe.value);
+const onClick = () => {};
 </script>
 
 <style scoped>
@@ -151,6 +144,4 @@ h3 {
 	position: relative;
 	top: 0;
 }
-
-
 </style>

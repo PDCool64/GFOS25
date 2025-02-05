@@ -10,7 +10,6 @@
 <script setup>
 import { computed, ref } from "vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
-import KundeComponent from "./KundeComponent.vue";
 import { useRouter } from "vue-router";
 import BeschreibungConponement from "./aufgabe/BeschreibungComponent.vue";
 
@@ -25,7 +24,6 @@ const props = defineProps({
 });
 
 const aufgabe = computed(() => {
-	console.log(aufgabenStore.aufgaben);
 	return aufgabenStore.aufgaben[props.id];
 });
 
@@ -36,8 +34,6 @@ const done = computed(() => {
 	}
 	return summe;
 });
-
-console.log(done.value);
 
 const taskClass = computed(() => {
 	// Define your task class logic here
@@ -50,8 +46,7 @@ const displayDate = (date) => {
 };
 
 const onClick = async () => {
-	console.log("Task clicked");
-	await router.push("/aufgabe/" + props.id);
+	await router.push("/aufgaben/" + props.id);
 };
 
 const isLastPunkt = (punkt) => {

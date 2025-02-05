@@ -117,6 +117,11 @@ const linksList = [
 		link: "/#/calendar",
 	},
 	{
+		title: "Kunden",
+		icon: "support_agent",
+		link: "/#/clients",
+	},
+	{
 		title: "Account",
 		icon: "person",
 		link: "/#/account",
