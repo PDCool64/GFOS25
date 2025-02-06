@@ -20,6 +20,7 @@
 							</q-popup-proxy>
 						</q-icon>
 					</div>
+					<NewAufgabenComponement></NewAufgabenComponement>
 				</div>
 			</div>
 			<div class="chart-section">
@@ -43,6 +44,7 @@ import AccountPieGraphComponent from "src/components/stats/aufgaben/AufgabenPieG
 import AufgabenCreateComponent from "src/components/create/AufgabenCreateComponent.vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
 import { useAccountStore } from "src/stores/account";
+import NewAufgabenComponement from "src/components/NewAufgabenComponement.vue";
 
 const createAufgabeOpen = ref(false);
 
