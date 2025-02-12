@@ -16,9 +16,7 @@
 					:stamp="get_display_time(message.timeSent)" />
 			</div>
 		</div>
-		<div
-			class="input row"
-			style="background: var(--q-whitedark); padding-bottom: 5px">
+		<div class="input row" style="padding-bottom: 5px">
 			<q-input
 				v-model="message"
 				@keyup.enter="send_message"

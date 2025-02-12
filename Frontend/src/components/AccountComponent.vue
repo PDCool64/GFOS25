@@ -54,7 +54,6 @@ li {
 	padding-left: 3em;
 	padding-right: 3em;
 	font-size: 1.5em;
-	color: --var(--q-whitedark);
 	display: flex; /* Inhalt innerhalb eines Listenelements horizontal anordnen */
 	flex-direction: row; /* Inhalt innerhalb eines Listenelements horizontal anordnen */
 	align-items: center; /* Vertikale Ausrichtung der Inhalte innerhalb eines Listenelements */

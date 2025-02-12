@@ -119,7 +119,6 @@ console.log(aufgabenStore.stats);
 .add-task-item {
 	cursor: pointer;
 	border: 2px dashed #ccc;
-	background-color: var(--q-whitedark);
 	transition: background-color 0.3s;
 	display: flex;
 	justify-content: center;
