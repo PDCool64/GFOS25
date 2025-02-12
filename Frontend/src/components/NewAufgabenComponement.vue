@@ -47,7 +47,7 @@ const columns = [
 ];
 
 const rows = computed(() => {
-	const aufgabenArray = Object.values(aufgabenStore.aufgaben);
+	const aufgabenArray = Object.values(aufgabenStore.active);
 	console.log("Rows für die Tabelle:", aufgabenArray);
 	return aufgabenArray.map((aufgabe) => ({
 		id: aufgabe.id,
