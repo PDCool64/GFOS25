@@ -102,7 +102,7 @@ const onClick = (id) => {
 	display: flex;
 	flex-direction: column;
 	width: 85%;
-	height: 50vh;
+	height: auto;
 	padding: 10px;
 }
 

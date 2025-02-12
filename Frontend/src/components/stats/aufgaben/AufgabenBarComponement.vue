@@ -17,7 +17,10 @@ const StatusImMonat = (monat, status) => {
 	for (const aufgabe of Object.values(aufgabenStore.aufgaben)) {
 		const date = new Date(aufgabe.faelligkeitsdatum);
 		console.log(aufgabe.faelligkeitsdatum);
-		if (date.getMonth() === monat) {
+		if (
+			date.getMonth() === monat &&
+			date.getFullYear() === new Date().getFullYear() - 1
+		) {
 			if (aufgabe.status == status) {
 				count++;
 			}

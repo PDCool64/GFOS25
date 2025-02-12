@@ -120,6 +120,10 @@ input {
 	padding: 15px 0;
 	font-size: 20px;
 	margin: 10px 0 40px;
+	background-color: var(--q-whitedark);
+	color: var(--q-whitedark);
+	-webkit-filter: invert(100%);
+	filter: invert(100%);
 }
 
 input:valid,

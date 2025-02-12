@@ -95,6 +95,7 @@ console.log(aufgabenStore.stats);
 	/* Three items per row with gap */
 	min-width: 250px;
 	/* Minimum width before wrapping */
+	background-color: var(--q-secondary);
 }
 
 .chart-section {
@@ -118,7 +119,7 @@ console.log(aufgabenStore.stats);
 .add-task-item {
 	cursor: pointer;
 	border: 2px dashed #ccc;
-	background-color: #f9f9f9;
+	background-color: var(--q-whitedark);
 	transition: background-color 0.3s;
 	display: flex;
 	justify-content: center;
