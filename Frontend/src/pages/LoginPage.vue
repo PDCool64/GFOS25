@@ -123,11 +123,19 @@ input {
 	background-color: var(--q-login-form) !important;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: var(--q-login-form-text);
+}
+
 input:valid,
 input:focus {
 	outline: 0;
-	color: var(--q-secondary) !important;
-	border-bottom: 2px solid var(--q-login-form-text);
+	color: var(--q-login-form-text) !important;
+	border-bottom: 2px solid var(--q-secondary);
 }
 button {
 	width: 100%;
