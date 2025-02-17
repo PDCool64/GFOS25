@@ -17,6 +17,7 @@ $secondary: #98c1d9;
 $accent: #ee6c4d;
 
 $login-form: #fff;
+$login-form-text: #000;
 
 @media (prefers-color-scheme: dark) {
 	$primary: #007d8f;
@@ -35,6 +36,7 @@ $warning: #f2c037;
 body.body--dark {
 	--q-primary: #ee6c4d;
 	--q-secondary: #0a2240;
+	--q-login-form-text: #000;
 	$accent: #ee6c4d;
 
 	--q-login-form: #000;

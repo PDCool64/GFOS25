@@ -127,9 +127,8 @@ input:valid,
 input:focus {
 	outline: 0;
 	color: var(--q-secondary) !important;
-	border-bottom: 2px solid var(--q-secondary);
+	border-bottom: 2px solid var(--q-login-form-text);
 }
-
 button {
 	width: 100%;
 	border: 0;

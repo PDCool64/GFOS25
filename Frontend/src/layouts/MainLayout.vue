@@ -77,8 +77,10 @@ import EssentialLink from "components/EssentialLink.vue";
 import { useTokenStore } from "src/stores/token";
 import { useRouter } from "vue-router";
 import { useQuasar } from "quasar";
+import { useAccountStore } from "src/stores/account";
 
 const tokenStore = useTokenStore();
+const accountStore = useAccountStore();
 
 const $q = useQuasar();
 
@@ -88,7 +90,7 @@ defineOptions({
 
 const router = useRouter();
 
-const darkMode = ref(false);
+const darkMode = ref($q.dark.isActive);
 
 const warning = ref(true);
 
@@ -97,6 +99,7 @@ watch(
 	() => {
 		console.log("Switching");
 		$q.dark.set(darkMode.value);
+		accountStore.account.einstellungen.farbschema = darkMode;
 	}
 );
 
