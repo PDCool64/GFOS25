@@ -5,5 +5,8 @@
     <!-- Define Persistence Unit -->
     <persistence-unit name="my_persistence_unit">
         <jta-data-source>punit</jta-data-source>
+        <properties>
+            <property name="eclipselink.cache.shared.default" value="false"/>
+        </properties>
     </persistence-unit>
 </persistence>
