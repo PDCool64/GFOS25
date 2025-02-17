@@ -5,8 +5,6 @@ import { useRouter } from "vue-router";
 
 const accountStore = useAccountStore();
 
-const router = useRouter();
-
 export const useTokenStore = defineStore("token", {
 	state: () => ({
 		token: "",
@@ -18,6 +16,7 @@ export const useTokenStore = defineStore("token", {
 			this.token = "";
 		},
 		async logout() {
+			const router = useRouter();
 			this.token = "";
 			this.refresh_token = "";
 			accountStore.$reset();

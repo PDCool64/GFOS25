@@ -52,6 +52,7 @@ const routes = [
 			{
 				path: "/clients",
 				component: () => import("pages/KundePage.vue"),
+				meta: { requiresAuth: true },
 			},
 		],
 	},

@@ -14,7 +14,9 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import ppj.gfos25.Entity.Account;
 import ppj.gfos25.Entity.Kunde;
+import ppj.gfos25.Facades.AccountFacade;
 import ppj.gfos25.Facades.KundeFacade;
 import ppj.gfos25.Service.ResponseService;
 
@@ -34,6 +36,9 @@ public class KundeWS {
 
     @EJB
     ResponseService responseService;
+
+    @EJB
+    AccountFacade accountFacade;
 
     @GET
     @Path("/all")
@@ -71,5 +76,14 @@ public class KundeWS {
             return responseService.badRequest("Invalid JSON");
         }
         return responseService.ok(jsonb.toJson(kundeFacade.updateKunde(k)));
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/account/{id}")
+    public Response getKundenForAccount(@PathParam("id") int id) {
+        Account a = accountFacade.getAccountById(id);
+        return responseService.ok(jsonb.toJson(a.getKundeList()));
+
     }
 }
