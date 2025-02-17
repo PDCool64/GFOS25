@@ -7,7 +7,7 @@
 			<div class="tasks-section">
 				<h4>Offene Aufgaben</h4>
 				<div class="tasks-wrapper">
-					<div v-for="id in aufgabenIds" :key="id" class="task-item">
+					<!-- <div v-for="id in aufgabenIds" :key="id" class="task-item">
 						<AufgabenComponent :id="'' + id" />
 					</div>
 					<div
@@ -19,8 +19,8 @@
 									@creationDone="onCreationDone" />
 							</q-popup-proxy>
 						</q-icon>
-					</div>
-					<NewAufgabenComponement></NewAufgabenComponement>
+					</div> -->
+					<AufgabenList />
 				</div>
 			</div>
 			<div class="chart-section">
@@ -44,7 +44,7 @@ import AccountPieGraphComponent from "src/components/stats/aufgaben/AufgabenPieG
 import AufgabenCreateComponent from "src/components/create/AufgabenCreateComponent.vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
 import { useAccountStore } from "src/stores/account";
-import NewAufgabenComponement from "src/components/NewAufgabenComponement.vue";
+import AufgabenList from "src/components/AufgabenList.vue";
 
 const createAufgabeOpen = ref(false);
 

@@ -16,15 +16,6 @@ $primary: #3d5a80;
 $secondary: #98c1d9;
 $accent: #ee6c4d;
 
-$login-form: #fff;
-$login-form-text: #000;
-
-@media (prefers-color-scheme: dark) {
-	$primary: #007d8f;
-	$secondary: #6ab6c2;
-	$accent: #ee6c4d;
-}
-
 $dark: #293241;
 $dark-page: #121212;
 
@@ -33,19 +24,22 @@ $negative: #c10015;
 $info: #31ccec;
 $warning: #f2c037;
 
+:root {
+	--q-login-form: #fff;
+	--q-login-form-text: #000;
+	--q-aufgabe-done: #a5efc2;
+	--q-aufgabe-in-progress: #f7d7a7;
+	--q-aufgabe-undone: #f7b7b7;
+}
+
 body.body--dark {
 	--q-primary: #ee6c4d;
 	--q-secondary: #0a2240;
-	--q-login-form-text: #fff;
-	$accent: #ee6c4d;
 
 	--q-login-form: #000;
+	--q-login-form-text: #fff;
 
-	$dark: #121212;
-	$dark-page: #000000;
-
-	$positive: #21ba45;
-	$negative: #c10015;
-	$info: #31ccec;
-	$warning: #f2c037;
+	--q-aufgabe-done: #6ab588;
+	--q-aufgabe-in-progress: #be9b66;
+	--q-aufgabe-undone: #c27777;
 }

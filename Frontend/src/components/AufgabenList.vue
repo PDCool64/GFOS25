@@ -84,14 +84,14 @@ const onClick = (id) => {
 }
 
 .status-orange {
-	background-color: #f7d7a7;
+	background-color: var(--q-aufgabe-in-progress);
 }
 
 .status-green {
-	background-color: #a5efc2;
+	background-color: var(--q-aufgabe-done);
 }
 
 .status-red {
-	background-color: #f7b7b7;
+	background-color: var(--q-aufgabe-undone);
 }
 </style>
