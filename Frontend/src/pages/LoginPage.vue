@@ -120,14 +120,13 @@ input {
 	padding: 15px 0;
 	font-size: 20px;
 	margin: 10px 0 40px;
-	-webkit-filter: invert(100%);
-	filter: invert(100%);
+	background-color: var(--q-login-form) !important;
 }
 
 input:valid,
 input:focus {
 	outline: 0;
-	color: var(--q-secondary);
+	color: var(--q-secondary) !important;
 	border-bottom: 2px solid var(--q-secondary);
 }
 
