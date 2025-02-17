@@ -101,18 +101,17 @@ const onClick = (id) => {
 	border-radius: 5px;
 	display: flex;
 	flex-direction: column;
-	width: 85%;
+	width: 20vw;
 	height: auto;
 	padding: 10px;
 }
 
 .titel {
 	border-radius: 5px;
-	flex: 0.5;
-	margin: 5px;
+	flex: 1;
+	margin: 3px 0;
 	cursor: pointer;
 	width: 100%;
-	height: 500%;
 	background-color: var(--q-secondary);
 	font-size: 2em;
 	font: Noto Sans;
@@ -153,4 +152,3 @@ const onClick = (id) => {
 	color: black;
 }
 </style>
-ease-in;
