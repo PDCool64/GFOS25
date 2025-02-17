@@ -19,6 +19,7 @@ import "@schedule-x/theme-default/dist/index.css";
 import { useAufgabenStore } from "src/stores/aufgaben";
 import { useKalendarStore } from "src/stores/kalendar";
 import { ref } from "vue";
+import { useQuasar } from "quasar";
 
 // Do not use a ref here, as the calendar instance is not reactive, and doing so might cause issues
 // For updating events, use the events service plugin
@@ -34,6 +35,7 @@ const get_formatted_date = (date) => {
 
 const aufgaben = aufgabenStore.aufgaben;
 const kalenderStore = useKalendarStore();
+const $q = useQuasar();
 
 const events = ref([]);
 
@@ -47,6 +49,7 @@ const calendarApp = createCalendar({
 		start: "08:00",
 		end: "18:00",
 	},
+	isDark: $q.dark.isActive,
 	views: [
 		createViewDay(),
 		createViewWeek(),
