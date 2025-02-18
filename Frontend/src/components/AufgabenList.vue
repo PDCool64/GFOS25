@@ -1,10 +1,16 @@
 <template>
-	<q-table class="q-table" :rows="rows" :columns="columns" row-key="id">
+	<q-table
+		class="q-table"
+		:rows="rows"
+		:columns="columns"
+		row-key="id"
+		hide-bottom>
 		<template v-slot:body="props">
 			<q-tr
 				:props="props"
 				:class="getRowClass(props.row)"
-				@click="() => onClick(props.row.id)">
+				@click="() => onClick(props.row.id)"
+				style="">
 				<q-td v-for="col in props.cols" :key="col.name" :props="props">
 					{{ props.row[col.field] }}
 				</q-td>
@@ -42,7 +48,7 @@ const columns = [
 		name: "faelligkeitsdatum",
 		label: "Fälligkeitsdatum",
 		align: "left",
-		field: "faelligkeitsdatum",
+		field: "faellikgkeitsdatum",
 	},
 ];
 
@@ -80,7 +86,6 @@ const onClick = (id) => {
 <style scoped>
 .q-table {
 	width: 35vw;
-	height: 35vh;
 }
 
 .status-orange {
