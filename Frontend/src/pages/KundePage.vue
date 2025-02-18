@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<q-list>
+		<q-list class="q-table">
 			<KundeListComponent
 				:id="'' + kunde.id"
 				v-for="kunde in kundenStore.kunden"
@@ -16,4 +16,11 @@ const kundenStore = useKundeStore();
 kundenStore.fetchOwnKunden();
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.q-table {
+	top: 15%;
+	left: 15%;
+	position: relative;
+	width: 70%;
+}
+</style>

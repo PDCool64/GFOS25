@@ -48,7 +48,7 @@ const columns = [
 		name: "faelligkeitsdatum",
 		label: "Fälligkeitsdatum",
 		align: "left",
-		field: "faellikgkeitsdatum",
+		field: "faelligkeitsdatum",
 	},
 ];
 
