@@ -3,20 +3,17 @@
 		<h1 class="q-pa-xs">{{ aufgabe?.titel }}</h1>
 		<div class="wrapper">
 			<div>
-				<BeschreibungComponent
-					:id="route.params.id"
-					style="height: 50vh" />
+				<Unterpunkte :id="route.params.id" class="unterpunkte" />
+			</div>
+			<div class="beschreibung">
+				<BeschreibungComponent :id="route.params.id" />
 				<div
 					:class="[
 						{ done: aufgabe?.status === 1 },
 						{ undone: aufgabe?.status === 2 },
 						{ inprogress: aufgabe?.status === 0 },
 						'bar',
-					]">
-				</div>
-			</div>
-			<div>
-				<Unterpunkte :id="route.params.id" />
+					]"></div>
 			</div>
 		</div>
 	</div>
@@ -67,18 +64,24 @@ onMounted(() => {
 	flex-direction: column;
 }
 h1 {
-	font-size: 8em;
+	font-size: 4em;
 	font: Noto Sans;
 	font-weight: bold;
 	color: var(--q-primary);
 }
 .wrapper {
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	display: flex; /* Flexbox hinzufügen */
-	padding: 20px;
-	margin: 20px;
+	display: flex;
+}
+
+.beschreibung {
+	height: 50vh;
+	margin-left: 1vw;
+}
+
+.unterpunkte {
+	height: 50vh;
+	overflow-y: auto;
+	width: 40vw;
 }
 
 .bar {

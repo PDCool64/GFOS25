@@ -1,5 +1,6 @@
 <template>
 	<div class="wrapper">
+		<div><h1>Unterpunkte</h1></div>
 		<div
 			v-for="punkt in aufgabenpunktList"
 			:key="punkt.id"
@@ -15,20 +16,22 @@
 				{{ punkt.beschreibung }}
 			</div>
 		</div>
-		<div
-			:class="['plus', 'titel', { active: null === activePunktId }]"
-			@click="openCreate = true">
-			<q-icon name="add" size="auto">
-				<q-popup-proxy cover>
-					<AufgabenpunktCreateComponent
-						:id="props.id"
-						@creation-done="
-							aufgabenStore
-								.fetchAufgabe(id)
-								.finally(() => loadAufgabe(id))
-						" />
-				</q-popup-proxy>
-			</q-icon>
+		<div class="plus-wrapper">
+			<div
+				:class="['plus', { active: null === activePunktId }]"
+				@click="openCreate = true">
+				<q-icon name="add" size="50px">
+					<q-popup-proxy cover>
+						<AufgabenpunktCreateComponent
+							:id="props.id"
+							@creation-done="
+								aufgabenStore
+									.fetchAufgabe(id)
+									.finally(() => loadAufgabe(id))
+							" />
+					</q-popup-proxy>
+				</q-icon>
+			</div>
 		</div>
 	</div>
 </template>
@@ -102,13 +105,14 @@ const onClick = (id) => {
 	display: flex;
 	flex-direction: column;
 	width: 20vw;
-	height: auto;
+	min-height: 50vh;
+	overflow-y: auto;
 	padding: 10px;
 }
 
 .titel {
 	border-radius: 5px;
-	flex: 1;
+	flex: 0.5;
 	margin: 3px 0;
 	cursor: pointer;
 	width: 100%;
@@ -120,10 +124,22 @@ const onClick = (id) => {
 	transition: flex 0.7s ease-in;
 }
 
+.plus-wrapper {
+	display: flex;
+	justify-content: center; /* Zentriert das Plus-Symbol horizontal */
+	align-items: center;
+	margin-top: 10px; /* Optional: Abstand nach oben */
+}
+
 .plus {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	border-radius: 50px;
+	height: 75px;
+	width: 75px;
+	background-color: var(--q-secondary);
+	cursor: pointer;
 }
 
 .done {
@@ -150,5 +166,12 @@ const onClick = (id) => {
 	font-size: 0.5em;
 	font: Noto Sans;
 	color: black;
+}
+
+h1 {
+	font-size: 3em;
+	font: Noto Sans;
+	font-weight: bold;
+	color: var(--q-primary);
 }
 </style>
