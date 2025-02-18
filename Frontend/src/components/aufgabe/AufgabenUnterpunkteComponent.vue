@@ -21,13 +21,14 @@
 				:class="['plus', { active: null === activePunktId }]"
 				@click="openCreate = true">
 				<q-icon name="add" size="50px">
-					<q-popup-proxy cover>
+					<q-popup-proxy cover v-model="openCreate">
 						<AufgabenpunktCreateComponent
 							:id="props.id"
 							@creation-done="
 								aufgabenStore
 									.fetchAufgabe(id)
-									.finally(() => loadAufgabe(id))
+									.finally(() => loadAufgabe(id)),
+									(openCreate = false)
 							" />
 					</q-popup-proxy>
 				</q-icon>
