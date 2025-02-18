@@ -26,8 +26,7 @@
 							aufgabenStore
 								.fetchAufgabe(id)
 								.finally(() => loadAufgabe(id)),
-								(openCreate = false),
-								console.log('Here')
+								(openCreate = false)
 						" />
 				</q-popup-proxy>
 			</q-icon>
