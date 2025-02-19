@@ -25,13 +25,38 @@
 						>
 					</q-item-section>
 				</q-item>
-				<q-item clickable v-ripple>
+				<q-item clickable v-ripple @click="console.log('Click')">
 					<q-item-section>
 						<q-item-label>
 							<q-icon name="edit" />
 							Chat beginnen
-						</q-item-label></q-item-section
-					>
+						</q-item-label>
+					</q-item-section>
+					<q-popup-proxy v-model="searchOpen">
+						<q-list>
+							<q-input
+								type="search"
+								style="padding: 0 16px"
+								placeholder="Search..."
+								v-model="search" />
+							<q-item
+								clickable
+								style="cursor: pointer"
+								v-for="account in searchableAccounts"
+								:key="account"
+								@click="
+									(receiver = '' + account[0]),
+										console.log('Something works'),
+										(searchOpen = false)
+								">
+								{{ accountsStore.accounts[account[0]].vorname }}
+								{{
+									accountsStore.accounts[account[0]].nachname
+								}}
+								{{ account }}
+							</q-item>
+						</q-list>
+					</q-popup-proxy>
 				</q-item>
 			</q-list>
 		</q-drawer>
@@ -48,7 +73,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref, watch } from "vue";
 import ChatComponent from "src/components/ChatComponent.vue";
 import { useAccountStore } from "src/stores/account";
 import { useMessageStore } from "src/stores/message";
@@ -58,14 +83,46 @@ const receiver = ref(-1);
 
 const messagesStore = useMessageStore();
 const accountsStore = useAccountsStore();
+
+const accountList = computed(() => {
+	let temp = [];
+	for (const id in accountsStore.accounts) {
+		temp.push(accountsStore.accounts[id]);
+	}
+	return temp;
+});
+
+const searchableAccounts = ref(accountList.value.slice(0, 4));
+console.log(searchableAccounts.value);
+
+const search = ref("");
+const searchOpen = ref(false);
+
+watch(search, () => {
+	let temp = [];
+	for (let i = 0; i < accountList.value.length; i++) {
+		let summe = 0;
+		summe +=
+			100 / 0.5 +
+			accountList.value[i].vorname
+				.toLowerCase()
+				.indexOf(search.value.toLowerCase());
+		summe +=
+			100 / 0.5 +
+			accountList.value[i].nachname
+				.toLowerCase()
+				.indexOf(search.value.toLowerCase());
+		temp.push([i, summe - 398]);
+	}
+	temp = temp.filter((a) => a[1] != 0);
+	temp.sort((a, b) => b[1] - a[1]);
+	searchableAccounts.value = temp.slice(0, 5);
+});
+
 accountsStore.fetchAllAccounts().then(async () => {
 	await messagesStore.fetchChats().then(() => {
 		console.log("Something worked");
 	});
-	const chats = messagesStore.chats;
-	for (let index in chats) {
-		console.log(accountsStore.accounts[index]);
-	}
 });
 
 const drawer = ref(true);

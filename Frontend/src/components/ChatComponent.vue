@@ -67,7 +67,7 @@ const message = ref("");
 const send_message = async () => {
 	const response = await post("/messages", {
 		sender: accountStore.account.id.toString(),
-		receiver: props.receiver,
+		receiver: "" + props.receiver,
 		content: message.value,
 		timeSent: new Date().toISOString(),
 		isReceived: false,
@@ -91,7 +91,7 @@ console.log(props.receiver);
 console.log(accountStore.account.id);
 
 const get_messages = async () => {
-	messageStore.fetchChat(props.receiver).finally(() => {
+	messageStore.fetchChatForced(props.receiver).finally(() => {
 		const data = messageStore.chats[props.receiver];
 		process_messages(data.sent, data.received);
 	});

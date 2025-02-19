@@ -38,12 +38,22 @@ export const useMessageStore = defineStore("message", {
 			this.chats[receiver] = data;
 			this.chats[receiver].id = receiver;
 		},
+		async fetchChatForced(receiver) {
+			const response = await get_no_data(
+				"/messages/chat/" + accountStore.account.id + "/" + receiver
+			);
+			if (!response.ok) {
+				throw new Error("HTTP error, status = " + response.status);
+			}
+			const data = await response.json();
+			this.chats[receiver] = data;
+			this.chats[receiver].id = receiver;
+		},
 		async fetchChats() {
 			console.log(accountsStore.accounts["0"]);
 			console.log("Fetching Chats");
 			console.log(accountsStore.accounts);
 			for (const account in Object.values(accountsStore.accounts)) {
-				console.log(account);
 				this.fetchChat(account);
 			}
 		},
