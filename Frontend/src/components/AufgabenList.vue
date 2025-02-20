@@ -11,7 +11,11 @@
 				:class="getRowClass(props.row)"
 				@click="() => onClick(props.row.id)"
 				style="">
-				<q-td v-for="col in props.cols" :key="col.name" :props="props">
+				<q-td
+					v-for="col in props.cols"
+					:key="col.name"
+					:props="props"
+					style="cursor: pointer">
 					{{ props.row[col.field] }}
 				</q-td>
 			</q-tr>
@@ -67,11 +71,11 @@ const rows = computed(() => {
 const getRowClass = (row) => {
 	switch (row.status) {
 		case 0:
-			return "status-orange";
-		case 1:
-			return "status-green";
-		case 2:
 			return "status-red";
+		case 1:
+			return "status-orange";
+		case 2:
+			return "status-green";
 		default:
 			return "";
 	}

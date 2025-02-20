@@ -38,12 +38,9 @@ const props = defineProps({
 	receiver: String,
 });
 
-watch(
-	() => props.receiver,
-	() => {
-		get_messages();
-	}
-);
+watch(props.receiver, () => {
+	get_messages();
+});
 
 const accountStore = useAccountStore();
 const messageStore = useMessageStore();

@@ -9,9 +9,9 @@
 				<BeschreibungComponent :id="route.params.id" />
 				<div
 					:class="[
-						{ done: aufgabe?.status === 1 },
-						{ undone: aufgabe?.status === 2 },
-						{ inprogress: aufgabe?.status === 0 },
+						{ done: aufgabe?.status === 2 },
+						{ undone: aufgabe?.status === 0 },
+						{ inprogress: aufgabe?.status === 1 },
 						'bar',
 					]"></div>
 			</div>

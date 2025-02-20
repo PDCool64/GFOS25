@@ -77,6 +77,22 @@ public class AufgabenpunkteWS {
                     return responseService.notFound("Aufgabenpunkt not found");
                 }
                 ap.setErledigt(!ap.getErledigt());
+                Aufgabe aufgabe = ap.getAufgabe();
+                boolean done = true, undone = true;
+                for (Aufgabenpunkt a : aufgabe.getAufgabenpunktList()) { 
+                    if (!a.getErledigt()) {
+                        done = false;
+                    } else {
+                        undone = false;
+                    }
+                }
+                if (undone) {
+                    aufgabe.setStatus(0);
+                } else if (done) {
+                    aufgabe.setStatus(2);
+                } else {
+                    aufgabe.setStatus(1);
+                }
                 return responseService.ok(
                         jsonb.toJson(
                                 aufgabeFacade.updateAufgabenpunkt(ap)));
