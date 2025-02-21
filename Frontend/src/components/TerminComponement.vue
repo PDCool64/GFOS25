@@ -1,5 +1,6 @@
 <template>
 	<div class="wrapper">
+		{{ kalendarStore.termine }}
 		<h3 class="q-pa-xs">{{ kalendar?.titel }}</h3>
 		<div class="inner">
 			<q-icon class="icon" name="description" />
@@ -27,6 +28,8 @@ const kalendarStore = useKalendarStore();
 const props = defineProps({
 	id: String,
 });
+
+console.log("Kalendar Store: ", kalendarStore.termine);
 
 const kalendar = computed(() => {
 	return kalendarStore.termine[props.id];

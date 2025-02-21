@@ -54,6 +54,11 @@ const routes = [
 				component: () => import("pages/KundePage.vue"),
 				meta: { requiresAuth: true },
 			},
+			{
+				path: "/termin",
+				component: () => import("pages/TerminPage.vue"),
+				meta: { requiresAuth: true },
+			},
 		],
 	},
 	// Always leave this as last one,

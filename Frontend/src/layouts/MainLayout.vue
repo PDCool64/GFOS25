@@ -120,6 +120,11 @@ const linksList = [
 		link: "/#/calendar",
 	},
 	{
+		title: "Termin hinzufügen",
+		icon: "edit_calendar",
+		link: "/#/termin",
+	},
+	{
 		title: "Kunden",
 		icon: "support_agent",
 		link: "/#/clients",
