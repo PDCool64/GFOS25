@@ -21,6 +21,18 @@
 						</q-icon>
 					</div> -->
 					<AufgabenList />
+					<div class="plus-wrapper">
+						<div
+							:class="['plus']"
+							@click="createAufgabeOpen = true">
+							<q-icon name="add" size="50px">
+								<q-popup-proxy cover v-if="createAufgabeOpen">
+									<AufgabenCreateComponent
+										@creationDone="onCreationDone" />
+								</q-popup-proxy>
+							</q-icon>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="chart-section">
@@ -33,8 +45,11 @@
 		<!-- Space for future components -->
 		<div class="bottom-row">
 			<h4>Anstehende Termine</h4>
-
-			<!-- Future components will go here -->
+			<div class="termin-wrapper">
+				<div v-for="id in kalendarIds" :key="id" class="task-item">
+					<TerminComponement :id="'' + id" />
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -47,8 +62,12 @@ import AufgabenCreateComponent from "src/components/create/AufgabenCreateCompone
 import { useAufgabenStore } from "src/stores/aufgaben";
 import { useAccountStore } from "src/stores/account";
 import AufgabenList from "src/components/AufgabenList.vue";
+import TerminComponement from "src/components/TerminComponement.vue";
+import { useKalendarStore } from "src/stores/kalendar";
 
 const createAufgabeOpen = ref(false);
+
+const kalendarStore = useKalendarStore();
 
 const aufgabenStore = useAufgabenStore();
 const accountStore = useAccountStore();
@@ -66,6 +85,13 @@ aufgabenStore.fetchAufgaben().finally(() => {
 	}
 });
 console.log(aufgabenStore.stats);
+
+const kalendarIds = ref([]);
+kalendarStore.fetchTermine().finally(() => {
+	for (const termin of kalendarStore.active) {
+		kalendarIds.value.push(termin.id);
+	}
+});
 </script>
 
 <style scoped>
@@ -85,6 +111,24 @@ console.log(aufgabenStore.stats);
 	gap: 1rem;
 }
 
+.plus-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10px;
+}
+
+.plus {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50px;
+	height: 75px;
+	width: 75px;
+	background-color: var(--q-secondary);
+	cursor: pointer;
+}
+
 .tasks-wrapper {
 	display: flex;
 	flex-wrap: wrap;
@@ -95,9 +139,17 @@ console.log(aufgabenStore.stats);
 .task-item {
 	flex: 0 1 calc(33.333% - 1rem);
 	/* Three items per row with gap */
-	min-width: 250px;
+	width: 30vw;
+	min-height: 100px;
 	/* Minimum width before wrapping */
-	background-color: var(--q-secondary);
+}
+
+.termin-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	padding: 0.5rem;
+	margin: 10px;
 }
 
 .chart-wrapper {

@@ -5,7 +5,11 @@ export const useKalendarStore = defineStore("kalendar", {
 	state: () => ({
 		termine: [],
 	}),
-	getters: {},
+	getters: {
+		active() {
+			return this.termine;
+		},
+	},
 	actions: {
 		async fetchTermine() {
 			try {
@@ -17,6 +21,21 @@ export const useKalendarStore = defineStore("kalendar", {
 				this.termine = data;
 			} catch (error) {
 				console.error("Error fetching termine:", error);
+			}
+		},
+		async fetchTermin(id) {
+			try {
+				const response = await get_no_data(`/termine/${id}`);
+				if (!response.ok) {
+					throw new Error("Failed to fetch termin");
+				}
+				const data = await response.json();
+				const index = this.termine.findIndex((t) => t.id === id);
+				if (index !== -1) {
+					this.termine[index] = data;
+				}
+			} catch (error) {
+				console.error("Error fetching termin:", error);
 			}
 		},
 		async addTermin(termin) {
