@@ -7,12 +7,16 @@
 			</div>
 			<div class="box" id="zwei">
 				<h2>Aktuelle Statistik</h2>
-				<AccountPieGraphComponent />
+				<div class="bar-wrapper">
+					<AccountPieGraphComponent />
+				</div>
 			</div>
 			<div class="box" id="drei">
 				<div class="bar">
 					<h2>Aktivitäten letztes Jahr</h2>
-					<BarComponement />
+					<div class="bar-wrapper">
+						<BarComponement />
+					</div>
 				</div>
 			</div>
 		</div>
@@ -62,6 +66,13 @@ h2 {
 	border-radius: 10px;
 	box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
 		rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+
+.bar-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
 }
 
 @media screen and (min-width: 600px) {

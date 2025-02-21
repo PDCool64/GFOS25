@@ -25,7 +25,9 @@
 			</div>
 			<div class="chart-section">
 				<h4>Charts</h4>
-				<AccountPieGraphComponent />
+				<div class="chart-wrapper">
+					<AccountPieGraphComponent />
+				</div>
 			</div>
 		</div>
 		<!-- Space for future components -->
@@ -98,11 +100,11 @@ console.log(aufgabenStore.stats);
 	background-color: var(--q-secondary);
 }
 
-.chart-section {
+.chart-wrapper {
 	display: flex;
-	align-items: start;
-	justify-content: center;
-	min-height: 0;
+	flex-wrap: wrap;
+	gap: 1rem;
+	padding: 0.5rem;
 }
 
 .aufgaben {

@@ -134,4 +134,10 @@ aufgabenStore.$subscribe(() => {
 	display: flex;
 	align-items: center;
 }
+@media (max-width: 1024px) {
+	.bar-container {
+		width: 100vw;
+		height: auto;
+	}
+}
 </style>

@@ -62,7 +62,14 @@ aufgabenStore.$subscribe(() => {
 
 <style scoped>
 .wrapper {
-	width: auto;
+	width: 10vw;
 	height: 30vh;
+}
+
+@media (max-width: 1024px) {
+	.wrapper {
+		width: 100vw;
+		height: auto;
+	}
 }
 </style>

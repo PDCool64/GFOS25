@@ -60,9 +60,13 @@ const rows = computed(() => {
 		titel: aufgabe.titel,
 		beschreibung: aufgabe.beschreibung,
 		status: aufgabe.status,
-		faelligkeitsdatum: aufgabe.faelligkeitsdatum,
+		faelligkeitsdatum: displayDate(new Date(aufgabe.faelligkeitsdatum)),
 	}));
 });
+
+const displayDate = (date) => {
+	return new Date(date).toLocaleDateString();
+};
 
 const getRowClass = (row) => {
 	switch (row.status) {
@@ -85,7 +89,11 @@ const onClick = (id) => {
 
 <style scoped>
 .q-table {
-	width: 35vw;
+	width: 50vw;
+}
+
+.q-td {
+	font-size: 1.1em;
 }
 
 .status-orange {
@@ -98,5 +106,11 @@ const onClick = (id) => {
 
 .status-red {
 	background-color: var(--q-aufgabe-undone);
+}
+
+@media (max-width: 1024px) {
+	.q-table {
+		width: 100%;
+	}
 }
 </style>
