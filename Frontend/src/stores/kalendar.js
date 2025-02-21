@@ -3,11 +3,16 @@ import { get, post, get_no_data } from "../request";
 
 export const useKalendarStore = defineStore("kalendar", {
 	state: () => ({
-		termine: [],
+		termine: {},
 	}),
 	getters: {
 		active() {
-			return this.termine;
+			let validTermine = Object.values(this.termine).filter(
+				(aufgabe) =>
+					true || new Date(aufgabe.faelligkeitsdatum) > new Date()
+			);
+			console.log(validTermine);
+			return validTermine;
 		},
 	},
 	actions: {
@@ -18,7 +23,12 @@ export const useKalendarStore = defineStore("kalendar", {
 					throw new Error("Failed to fetch termine");
 				}
 				const data = await response.json();
-				this.termine = data;
+				this.termine = {};
+				for (const termin of data) {
+					this.termine[termin.id] = termin;
+					console.log(termin.id);
+				}
+				console.log(this.termine);
 			} catch (error) {
 				console.error("Error fetching termine:", error);
 			}
@@ -30,10 +40,7 @@ export const useKalendarStore = defineStore("kalendar", {
 					throw new Error("Failed to fetch termin");
 				}
 				const data = await response.json();
-				const index = this.termine.findIndex((t) => t.id === id);
-				if (index !== -1) {
-					this.termine[index] = data;
-				}
+				this.termine[id] = data;
 			} catch (error) {
 				console.error("Error fetching termin:", error);
 			}
@@ -47,7 +54,7 @@ export const useKalendarStore = defineStore("kalendar", {
 					throw new Error("Failed to add termin");
 				}
 				const data = await response.json();
-				this.termine.push(data);
+				this.termine[data.id] = data;
 			} catch (error) {
 				console.error("Error adding termin:", error);
 			}
@@ -62,14 +69,15 @@ export const useKalendarStore = defineStore("kalendar", {
 					throw new Error("Failed to update termin");
 				}
 				const data = await response.json();
-				const index = this.termine.findIndex((t) => t.id === id);
-				if (index !== -1) {
-					this.termine[index] = data;
-				}
+				this.termine[data.id] = data;
 			} catch (error) {
 				console.error("Error updating termin:", error);
 			}
 		},
+	},
+	persist: {
+		enabled: true,
+		strategy: "local",
 	},
 });
 
