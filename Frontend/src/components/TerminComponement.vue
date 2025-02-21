@@ -1,6 +1,5 @@
 <template>
 	<div class="wrapper">
-		{{ kalendarStore.termine }}
 		<h3 class="q-pa-xs">{{ kalendar?.titel }}</h3>
 		<div class="inner">
 			<q-icon class="icon" name="description" />
