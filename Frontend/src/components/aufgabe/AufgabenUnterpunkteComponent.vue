@@ -3,6 +3,7 @@
 		<div><h1>Unterpunkte</h1></div>
 		<div
 			v-for="punkt in aufgabenpunktList"
+			style="user-select: none"
 			:key="punkt.id"
 			:class="[
 				'titel',
