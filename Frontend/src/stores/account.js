@@ -10,7 +10,17 @@ export const useAccountStore = defineStore("account", {
 		},
 	}),
 	getters: {},
-	actions: {},
+	actions: {
+		reset() {
+			this.account = {
+				settings: this.account.settings,
+				id: -1,
+				email: "",
+				vorname: "",
+				nachname: "",
+			};
+		},
+	},
 	persist: {
 		enabled: true,
 		strategy: "local",

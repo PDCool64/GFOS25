@@ -19,7 +19,7 @@ export const useTokenStore = defineStore("token", {
 			const router = useRouter();
 			this.token = "";
 			this.refresh_token = "";
-			accountStore.$reset();
+			accountStore.reset();
 			await router.push("/login");
 		},
 		async refreshToken() {
