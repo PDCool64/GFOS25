@@ -1,6 +1,6 @@
 export default {
-	termin_erstellen: {
-		de: "Termin erstellen",
-		en: "create appointment",
+	anstehende_termine: {
+		de: "Anstehende Termine",
+		en: "Upcoming Appointments",
 	},
 };

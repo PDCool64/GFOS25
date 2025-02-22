@@ -60,6 +60,18 @@
 			<q-card style="width: 25vh; height: 25vh">
 				<q-card-section>Settings</q-card-section>
 				<q-toggle label="Dark Mode" v-model="darkMode" />
+				<q-select
+					v-model="accountStore.account.einstellungen.sprache"
+					:options="languages"
+					option-value="code"
+					option-label="name"
+					dense
+					outlined
+					class="q-ml-md"
+					style="max-width: 120px"
+					@update:model-value="changeLanguage"
+					emit-value
+					map-options />
 				<q-card-actions align="center">
 					<q-btn
 						label="OK"
@@ -92,7 +104,19 @@ const router = useRouter();
 
 const darkMode = ref($q.dark.isActive);
 
+const languages = [
+	{ name: "Deutsch", code: "de" },
+	{ name: "English", code: "en" },
+];
+
 const warning = ref(true);
+
+const changeLanguage = (language) => {
+	if (accountStore.account && accountStore.account.einstellungen) {
+		accountStore.account.einstellungen.sprache = language;
+	}
+	console.log("Language changed to", language);
+};
 
 watch(
 	() => darkMode.value,

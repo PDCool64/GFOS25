@@ -44,7 +44,13 @@
 		</div>
 		<!-- Space for future components -->
 		<div class="bottom-row">
-			<h4>Anstehende Termine</h4>
+			<h4>
+				{{
+					language["anstehende_termine"][
+						accountStore.account.einstellungen?.sprache
+					]
+				}}
+			</h4>
 			<div class="termin-wrapper">
 				<div v-for="id in kalendarIds" :key="id" class="task-item">
 					<TerminComponement :id="'' + id" />
@@ -55,6 +61,7 @@
 </template>
 
 <script setup>
+import language from "src/language";
 import { ref, watch } from "vue";
 import AufgabenComponent from "src/components/AufgabenComponent.vue";
 import AccountPieGraphComponent from "src/components/stats/aufgaben/AufgabenPieGraphComponent.vue";
