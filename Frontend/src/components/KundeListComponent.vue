@@ -15,6 +15,28 @@
 			</q-item-label>
 		</q-item-section>
 		<q-item-section side>
+			<q-btn-group rounded>
+				<q-btn
+					:label="
+						language['nicht_kontaktiert'][
+							accountStore.account.einstellungen.sprache
+						]
+					" />
+				<q-btn
+					:label="
+						language['kontaktiert'][
+							accountStore.account.einstellungen.sprache
+						]
+					" />
+				<q-btn
+					:label="
+						language['kunde'][
+							accountStore.account.einstellungen.sprache
+						]
+					" />
+			</q-btn-group>
+		</q-item-section>
+		<q-item-section side>
 			<div class="digital-clock">
 				{{ formattedTime }}
 			</div>
@@ -25,6 +47,10 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from "vue";
 import { useKundeStore } from "src/stores/kunde";
+import language from "src/language";
+import { useAccountStore } from "src/stores/account";
+
+const accountStore = useAccountStore();
 
 const props = defineProps({
 	id: String,
@@ -37,43 +63,60 @@ const kunde = props.kunde
 	? ref(kundenStore.kunden[props.id])
 	: ref(kundenStore.interessenten[props.id]);
 
-const currentTime = ref(new Date());
+const currentTime = ref(
+	new Date(new Date().getTime() + kunde.value.utcOffset * 1000 * 60)
+);
 let timer = null;
 onMounted(() => {
 	timer = setInterval(() => {
 		currentTime.value = new Date(
 			new Date().getTime() + kunde.value.utcOffset * 1000 * 60
 		);
-	}, 1000);
+	}, 6000);
 });
 onUnmounted(() => {
 	clearInterval(timer);
 });
 
 const formattedTime = computed(() =>
-	currentTime.value.toTimeString().slice(0, 8)
+	currentTime.value.toTimeString().slice(0, 5)
 );
 </script>
 
 <style lang="scss" scoped>
 .main {
-	background-color: var(--q-secondary);
+	background-color: var(--q-login-form);
 	border-bottom: 3px solid var(--q-primary);
 }
 .red {
 	background-color: var(--q-aufgabe-undone);
+	background-image: linear-gradient(
+		90deg,
+		var(--q-aufgabe-undone) 1%,
+		var(--q-login-form) 1%
+	);
 }
 .blue {
 	background-color: var(--q-aufgabe-in-progress);
+	background-image: linear-gradient(
+		90deg,
+		var(--q-aufgabe-in-progress) 1%,
+		var(--q-login-form) 1%
+	);
 }
 .green {
 	background-color: var(--q-aufgabe-done);
+	background-image: linear-gradient(
+		90deg,
+		var(--q-aufgabe-done) 1%,
+		var(--q-login-form) 1%
+	);
 }
 .digital-clock {
-	font-family: monospace;
 	font-size: 1.5rem;
-	padding: 0.5rem 1rem;
+	padding: 0.1rem 0.2rem;
 	text-align: center;
 	border-radius: 4px;
+	color: var(--q-login-form-text);
 }
 </style>

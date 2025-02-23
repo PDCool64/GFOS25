@@ -16,14 +16,24 @@
 				<button>login</button>
 			</form>
 			<button class="password" @click="onForgotPassword">
-				Forgot Password?
+				{{
+					language["passwort_vergessen"][
+						accountStore.account.einstellungen.sprache
+					]
+				}}
 			</button>
 		</div>
 
 		<q-dialog v-model="showPopup">
 			<q-card>
 				<q-card-section>
-					<h4>Leider Pech gehabt du Huremsom</h4>
+					<h4>
+						{{
+							language["leider_pech_gehabt"][
+								accountStore.account.einstellungen.sprache
+							]
+						}}
+					</h4>
 					<h5>Aber wird vielleicht später mal implementiert</h5>
 				</q-card-section>
 				<q-card-actions align="right">
@@ -45,6 +55,7 @@ import { useTokenStore } from "src/stores/token";
 import { useAccountStore } from "src/stores/account";
 import { useAufgabenStore } from "src/stores/aufgaben";
 import { useRouter } from "vue-router";
+import language from "src/language";
 
 const tokenStore = useTokenStore();
 const accountStore = useAccountStore();

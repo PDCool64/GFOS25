@@ -18,6 +18,7 @@
 					dense
 					icon="error"
 					aria-label="Messages"
+					@click="alertOpen = true"
 					color="yellow" />
 
 				<q-btn
@@ -58,7 +59,13 @@
 
 		<q-dialog v-model="settingsOpen" persistent>
 			<q-card style="width: 25vh; height: 25vh">
-				<q-card-section>Settings</q-card-section>
+				<q-card-section>
+					{{
+						language["einstellungen"][
+							accountStore.account.einstellungen.sprache
+						]
+					}}
+				</q-card-section>
 				<q-toggle label="Dark Mode" v-model="darkMode" />
 				<q-select
 					v-model="accountStore.account.einstellungen.sprache"
@@ -80,6 +87,18 @@
 				</q-card-actions>
 			</q-card>
 		</q-dialog>
+
+		<q-dialog v-model="alertOpen" persistent>
+			<q-card style="width: 25vh; height: 25vh">
+				<q-card-section>Message Center</q-card-section>
+				<q-card-actions align="center">
+					<q-btn
+						label="OK"
+						color="primary"
+						@click="alertOpen = false" />
+				</q-card-actions>
+			</q-card>
+		</q-dialog>
 	</q-layout>
 </template>
 
@@ -90,6 +109,7 @@ import { useTokenStore } from "src/stores/token";
 import { useRouter } from "vue-router";
 import { useQuasar } from "quasar";
 import { useAccountStore } from "src/stores/account";
+import language from "src/language";
 
 const tokenStore = useTokenStore();
 const accountStore = useAccountStore();
@@ -107,6 +127,7 @@ const darkMode = ref($q.dark.isActive);
 const languages = [
 	{ name: "Deutsch", code: "de" },
 	{ name: "English", code: "en" },
+	{ name: "Français", code: "fr" },
 ];
 
 const warning = ref(true);
@@ -163,6 +184,7 @@ const linksList = [
 const leftDrawerOpen = ref(false);
 
 const settingsOpen = ref(false);
+const alertOpen = ref(false);
 
 function toggleLeftDrawer() {
 	leftDrawerOpen.value = !leftDrawerOpen.value;

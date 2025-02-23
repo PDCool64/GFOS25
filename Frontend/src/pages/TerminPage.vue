@@ -5,7 +5,7 @@
 				<div class="text-h6">
 					{{
 						language["termin_erstellen"][
-							accountStore.account.einstellungen?.sprache
+							accountStore.account.einstellungen.sprache
 						]
 					}}
 				</div>
@@ -72,6 +72,7 @@ import language from "src/language";
 
 const accountStore = useAccountStore();
 const kalendarStore = useKalendarStore();
+const accountStore = useAccountStore();
 
 const termin = ref({
 	titel: "",

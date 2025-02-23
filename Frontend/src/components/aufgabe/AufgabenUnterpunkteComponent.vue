@@ -53,10 +53,13 @@ import { computed, ref, watch, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useAufgabenStore } from "src/stores/aufgaben";
 import AufgabenpunktCreateComponent from "../create/AufgabenpunktCreateComponent.vue";
+import language from "src/language";
+import { useAccountStore } from "src/stores/account";
 
 const accountStore = useAccountStore();
 const route = useRoute();
 const aufgabenStore = useAufgabenStore();
+const accountStore = useAccountStore();
 
 const props = defineProps({
 	id: {
