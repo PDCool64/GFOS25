@@ -22,7 +22,7 @@ INSERT INTO
         email,
         telefonnummer,
         kontaktstatus,
-        kundenststatus,
+        kundenstatus,
         utc_offset,
         ansprechpartner
     )

@@ -35,7 +35,7 @@ import java.util.List;
 	@NamedQuery(name = "Kunde.findByEmail", query = "SELECT k FROM Kunde k WHERE k.email = :email"),
 	@NamedQuery(name = "Kunde.findByTelefonnummer", query = "SELECT k FROM Kunde k WHERE k.telefonnummer = :telefonnummer"),
 	@NamedQuery(name = "Kunde.findByKontaktstatus", query = "SELECT k FROM Kunde k WHERE k.kontaktstatus = :kontaktstatus"),
-	@NamedQuery(name = "Kunde.findByKundenststatus", query = "SELECT k FROM Kunde k WHERE k.kundenststatus = :kundenststatus"),
+	@NamedQuery(name = "Kunde.findByKundenstatus", query = "SELECT k FROM Kunde k WHERE k.kundenstatus = :kundenstatus"),
 	@NamedQuery(name = "Kunde.findByUtcOffset", query = "SELECT k FROM Kunde k WHERE k.utcOffset = :utcOffset")})
 public class Kunde implements Serializable {
 
@@ -59,8 +59,8 @@ public class Kunde implements Serializable {
 	private String telefonnummer;
 	@Column(name = "KONTAKTSTATUS")
 	private Integer kontaktstatus;
-	@Column(name = "KUNDENSTSTATUS")
-	private Integer kundenststatus;
+	@Column(name = "KUNDENSTATUS")
+	private Integer kundenstatus;
 	@Column(name = "UTC_OFFSET")
 	private Integer utcOffset;
 	@OneToMany(mappedBy = "kunde")
@@ -139,12 +139,12 @@ public class Kunde implements Serializable {
 		this.kontaktstatus = kontaktstatus;
 	}
 
-	public Integer getKundenststatus() {
-		return kundenststatus;
+	public Integer getKundenstatus() {
+		return kundenstatus;
 	}
 
-	public void setKundenststatus(Integer kundenststatus) {
-		this.kundenststatus = kundenststatus;
+	public void setKundenstatus(Integer kundenstatus) {
+		this.kundenstatus = kundenstatus;
 	}
 
 	public Integer getUtcOffset() {

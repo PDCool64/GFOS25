@@ -7,6 +7,7 @@ const accountStore = useAccountStore();
 export const useKundeStore = defineStore("kunde", {
 	state: () => ({
 		kunden: {},
+		interessenten: {},
 	}),
 	getters: {},
 	actions: {
@@ -14,7 +15,11 @@ export const useKundeStore = defineStore("kunde", {
 			id = parseInt(id);
 			const response = await get_no_data("/kunde/" + id);
 			const data = await response.json();
-			this.kunden[id] = data;
+			if (data.kundenstatus == 1) {
+				this.interessenten[String(id)] = data;
+			} else {
+				this.kunden[String(id)] = data;
+			}
 			console.log(data);
 		},
 		async fetchOwnKunden() {
@@ -22,9 +27,21 @@ export const useKundeStore = defineStore("kunde", {
 				"/kunde/account/" + accountStore.account.id
 			);
 			const data = await response.json();
-			this.kunden = data;
+			for (const kunde of data) {
+				if (kunde.kundenstatus == 1) {
+					this.interessenten[String(kunde.id)] = kunde;
+				} else {
+					console.log(kunde);
+					this.kunden["" + kunde.id] = kunde;
+				}
+			}
+			console.log(this.kunden);
 			console.log(data);
 		},
+	},
+	persist: {
+		enabled: true,
+		strategy: "local",
 	},
 });
 
