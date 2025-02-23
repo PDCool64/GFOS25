@@ -24,11 +24,14 @@
 </template>
 
 <script setup>
+import language from "src/language";
 import { computed } from "vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
 import { useRouter } from "vue-router";
 import { QTable, QTr, QTd } from "quasar";
+import { useAccountStore } from "src/stores/account";
 
+const accountStore = useAccountStore();
 const router = useRouter();
 const aufgabenStore = useAufgabenStore();
 
@@ -44,13 +47,17 @@ const columns = [
 	},
 	{
 		name: "beschreibung",
-		label: "Beschreibung",
+		label: language["beschreibung"][
+			accountStore.account.einstellungen?.sprache
+		],
 		align: "left",
 		field: "beschreibung",
 	},
 	{
-		name: "faelligkeitsdatum",
-		label: "Fälligkeitsdatum",
+		name: "fälligkeitsdatum",
+		label: language["faelligkeitsdatum"][
+			accountStore.account.einstellungen?.sprache
+		],
 		align: "left",
 		field: "faelligkeitsdatum",
 	},

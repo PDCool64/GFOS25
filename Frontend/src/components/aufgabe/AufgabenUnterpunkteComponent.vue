@@ -1,6 +1,14 @@
 <template>
 	<div class="wrapper">
-		<div><h1>Unterpunkte</h1></div>
+		<div>
+			<h1>
+				{{
+					language["unterpunkte"][
+						accountStore.account.einstellungen?.sprache
+					]
+				}}
+			</h1>
+		</div>
 		<div
 			v-for="punkt in aufgabenpunktList"
 			style="user-select: none"
@@ -39,11 +47,14 @@
 </template>
 
 <script setup>
+import { useAccountStore } from "src/stores/account";
+import language from "src/language";
 import { computed, ref, watch, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useAufgabenStore } from "src/stores/aufgaben";
 import AufgabenpunktCreateComponent from "../create/AufgabenpunktCreateComponent.vue";
 
+const accountStore = useAccountStore();
 const route = useRoute();
 const aufgabenStore = useAufgabenStore();
 

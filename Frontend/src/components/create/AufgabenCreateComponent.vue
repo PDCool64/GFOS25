@@ -1,10 +1,20 @@
 <template>
 	<q-card class="aufgaben-card">
 		<q-card-section>
-			<q-input v-model="titel" label="Titel" />
+			<q-input
+				v-model="titel"
+				:label="
+					language['titel'][
+						accountStore.account.einstellungen?.sprache
+					]
+				" />
 			<q-input
 				v-model="beschreibung"
-				label="Beschreibung"
+				:label="
+					language['beschreibung'][
+						accountStore.account.einstellungen?.sprache
+					]
+				"
 				type="textarea" />
 			<!-- Input with Date-Picker as a popup -->
 			<q-input
@@ -12,7 +22,11 @@
 				v-model="faelligkeitsdatum"
 				mask="date"
 				:rules="['date']"
-				label="Fälligkeitsdatum">
+				:label="
+					language['faelligkeitsdatum'][
+						accountStore.account.einstellungen?.sprache
+					]
+				">
 				<template v-slot:append>
 					<q-icon name="event" class="cursor-pointer">
 						<q-popup-proxy
@@ -35,10 +49,18 @@
 			<q-select
 				v-model="prioritaet"
 				:options="prioritaetOptions"
-				label="Priorität" />
+				:label="
+					language['priorität'][
+						accountStore.account.einstellungen?.sprache
+					]
+				" />
 			<q-btn
 				@click="createAufgabe"
-				label="Aufgabe erstellen"
+				:label="
+					language['aufgabe_erstellen'][
+						accountStore.account.einstellungen?.sprache
+					]
+				"
 				color="primary" />
 		</q-card-section>
 	</q-card>
@@ -47,6 +69,10 @@
 <script setup>
 import { ref } from "vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
+import { useAccountStore } from "src/stores/account";
+import language from "src/language";
+
+const accountStore = useAccountStore();
 
 const emit = defineEmits(["creationDone"]);
 

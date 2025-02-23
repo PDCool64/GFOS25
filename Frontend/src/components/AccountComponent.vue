@@ -6,7 +6,11 @@
 				<p>{{ account.vorname }}</p>
 			</li>
 			<li>
-				Accountname: &nbsp;
+				{{
+					language["accountname"][
+						accountStore.account.einstellungen?.sprache
+					]
+				}}: &nbsp;
 				<p>{{ account.nachname }}</p>
 			</li>
 			<li>
@@ -14,7 +18,11 @@
 				<p>{{ account.email }}</p>
 			</li>
 			<li>
-				Telefonnummer: &nbsp;
+				{{
+					language["telefonnummer"][
+						accountStore.account.einstellungen?.sprache
+					]
+				}}: &nbsp;
 				<p>{{ account.telefonnummer }}</p>
 			</li>
 		</ul>
@@ -23,6 +31,11 @@
 
 <script setup>
 import { ref } from "vue";
+import { useAccountStore } from "src/stores/account";
+import language from "src/language";
+
+const accountStore = useAccountStore();
+
 const _2fa = ref(false);
 
 import { getAccountById } from "src/requests/account";

@@ -2,35 +2,61 @@
 	<q-page class="termin-page">
 		<q-card class="q-pa-md full-card">
 			<q-card-section>
-				<div class="text-h6">Termin erstellen</div>
+				<div class="text-h6">
+					{{
+						language["termin_erstellen"][
+							accountStore.account.einstellungen?.sprache
+						]
+					}}
+				</div>
 			</q-card-section>
 			<q-card-section>
 				<q-input
 					filled
 					v-model="termin.titel"
-					label="Titel"
+					:label="
+						language['titel'][
+							accountStore.account.einstellungen?.sprache
+						]
+					"
 					placeholder="Geben Sie den Titel ein" />
 				<q-input
 					filled
 					v-model="termin.beschreibung"
-					label="Beschreibung"
+					:label="
+						language['beschreibung'][
+							accountStore.account.einstellungen?.sprache
+						]
+					"
 					type="textarea"
 					autogrow
 					placeholder="Beschreibung des Termins" />
 				<q-input
 					filled
 					v-model="termin.startzeit"
-					label="Startzeit"
+					:label="
+						language['startzeit'][
+							accountStore.account.einstellungen?.sprache
+						]
+					"
 					type="datetime-local" />
 				<q-input
 					filled
 					v-model="termin.endzeit"
-					label="Endzeit"
+					:label="
+						language['endzeit'][
+							accountStore.account.einstellungen?.sprache
+						]
+					"
 					type="datetime-local" />
 			</q-card-section>
 			<q-card-actions align="right">
 				<q-btn
-					label="Erstellen"
+					:label="
+						language['erstellen'][
+							accountStore.account.einstellungen?.sprache
+						]
+					"
 					color="primary"
 					@click="createTermin" />
 			</q-card-actions>
@@ -41,7 +67,10 @@
 <script setup>
 import { ref } from "vue";
 import { useKalendarStore } from "src/stores/kalendar";
+import { useAccountStore } from "src/stores/account";
+import language from "src/language";
 
+const accountStore = useAccountStore();
 const kalendarStore = useKalendarStore();
 
 const termin = ref({

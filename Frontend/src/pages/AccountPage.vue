@@ -2,18 +2,36 @@
 	<div class="account">
 		<div class="account-wrapper">
 			<div class="box" id="eins">
-				<h2>Accountdetails</h2>
+				<h2>
+					{{
+						language["aktuelle_statistik"][
+							accountStore.account.einstellungen?.sprache
+						]
+					}}
+				</h2>
 				<AccountComponent />
 			</div>
 			<div class="box" id="zwei">
-				<h2>Aktuelle Statistik</h2>
+				<h2>
+					{{
+						language["aktuelle_statistik"][
+							accountStore.account.einstellungen?.sprache
+						]
+					}}
+				</h2>
 				<div class="bar-wrapper">
 					<AccountPieGraphComponent />
 				</div>
 			</div>
 			<div class="box" id="drei">
 				<div class="bar">
-					<h2>Aktivitäten letztes Jahr</h2>
+					<h2>
+						{{
+							language["aktivität"][
+								accountStore.account.einstellungen?.sprache
+							]
+						}}
+					</h2>
 					<div class="bar-wrapper">
 						<BarComponement />
 					</div>
@@ -27,6 +45,10 @@
 import BarComponement from "src/components/stats/aufgaben/AufgabenBarComponement.vue";
 import AccountPieGraphComponent from "src/components/stats/aufgaben/AufgabenPieGraphComponent.vue";
 import AccountComponent from "src/components/AccountComponent.vue";
+import { useAccountStore } from "src/stores/account";
+import language from "src/language";
+
+const accountStore = useAccountStore();
 </script>
 
 <style scoped>
