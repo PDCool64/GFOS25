@@ -15,7 +15,7 @@
 					v-for="col in props.cols"
 					:key="col.name"
 					:props="props"
-					style="cursor: pointer">
+					style="cursor: pointer; overflow: visible">
 					{{ props.row[col.field] }}
 				</q-td>
 			</q-tr>
@@ -116,5 +116,9 @@ const onClick = (id) => {
 	.q-table {
 		width: 100%;
 	}
+}
+.q-td {
+	white-space: normal !important;
+	word-wrap: break-word;
 }
 </style>

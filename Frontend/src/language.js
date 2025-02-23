@@ -80,4 +80,19 @@ export default {
 		en: "Bad Luck, you son of a bitch!",
 		fr: "Pas de chance, fils de pute!",
 	},
+	kontaktiert: {
+		de: "kontaktiert",
+		en: "contacted",
+		fr: "contacté",
+	},
+	nicht_kontaktiert: {
+		de: "nicht kontaktiert",
+		en: "not contacted",
+		fr: "pas contacté",
+	},
+	kunde: {
+		de: "Kunde",
+		en: "Client",
+		fr: "Client",
+	},
 };

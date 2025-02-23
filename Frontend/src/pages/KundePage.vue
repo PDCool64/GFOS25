@@ -46,4 +46,8 @@ kundenStore.fetchOwnKunden().finally(() => {
 	position: relative;
 	width: 70%;
 }
+
+h3 {
+	text-align: center;
+}
 </style>
