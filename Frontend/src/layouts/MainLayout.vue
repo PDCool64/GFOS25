@@ -129,32 +129,32 @@ watch(
 
 const linksList = [
 	{
-		title: "Übersicht",
+		title: "übersicht",
 		icon: "space_dashboard",
 		link: "/#/dashboard",
 	},
 	{
-		title: "Chat",
+		title: "chat",
 		icon: "chat",
 		link: "/#/chat",
 	},
 	{
-		title: "Kalender",
+		title: "kalender",
 		icon: "event",
 		link: "/#/calendar",
 	},
 	{
-		title: "Termin hinzufügen",
+		title: "termin_erstellen",
 		icon: "edit_calendar",
 		link: "/#/termin",
 	},
 	{
-		title: "Kunden",
+		title: "kunden",
 		icon: "support_agent",
 		link: "/#/clients",
 	},
 	{
-		title: "Account",
+		title: "account",
 		icon: "person",
 		link: "/#/account",
 	},
