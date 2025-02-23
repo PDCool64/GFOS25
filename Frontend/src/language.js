@@ -52,7 +52,7 @@ export default {
 	übersicht: {
 		de: "Übersicht",
 		en: "Dashboard",
-		fr: "Tableau de bord",
+		fr: "Résumé",
 	},
 	chat: {
 		de: "Chat",
@@ -72,6 +72,6 @@ export default {
 	account: {
 		de: "Account",
 		en: "Account",
-		fr: "Compte",
+		fr: "Account",
 	},
 };
