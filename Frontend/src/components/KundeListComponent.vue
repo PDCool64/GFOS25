@@ -9,6 +9,7 @@
 		<q-item-section>
 			<q-item-label>
 				{{ kunde.vorname }} {{ kunde.nachname }}
+				<q-badge rounded> {{ numberOfTasks }}</q-badge>
 			</q-item-label>
 			<q-item-label caption>
 				{{ kunde.email }}
@@ -49,8 +50,17 @@ import { ref, onMounted, onUnmounted, computed } from "vue";
 import { useKundeStore } from "src/stores/kunde";
 import language from "src/language";
 import { useAccountStore } from "src/stores/account";
+import { useAufgabenStore } from "src/stores/aufgaben";
 
 const accountStore = useAccountStore();
+const aufgabenStore = useAufgabenStore();
+
+const numberOfTasks = computed(() => {
+	for (const task in aufgabenStore.aufgaben) {
+		console.log(task);
+	}
+	return 4;
+});
 
 const props = defineProps({
 	id: String,

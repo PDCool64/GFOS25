@@ -72,7 +72,6 @@ import language from "src/language";
 
 const accountStore = useAccountStore();
 const kalendarStore = useKalendarStore();
-const accountStore = useAccountStore();
 
 const termin = ref({
 	titel: "",
