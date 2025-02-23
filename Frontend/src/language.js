@@ -58,6 +58,7 @@ export default {
 		de: "Chat",
 		en: "Chat",
 		fr: "Chat",
+		fr: "Chat",
 	},
 	kalender: {
 		de: "Kalender",
