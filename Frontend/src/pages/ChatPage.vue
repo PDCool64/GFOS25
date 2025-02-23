@@ -29,7 +29,11 @@
 					<q-item-section>
 						<q-item-label>
 							<q-icon name="edit" />
-							Chat beginnen
+							{{
+								language["chat_beginnen"][
+									accountStore.account.einstellungen.sprache
+								]
+							}}
 						</q-item-label>
 					</q-item-section>
 					<q-popup-proxy v-model="searchOpen">
@@ -66,7 +70,13 @@
 				<div class="everything" v-if="receiver !== -1">
 					<ChatComponent :receiver="receiver" />
 				</div>
-				<div v-else>Öffnen Sie einen Chat</div>
+				<div v-else>
+					{{
+						language["chat_oeffnen"][
+							accountStore.account.einstellungen.sprache
+						]
+					}}
+				</div>
 			</q-page>
 		</q-page-container>
 	</q-layout>
@@ -78,6 +88,7 @@ import ChatComponent from "src/components/ChatComponent.vue";
 import { useAccountStore } from "src/stores/account";
 import { useMessageStore } from "src/stores/message";
 import { useAccountsStore } from "src/stores/accounts";
+import language from "src/language";
 
 const receiver = ref(-1);
 

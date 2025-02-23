@@ -2,7 +2,13 @@
 	<q-page class="termin-page">
 		<q-card class="q-pa-md full-card">
 			<q-card-section>
-				<div class="text-h6">Termin erstellen</div>
+				<div class="text-h6">
+					{{
+						language["termin_erstellen"][
+							accountStore.account.einstellungen.sprache
+						]
+					}}
+				</div>
 			</q-card-section>
 			<q-card-section>
 				<q-input
@@ -41,8 +47,11 @@
 <script setup>
 import { ref } from "vue";
 import { useKalendarStore } from "src/stores/kalendar";
+import { useAccountStore } from "src/stores/account";
+import language from "src/language";
 
 const kalendarStore = useKalendarStore();
+const accountStore = useAccountStore();
 
 const termin = ref({
 	titel: "",
