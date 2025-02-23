@@ -30,9 +30,7 @@
 						<q-item-label>
 							<q-icon name="edit" />
 							{{
-								language["chat_beginnen"][
-									accountStore.account.einstellungen.sprache
-								]
+								language["chat_beginnen"][accountStore.sprache]
 							}}
 						</q-item-label>
 					</q-item-section>
@@ -71,11 +69,7 @@
 					<ChatComponent :receiver="receiver" />
 				</div>
 				<div v-else>
-					{{
-						language["chat_oeffnen"][
-							accountStore.account.einstellungen.sprache
-						]
-					}}
+					{{ language["chat_oeffnen"][accountStore.sprache] }}
 				</div>
 			</q-page>
 		</q-page-container>

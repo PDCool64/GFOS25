@@ -9,7 +9,9 @@
 		<q-item-section>
 			<q-item-label>
 				{{ kunde.vorname }} {{ kunde.nachname }}
-				<q-badge rounded> {{ numberOfTasks }}</q-badge>
+				<q-badge rounded v-if="numberOfTasks">
+					{{ numberOfTasks }}</q-badge
+				>
 			</q-item-label>
 			<q-item-label caption>
 				{{ kunde.email }}
@@ -56,10 +58,23 @@ const accountStore = useAccountStore();
 const aufgabenStore = useAufgabenStore();
 
 const numberOfTasks = computed(() => {
-	for (const task in aufgabenStore.aufgaben) {
-		console.log(task);
+	console.log("Computing number of tasks for " + props.id);
+
+	let sum = 0;
+	for (const id in aufgabenStore.aufgaben) {
+		const task = aufgabenStore.aufgaben[id];
+		console.log(task.kunde?.id);
+		if (task.kunde?.id === undefined) {
+			console.log(task);
+		}
+		if (task.kunde?.id != props.id) {
+			continue;
+		}
+		console.log("sum++");
+		sum++;
+		console.log("Summe = " + sum);
 	}
-	return 4;
+	return sum;
 });
 
 const props = defineProps({

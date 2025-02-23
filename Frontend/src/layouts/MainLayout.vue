@@ -60,15 +60,11 @@
 		<q-dialog v-model="settingsOpen" persistent>
 			<q-card style="width: 25vh; height: 25vh">
 				<q-card-section>
-					{{
-						language["einstellungen"][
-							accountStore.account.einstellungen.sprache
-						]
-					}}
+					{{ language["einstellungen"][accountStore.sprache] }}
 				</q-card-section>
 				<q-toggle label="Dark Mode" v-model="darkMode" />
 				<q-select
-					v-model="accountStore.account.einstellungen.sprache"
+					v-model="accountStore.sprache"
 					:options="languages"
 					option-value="code"
 					option-label="name"

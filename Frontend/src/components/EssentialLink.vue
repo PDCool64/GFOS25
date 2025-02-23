@@ -6,9 +6,7 @@
 
 		<q-item-section>
 			<q-item-label>{{
-				language[props.title][
-					accountStore.account.einstellungen.sprache
-				]
+				language[props.title][accountStore.sprache]
 			}}</q-item-label>
 		</q-item-section>
 	</q-item>

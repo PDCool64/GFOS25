@@ -9,7 +9,14 @@ export const useAccountStore = defineStore("account", {
 			nachname: "",
 		},
 	}),
-	getters: {},
+	getters: {
+		sprache() {
+			if (this.account.einstellungen === undefined) {
+				return "de";
+			}
+			return this.account.einstellungen.sprache;
+		},
+	},
 	actions: {
 		reset() {
 			this.account = {

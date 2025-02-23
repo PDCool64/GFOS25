@@ -16,11 +16,7 @@
 				<button>login</button>
 			</form>
 			<button class="password" @click="onForgotPassword">
-				{{
-					language["passwort_vergessen"][
-						accountStore.account.einstellungen.sprache
-					]
-				}}
+				{{ language["passwort_vergessen"][accountStore.sprache] }}
 			</button>
 		</div>
 
@@ -29,9 +25,7 @@
 				<q-card-section>
 					<h4>
 						{{
-							language["leider_pech_gehabt"][
-								accountStore.account.einstellungen.sprache
-							]
+							language["leider_pech_gehabt"][accountStore.sprache]
 						}}
 					</h4>
 					<h5>Aber wird vielleicht später mal implementiert</h5>
