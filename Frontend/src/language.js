@@ -70,4 +70,14 @@ export default {
 		en: "Account",
 		fr: "Compte",
 	},
+	passwort_vergessen: {
+		de: "Passwort vergessen?",
+		en: "Forgot Password?",
+		fr: "Mot de passe oublié?",
+	},
+	leider_pech_gehabt: {
+		de: "Leider Pech gehabt, du Huremsom!",
+		en: "Bad Luck, you son of a bitch!",
+		fr: "Pas de chance, fils de pute!",
+	},
 };
