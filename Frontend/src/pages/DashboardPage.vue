@@ -113,6 +113,9 @@ kalendarStore.fetchTermine().finally(() => {
 </script>
 
 <style scoped>
+h4 {
+	margin: auto 5px;
+}
 .dashboard-container {
 	display: grid;
 	grid-template-rows: auto 1fr;

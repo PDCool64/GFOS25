@@ -15,6 +15,11 @@
 			</q-item-label>
 		</q-item-section>
 		<q-item-section side>
+			<q-btn-group rounded>
+				<q-btn label="Test" /> <q-btn label="Test2"></q-btn
+			></q-btn-group>
+		</q-item-section>
+		<q-item-section side>
 			<div class="digital-clock">
 				{{ formattedTime }}
 			</div>
@@ -62,12 +67,27 @@ const formattedTime = computed(() =>
 }
 .red {
 	background-color: var(--q-aufgabe-undone);
+	background-image: linear-gradient(
+		90deg,
+		var(--q-aufgabe-undone) 1%,
+		var(--q-secondary) 1%
+	);
 }
 .blue {
 	background-color: var(--q-aufgabe-in-progress);
+	background-image: linear-gradient(
+		90deg,
+		var(--q-aufgabe-in-progress) 1%,
+		var(--q-secondary) 1%
+	);
 }
 .green {
 	background-color: var(--q-aufgabe-done);
+	background-image: linear-gradient(
+		90deg,
+		var(--q-aufgabe-done) 1%,
+		var(--q-secondary) 1%
+	);
 }
 .digital-clock {
 	font-family: monospace;

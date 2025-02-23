@@ -42,29 +42,31 @@ export default {
 	kunden: {
 		de: "Kunden",
 		en: "Clients",
+		fr: "Clients",
 	},
 	interessenten: {
 		de: "Interessenten",
 		en: "Prospects",
+		fr: "Prospects",
 	},
 	übersicht: {
 		de: "Übersicht",
 		en: "Dashboard",
+		fr: "Aperçu",
 	},
 	chat: {
 		de: "Chat",
 		en: "Chat",
+		fr: "Chat",
 	},
 	kalender: {
 		de: "Kalender",
 		en: "Calendar",
-	},
-	termin_erstellen: {
-		de: "Termin erstellen",
-		en: "Create Appointment",
+		fr: "Calendrier",
 	},
 	account: {
 		de: "Account",
 		en: "Account",
+		fr: "Compte",
 	},
 };
