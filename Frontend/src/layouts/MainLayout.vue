@@ -64,7 +64,7 @@
 				</q-card-section>
 				<q-toggle label="Dark Mode" v-model="darkMode" />
 				<q-select
-					v-model="accountStore.sprache"
+					v-model="accountStore.account.einstellungen.sprache"
 					:options="languages"
 					option-value="code"
 					option-label="name"
@@ -195,6 +195,11 @@ const linksList = computed(() => {
 					title: "kalender",
 					icon: "event",
 					link: "/#/calendar",
+				},
+				{
+					title: "termin_erstellen",
+					icon: "edit_calendar",
+					link: "/#/termin",
 				},
 				{
 					title: "account",
