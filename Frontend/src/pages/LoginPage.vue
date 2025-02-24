@@ -68,7 +68,9 @@ const onSubmit = async () => {
 	const data = await login(email.value, password.value);
 
 	if (data?.token != "") {
-		router.push("/dashboard");
+		const account = JSON.parse(data.account);
+		if (account.rang > 0) router.push("/managment_dashboard");
+		else router.push("/dashboard");
 	}
 
 	accountStore.account = JSON.parse(data.account);

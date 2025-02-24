@@ -99,7 +99,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import EssentialLink from "components/EssentialLink.vue";
 import { useTokenStore } from "src/stores/token";
 import { useRouter } from "vue-router";
@@ -144,38 +144,65 @@ watch(
 	}
 );
 
-const linksList = [
-	{
-		title: "übersicht",
-		icon: "space_dashboard",
-		link: "/#/dashboard",
-	},
-	{
-		title: "chat",
-		icon: "chat",
-		link: "/#/chat",
-	},
-	{
-		title: "kalender",
-		icon: "event",
-		link: "/#/calendar",
-	},
-	{
-		title: "termin_erstellen",
-		icon: "edit_calendar",
-		link: "/#/termin",
-	},
-	{
-		title: "kunden",
-		icon: "support_agent",
-		link: "/#/clients",
-	},
-	{
-		title: "account",
-		icon: "person",
-		link: "/#/account",
-	},
-];
+const linksList = computed(() => {
+	return accountStore.account.rang < 1
+		? //  Non-Managment Links
+		  [
+				{
+					title: "übersicht",
+					icon: "space_dashboard",
+					link: "/#/dashboard",
+				},
+				{
+					title: "chat",
+					icon: "chat",
+					link: "/#/chat",
+				},
+				{
+					title: "kalender",
+					icon: "event",
+					link: "/#/calendar",
+				},
+				{
+					title: "termin_erstellen",
+					icon: "edit_calendar",
+					link: "/#/termin",
+				},
+				{
+					title: "kunden",
+					icon: "support_agent",
+					link: "/#/clients",
+				},
+				{
+					title: "account",
+					icon: "person",
+					link: "/#/account",
+				},
+		  ]
+		: //   Managment Links
+		  [
+				{
+					title: "übersicht",
+					icon: "space_dashboard",
+					link: "/#/managment_dashboard",
+				},
+				{
+					title: "chat",
+					icon: "chat",
+					link: "/#/chat",
+				},
+				{
+					title: "kalender",
+					icon: "event",
+					link: "/#/calendar",
+				},
+				{
+					title: "account",
+					icon: "person",
+					link: "/#/account",
+				},
+		  ];
+});
 
 const leftDrawerOpen = ref(false);
 

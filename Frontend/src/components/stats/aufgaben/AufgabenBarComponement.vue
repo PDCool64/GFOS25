@@ -1,6 +1,6 @@
 <template>
 	<div class="bar-container">
-		<canvas id="myChart"></canvas>
+		<canvas :id="'myChart' + props.id"></canvas>
 	</div>
 </template>
 
@@ -9,6 +9,19 @@ import { onMounted, ref } from "vue";
 import { Chart, registerables } from "chart.js";
 import { useAufgabenStore } from "src/stores/aufgaben";
 
+const props = defineProps({
+	year: {
+		type: Number,
+		default: new Date().getFullYear(),
+	},
+	id: {
+		required: true,
+	},
+	title: {
+		type: Object,
+	},
+});
+
 const aufgabenStore = useAufgabenStore();
 Chart.register(...registerables);
 
@@ -16,11 +29,7 @@ const StatusImMonat = (monat, status) => {
 	let count = 0;
 	for (const aufgabe of Object.values(aufgabenStore.aufgaben)) {
 		const date = new Date(aufgabe.faelligkeitsdatum);
-		console.log(aufgabe.faelligkeitsdatum);
-		if (
-			date.getMonth() === monat &&
-			date.getFullYear() === new Date().getFullYear() - 1
-		) {
+		if (date.getMonth() === monat && date.getFullYear() === props.year) {
 			if (aufgabe.status == status) {
 				count++;
 			}
@@ -32,7 +41,7 @@ const StatusImMonat = (monat, status) => {
 const chartRef = ref(null);
 
 onMounted(() => {
-	const ctx = document.getElementById("myChart").getContext("2d");
+	const ctx = document.getElementById("myChart" + props.id).getContext("2d");
 	const months = [
 		"January",
 		"February",
@@ -108,6 +117,9 @@ onMounted(() => {
 					},
 				},
 			},
+			plugins: {
+				title: props.title,
+			},
 			elements: {
 				line: {
 					borderWidth: 5, // Linienbreite
@@ -129,7 +141,7 @@ aufgabenStore.$subscribe(() => {
 
 <style scoped>
 .bar-container {
-	width: 60vw;
+	width: auto;
 	height: 35vh;
 	display: flex;
 	align-items: center;

@@ -59,6 +59,11 @@ const routes = [
 				component: () => import("pages/TerminPage.vue"),
 				meta: { requiresAuth: true },
 			},
+			{
+				path: "/managment_dashboard",
+				component: () => import("pages/ManagmentDashboardPage.vue"),
+				meta: { requiresAuth: true },
+			},
 		],
 	},
 	// Always leave this as last one,

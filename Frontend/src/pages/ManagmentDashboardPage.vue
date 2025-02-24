@@ -1,0 +1,59 @@
+<template>
+	<q-page class="dashboard-page">
+		<div class="grid-container" v-if="visible">
+			<div class="grid-item">
+				<AufgabenBarComponement
+					:id="0"
+					:year="currentYear - 1"
+					:title="{
+						display: true,
+						text: 'Last year',
+					}" />
+			</div>
+			<div class="grid-item">
+				<AufgabenBarComponement
+					:id="1"
+					:year="currentYear"
+					:title="{
+						display: true,
+						text: 'This year',
+					}" />
+			</div>
+			<div class="grid-item"></div>
+			<div class="grid-item"></div>
+		</div>
+	</q-page>
+</template>
+
+<script setup>
+import AufgabenBarComponement from "src/components/stats/aufgaben/AufgabenBarComponement.vue";
+import { useAufgabenStore } from "src/stores/aufgaben";
+import { ref } from "vue";
+
+const aufgabenStore = useAufgabenStore();
+const visible = ref(false);
+const currentYear = new Date().getFullYear();
+
+aufgabenStore.fetchAllAufgaben().then(() => {
+	console.log(aufgabenStore.aufgaben);
+	visible.value = true;
+});
+</script>
+
+<style scoped>
+.dashboard-page {
+	padding: 16px;
+}
+
+/* CSS Grid for the charts */
+.grid-container {
+	display: grid;
+	gap: 16px;
+	/* Force exactly 2 columns per row */
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-item {
+	/* Optional styling for grid items */
+}
+</style>

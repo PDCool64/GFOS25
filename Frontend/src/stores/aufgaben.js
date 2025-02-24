@@ -86,6 +86,16 @@ export const useAufgabenStore = defineStore("aufgaben", {
 				this.aufgaben[aufgabe.aufgabe.id] = aufgabe.aufgabe;
 			}
 		},
+		async fetchAllAufgaben() {
+			const response = await get_no_data("/aufgaben/all");
+			if (!response.ok) {
+				throw new Error("HTTP error, status = " + response.status);
+			}
+			const data = await response.json();
+			for (const aufgabe of data) {
+				this.aufgaben[aufgabe.id] = aufgabe;
+			}
+		},
 		async fetchAufgabe(id) {
 			const response = await get_no_data("/aufgaben/" + id);
 			if (!response.ok) {
