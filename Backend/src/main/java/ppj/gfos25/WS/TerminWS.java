@@ -55,8 +55,9 @@ public class TerminWS {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public Response createTermin(Termin termin) {
-    Termin createdTermin = terminFacade.createTermin(termin);
+  public Response createTermin(String termin) {
+    Termin t = jsonb.fromJson(termin, Termin.class);
+    Termin createdTermin = terminFacade.createTermin(t);
     if (createdTermin == null) {
       return responseService.badRequest("Error creating Termin");
     }

@@ -62,7 +62,8 @@ const calendarApp = createCalendar({
 
 kalenderStore.fetchTermine().then(() => {
 	console.log(kalenderStore.termine);
-	for (let temp of kalenderStore.termine) {
+	for (let id in kalenderStore.termine) {
+		const temp = kalenderStore.termine[id];
 		let termin = {};
 		termin.start = temp.startzeit;
 		termin.end = temp.endzeit;

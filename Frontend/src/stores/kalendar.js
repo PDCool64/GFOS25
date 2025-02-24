@@ -46,9 +46,7 @@ export const useKalendarStore = defineStore("kalendar", {
 		},
 		async addTermin(termin) {
 			try {
-				const response = await post("/termine", {
-					body: JSON.stringify(termin),
-				});
+				const response = await post("/termine", termin);
 				if (!response.ok) {
 					throw new Error("Failed to add termin");
 				}
