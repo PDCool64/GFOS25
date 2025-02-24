@@ -1,0 +1,1 @@
+import{b as t}from"./index-BoGljDLN.js";import{u as n}from"./token--ulPFVqS.js";const l=t(async({app:s,router:r})=>{const e=n();console.log(e),r.beforeEach(o=>{if(console.log(o),console.log(o.meta.requiresAuth),o.meta.requiresAuth&&e.token=="")return"/login"})});export{l as default};

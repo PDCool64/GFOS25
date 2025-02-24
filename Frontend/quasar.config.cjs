@@ -50,6 +50,8 @@ module.exports = configure(function (/* ctx */) {
 				node: "node20",
 			},
 
+			publicPath: "/Backend",
+
 			vueRouterMode: "hash", // available values: 'hash', 'history'
 			// vueRouterBase,
 			// vueDevtools,
