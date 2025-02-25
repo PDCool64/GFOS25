@@ -47,13 +47,28 @@
 				</template>
 			</q-input>
 			<q-select
+				v-model:model-value="kunde"
+				:options="kunden"
+				:label="language['kunde'][accountStore.sprache]"
+				:option-label="(opt) => opt.vorname + ' ' + opt.nachname">
+				<template v-slot:option="scope">
+					<q-item clickable v-bind="scope.itemProps">
+						<q-item-section>
+							<q-item-label>
+								{{ scope.opt.vorname }}
+								{{ scope.opt.nachname }}
+							</q-item-label>
+							<q-item-label caption>
+								{{ scope.opt.firma }}
+							</q-item-label>
+						</q-item-section>
+					</q-item>
+				</template>
+			</q-select>
+			<q-select
 				v-model="prioritaet"
 				:options="prioritaetOptions"
-				:label="
-					language['priorität'][
-						accountStore.account.einstellungen?.sprache
-					]
-				" />
+				:label="language['priorität'][accountStore.sprache]" />
 			<q-btn
 				@click="createAufgabe"
 				:label="
@@ -67,12 +82,22 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
 import { useAccountStore } from "src/stores/account";
 import language from "src/language";
+import { useKundeStore } from "src/stores/kunde";
 
 const accountStore = useAccountStore();
+const kundenStore = useKundeStore();
+
+const kunden = computed(() => {
+	let temp = [];
+	for (const id in kundenStore.kunden) {
+		temp.push(kundenStore.kunden[id]);
+	}
+	return temp;
+});
 
 const emit = defineEmits(["creationDone"]);
 
@@ -82,7 +107,22 @@ const titel = ref("");
 const beschreibung = ref("");
 const faelligkeitsdatum = ref("");
 const prioritaet = ref(null);
-const status = ref(null);
+const kunde = ref(null);
+
+const beispielKunden = [
+	{
+		vorname: "Gerhard",
+		nachname: "Müller",
+		firma: "Gerhard Müller AG",
+		email: "gerhard.müller@ghag.de",
+	},
+	{
+		vorname: "Hans",
+		nachname: "Schmidt",
+		firma: "Hans Schmidt GmbH",
+		email: "hans.schmidt@hs.com",
+	},
+];
 
 const prioritaetOptions = [
 	{ label: "Low", value: 0 },
@@ -110,8 +150,10 @@ async function createAufgabe() {
 		erstellungsdatum: formatDate(new Date()),
 		faelligkeitsdatum: faelligkeitsdatum.value,
 		prioritaet: prioritaet.value.value,
+		kunde: kunde.value,
 		status: 0,
 	};
+	console.log(newAufgabe);
 	await aufgabenStore.createAufgabe(newAufgabe);
 
 	emit("creationDone");
