@@ -1,5 +1,8 @@
 import { defineStore, acceptHMRUpdate } from "pinia";
 import { get, post, get_no_data } from "../request";
+import { useAccountStore } from "./account";
+
+const accountStore = useAccountStore();
 
 export const useKalendarStore = defineStore("kalendar", {
 	state: () => ({
@@ -28,6 +31,23 @@ export const useKalendarStore = defineStore("kalendar", {
 					console.log(termin.id);
 				}
 				console.log(this.termine);
+			} catch (error) {
+				console.error("Error fetching termine:", error);
+			}
+		},
+		async fetchOwnTermine() {
+			try {
+				const response = await get_no_data(
+					"/termine/account/" + accountStore.account.id
+				);
+				if (!response.ok) {
+					throw new Error("Failed to fetch termine");
+				}
+				const data = await response.json();
+				this.termine = {};
+				for (const termin of data) {
+					this.termine[termin.id] = termin;
+				}
 			} catch (error) {
 				console.error("Error fetching termine:", error);
 			}
