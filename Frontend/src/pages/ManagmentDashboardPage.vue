@@ -19,7 +19,9 @@
 						text: 'This year',
 					}" />
 			</div>
-			<div class="grid-item"></div>
+			<div class="grid-item">
+				<KundenstatusDoughtnutComponement />
+			</div>
 			<div class="grid-item"></div>
 		</div>
 	</q-page>
@@ -29,6 +31,7 @@
 import AufgabenBarComponement from "src/components/stats/aufgaben/AufgabenBarComponement.vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
 import { ref } from "vue";
+import KundenstatusDoughtnutComponement from "src/components/stats/kunden/KundenstatusDoughtnutComponement.vue";
 
 const aufgabenStore = useAufgabenStore();
 const visible = ref(false);

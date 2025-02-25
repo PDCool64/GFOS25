@@ -9,7 +9,22 @@ export const useKundeStore = defineStore("kunde", {
 		kunden: {},
 		interessenten: {},
 	}),
-	getters: {},
+	getters: {
+		activeStats() {
+			let stats = {
+				kunden: 0,
+				interessenten: 0,
+			};
+			for (const kunde of Object.values(this.kunden)) {
+				if (kunde.kundenstatus == 1) {
+					stats.interessenten++;
+				} else {
+					stats.kunden++;
+				}
+			}
+			return stats;
+		},
+	},
 	actions: {
 		async fetchKunde(id) {
 			id = parseInt(id);
@@ -37,7 +52,7 @@ export const useKundeStore = defineStore("kunde", {
 			}
 			console.log(this.kunden);
 			console.log(data);
-		},
+		}, 
 		async fetchAllKunden() {
 			const response = await get_no_data("/kunde/all");
 			const data = await response.json();
