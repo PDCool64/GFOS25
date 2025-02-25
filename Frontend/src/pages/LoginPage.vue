@@ -69,7 +69,7 @@ const onSubmit = async () => {
 
 	if (data?.token != "") {
 		const account = JSON.parse(data.account);
-		if (account.rang > 0) router.push("/managment_dashboard");
+		if (account.rang > 0) router.push("/management_dashboard");
 		else router.push("/dashboard");
 	}
 
