@@ -60,7 +60,7 @@ const calendarApp = createCalendar({
 	events: events.value,
 });
 
-kalenderStore.fetchTermine().then(() => {
+kalenderStore.fetchOwnTermine().then(() => {
 	console.log(kalenderStore.termine);
 	for (let id in kalenderStore.termine) {
 		const temp = kalenderStore.termine[id];

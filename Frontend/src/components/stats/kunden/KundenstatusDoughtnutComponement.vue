@@ -17,6 +17,7 @@ const kundenStore = useKundeStore();
 
 kundenStore.fetchAllKunden().then(() => {
 	console.log(kundenStore.kunden);
+	console.log(kundenStore.interessenten);
 });
 
 const data = ref({
