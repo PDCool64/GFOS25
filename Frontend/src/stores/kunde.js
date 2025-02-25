@@ -1,6 +1,7 @@
 import { defineStore, acceptHMRUpdate } from "pinia";
 import { get, get_no_data } from "src/request";
 import { useAccountStore } from "./account";
+import KundeComponent from "src/components/KundeComponent.vue";
 
 const accountStore = useAccountStore();
 
@@ -12,16 +13,27 @@ export const useKundeStore = defineStore("kunde", {
 	getters: {
 		activeStats() {
 			let stats = {
+				kein_Kontakt: 0,
+				kontakt_aufgenommen: 0,
 				kunden: 0,
 				interessenten: 0,
 			};
 			for (const kunde of Object.values(this.kunden)) {
 				if (kunde.kundenstatus == 1) {
 					stats.interessenten++;
-				} else {
-					stats.kunden++;
+					continue;
 				}
+				if (kunde.kontaktstatus == 0) {
+					stats.kein_Kontakt++;
+					continue;
+				}
+				if (kunde.kontaktstatus == 1) {
+					stats.kontakt_aufgenommen++;
+					continue;
+				}
+				stats.kunden++;
 			}
+			console.log(stats);
 			return stats;
 		},
 	},
@@ -52,10 +64,11 @@ export const useKundeStore = defineStore("kunde", {
 			}
 			console.log(this.kunden);
 			console.log(data);
-		}, 
+		},
 		async fetchAllKunden() {
 			const response = await get_no_data("/kunde/all");
 			const data = await response.json();
+			console.log(data);
 			for (const kunde of data) {
 				if (kunde.kundenstatus == 1) {
 					this.interessenten[String(kunde.id)] = kunde;

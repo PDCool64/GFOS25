@@ -1,6 +1,10 @@
 <template>
 	<div class="wrapper">
-		<Doughnut :data="data" :options="options" ref="chartRef" />
+		<Doughnut
+			:data="data"
+			:options="options"
+			ref="chartRef"
+			v-if="visible" />
 	</div>
 </template>
 
@@ -12,27 +16,36 @@ import { useKundeStore } from "src/stores/kunde";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+const visible = ref(false);
 const chartRef = ref(null);
 const kundenStore = useKundeStore();
 
-kundenStore.fetchAllKunden().then(() => {
-	console.log(kundenStore.kunden);
+const data = ref({
+	labels: ["Interested", "no contact", "contacted", "customer"],
 });
 
-const data = ref({
-	labels: ["Active", "Inactive"],
-	datasets: [
-		{
-			backgroundColor: ["#21BA45", "#F2C037"],
-			data: [
-				kundenStore.activeStats.kunden,
-				kundenStore.activeStats.interessenten,
-			],
-		},
-	],
+kundenStore.fetchAllKunden().then(() => {
+	console.log(kundenStore.kunden);
+	data.value = {
+		...data.value,
+		datasets: [
+			{
+				backgroundColor: ["#21BA45", "#F2C037", "#C10015", "#FF5733"],
+				data: [
+					kundenStore.activeStats.interessenten,
+					kundenStore.activeStats.kein_Kontakt,
+					kundenStore.activeStats.kontakt_aufgenommen,
+					kundenStore.activeStats.kunden,
+				],
+			},
+		],
+	};
+	visible.value = true;
 });
 
 console.log(kundenStore.activeStats.interessenten);
+console.log(kundenStore.activeStats.kein_Kontakt);
+console.log(kundenStore.activeStats.kontakt_aufgenommen);
 console.log(kundenStore.activeStats.kunden);
 
 const options = ref({
