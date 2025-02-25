@@ -184,7 +184,7 @@ const linksList = computed(() => {
 				{
 					title: "übersicht",
 					icon: "space_dashboard",
-					link: "/#/managment_dashboard",
+					link: "/#/management_dashboard",
 				},
 				{
 					title: "chat",

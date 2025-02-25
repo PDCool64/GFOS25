@@ -60,8 +60,9 @@ const routes = [
 				meta: { requiresAuth: true },
 			},
 			{
-				path: "/managment_dashboard",
-				component: () => import("pages/ManagmentDashboardPage.vue"),
+				path: "/management_dashboard",
+				component: () =>
+					import("src/pages/ManagementDashboardPage.vue"),
 				meta: { requiresAuth: true },
 			},
 		],
