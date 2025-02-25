@@ -63,28 +63,31 @@ onMounted(() => {
 				label: "In Progress",
 				data: months.map((month, index) => StatusImMonat(index, 1)),
 				borderColor: "#F2C037",
-				borderWidth: 5,
+				borderWidth: 3,
 				fill: false,
 				pointBackgroundColor: "#F2C037", // Punktfarbe
-				radius: 5, // Punktgröße
+				radius: 3, // Punktgröße
+				tension: 0.3,
 			},
 			{
 				label: "done",
 				data: months.map((month, index) => StatusImMonat(index, 2)),
 				borderColor: "#21BA45",
-				borderWidth: 5,
+				borderWidth: 3,
 				fill: false,
 				pointBackgroundColor: "#21BA45", // Punktfarbe
-				radius: 5, // Punktgröße
+				radius: 3, // Punktgröße
+				tension: 0.3,
 			},
 			{
 				label: "undone",
 				data: months.map((month, index) => StatusImMonat(index, 0)),
 				borderColor: "#C10015",
-				borderWidth: 5,
+				borderWidth: 3,
 				fill: false,
 				pointBackgroundColor: "#C10015",
-				radius: 5,
+				radius: 3,
+				tension: 0.3,
 			},
 		],
 	};
@@ -100,8 +103,14 @@ onMounted(() => {
 					},
 					ticks: {
 						font: {
-							size: 20, // Schriftgröße der x-Achse
+							size: 15, // Schriftgröße der x-Achse
 						},
+						color: "black", // Schriftfarbe der x-Achse
+					},
+					border: {
+						display: true,
+						width: 2, // Dicke der x-Achse
+						color: "black", // Farbe der x-Achse
 					},
 				},
 				y: {
@@ -114,6 +123,12 @@ onMounted(() => {
 						font: {
 							size: 20, // Schriftgröße der y-Achse
 						},
+						color: "black", // Farbe der y-Achsenschrift
+					},
+					border: {
+						display: true,
+						width: 2, // Dicke der x-Achse
+						color: "black", // Farbe der x-Achse
 					},
 				},
 			},
