@@ -97,10 +97,6 @@ export default {
 		en: "Client",
 		fr: "Client",
 	},
-	willkommen: {
-		de: "Willkommen zurück,",
-		en: "Welcome Back,",
-	},
 	aktive_aufgabe: {
 		de: "Aktive Aufgaben",
 		en: "Active Tasks",

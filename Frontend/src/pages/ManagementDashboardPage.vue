@@ -1,5 +1,13 @@
 <template>
 	<q-page class="dashboard-page">
+		<h3 style="font-weight: 700">
+			{{
+				language["willkommen_zurueck"][
+					accountStore.account.einstellungen?.sprache
+				]
+			}}
+			{{ accountStore.account.vorname }}!
+		</h3>
 		<div class="grid-container" v-if="visible">
 			<div class="grid-item">
 				<AufgabenBarComponement
@@ -30,10 +38,13 @@
 <script setup>
 import AufgabenBarComponement from "src/components/stats/aufgaben/AufgabenBarComponement.vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
+import { useAccountStore } from "src/stores/account";
 import { ref } from "vue";
 import KundenstatusDoughtnutComponement from "src/components/stats/kunden/KundenstatusDoughtnutComponement.vue";
+import language from "src/language";
 
 const aufgabenStore = useAufgabenStore();
+const accountStore = useAccountStore();
 const visible = ref(false);
 const currentYear = new Date().getFullYear();
 

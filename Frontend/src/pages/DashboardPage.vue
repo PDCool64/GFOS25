@@ -2,7 +2,7 @@
 	<div class="dashboard-container">
 		<h3 style="font-weight: 700">
 			{{
-				language["willkommen"][
+				language["willkommen_zurueck"][
 					accountStore.account.einstellungen?.sprache
 				]
 			}}
