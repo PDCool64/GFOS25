@@ -100,65 +100,81 @@ export default {
 	aktive_aufgabe: {
 		de: "Aktive Aufgaben",
 		en: "Active Tasks",
+		fr: "Tâches actives",
 	},
 	beschreibung: {
 		de: "Beschreibung",
 		en: "Description",
+		fr: "Description",
 	},
 	faelligkeitsdatum: {
 		de: "Fälligkeitsdatum",
 		en: "Due Date",
+		fr: "Date d'échéance",
 	},
 	unterpunkte: {
 		de: "Unterpunkte",
 		en: "Subitems",
+		fr: "Sous-points",
 	},
 	telefonnummer: {
 		de: "Telefonnummer",
 		en: "Phone Number",
+		fr: "Numéro de téléphone",
 	},
 	accountname: {
 		de: "Accountname",
 		en: "Account Name",
+		fr: "Nom",
 	},
 	accountdetails: {
 		de: "Accountdetails",
 		en: "Account Details",
+		fr: "Détails",
 	},
 	aktivität: {
 		de: "Aktivität letzes Jahr",
 		en: "Activity Last Year",
+		fr: "Activité de l'année dernière",
 	},
 	aktuelle_statistik: {
 		de: "Aktuelle Statistik",
 		en: "Current Statistics",
+		fr: "Statistiques actuelles",
 	},
 	termin_erstellen: {
 		de: "Termin erstellen",
 		en: "Create Appointment",
+		fr: "Créer un rendez-vous",
 	},
 	startzeit: {
 		de: "Startzeit",
 		en: "Start Time",
+		fr: "Heure de début",
 	},
 	endzeit: {
 		de: "Endzeit",
 		en: "End Time",
+		fr: "Heure de fin",
 	},
 	titel: {
 		de: "Titel",
 		en: "Title",
+		fr: "Titre",
 	},
 	priorität: {
 		de: "Priorität",
 		en: "Priority",
+		fr: "Priorité",
 	},
 	aufgabe_erstellen: {
 		de: "Aufgabe erstellen",
 		en: "Create Task",
+		fr: "Créer une tâche",
 	},
 	erstellen: {
 		de: "Erstellen",
 		en: "Create",
+		fr: "Créer",
 	},
 };
