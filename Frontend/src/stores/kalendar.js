@@ -1,5 +1,5 @@
 import { defineStore, acceptHMRUpdate } from "pinia";
-import { get, post, get_no_data } from "../request";
+import { get, post, get_no_data, post_no_data } from "../request";
 import { useAccountStore } from "./account";
 
 const accountStore = useAccountStore();
@@ -65,15 +65,29 @@ export const useKalendarStore = defineStore("kalendar", {
 			}
 		},
 		async addTermin(termin) {
+			let data;
 			try {
 				const response = await post("/termine", termin);
 				if (!response.ok) {
 					throw new Error("Failed to add termin");
 				}
-				const data = await response.json();
+				data = await response.json();
 				this.termine[data.id] = data;
 			} catch (error) {
 				console.error("Error adding termin:", error);
+			}
+			return data;
+		},
+		async addAufgabeToTermin(aufgabeId, terminId) {
+			try {
+				const response = await post_no_data(
+					`/termine/${terminId}/add-aufgabe/${aufgabeId}`
+				);
+				if (!response.ok) {
+					throw new Error("Failed to add aufgabe to termin");
+				}
+			} catch (error) {
+				console.error("Error adding aufgabe to termin:", error);
 			}
 		},
 		async updateTermin(id, termin) {

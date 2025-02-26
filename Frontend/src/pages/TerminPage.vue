@@ -17,7 +17,9 @@
 					placeholder="Beschreibung des Termins" />
 			</div>
 
-			<AufgabenSelectionComponent v-model="aufgaben" />
+			<AufgabenSelectionComponent
+				v-model="aufgaben"
+				@aufgabe-pushed="console.log(aufgaben)" />
 			<!-- Row with month view and toggles -->
 			<div class="row-container">
 				<div class="month-view">
@@ -185,7 +187,11 @@ const createTermin = async () => {
 				termin.value.endTime,
 		};
 		console.log(temp);
-		await kalendarStore.addTermin(temp);
+		const t = await kalendarStore.addTermin(temp);
+		console.log(t);
+		for (const a of aufgaben.value) {
+			kalendarStore.addAufgabeToTermin(a.id, t.id);
+		}
 		router.push("/calendar");
 		// Clear form
 		termin.value = {
