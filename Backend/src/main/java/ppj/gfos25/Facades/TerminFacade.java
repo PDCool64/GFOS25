@@ -9,8 +9,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.util.List;
 
+import ppj.gfos25.Entity.Aufgabe;
+import ppj.gfos25.Entity.Aufgabenbehandlung;
 import ppj.gfos25.Entity.Kalendar;
 import ppj.gfos25.Entity.Termin;
+import jakarta.ejb.EJB;
 import jakarta.ejb.LocalBean;
 
 /**
@@ -22,6 +25,9 @@ import jakarta.ejb.LocalBean;
 public class TerminFacade {
     @PersistenceContext
     private EntityManager em;
+
+    @EJB
+    private AufgabeFacade aufgabeFacade;
 
     public Termin createTermin(Termin t) {
         try {
@@ -87,4 +93,18 @@ public class TerminFacade {
             return false;
         }
     }
+
+    public Aufgabenbehandlung addAufgabeToTermin(int terminId, int aufgabeId) {
+        try {
+            Termin t = getTerminById(terminId);
+            Aufgabe a = aufgabeFacade.getAufgabeById(aufgabeId);
+            Aufgabenbehandlung ab = new Aufgabenbehandlung();
+            ab.setAufgabe(a);
+            ab.setTermin(t);
+            em.persist(ab);
+            return ab;
+        } catch (Exception e) {
+            return null;
+        }
+    }   
 }
