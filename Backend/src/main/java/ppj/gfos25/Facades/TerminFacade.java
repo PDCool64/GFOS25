@@ -9,6 +9,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.util.List;
 
+import ppj.gfos25.Entity.Account;
 import ppj.gfos25.Entity.Aufgabe;
 import ppj.gfos25.Entity.Aufgabenbehandlung;
 import ppj.gfos25.Entity.Kalendar;
@@ -28,6 +29,9 @@ public class TerminFacade {
 
     @EJB
     private AufgabeFacade aufgabeFacade;
+
+    @EJB
+    private AccountFacade accountFacade;
 
     public Termin createTermin(Termin t) {
         try {
@@ -103,6 +107,20 @@ public class TerminFacade {
             ab.setTermin(t);
             em.persist(ab);
             return ab;
+        } catch (Exception e) {
+            return null;
+        }
+    }   
+
+    public Kalendar addAccountToTermin(int terminId, int accountId) {
+        try {
+            Termin t = getTerminById(terminId);
+            Account a = accountFacade.getAccountById(accountId);
+            Kalendar k = new Kalendar();
+            k.setAccount(a);
+            k.setTermin(t);
+            em.persist(k);
+            return k;
         } catch (Exception e) {
             return null;
         }

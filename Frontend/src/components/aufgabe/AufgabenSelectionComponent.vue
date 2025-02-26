@@ -23,7 +23,6 @@
 	<div>
 		<q-list
 			v-if="showing"
-			floating
 			style="position: absolute; z-index: 2; margin: 20px">
 			<q-item
 				clickable
@@ -33,7 +32,7 @@
 				@click="handleClick(aufgabenList[aufgabe[0]])">
 				<q-item-section>
 					<q-item-label>{{
-						aufgabenList[aufgabe[0]].titel
+						aufgabenList[aufgabe[0]]?.titel
 					}}</q-item-label>
 					<q-item-label caption>
 						{{ aufgabenList[aufgabe[0]].kunde?.vorname }}

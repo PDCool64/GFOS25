@@ -90,6 +90,18 @@ export const useKalendarStore = defineStore("kalendar", {
 				console.error("Error adding aufgabe to termin:", error);
 			}
 		},
+		async addAccountToTermin(accountId, terminId) {
+			try {
+				const response = await post_no_data(
+					`/termine/${terminId}/add-account/${accountId}`
+				);
+				if (!response.ok) {
+					throw new Error("Failed to add account to termin");
+				}
+			} catch (error) {
+				console.error("Error adding account to termin:", error);
+			}
+		},
 		async updateTermin(id, termin) {
 			try {
 				const response = await post(`/termine/${id}`, {

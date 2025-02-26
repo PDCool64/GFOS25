@@ -20,6 +20,9 @@
 			<AufgabenSelectionComponent
 				v-model="aufgaben"
 				@aufgabe-pushed="console.log(aufgaben)" />
+			<AccountSelectionComponent
+				v-model="accounts"
+				@account-pushed="console.log(accounts)" />
 			<!-- Row with month view and toggles -->
 			<div class="row-container">
 				<div class="month-view">
@@ -92,6 +95,7 @@ import { useAccountStore } from "src/stores/account";
 import language from "src/language";
 import { useRouter } from "vue-router";
 import AufgabenSelectionComponent from "src/components/aufgabe/AufgabenSelectionComponent.vue";
+import AccountSelectionComponent from "src/components/account/AccountSelectionComponent.vue";
 
 const router = useRouter();
 
@@ -109,6 +113,7 @@ const termin = ref({
 });
 
 const aufgaben = ref([]);
+const accounts = ref([]);
 
 // Toggles for full day event and for showing end date/time.
 const fullDay = ref(false);
@@ -192,6 +197,11 @@ const createTermin = async () => {
 		for (const a of aufgaben.value) {
 			kalendarStore.addAufgabeToTermin(a.id, t.id);
 		}
+		for (const a of accounts.value) {
+			console.log(a);
+			kalendarStore.addAccountToTermin(a.id, t.id);
+		}
+		kalendarStore.addAccountToTermin(accountStore.account.id, t.id);
 		router.push("/calendar");
 		// Clear form
 		termin.value = {

@@ -1,6 +1,7 @@
 package ppj.gfos25.WS;
 
 import ppj.gfos25.Entity.Aufgabenbehandlung;
+import ppj.gfos25.Entity.Kalendar;
 import ppj.gfos25.Entity.Termin;
 import ppj.gfos25.Facades.AccountFacade;
 import ppj.gfos25.Facades.TerminFacade;
@@ -106,5 +107,16 @@ public class TerminWS {
             return responseService.badRequest("Error adding Aufgabe to Termin");
         }
         return responseService.ok(jsonb.toJson(ab));
+    }
+
+    @POST 
+    @Path("/{id}/add-account/{aufgabeId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addAccountToTermin(@PathParam("id") int id, @PathParam("aufgabeId") int aufgabeId) {
+        Kalendar k = terminFacade.addAccountToTermin(id, aufgabeId);
+        if (k == null) {
+            return responseService.badRequest("Error adding Account to Termin");
+        }
+        return responseService.ok(jsonb.toJson(k));
     }
 }
