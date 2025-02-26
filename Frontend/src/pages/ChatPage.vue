@@ -51,10 +51,8 @@
 										console.log('Something works'),
 										(searchOpen = false)
 								">
-								{{ accountsStore.accounts[account[0]].vorname }}
-								{{
-									accountsStore.accounts[account[0]].nachname
-								}}
+								{{ accountList[account[0]].vorname }}
+								{{ accountList[account[0]].nachname }}
 								{{ account }}
 							</q-item>
 						</q-list>

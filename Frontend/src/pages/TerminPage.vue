@@ -17,6 +17,9 @@
 					placeholder="Beschreibung des Termins" />
 			</div>
 
+			<AufgabenSelectionComponent
+				v-model="aufgaben"
+				@aufgabe-pushed="console.log(aufgaben)" />
 			<!-- Row with month view and toggles -->
 			<div class="row-container">
 				<div class="month-view">
@@ -68,7 +71,6 @@
 				</div>
 			</div>
 
-			<!-- Action button -->
 			<div class="form-actions">
 				<q-btn
 					:label="
@@ -89,6 +91,7 @@ import { useKalendarStore } from "src/stores/kalendar";
 import { useAccountStore } from "src/stores/account";
 import language from "src/language";
 import { useRouter } from "vue-router";
+import AufgabenSelectionComponent from "src/components/aufgabe/AufgabenSelectionComponent.vue";
 
 const router = useRouter();
 
@@ -104,6 +107,8 @@ const termin = ref({
 	endDate: "",
 	endTime: "",
 });
+
+const aufgaben = ref([]);
 
 // Toggles for full day event and for showing end date/time.
 const fullDay = ref(false);
@@ -182,7 +187,11 @@ const createTermin = async () => {
 				termin.value.endTime,
 		};
 		console.log(temp);
-		await kalendarStore.addTermin(temp);
+		const t = await kalendarStore.addTermin(temp);
+		console.log(t);
+		for (const a of aufgaben.value) {
+			kalendarStore.addAufgabeToTermin(a.id, t.id);
+		}
 		router.push("/calendar");
 		// Clear form
 		termin.value = {
