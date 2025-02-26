@@ -109,7 +109,7 @@ onMounted(() => {
 					},
 					border: {
 						display: true,
-						width: 2, // Dicke der x-Achse
+						width: 1.5, // Dicke der x-Achse
 						color: "black", // Farbe der x-Achse
 					},
 				},
@@ -127,7 +127,7 @@ onMounted(() => {
 					},
 					border: {
 						display: true,
-						width: 2, // Dicke der x-Achse
+						width: 1.5, // Dicke der x-Achse
 						color: "black", // Farbe der x-Achse
 					},
 				},

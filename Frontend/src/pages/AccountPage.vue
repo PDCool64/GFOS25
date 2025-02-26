@@ -2,13 +2,7 @@
 	<div class="account">
 		<div class="account-wrapper">
 			<div class="box" id="eins">
-				<h2>
-					{{
-						language["aktuelle_statistik"][
-							accountStore.account.einstellungen?.sprache
-						]
-					}}
-				</h2>
+				<h2>Account</h2>
 				<AccountComponent />
 			</div>
 			<div class="box" id="zwei">
@@ -23,18 +17,18 @@
 					<AccountPieGraphComponent />
 				</div>
 			</div>
-			<div class="box" id="drei">
-				<div class="bar">
-					<h2>
-						{{
-							language["aktivität"][
-								accountStore.account.einstellungen?.sprache
-							]
-						}}
-					</h2>
-					<div class="bar-wrapper">
-						<BarComponement />
-					</div>
+		</div>
+		<div class="box" id="drei">
+			<div class="bar">
+				<h2>
+					{{
+						language["aktivität"][
+							accountStore.account.einstellungen?.sprache
+						]
+					}}
+				</h2>
+				<div class="bar-wrapper">
+					<BarComponement />
 				</div>
 			</div>
 		</div>
@@ -67,7 +61,6 @@ h2 {
 }
 
 .account {
-	margin-top: 0;
 	margin-left: 10%;
 	margin-right: 10%;
 	align-items: center;
@@ -76,7 +69,6 @@ h2 {
 	display: flex; /* Flexbox hinzufügen */
 	flex-direction: column; /* Elemente vertikal anordnen */
 	padding: 10px;
-	height: 100vh;
 }
 
 #eins {
@@ -101,10 +93,9 @@ h2 {
 	.account-wrapper {
 		display: grid;
 		grid-template-columns: 1fr 2fr 1fr;
-		grid-template-rows: 1fr 1fr 1fr;
 		gap: 1rem;
 		width: 100%;
-		height: 100%;
+		height: 50vh;
 	}
 
 	#eins {
@@ -118,8 +109,8 @@ h2 {
 	}
 
 	#drei {
-		grid-column: 1 / span 3;
-		grid-row: 2 / span 1;
+		margin-top: 20px;
+		width: 100%;
 		display: flex;
 		align-items: center;
 	}

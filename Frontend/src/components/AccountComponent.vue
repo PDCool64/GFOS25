@@ -1,44 +1,28 @@
 <template>
-	<div class="account-container">
-		<ul>
-			<li>
-				Name: &nbsp;
-				<p>{{ account.vorname }}</p>
-			</li>
-			<li>
-				{{
-					language["accountname"][
-						accountStore.account.einstellungen?.sprache
-					]
-				}}: &nbsp;
-				<p>{{ account.nachname }}</p>
-			</li>
-			<li>
-				E-Mail: &nbsp;
-				<p>{{ account.email }}</p>
-			</li>
-			<li>
-				{{
-					language["telefonnummer"][
-						accountStore.account.einstellungen?.sprache
-					]
-				}}: &nbsp;
-				<p>{{ account.telefonnummer }}</p>
-			</li>
-		</ul>
-	</div>
+	<q-table
+		:rows="transformedRows"
+		:columns="transformedColumns"
+		row-key="field"
+		hide-bottom
+		hide-header>
+		<template v-slot:body="props">
+			<q-tr :props="props">
+				<q-td v-for="col in props.cols" :key="col.name" :props="props">
+					{{ props.row[col.field] }}
+				</q-td>
+			</q-tr>
+		</template>
+	</q-table>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 import { useAccountStore } from "src/stores/account";
 import language from "src/language";
+import { getAccountById } from "src/requests/account";
 
 const accountStore = useAccountStore();
-
 const _2fa = ref(false);
-
-import { getAccountById } from "src/requests/account";
 
 const account = ref({});
 const fetchAccount = async () => {
@@ -48,32 +32,77 @@ const fetchAccount = async () => {
 	console.log(account.value);
 };
 
-fetchAccount();
+onMounted(() => {
+	fetchAccount();
+});
+
+const columns = [
+	{
+		name: "vorname",
+		label: "Vorname",
+		align: "left",
+		field: "vorname",
+	},
+	{
+		name: "nachname",
+		label: "Nachname",
+		align: "left",
+		field: "nachname",
+	},
+	{
+		name: "email",
+		label: "Email",
+		align: "left",
+		field: "email",
+	},
+	{
+		name: "telefonnummer",
+		label: "Telefonnummer",
+		align: "left",
+		field: "telefonnummer",
+	},
+];
+
+const rows = ref([]);
+
+watch(account, (newAccount) => {
+	rows.value = [newAccount];
+});
+
+// Transformiere die Datenstruktur, um die Achsen zu vertauschen
+const transformedColumns = ref([
+	{ name: "field", label: "Field", align: "left", field: "field" },
+	{ name: "value", label: "Value", align: "left", field: "value" },
+]);
+
+const transformedRows = computed(() => {
+	if (!rows.value.length) return [];
+	const accountData = rows.value[0];
+	return columns.map((col) => ({
+		field: col.label,
+		value: accountData[col.field],
+	}));
+});
 </script>
 
 <style scoped>
-ul {
-	margin: 0;
-	height: 30vh;
+.q-table__card {
+	height: auto;
 	width: auto;
-	padding: 0;
-	list-style-type: none;
-	display: flex;
-	flex-direction: column; /* Listenelemente vertikal anordnen */
+	background: transparent;
+	box-shadow: none;
 }
 
-li {
-	padding: auto;
-	padding-left: 3em;
-	padding-right: 3em;
+.q-td {
+	background: transparent;
 	font-size: 1.5em;
-	display: flex; /* Inhalt innerhalb eines Listenelements horizontal anordnen */
-	flex-direction: row; /* Inhalt innerhalb eines Listenelements horizontal anordnen */
-	align-items: center; /* Vertikale Ausrichtung der Inhalte innerhalb eines Listenelements */
 }
 
-p {
-	opacity: 0.6;
-	margin-left: auto; /* Verschiebt das <p>-Element an das Ende des Listenelements */
+.q-tr {
+	background: transparent;
+}
+
+.q-td:nth-child(2) {
+	color: rgba(0, 0, 0, 0.5);
 }
 </style>
