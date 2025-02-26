@@ -1,10 +1,25 @@
 <template>
+	<q-list v-for="aufgabe in aufgaben" :key="aufgabe">
+		<q-item>
+			<q-item-section>
+				<q-item-label> {{ aufgabe.titel }} </q-item-label>
+				<q-item-label caption>
+					{{
+						aufgabe.beschreibung.split(" ").splice(0, 10).join(" ")
+					}}...
+				</q-item-label>
+			</q-item-section>
+			<q-item-section side>
+				{{ aufgabe.kunde.vorname }} {{ aufgabe.kunde.nachname }}
+			</q-item-section>
+		</q-item>
+	</q-list>
 	<q-input
 		type="search"
 		placeholder="Search..."
 		v-model="search"
-		@focus="(showing = true), console.log('Showing')"
-		@blur="showing = false" />
+		@focus="showing = true"
+		@blur="onFocusLost" />
 	<div>
 		<q-list
 			v-if="showing"
@@ -15,11 +30,7 @@
 				style="cursor: pointer; background-color: var(--q-login-form)"
 				v-for="aufgabe in searchableAufgaben"
 				:key="aufgabe"
-				@click="
-					(receiver = '' + account[0]),
-						console.log('Something works'),
-						(searchOpen = false)
-				">
+				@click="handleClick(aufgabenList[aufgabe[0]])">
 				<q-item-section>
 					<q-item-label>{{
 						aufgabenList[aufgabe[0]].titel
@@ -38,8 +49,24 @@
 import { useAufgabenStore } from "src/stores/aufgaben";
 import { computed, ref, watch } from "vue";
 
-const model = defineModel();
+const emit = defineEmits(["aufgabe-pushed"]);
+
+const aufgaben = defineModel();
 const showing = ref(false);
+
+const onFocusLost = () => {
+	setTimeout(() => {
+		showing.value = false;
+	}, 100);
+};
+
+const handleClick = (aufgabe) => {
+	console.log("Something still works");
+	aufgaben.value.push(aufgabe);
+	console.log(aufgaben.value);
+	search.value = "";
+	emit("aufgabe-pushed");
+};
 
 const aufgabenStore = useAufgabenStore();
 
@@ -63,9 +90,6 @@ watch(search, () => {
 	let temp = [];
 	for (let i = 0; i < aufgabenList.value.length; i++) {
 		let summe = 0;
-		console.log(aufgabenList.value);
-		console.log(aufgabenList.value[i]);
-		console.log(aufgabenList.value[i].titel);
 		summe +=
 			100 / 0.5 +
 			aufgabenList.value[i].titel
@@ -78,7 +102,6 @@ watch(search, () => {
 				.indexOf(search.value.toLowerCase());
 		temp.push([i, summe - 398]);
 	}
-	console.log(temp);
 	temp = temp.filter((a) => a[1] != 0);
 	temp.sort((a, b) => b[1] - a[1]);
 	searchableAufgaben.value = temp.slice(0, 5);
