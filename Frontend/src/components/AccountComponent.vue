@@ -6,7 +6,7 @@
 		hide-bottom
 		hide-header>
 		<template v-slot:body="props">
-			<q-tr :props="props">
+			<q-tr :props="props" class="q-tr--no-hover">
 				<q-td v-for="col in props.cols" :key="col.name" :props="props">
 					{{ props.row[col.field] }}
 				</q-td>
@@ -26,9 +26,7 @@ const _2fa = ref(false);
 
 const account = ref({});
 const fetchAccount = async () => {
-	let a = await getAccountById(1);
-	console.log(a);
-	account.value = a;
+	account.value = accountStore.account;
 	console.log(account.value);
 };
 

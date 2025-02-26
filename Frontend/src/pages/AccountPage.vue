@@ -14,7 +14,7 @@
 					}}
 				</h2>
 				<div class="bar-wrapper">
-					<AccountPieGraphComponent />
+					<AccountPieGraphComponent :id="0" />
 				</div>
 			</div>
 		</div>
@@ -28,7 +28,7 @@
 					}}
 				</h2>
 				<div class="bar-wrapper">
-					<BarComponement />
+					<BarComponement :id="1" />
 				</div>
 			</div>
 		</div>
