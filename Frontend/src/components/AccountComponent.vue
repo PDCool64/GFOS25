@@ -43,11 +43,9 @@ const columns = [
 	},
 	{
 		name: "name",
-		label: language["name"][
-			accountStore.sprache
-		],
+		label: language["name"][accountStore.sprache],
 		align: "left",
-		field: "name",
+		field: "nachname",
 	},
 	{
 		name: "email",
@@ -57,9 +55,7 @@ const columns = [
 	},
 	{
 		name: "telefonnummer",
-		label: language["telefonnummer"][
-			accountStore.sprache
-		],
+		label: language["telefonnummer"][accountStore.sprache],
 		align: "left",
 		field: "telefonnummer",
 	},
