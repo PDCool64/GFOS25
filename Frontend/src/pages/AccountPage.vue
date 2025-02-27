@@ -14,7 +14,7 @@
 					}}
 				</h2>
 				<div class="bar-wrapper">
-					<AccountPieGraphComponent :id="0" />
+					<AccountPieGraphComponent />
 				</div>
 			</div>
 		</div>
@@ -27,9 +27,7 @@
 						]
 					}}
 				</h2>
-				<div class="bar-wrapper">
-					<BarComponement :id="1" />
-				</div>
+				<BarComponement id="2" />
 			</div>
 		</div>
 	</div>
@@ -61,14 +59,17 @@ h2 {
 }
 
 .account {
-	margin-left: 10%;
-	margin-right: 10%;
+	margin-top: 0;
+	margin-left: 20%;
+	margin-right: 20%;
+	margin-bottom: 20%;
 	align-items: center;
 	justify-content: center;
 	text-align: center;
 	display: flex; /* Flexbox hinzufügen */
 	flex-direction: column; /* Elemente vertikal anordnen */
 	padding: 10px;
+	height: 100vh;
 }
 
 #eins {
@@ -86,16 +87,17 @@ h2 {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 100%;
+	width: auto;
+	height: auto;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 1024px) {
 	.account-wrapper {
 		display: grid;
-		grid-template-columns: 1fr 2fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr;
 		gap: 1rem;
 		width: 100%;
-		height: 50vh;
+		height: 100%;
 	}
 
 	#eins {
@@ -109,12 +111,14 @@ h2 {
 	}
 
 	#drei {
-		margin-top: 20px;
-		width: 100%;
 		display: flex;
 		align-items: center;
+		width: 100%;
+		text-align: center;
+		justify-content: center;
+		margin-top: 20px;
 	}
-	div {
+	#eins #zwei {
 		text-align: center;
 		justify-content: center;
 	}
