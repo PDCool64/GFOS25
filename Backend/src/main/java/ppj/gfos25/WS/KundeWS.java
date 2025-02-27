@@ -86,4 +86,15 @@ public class KundeWS {
         return responseService.ok(jsonb.toJson(a.getKundeList()));
 
     }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{id}/kontaktstatus/{status}")
+    public Response setKontaktstatus(@PathParam("id") int id, @PathParam("status") int status) {
+        Kunde k = kundeFacade.getKundeById(id);
+        k.setKontaktstatus(status);
+        return responseService.ok(jsonb.toJson(kundeFacade.updateKunde(k)));
+    }
+
 }
+

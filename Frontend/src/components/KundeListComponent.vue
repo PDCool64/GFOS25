@@ -17,12 +17,13 @@
 				{{ kunde.email }}
 			</q-item-label>
 		</q-item-section>
-		<q-item-section side>
+		<q-item-section side v-if="props.kunde">
 			<q-btn-group>
 				<q-btn
 					:class="[
 						{ active: props.kunde && kunde.kontaktstatus == 0 },
 					]"
+					@click="handleClick(0)"
 					:label="
 						language['nicht_kontaktiert'][
 							accountStore.account.einstellungen.sprache
@@ -32,6 +33,7 @@
 					:class="[
 						{ active: props.kunde && kunde.kontaktstatus == 1 },
 					]"
+					@click="handleClick(1)"
 					:label="
 						language['kontaktiert'][
 							accountStore.account.einstellungen.sprache
@@ -41,6 +43,7 @@
 					:class="[
 						{ active: props.kunde && kunde.kontaktstatus == 2 },
 					]"
+					@click="handleClick(2)"
 					:label="
 						language['kunde'][
 							accountStore.account.einstellungen.sprache
@@ -112,6 +115,14 @@ onUnmounted(() => {
 	clearInterval(timer);
 });
 
+const handleClick = (status) => {
+	console.log(kunde);
+	if (kunde.kontaktstatus == status) {
+		return;
+	}
+	kundenStore.updateKontaktstatus(kunde.value.id, status);
+};
+
 const formattedTime = computed(() =>
 	currentTime.value.toTimeString().slice(0, 5)
 );
@@ -157,10 +168,10 @@ const formattedTime = computed(() =>
 
 .q-btn-group {
 	box-shadow: none;
-	//background-color: var(--q-primary);
+	// background-color: var(--q-primary);
 	//color: white;
-	border: 1px solid var(--q-primary);
-	background: rgba($color: #000000, $alpha: 0.03);
+
+	background: rgba($color: #000000, $alpha: 0.075);
 }
 
 .q-btn {

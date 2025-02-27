@@ -1,5 +1,5 @@
 import { defineStore, acceptHMRUpdate } from "pinia";
-import { get, get_no_data } from "src/request";
+import { get, get_no_data, post_no_data } from "src/request";
 import { useAccountStore } from "./account";
 import KundeComponent from "src/components/KundeComponent.vue";
 
@@ -75,6 +75,17 @@ export const useKundeStore = defineStore("kunde", {
 				} else {
 					this.kunden[String(kunde.id)] = kunde;
 				}
+			}
+		},
+		async updateKontaktstatus(id, status) {
+			const response = await post_no_data(
+				"/kunde/" + id + "/kontaktstatus/" + status
+			);
+			const data = await response.json();
+			if (data.kundenstatus == 1) {
+				this.interessenten[String(id)] = data;
+			} else {
+				this.kunden[String(id)] = data;
 			}
 		},
 	},
