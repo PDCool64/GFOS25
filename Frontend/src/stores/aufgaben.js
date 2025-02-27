@@ -105,13 +105,13 @@ export const useAufgabenStore = defineStore("aufgaben", {
 			this.aufgaben[aufgabe.id.toString()] = aufgabe;
 		},
 		async createAufgabe(aufgabe) {
-			this.aufgaben[aufgabe.id] = aufgabe;
 			const response = await post("/aufgaben", aufgabe);
 			if (!response.ok) {
 				throw new Error("HTTP error, status = " + response.status);
 			}
 			const data = await response.json();
 			const aufgabenId = data.id;
+			this.aufgaben[aufgabenId] = data;
 
 			const response_to_account_add = await post_no_data(
 				`/aufgaben/${aufgabenId}/add-account/` + accountStore.account.id
