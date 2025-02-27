@@ -187,6 +187,11 @@ export default {
 		en: "First Name",
 		fr: "Prénom",
 	},
+	name: {
+		de: "Name",
+		en: "Name",
+		fr: "Nom",
+	},
 	letztes_jahr: {
 		de: "Letztes Jahr",
 		en: "Last Year",

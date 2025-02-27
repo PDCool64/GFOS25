@@ -18,20 +18,29 @@
 			</q-item-label>
 		</q-item-section>
 		<q-item-section side>
-			<q-btn-group rounded>
+			<q-btn-group>
 				<q-btn
+					:class="[
+						{ active: props.kunde && kunde.kontaktstatus == 0 },
+					]"
 					:label="
 						language['nicht_kontaktiert'][
 							accountStore.account.einstellungen.sprache
 						]
 					" />
 				<q-btn
+					:class="[
+						{ active: props.kunde && kunde.kontaktstatus == 1 },
+					]"
 					:label="
 						language['kontaktiert'][
 							accountStore.account.einstellungen.sprache
 						]
 					" />
 				<q-btn
+					:class="[
+						{ active: props.kunde && kunde.kontaktstatus == 2 },
+					]"
 					:label="
 						language['kunde'][
 							accountStore.account.einstellungen.sprache
@@ -143,5 +152,22 @@ const formattedTime = computed(() =>
 	text-align: center;
 	border-radius: 4px;
 	color: var(--q-login-form-text);
+}
+
+.q-btn-group {
+	box-shadow: none;
+	//background-color: var(--q-primary);
+	//color: white;
+	border: 1px solid var(--q-primary);
+	background: rgba($color: #000000, $alpha: 0.03);
+}
+
+.q-btn {
+	width: 9vw;
+}
+
+.q-btn.active {
+	background-color: var(--q-primary);
+	color: white;
 }
 </style>
