@@ -1,11 +1,13 @@
 <template>
-	<q-list v-for="account in accounts" :key="account">
-		<q-item>
-			<q-item-section>
-				{{ account.vorname }} {{ account.nachname }}
-			</q-item-section>
-		</q-item>
-	</q-list>
+	<div v-if="!props.hideNames">
+		<q-list v-for="account in accounts" :key="account">
+			<q-item>
+				<q-item-section>
+					{{ account.vorname }} {{ account.nachname }}
+				</q-item-section>
+			</q-item>
+		</q-list>
+	</div>
 	<q-input
 		type="search"
 		placeholder="Search..."
@@ -38,6 +40,9 @@ import { useAccountsStore } from "src/stores/accounts";
 import { computed, ref, watch } from "vue";
 
 const emit = defineEmits(["account-pushed"]);
+const props = defineProps({
+	hideNames: { type: Boolean, default: false },
+});
 
 const accounts = defineModel();
 const showing = ref(false);
@@ -53,7 +58,7 @@ const handleClick = (account) => {
 	accounts.value.push(account);
 	console.log(accounts.value);
 	search.value = "";
-	emit("account-pushed");
+	emit("account-pushed", account);
 };
 
 const accountStore = useAccountsStore();

@@ -154,4 +154,18 @@ public class AufgabeWS {
 		Aufgabe a = aufgabeFacade.getAufgabeById(id);
 		return responseService.ok(jsonb.toJson(a.getAufgabenpunktList()));
 	}
+
+	@POST
+	@Path("{id}/add-account/{accountId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addAccountToAufgabe(@PathParam("id") int id, @PathParam("accountId") int accountId) {
+		Aufgabe a = aufgabeFacade.getAufgabeById(id);
+		System.out.println(a);
+		Account account = accountFacade.getAccountById(accountId);
+		System.out.println(account);
+		Aufgabenbearbeitung ab = new Aufgabenbearbeitung();
+		ab.setAufgabe(a);
+		ab.setBearbeiter(account);
+		return responseService.ok(jsonb.toJson(aufgabeFacade.createAufgabenbearbeitung(ab)));
+	}
 }

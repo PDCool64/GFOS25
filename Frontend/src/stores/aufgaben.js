@@ -83,7 +83,7 @@ export const useAufgabenStore = defineStore("aufgaben", {
 			}
 			const data = await response.json();
 			for (const aufgabe of data) {
-				this.aufgaben[aufgabe.aufgabe.id] = aufgabe.aufgabe;
+				this.aufgaben[aufgabe.id] = aufgabe;
 			}
 		},
 		async fetchAllAufgaben() {
@@ -134,6 +134,14 @@ export const useAufgabenStore = defineStore("aufgaben", {
 			}
 			const data = await response.json();
 			this.aufgaben[id] = data;
+		},
+		async addAccountToAufgabe(aufgabeId, accountId) {
+			const response = await post_no_data(
+				`/aufgaben/${aufgabeId}/add-account/` + accountId
+			);
+			if (!response.ok) {
+				throw new Error("HTTP error, status = " + response.status);
+			}
 		},
 	},
 });

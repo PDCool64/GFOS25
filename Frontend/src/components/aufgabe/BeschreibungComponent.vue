@@ -108,7 +108,6 @@ const onClick = () => {};
 	flex-direction: column;
 	align-items: center;
 	background-color: var(--q-secondary);
-	border-radius: 5px;
 	cursor: pointer;
 	user-select: none;
 }
@@ -125,9 +124,9 @@ h3 {
 	margin-bottom: 10%;
 	margin-top: 10%;
 	padding: 0;
+	height: 100%;
 	list-style-type: none;
 	background-color: var(--q-secondary);
-	border-radius: 10px;
 	overflow-x: hidden;
 }
 

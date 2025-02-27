@@ -1,5 +1,6 @@
 package ppj.gfos25.WS;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.ejb.EJB;
@@ -14,6 +15,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
 import ppj.gfos25.Entity.Account;
+import ppj.gfos25.Entity.Aufgabe;
 import ppj.gfos25.Entity.Aufgabenbearbeitung;
 import ppj.gfos25.Facades.AccountFacade;
 import ppj.gfos25.Service.ResponseService;
@@ -93,7 +95,11 @@ public class AccountWS {
 			responseService.unauthorized("Token invalid");
 		}
 		List<Aufgabenbearbeitung> aufgabenbearbeitungsListe = accountFacade.getAllAufgabenbearbeitungByAccountId(id);
-		return responseService.ok(jsonb.toJson(aufgabenbearbeitungsListe));
+		List<Aufgabe> aufgabenListe = new ArrayList<>(); 
+		for (Aufgabenbearbeitung aufgabenbearbeitung : aufgabenbearbeitungsListe) {
+			aufgabenListe.add(aufgabenbearbeitung.getAufgabe());
+		}
+		return responseService.ok(jsonb.toJson(aufgabenListe));
 	}
 
 	@PUT
