@@ -51,6 +51,7 @@
 					" />
 			</q-btn-group>
 		</q-item-section>
+		<q-btn icon="arrow_downward"></q-btn>
 		<q-item-section side>
 			<div class="digital-clock">
 				{{ formattedTime }}
