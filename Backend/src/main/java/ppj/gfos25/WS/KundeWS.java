@@ -96,5 +96,13 @@ public class KundeWS {
         return responseService.ok(jsonb.toJson(kundeFacade.updateKunde(k)));
     }
 
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{id}/kundenstatus/{status}")
+    public Response setKundenstatus(@PathParam("id") int id, @PathParam("status") int status) {
+        Kunde k = kundeFacade.getKundeById(id);
+        k.setKundenstatus(status);
+        return responseService.ok(jsonb.toJson(kundeFacade.updateKunde(k)));
+    }
 }
 

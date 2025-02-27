@@ -88,6 +88,24 @@ export const useKundeStore = defineStore("kunde", {
 				this.kunden[String(id)] = data;
 			}
 		},
+		async updateKundenstatus(id, status) {
+			if (status) {
+				this.interessenten[id] = this.kunden[id];
+				delete this.kunden[id];
+			} else {
+				this.kunden[id] = this.interessenten[id];
+				delete this.interessenten[id];
+			}
+			const response = await post_no_data(
+				"/kunde/" + id + "/kundenstatus/" + Number(status)
+			);
+			const data = await response.json();
+			if (data.kundenstatus == 1) {
+				this.interessenten[String(id)] = data;
+			} else {
+				this.kunden[String(id)] = data;
+			}
+		},
 	},
 	persist: {
 		enabled: true,

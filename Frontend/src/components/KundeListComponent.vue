@@ -51,7 +51,10 @@
 					" />
 			</q-btn-group>
 		</q-item-section>
-		<q-btn icon="arrow_downward" class="arrow"></q-btn>
+		<q-btn
+			:icon="props.kunde ? 'arrow_downward' : 'arrow_upward'"
+			@click="changeKundenstatus"
+			class="arrow"></q-btn>
 		<q-item-section side>
 			<div class="digital-clock">
 				{{ formattedTime }}
@@ -122,6 +125,10 @@ const handleClick = (status) => {
 		return;
 	}
 	kundenStore.updateKontaktstatus(kunde.value.id, status);
+};
+
+const changeKundenstatus = () => {
+	kundenStore.updateKundenstatus(kunde.value.id, props.kunde);
 };
 
 const formattedTime = computed(() =>
