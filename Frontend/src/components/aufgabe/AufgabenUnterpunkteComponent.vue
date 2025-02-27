@@ -117,7 +117,7 @@ const onClick = (id) => {
 	border-radius: 5px;
 	display: flex;
 	flex-direction: column;
-	width: 20vw;
+	width: 10vw;
 	min-height: 50vh;
 	overflow-y: auto;
 	padding: 10px;

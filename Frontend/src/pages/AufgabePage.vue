@@ -2,19 +2,18 @@
 	<div id="aufgabe">
 		<h1 class="q-pa-xs">{{ aufgabe?.titel }}</h1>
 		<div class="wrapper">
-			<div v-if="aufgabe && bearbeiterList">
-				<q-list
-					style="
-						background-color: var(--q-primary);
-						height: max-content;
-						border-radius: 5px;
-					">
+			<div
+				class="bearbeiter"
+				v-if="aufgabe && bearbeiterList"
+				style="height: 50vh; overflow-y: auto">
+				<h2>Mitwirkende</h2>
+				<q-list style="height: max-content">
 					<q-item
 						v-for="bearbeiter in bearbeiterList"
 						style="color: white"
 						:key="bearbeiter">
 						<q-item-section>
-							<q-item-label>
+							<q-item-label class="email">
 								{{ bearbeiter?.vorname }}
 								{{ bearbeiter?.nachname }}
 							</q-item-label>
@@ -106,6 +105,34 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.email {
+	font-weight: bold;
+}
+
+.q-item {
+	background-color: var(--q-primary);
+	height: max-content;
+	border-radius: 5px;
+	margin-top: 0.5vw;
+	padding: 20px;
+}
+
+.bearbeiter {
+	padding: 1vw;
+	display: flex;
+	flex-direction: column;
+	margin-right: 1vw;
+	width: 25vw;
+	box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+		rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+h2 {
+	font-size: 3em;
+	font: Noto Sans;
+	font-weight: bold;
+	color: var(--q-primary);
+}
+
 #aufgabe {
 	align-items: center;
 	justify-content: center;
@@ -132,7 +159,7 @@ h1 {
 .unterpunkte {
 	height: 50vh;
 	overflow-y: auto;
-	width: 40vw;
+	width: 25vw;
 }
 
 .bar {
