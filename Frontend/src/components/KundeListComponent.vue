@@ -119,8 +119,9 @@ const formattedTime = computed(() =>
 
 <style lang="scss" scoped>
 .main {
+	margin: 1vh;
 	background-color: var(--q-login-form);
-	border-bottom: 3px solid var(--q-primary);
+	border: 1px solid var(--q-primary);
 }
 .red {
 	background-color: var(--q-aufgabe-undone);
