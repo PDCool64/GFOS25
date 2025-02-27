@@ -97,6 +97,11 @@ export default {
 		en: "Client",
 		fr: "Client",
 	},
+	kunden: {
+		de: "Kunden",
+		en: "Clients",
+		fr: "Clients",
+	},
 	aktive_aufgabe: {
 		de: "Aktive Aufgaben",
 		en: "Active Tasks",
@@ -181,5 +186,15 @@ export default {
 		de: "Vorname",
 		en: "First Name",
 		fr: "Prénom",
+	},
+	letztes_jahr: {
+		de: "Letztes Jahr",
+		en: "Last Year",
+		fr: "Année Dernière",
+	},
+	dieses_jahr: {
+		de: "Dieses Jahr",
+		en: "This Year",
+		fr: "Cette Année",
 	},
 };

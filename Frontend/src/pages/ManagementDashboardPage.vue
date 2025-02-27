@@ -10,20 +10,34 @@
 		</h3>
 		<div class="grid-container" v-if="visible">
 			<div class="grid-item">
+				<h4>
+					{{
+						language["letztes_jahr"][
+							accountStore.account.einstellungen?.sprache
+						]
+					}}
+				</h4>
 				<AufgabenBarComponement
 					:id="0"
 					:year="currentYear - 1"
 					:title="{
-						display: true,
+						display: false,
 						text: 'Last year',
 					}" />
 			</div>
 			<div class="grid-item">
+				<h4>
+					{{
+						language["dieses_jahr"][
+							accountStore.account.einstellungen?.sprache
+						]
+					}}
+				</h4>
 				<AufgabenBarComponement
 					:id="1"
 					:year="currentYear"
 					:title="{
-						display: true,
+						display: false,
 						text: 'This year',
 					}" />
 			</div>
