@@ -177,4 +177,9 @@ export default {
 		en: "Create",
 		fr: "Créer",
 	},
+	vorname: {
+		de: "Vorname",
+		en: "First Name",
+		fr: "Prénom",
+	},
 };

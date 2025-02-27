@@ -2,7 +2,13 @@
 	<div class="account">
 		<div class="account-wrapper">
 			<div class="box" id="eins">
-				<h2>Account</h2>
+				<h2>
+					{{
+						language["account"][
+							accountStore.account.einstellungen?.sprache
+						]
+					}}
+				</h2>
 				<AccountComponent />
 			</div>
 			<div class="box" id="zwei">
