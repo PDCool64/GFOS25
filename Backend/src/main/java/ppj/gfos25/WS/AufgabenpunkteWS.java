@@ -116,6 +116,18 @@ public class AufgabenpunkteWS {
             System.out.println(temp.getAufgabeId());
             return responseService.notFound("Aufgabe not found");
         }
+        boolean undone = true;
+        for (Aufgabenpunkt a : aufgabe.getAufgabenpunktList()) {
+            if (a.getErledigt())
+                undone = false;
+        }
+        if (undone) {
+            aufgabe.setStatus(0);
+        } else {
+            aufgabe.setStatus(1);
+        }
+
+
         Aufgabenpunkt ap;
         try {
             ap = jsonb.fromJson(aufgabenpunkt, Aufgabenpunkt.class);
