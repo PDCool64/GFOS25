@@ -188,6 +188,7 @@ h4 {
 
 .bottom-row {
 	min-height: 200px;
+	margin-bottom: 40px;
 	/* Minimum height for future components */
 }
 

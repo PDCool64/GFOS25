@@ -15,6 +15,7 @@
 			<q-icon name="schedule" class="icon" />
 			{{ kalendar?.startzeit }}
 		</div>
+		<div class="inner"></div>
 	</div>
 </template>
 
