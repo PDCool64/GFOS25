@@ -10,9 +10,10 @@ export const useKalendarStore = defineStore("kalendar", {
 	}),
 	getters: {
 		active() {
-			let validTermine = Object.values(this.termine).filter(
-				(aufgabe) => new Date(aufgabe.faelligkeitsdatum) > new Date()
-			);
+			let validTermine = Object.values(this.termine).filter((aufgabe) => {
+				console.log(aufgabe.endzeit);
+				return new Date(aufgabe.endzeit) > new Date();
+			});
 			console.log(validTermine);
 			return validTermine;
 		},
