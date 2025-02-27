@@ -182,4 +182,9 @@ export default {
 		en: "First Name",
 		fr: "Prénom",
 	},
+	name: {
+		de: "Name",
+		en: "Name",
+		fr: "Nom",
+	},
 };

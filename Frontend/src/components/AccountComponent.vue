@@ -37,14 +37,17 @@ onMounted(() => {
 const columns = [
 	{
 		name: "vorname",
-		label: language["vorname"][accountStore.account.einstellungen?.sprache],
+		label: language["vorname"][accountStore.sprache],
 		align: "left",
 		field: "vorname",
 	},
 	{
-		label: language["accountname"][
-			accountStore.account.einstellungen?.sprache
+		name: "name",
+		label: language["name"][
+			accountStore.sprache
 		],
+		align: "left",
+		field: "name",
 	},
 	{
 		name: "email",
@@ -55,7 +58,7 @@ const columns = [
 	{
 		name: "telefonnummer",
 		label: language["telefonnummer"][
-			accountStore.account.einstellungen?.sprache
+			accountStore.sprache
 		],
 		align: "left",
 		field: "telefonnummer",
