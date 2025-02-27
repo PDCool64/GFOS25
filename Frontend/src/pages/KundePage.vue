@@ -24,6 +24,17 @@
 				:key="kunde" />
 		</q-list>
 	</div>
+	<div class="plus-wrapper">
+		<div
+			:class="['plus', { active: null === activePunktId }]"
+			@click="openCreate = true">
+			<q-icon name="add" size="50px">
+				<q-popup-proxy cover v-model="openCreate">
+					<KundeCreateComponent />
+				</q-popup-proxy>
+			</q-icon>
+		</div>
+	</div>
 </template>
 
 <script setup>
@@ -31,6 +42,7 @@ import { useKundeStore } from "src/stores/kunde";
 import KundeListComponent from "src/components/KundeListComponent.vue";
 import language from "src/language";
 import { useAccountStore } from "src/stores/account";
+import KundeCreateComponent from "src/components/create/KundeCreateComponent.vue";
 
 const kundenStore = useKundeStore();
 const accountStore = useAccountStore();
@@ -49,5 +61,23 @@ kundenStore.fetchOwnKunden().finally(() => {
 
 h3 {
 	text-align: center;
+}
+
+.plus-wrapper {
+	display: flex;
+	justify-content: center; /* Zentriert das Plus-Symbol horizontal */
+	align-items: center;
+	margin-top: 10px; /* Optional: Abstand nach oben */
+}
+
+.plus {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50px;
+	height: 75px;
+	width: 75px;
+	background-color: var(--q-secondary);
+	cursor: pointer;
 }
 </style>

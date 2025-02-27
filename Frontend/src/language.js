@@ -202,4 +202,19 @@ export default {
 		en: "This Year",
 		fr: "Cette Année",
 	},
+	firma: {
+		de: "Firma",
+		en: "Company",
+		fr: "Entreprise",
+	},
+	ansprechpartner: {
+		de: "Ansprechpartner",
+		en: "Contact Person",
+		fr: "Contact",
+	},
+	kunde_erstellen: {
+		de: "Kunde erstellen",
+		en: "Create Client",
+		fr: "Créer un client",
+	},
 };
