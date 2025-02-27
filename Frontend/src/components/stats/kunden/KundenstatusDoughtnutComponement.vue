@@ -16,6 +16,10 @@ import { useKundeStore } from "src/stores/kunde";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+const props = defineProps({
+	title: Object,
+});
+
 const visible = ref(false);
 const chartRef = ref(null);
 const kundenStore = useKundeStore();
@@ -51,6 +55,9 @@ console.log(kundenStore.activeStats.kunden);
 const options = ref({
 	responsive: true,
 	maintainAspectRatio: false,
+	plugins: {
+		title: props.title,
+	},
 });
 
 onMounted(() => {

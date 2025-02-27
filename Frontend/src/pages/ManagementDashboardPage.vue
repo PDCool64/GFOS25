@@ -16,6 +16,9 @@
 					:title="{
 						display: true,
 						text: 'Last year',
+						font: {
+							size: 35,
+						},
 					}" />
 			</div>
 			<div class="grid-item">
@@ -25,10 +28,20 @@
 					:title="{
 						display: true,
 						text: 'This year',
+						font: {
+							size: 35,
+						},
 					}" />
 			</div>
 			<div class="grid-item">
-				<KundenstatusDoughtnutComponement />
+				<KundenstatusDoughtnutComponement
+					:title="{
+						display: true,
+						text: 'Kunden',
+						font: {
+							size: 35,
+						},
+					}" />
 			</div>
 			<div class="grid-item"></div>
 		</div>
