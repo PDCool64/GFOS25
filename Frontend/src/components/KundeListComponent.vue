@@ -51,7 +51,7 @@
 					" />
 			</q-btn-group>
 		</q-item-section>
-		<q-btn icon="arrow_downward"></q-btn>
+		<q-btn icon="arrow_downward" class="arrow"></q-btn>
 		<q-item-section side>
 			<div class="digital-clock">
 				{{ formattedTime }}
@@ -182,5 +182,21 @@ const formattedTime = computed(() =>
 .q-btn.active {
 	background-color: var(--q-primary);
 	color: white;
+}
+
+.arrow {
+	border-color: rgba($color: #000000, $alpha: 0.075);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50px;
+	height: 45px;
+	width: 45px;
+	cursor: pointer;
+	margin-left: 1vw;
+}
+
+.q-btn:before {
+	box-shadow: none;
 }
 </style>
