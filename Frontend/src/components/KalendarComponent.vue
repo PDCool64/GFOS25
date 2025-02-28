@@ -8,8 +8,13 @@
 						<div class="text-subtitle">
 							{{ calendarEvent.description }}
 						</div>
-						<q-separator />
-						<div class="text-subtitle">Aufgaben:</div>
+						<q-separator
+							v-if="calendarEvent.aufgaben.length != 0" />
+						<div
+							class="text-subtitle"
+							v-if="calendarEvent.aufgaben.length != 0">
+							Aufgaben:
+						</div>
 						<div
 							class="text-subtitle2"
 							v-for="aufgabe in calendarEvent.aufgaben"

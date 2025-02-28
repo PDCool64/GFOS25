@@ -50,13 +50,6 @@
 			</div>
 			<div class="beschreibung">
 				<BeschreibungComponent :id="route.params.id" />
-				<div
-					:class="[
-						{ done: aufgabe?.status === 2 },
-						{ undone: aufgabe?.status === 0 },
-						{ inprogress: aufgabe?.status === 1 },
-						'bar',
-					]"></div>
 			</div>
 		</div>
 	</div>
