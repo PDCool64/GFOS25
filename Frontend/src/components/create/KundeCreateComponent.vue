@@ -33,10 +33,6 @@
 						accountStore.account.einstellungen?.sprache
 					]
 				" />
-			<AccountSelectionComponent
-				@account-pushed="(account) => (ansprechpartner = account)"
-				hide-names />
-
 			<q-input v-model="utc_offset" :label="'utc - offset'" />
 
 			<q-btn
@@ -56,7 +52,6 @@ import { useAccountStore } from "src/stores/account";
 import language from "src/language";
 import { useKundeStore } from "src/stores/kunde";
 import { computed, ref, watch } from "vue";
-import AccountSelectionComponent from "../account/AccountSelectionComponent.vue";
 
 const accountStore = useAccountStore();
 const kundenStore = useKundeStore();
@@ -79,11 +74,12 @@ async function createKunde() {
 		telefonnummer: telefonnummer.value,
 		firma: firma.value,
 		kontaktstatus: 0,
-		utc_offset: utc_offset.value,
-		ansprechpartner: ansprechpartner.value,
+		utcOffset: utc_offset.value,
+		ansprechpartner: accountStore.account,
 		kundenstatus: 0,
 	};
-	await kundenStore.createAufgabe(newKunde);
+	console.log(newKunde);
+	await kundenStore.createKunde(newKunde);
 
 	emit("creationDone");
 }

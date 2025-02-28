@@ -25,7 +25,8 @@
 			<div class="plus" @click="openCreate = true">
 				<q-icon name="add" size="50px">
 					<q-popup-proxy cover v-model="openCreate">
-						<KundeCreateComponent />
+						<KundeCreateComponent
+							@creation-done="openCreate = false" />
 					</q-popup-proxy>
 				</q-icon>
 			</div>
