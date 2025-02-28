@@ -45,7 +45,6 @@ const kalendar = computed(() => {
 	align-items: center;
 	background-color: var(--q-secondary);
 	border-radius: 5px;
-	cursor: pointer;
 	user-select: none;
 }
 

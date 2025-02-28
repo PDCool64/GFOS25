@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import BarComponement from "src/components/stats/aufgaben/AufgabenBarComponement.vue";
+import BarComponement from "src/components/stats/aufgaben/AufgabenBarComponent.vue";
 import AccountPieGraphComponent from "src/components/stats/aufgaben/AufgabenPieGraphComponent.vue";
 import AccountComponent from "src/components/AccountComponent.vue";
 import { useAccountStore } from "src/stores/account";
