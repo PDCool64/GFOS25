@@ -59,7 +59,7 @@ export const useKundeStore = defineStore("kunde", {
 					this.interessenten[String(kunde.id)] = kunde;
 				} else {
 					console.log(kunde);
-					this.kunden["" + kunde.id] = kunde;
+					this.kunden[kunde.id] = kunde;
 				}
 			}
 			console.log(this.kunden);
@@ -116,10 +116,6 @@ export const useKundeStore = defineStore("kunde", {
 			}
 			return data;
 		},
-	},
-	persist: {
-		enabled: true,
-		strategy: "local",
 	},
 });
 

@@ -1,38 +1,34 @@
 <template>
 	<div>
-		<h3>
-			{{ language["kunden"][accountStore.account.einstellungen.sprache] }}
-		</h3>
-		<q-list class="q-table">
-			<KundeListComponent
-				:id="'' + kunde.id"
-				v-for="kunde in kundenStore.kunden"
-				:key="kunde"
-				kunde />
-		</q-list>
-		<h3>
-			{{
-				language["interessenten"][
-					accountStore.account.einstellungen.sprache
-				]
-			}}
-		</h3>
-		<q-list class="q-table">
-			<KundeListComponent
-				:id="'' + kunde.id"
-				v-for="kunde in kundenStore.interessenten"
-				:key="kunde" />
-		</q-list>
-	</div>
-	<div class="plus-wrapper">
-		<div
-			:class="['plus', { active: null === activePunktId }]"
-			@click="openCreate = true">
-			<q-icon name="add" size="50px">
-				<q-popup-proxy cover v-model="openCreate">
-					<KundeCreateComponent />
-				</q-popup-proxy>
-			</q-icon>
+		<div>
+			<h3>
+				{{ language["kunden"][accountStore.sprache] }}
+			</h3>
+			<q-list class="q-table">
+				<KundeListComponent
+					:id="'' + kunde.id"
+					v-for="kunde in kundenStore.kunden"
+					:key="kunde"
+					kunde />
+			</q-list>
+			<h3>
+				{{ language["interessenten"][accountStore.sprache] }}
+			</h3>
+			<q-list class="q-table">
+				<KundeListComponent
+					:id="'' + kunde.id"
+					v-for="kunde in kundenStore.interessenten"
+					:key="kunde" />
+			</q-list>
+		</div>
+		<div class="plus-wrapper">
+			<div class="plus" @click="openCreate = true">
+				<q-icon name="add" size="50px">
+					<q-popup-proxy cover v-model="openCreate">
+						<KundeCreateComponent />
+					</q-popup-proxy>
+				</q-icon>
+			</div>
 		</div>
 	</div>
 </template>
@@ -43,9 +39,12 @@ import KundeListComponent from "src/components/KundeListComponent.vue";
 import language from "src/language";
 import { useAccountStore } from "src/stores/account";
 import KundeCreateComponent from "src/components/create/KundeCreateComponent.vue";
+import { ref } from "vue";
 
 const kundenStore = useKundeStore();
 const accountStore = useAccountStore();
+
+const openCreate = ref(false);
 
 kundenStore.fetchOwnKunden().finally(() => {
 	console.log(kundenStore.kunden);
