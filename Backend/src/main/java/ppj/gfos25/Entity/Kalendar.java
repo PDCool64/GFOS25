@@ -4,6 +4,8 @@
  */
 package ppj.gfos25.Entity;
 
+import jakarta.json.bind.annotation.JsonbProperty;
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,6 +17,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import java.io.Serializable;
 
 /**
@@ -41,7 +45,12 @@ public class Kalendar implements Serializable {
 	private Account account;
 	@JoinColumn(name = "TERMIN", referencedColumnName = "ID")
     @ManyToOne
+	@JsonbTransient
 	private Termin termin;
+
+	@Transient
+	@JsonbProperty("terminId")
+	private Integer terminId;
 
 	public Kalendar() {
 	}
@@ -72,6 +81,18 @@ public class Kalendar implements Serializable {
 
 	public void setTermin(Termin termin) {
 		this.termin = termin;
+		this.terminId = termin != null ? termin.getId() : null;
+	}
+
+	public Integer getTerminId() {
+        if (this.terminId == null && termin != null) {
+            terminId = termin.getId();
+        }
+        return terminId;
+    }
+
+	public void setTerminId(Integer terminId) {
+		this.terminId = terminId;
 	}
 
 	@Override

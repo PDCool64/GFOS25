@@ -4,6 +4,8 @@
  */
 package ppj.gfos25.Entity;
 
+import jakarta.json.bind.annotation.JsonbProperty;
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,6 +17,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import java.io.Serializable;
 
 /**
@@ -39,7 +43,12 @@ public class Aufgabenbehandlung implements Serializable {
 	private Aufgabe aufgabe;
 	@JoinColumn(name = "TERMIN", referencedColumnName = "ID")
     @ManyToOne
+	@JsonbTransient
 	private Termin termin;
+
+	@Transient
+	@JsonbProperty("terminId")
+	private Integer terminId;
 
 	public Aufgabenbehandlung() {
 	}
@@ -70,6 +79,18 @@ public class Aufgabenbehandlung implements Serializable {
 
 	public void setTermin(Termin termin) {
 		this.termin = termin;
+		this.terminId = termin.getId();
+	}
+
+	public Integer getTerminId() {
+		if (terminId == null && termin != null) {
+			terminId = termin.getId();
+		}
+		return terminId;
+	}
+
+	public void setTerminId(Integer terminId) {
+		this.terminId = terminId;
 	}
 
 	@Override

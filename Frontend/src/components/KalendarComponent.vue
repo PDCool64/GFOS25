@@ -1,6 +1,31 @@
 <template>
 	<div>
-		<ScheduleXCalendar :calendar-app="calendarApp" />
+		<ScheduleXCalendar :calendar-app="calendarApp">
+			<template #eventModal="{ calendarEvent }">
+				<q-card>
+					<q-card-section>
+						<div class="text-h6">{{ calendarEvent.title }}</div>
+						<div class="text-subtitle2">
+							{{ calendarEvent.description }}
+						</div>
+						<q-separator />
+						Aufgaben:
+						<div
+							v-for="aufgabe in calendarEvent.aufgaben"
+							:key="aufgabe">
+							{{ aufgabe.titel }}
+						</div>
+						<q-separator />
+						Teilnehmende:
+						<div
+							v-for="teilnehmer in calendarEvent.teilnehmer"
+							:key="teilnehmer">
+							{{ teilnehmer.vorname }} {{ teilnehmer.nachname }}
+						</div>
+					</q-card-section>
+				</q-card>
+			</template>
+		</ScheduleXCalendar>
 	</div>
 </template>
 
@@ -69,6 +94,16 @@ kalenderStore.fetchOwnTermine().then(() => {
 		termin.end = temp.endzeit;
 		termin.title = temp.titel;
 		termin.description = temp.beschreibung;
+		termin.description += "\n\n";
+		termin.aufgaben = [];
+		termin.teilnehmer = [];
+		console.log(temp);
+		for (const behandlung of temp.aufgabenbehandlungList) {
+			termin.aufgaben.push(behandlung.aufgabe);
+		}
+		for (const kalendar of temp.kalendarList) {
+			termin.teilnehmer.push(kalendar.account);
+		}
 		console.log(termin);
 		events.value.push(termin);
 	}

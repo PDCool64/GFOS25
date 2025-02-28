@@ -49,10 +49,8 @@ public class Termin implements Serializable {
 	@Column(name = "ENDZEIT")
 	private String endzeit;
 	@OneToMany(mappedBy = "termin")
-	@JsonbTransient
 	private List<Kalendar> kalendarList;
 	@OneToMany(mappedBy = "termin")
-	@JsonbTransient
 	private List<Aufgabenbehandlung> aufgabenbehandlungList;
 
 	public Termin() {
