@@ -80,7 +80,7 @@ import AufgabenCreateComponent from "src/components/create/AufgabenCreateCompone
 import { useAufgabenStore } from "src/stores/aufgaben";
 import { useAccountStore } from "src/stores/account";
 import AufgabenList from "src/components/AufgabenList.vue";
-import TerminComponement from "src/components/TerminComponement.vue";
+import TerminComponement from "src/components/TerminComponent.vue";
 import { useKalendarStore } from "src/stores/kalendar";
 
 const createAufgabeOpen = ref(false);
