@@ -63,11 +63,11 @@
 </template>
 
 <script setup>
-import AufgabenBarComponement from "src/components/stats/aufgaben/AufgabenBarComponement.vue";
+import AufgabenBarComponement from "src/components/stats/aufgaben/AufgabenBarComponent.vue";
 import { useAufgabenStore } from "src/stores/aufgaben";
 import { useAccountStore } from "src/stores/account";
 import { ref } from "vue";
-import KundenstatusDoughtnutComponement from "src/components/stats/kunden/KundenstatusDoughtnutComponement.vue";
+import KundenstatusDoughtnutComponement from "src/components/stats/kunden/KundenstatusDoughtnutComponent.vue";
 import language from "src/language";
 
 const aufgabenStore = useAufgabenStore();
