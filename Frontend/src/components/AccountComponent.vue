@@ -101,6 +101,6 @@ const transformedRows = computed(() => {
 }
 
 .q-td:nth-child(2) {
-	color: rgba(0, 0, 0, 0.5);
+	color: var(--q-login-form-text);
 }
 </style>

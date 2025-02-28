@@ -8,6 +8,7 @@
 import { onMounted, ref } from "vue";
 import { Chart, registerables } from "chart.js";
 import { useAufgabenStore } from "src/stores/aufgaben";
+import { format } from "quasar";
 
 const props = defineProps({
 	year: {
@@ -105,7 +106,6 @@ onMounted(() => {
 						font: {
 							size: 15, // Schriftgröße der x-Achse
 						},
-						color: "black", // Schriftfarbe der x-Achse
 					},
 					border: {
 						display: true,
@@ -123,7 +123,7 @@ onMounted(() => {
 						font: {
 							size: 20, // Schriftgröße der y-Achse
 						},
-						color: "black", // Farbe der y-Achsenschrift
+						// Farbe der y-Achsenschrift
 					},
 					border: {
 						display: true,
