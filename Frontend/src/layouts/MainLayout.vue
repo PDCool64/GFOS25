@@ -11,16 +11,6 @@
 					@click="toggleLeftDrawer"
 					v-if="tokenStore.token != ''" /> -->
 				<q-toolbar-title class="logo"> flow </q-toolbar-title>
-
-				<q-btn
-					v-if="warning"
-					flat
-					dense
-					icon="error"
-					aria-label="Messages"
-					@click="alertOpen = true"
-					color="yellow" />
-
 				<q-btn
 					flat
 					dense
@@ -80,18 +70,6 @@
 						label="OK"
 						color="primary"
 						@click="settingsOpen = false" />
-				</q-card-actions>
-			</q-card>
-		</q-dialog>
-
-		<q-dialog v-model="alertOpen" persistent>
-			<q-card style="width: 25vh; height: 25vh">
-				<q-card-section>Message Center</q-card-section>
-				<q-card-actions align="center">
-					<q-btn
-						label="OK"
-						color="primary"
-						@click="alertOpen = false" />
 				</q-card-actions>
 			</q-card>
 		</q-dialog>
