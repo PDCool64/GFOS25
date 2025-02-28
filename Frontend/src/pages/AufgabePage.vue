@@ -6,7 +6,13 @@
 				class="bearbeiter"
 				v-if="aufgabe && bearbeiterList"
 				style="height: 50vh; overflow-y: auto">
-				<h2>Mitwirkende</h2>
+				<h2>
+					{{
+						language["mitwirkende"][
+							accountStore.account.einstellungen?.sprache
+						]
+					}}
+				</h2>
 				<q-list style="height: max-content">
 					<q-item
 						v-for="bearbeiter in bearbeiterList"
@@ -63,6 +69,10 @@ import { useAufgabenStore } from "src/stores/aufgaben";
 import BeschreibungComponent from "src/components/aufgabe/BeschreibungComponent.vue";
 import Unterpunkte from "src/components/aufgabe/AufgabenUnterpunkteComponent.vue";
 import AccountSelectionComponent from "src/components/account/AccountSelectionComponent.vue";
+import { useAccountStore } from "src/stores/account";
+import language from "src/language";
+
+const accountStore = useAccountStore();
 
 const route = useRoute();
 const aufgabenStore = useAufgabenStore();

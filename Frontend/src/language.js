@@ -217,4 +217,9 @@ export default {
 		en: "Create Client",
 		fr: "Créer un client",
 	},
+	mitwirkende: {
+		de: "Mitwirkende",
+		en: "Participants",
+		fr: "Participants",
+	},
 };
