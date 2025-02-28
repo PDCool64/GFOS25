@@ -30,7 +30,7 @@
 				</div>
 				<div class="inner">
 					<q-icon class="icon" name="description" />
-					<div>
+					<div class="beschreibung">
 						{{ aufgabe.beschreibung }}
 					</div>
 				</div>
@@ -110,6 +110,10 @@ const onClick = () => {};
 	background-color: var(--q-secondary);
 	cursor: pointer;
 	user-select: none;
+}
+
+.beschreibung {
+	text-align: left;
 }
 
 h3 {
