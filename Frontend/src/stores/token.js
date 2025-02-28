@@ -15,7 +15,6 @@ export const useTokenStore = defineStore("token", {
 			this.token = "";
 		},
 		async logout() {
-			const router = useRouter();
 			this.token = "";
 			this.refresh_token = "";
 			accountStore.reset();
