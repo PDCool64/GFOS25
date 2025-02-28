@@ -17,7 +17,7 @@
 					]
 				" />
 
-			<q-input v-model="email" :label="'email'" />
+			<q-input v-model="email" :label="'E-Mail'" />
 
 			<q-input
 				v-model="telefonnummer"
@@ -33,7 +33,7 @@
 						accountStore.account.einstellungen?.sprache
 					]
 				" />
-			<q-input v-model="utc_offset" :label="'utc - offset'" />
+			<q-input v-model="utc_offset" :label="'UTC-Offset'" />
 
 			<q-btn
 				@click="createKunde"
