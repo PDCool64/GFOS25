@@ -5,22 +5,25 @@
 				<q-card>
 					<q-card-section>
 						<div class="text-h6">{{ calendarEvent.title }}</div>
-						<div class="text-subtitle2">
+						<div class="text-subtitle">
 							{{ calendarEvent.description }}
 						</div>
 						<q-separator />
-						Aufgaben:
+						<div class="text-subtitle">Aufgaben:</div>
 						<div
+							class="text-subtitle2"
 							v-for="aufgabe in calendarEvent.aufgaben"
 							:key="aufgabe">
 							{{ aufgabe.titel }}
 						</div>
 						<q-separator />
-						Teilnehmende:
+						<div class="text-subtitle">Teilnehmende:</div>
 						<div
+							class="text-subtitle2"
 							v-for="teilnehmer in calendarEvent.teilnehmer"
 							:key="teilnehmer">
-							{{ teilnehmer.vorname }} {{ teilnehmer.nachname }}
+							{{ teilnehmer.vorname }}
+							{{ teilnehmer.nachname }}
 						</div>
 					</q-card-section>
 				</q-card>
@@ -111,3 +114,14 @@ kalenderStore.fetchOwnTermine().then(() => {
 	eventsService.set(events.value);
 });
 </script>
+
+<style>
+.text-subtitle {
+	font-weight: bold;
+	margin-top: 1vh;
+}
+
+.text-subtitle2 {
+	color: var(--q-primary);
+}
+</style>
