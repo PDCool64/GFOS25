@@ -1,5 +1,3 @@
-<!-- Diesen File bitte noch einmal überarbeiten tun, weil sonst ist der schlimmer als wie du! -->
-
 <template>
 	<div
 		class="fullscreen text-blue bg-blue text-center q-pa-md flex flex-center">
