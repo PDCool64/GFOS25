@@ -104,6 +104,16 @@ export default {
 		en: "Calendar",
 		fr: "Calendrier",
 	},
+	account: {
+		de: "Account",
+		en: "Account",
+		fr: "Compte",
+	},
+	passwort: {
+		de: "Passwort",
+		en: "Password",
+		fr: "Mot de passe",
+	},
 	kontaktiert: {
 		de: "kontaktiert",
 		en: "contacted",

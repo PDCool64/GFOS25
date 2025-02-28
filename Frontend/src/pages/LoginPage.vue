@@ -11,34 +11,11 @@
 				<input
 					type="password"
 					v-model="password"
-					placeholder="Password"
+					:placeholder="language['passwort'][accountStore.sprache]"
 					required />
 				<button>login</button>
 			</form>
-			<button class="password" @click="onForgotPassword">
-				{{ language["passwort_vergessen"][accountStore.sprache] }}
-			</button>
 		</div>
-
-		<q-dialog v-model="showPopup">
-			<q-card>
-				<q-card-section>
-					<h4>
-						{{
-							language["leider_pech_gehabt"][accountStore.sprache]
-						}}
-					</h4>
-					<h5>Aber wird vielleicht später mal implementiert</h5>
-				</q-card-section>
-				<q-card-actions align="right">
-					<q-btn
-						flat
-						label="Dismiss"
-						color="primary"
-						@click="closePopup" />
-				</q-card-actions>
-			</q-card>
-		</q-dialog>
 	</div>
 </template>
 
@@ -160,12 +137,7 @@ button:hover {
 	outline: none;
 	color: white;
 }
-.password {
-	color: var(--q-secondary);
-	cursor: pointer;
-	background-color: transparent;
-	width: auto;
-}
+
 .password:hover {
 	opacity: 0.8;
 	color: var(--q-primary);
