@@ -105,7 +105,7 @@ aufgabenStore.fetchAufgaben().finally(() => {
 console.log(aufgabenStore.stats);
 
 const kalendarIds = ref([]);
-kalendarStore.fetchTermine().finally(() => {
+kalendarStore.fetchOwnTermine().finally(() => {
 	for (const termin of kalendarStore.active) {
 		kalendarIds.value.push(termin.id);
 	}
